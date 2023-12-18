@@ -1,4 +1,4 @@
 export default function Home() {
   const hi = 'test'
-  return <>{hi}</>
+  return <div style={{ fontSize: '5rem' }}>{hi}</div>
 }
