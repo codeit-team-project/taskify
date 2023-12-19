@@ -1,5 +1,5 @@
 import { invitedDashboardListType } from '@/pages/mydashboard/index'
-import styles from './invitedDashboardTable.module.scss'
+import styles from './invitedDashboard.module.scss'
 
 export interface invitedDashboardProps {
   list: invitedDashboardListType
