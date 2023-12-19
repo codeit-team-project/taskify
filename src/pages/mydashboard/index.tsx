@@ -1,4 +1,5 @@
 import InvitedDashBoard from '@/components/inviteddashboard/index'
+import { invitedDashboardListType } from '@/types/invitedDashboardListType'
 
 const TEMP_LIST = [
   {
@@ -70,26 +71,6 @@ const TEMP_LIST = [
     updatedAt: '2023-12-19T12:04:10.596Z',
   },
 ]
-
-export type invitedDashboardListType =
-  | {
-      cursorId: number
-      id: number
-      inviterUserId: number
-      teamId: string
-      dashboard: {
-        title: string
-        id: number
-      }
-      invitee: {
-        nickname: string
-        id: number
-      }
-      inviteAccepted: boolean
-      createdAt: string
-      updatedAt: string
-    }[]
-  | null
 
 export default function MyDashboardPage({ ...pageProps }) {
   return (
