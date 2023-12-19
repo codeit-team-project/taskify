@@ -2,6 +2,7 @@ import InvitedDashBoard from '@/components/inviteddashboard/index'
 
 const TEMP_LIST = [
   {
+    cursorId: 0,
     id: 0,
     inviterUserId: 0,
     teamId: '2',
@@ -18,6 +19,7 @@ const TEMP_LIST = [
     updatedAt: '2023-12-19T08:52:01.433Z',
   },
   {
+    cursorId: 0,
     id: 1,
     inviterUserId: 0,
     teamId: '2',
@@ -34,6 +36,7 @@ const TEMP_LIST = [
     updatedAt: '2023-12-19T08:52:01.433Z',
   },
   {
+    cursorId: 0,
     id: 2,
     inviterUserId: 0,
     teamId: '2',
@@ -49,10 +52,28 @@ const TEMP_LIST = [
     createdAt: '2023-12-19T08:52:01.433Z',
     updatedAt: '2023-12-19T08:52:01.433Z',
   },
+  {
+    cursorId: 0,
+    id: 0,
+    inviterUserId: 0,
+    teamId: '2',
+    dashboard: {
+      title: '대시보드4',
+      id: 3,
+    },
+    invitee: {
+      nickname: '초대자4',
+      id: 0,
+    },
+    inviteAccepted: true,
+    createdAt: '2023-12-19T12:04:10.596Z',
+    updatedAt: '2023-12-19T12:04:10.596Z',
+  },
 ]
 
 export type invitedDashboardListType =
   | {
+      cursorId: number
       id: number
       inviterUserId: number
       teamId: string
