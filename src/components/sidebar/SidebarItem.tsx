@@ -6,6 +6,8 @@
  * Next Image 컴포넌트로 변경
  */
 
+import styles from './Sidebar.module.scss'
+
 interface SidebarItemProps {
   board: {
     id: number
@@ -22,7 +24,7 @@ export default function SidebarItem({ board }: SidebarItemProps) {
   return (
     <>
       <img src="ellipse.svg" />
-      <span>{board.title}</span>
+      <button className={styles.menu}>{board.title}</button>
       {board.createdByMe && <img src="crown_icon.svg" />}
     </>
   )
