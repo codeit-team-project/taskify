@@ -8,13 +8,13 @@ export default function Sidebar() {
   return (
     <section className={styles.container}>
       <div className={styles.logo}>
-        <img src="large_logo.svg" />
-        <img src="large_Taskify.svg" />
+        <img src="large_logo.svg" alt="로고" />
+        <img src="large_Taskify.svg" alt="로고" />
       </div>
       <div className={styles['title-wrapper']}>
         <span className={styles.title}>Dash Boards</span>
         <button className={styles.action}>
-          <img src="add_box.svg" />
+          <img src="add_box.svg" alt="대시보드 추가하기 버튼" />
         </button>
       </div>
       <div>
