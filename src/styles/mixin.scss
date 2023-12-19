@@ -1,18 +1,18 @@
 // 데스크탑 퍼스트 스타일. 화면이 작아질 수록 스타일을 덮어쓰는 방식입니다.
 
-$mobile-portrait: 576px;
-$tablet-portrait: 768px;
+$mobile: 375px;
+$tablet: 744px;
 
-// 브라우저 크기가 0px ~ 768px 사이일 때.
+// 브라우저 크기가 0px ~ 744px 사이일 때.
 @mixin tablet {
-  @media (max-width: $tablet-portrait) {
+  @media (max-width: $tablet) {
     @content;
   }
 }
 
-// 브라우저 크기가 0px ~ 576px 사이일 때
+// 브라우저 크기가 0px ~ 375px 사이일 때
 @mixin mobile {
-  @media (max-width: $mobile-portrait) {
+  @media (max-width: $mobile) {
     @content;
   }
 }
