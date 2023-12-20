@@ -1,0 +1,57 @@
+export const MEMBERS = [
+  {
+    id: 1,
+    userId: 10,
+    email: 'codeitA@codeit.com',
+    nickname: '박소현',
+    profileImageUrl: 'string',
+    createdAt: '2023-12-20T04:31:30.809Z',
+    updatedAt: '2023-12-20T04:31:30.809Z',
+    isOwner: true,
+  },
+  {
+    id: 2,
+    userId: 20,
+    email: 'codeitB@codeit.com',
+    nickname: '김선혜',
+    profileImageUrl: 'string',
+    createdAt: '2023-12-20T04:31:30.809Z',
+    updatedAt: '2023-12-20T04:31:30.809Z',
+    isOwner: false,
+  },
+  {
+    id: 3,
+    userId: 30,
+    email: 'codeitC@codeit.com',
+    nickname: '조연아',
+    profileImageUrl: 'string',
+    createdAt: '2023-12-20T04:31:30.809Z',
+    updatedAt: '2023-12-20T04:31:30.809Z',
+    isOwner: false,
+  },
+  {
+    id: 4,
+    userId: 40,
+    email: 'codeitD@codeit.com',
+    nickname: '홍재원',
+    profileImageUrl: 'string',
+    createdAt: '2023-12-20T04:31:30.809Z',
+    updatedAt: '2023-12-20T04:31:30.809Z',
+    isOwner: false,
+  },
+  {
+    id: 5,
+    userId: 50,
+    email: 'codeitE@codeit.com',
+    nickname: '코드잇',
+    profileImageUrl: 'string',
+    createdAt: '2023-12-20T04:31:30.809Z',
+    updatedAt: '2023-12-20T04:31:30.809Z',
+    isOwner: false,
+  },
+]
+
+export const DASHBOARD_MEMBERS = {
+  members: MEMBERS,
+  totalCount: 5,
+}
