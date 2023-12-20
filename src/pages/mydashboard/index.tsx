@@ -1,5 +1,8 @@
 import InvitedDashBoard from '@/components/inviteddashboard/index'
-import { invitedDashboardListType } from '@/types/invitedDashboardListType'
+import {
+  InvitedDashboardItemType,
+  InvitedDashboardListType,
+} from '@/types/invitedDashboardListType'
 
 const TEMP_LIST = [
   {
@@ -82,13 +85,21 @@ export default function MyDashboardPage({ ...pageProps }) {
 
 export async function getServerSideProps() {
   try {
-    const newInvitedDashboardList: invitedDashboardListType = TEMP_LIST.filter(
-      (item) => !item.inviteAccepted,
-    )
+    const { cursorId, invitations } = await getInvitations()
+
+    let newInvitedDashboardList: InvitedDashboardListType
+
+    if (invitations.length > 1) {
+      newInvitedDashboardList = invitations.filter(
+        (item: InvitedDashboardItemType) => !item.inviteAccepted,
+      )
+    } else {
+      newInvitedDashboardList = null
+    }
+
     return {
       props: {
         list: newInvitedDashboardList,
-        // list: null,
       },
     }
   } catch (error) {
@@ -98,5 +109,26 @@ export async function getServerSideProps() {
         list: null,
       },
     }
+  }
+}
+
+export const getInvitations = async (title?: string) => {
+  try {
+    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/invitations?size=10`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`,
+      },
+    })
+
+    if (!response.ok) {
+      throw new Error()
+    } else {
+      const result = await response.json()
+      return result
+    }
+  } catch (error) {
+    throw error
   }
 }
