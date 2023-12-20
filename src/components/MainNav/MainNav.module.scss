@@ -1,3 +1,5 @@
+@import '@/styles/mixin.scss';
+
 .nav-container {
   height: 7rem;
   min-width: 330px;
@@ -12,7 +14,7 @@
     .logo-title {
       visibility: visible;
     }
-    @media (max-width: 375px) {
+    @include mobile {
       .logo-title {
         visibility: hidden;
       }
