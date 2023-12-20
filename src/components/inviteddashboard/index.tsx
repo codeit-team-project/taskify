@@ -1,7 +1,7 @@
 import { InvitedDashboardListType } from '@/types/invitedDashboardListType'
 import styles from './invitedDashboard.module.scss'
 
-export interface invitedDashboardProps {
+interface invitedDashboardProps {
   list: InvitedDashboardListType
 }
 export default function InvitedDashBoard({ list }: invitedDashboardProps) {
