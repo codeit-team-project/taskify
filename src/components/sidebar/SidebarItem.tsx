@@ -2,10 +2,10 @@
  * @TODO
  * 대시보드 response types 분리
  * api 연동 후 mock 데이터 삭제
- * Next Image 컴포넌트로 변경
  * ellipse svg 삭제
  */
 
+import Image from 'next/image'
 import styles from './Sidebar.module.scss'
 import EllipseIcon from '@/components/icons/Ellipse'
 
@@ -28,7 +28,7 @@ export default function SidebarItem({ board }: SidebarItemProps) {
       <button className={styles.menu}>{board.title}</button>
       <span className={styles['icon-wrapper']}>
         {board.createdByMe && (
-          <img src="crown_icon.svg" className={styles.icon} alt="내가 만든 대시보드" />
+          <Image src="crown_icon.svg" className={styles.icon} alt="내가 만든 대시보드" fill />
         )}
       </span>
     </>
