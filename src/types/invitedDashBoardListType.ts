@@ -1,4 +1,4 @@
-export type InvitedDashboardItemType = {
+export type InvitedDashBoardItemType = {
   cursorId: number
   id: number
   inviterUserId: number
@@ -16,4 +16,4 @@ export type InvitedDashboardItemType = {
   updatedAt: string
 }
 
-export type InvitedDashboardListType = InvitedDashboardItemType[] | null
+export type InvitedDashBoardListType = InvitedDashBoardItemType[] | null

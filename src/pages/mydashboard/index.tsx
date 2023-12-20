@@ -1,8 +1,8 @@
-import InvitedDashBoard from '@/components/invitedDashBoardTemp/InvitedDashBoardTemp'
+import InvitedDashBoard from '@/components/invitedDashBoard/InvitedDashBoard'
 import {
-  InvitedDashboardItemType,
-  InvitedDashboardListType,
-} from '@/types/invitedDashboardListTypeTemp'
+  InvitedDashBoardItemType,
+  InvitedDashBoardListType,
+} from '@/types/invitedDashBoardListType'
 
 const TEMP_LIST = [
   {
@@ -87,11 +87,11 @@ export async function getServerSideProps() {
   try {
     const { cursorId, invitations } = await getInvitations()
 
-    let newInvitedDashboardList: InvitedDashboardListType
+    let newInvitedDashboardList: InvitedDashBoardListType
 
     if (invitations.length > 1) {
       newInvitedDashboardList = invitations.filter(
-        (item: InvitedDashboardItemType) => !item.inviteAccepted,
+        (item: InvitedDashBoardItemType) => !item.inviteAccepted,
       )
     } else {
       newInvitedDashboardList = null
