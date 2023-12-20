@@ -12,7 +12,12 @@ import Link from 'next/link'
 import { useState } from 'react'
 import styles from './DashboardNav.module.scss'
 import DashboardNavEditor from './dashboardNavEditor/DashboardNavEditor'
-import { mockupUser, mockDashboardMemberSmallList, mockDashboardInfo } from './mockup'
+import {
+  mockupUser,
+  mockDashboardMemberSmallList,
+  mockDashboardInfo,
+  mockDashboardMemberManyList,
+} from './mockup'
 
 const MY_DASHBOARD_INFO = {
   id: 0,
