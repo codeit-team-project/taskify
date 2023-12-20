@@ -7,25 +7,20 @@
  *
  * 리팩토링 및 기타 점검
  * 스타일링 - 반응형까지
- * 멤버 목록 공통 컴포넌트로 분리 (리팩토링)
+ * 멤버 목록 공통 컴포넌트로 분리 (리팩토링) (완료)
  * 페이지네이션 공통 컴포넌트 분리, 공통 로직 분리 (리팩토링)
  * 페이징 버튼 공통컴포넌트화 (리팩토링)
+ * 삭제 버튼 UI 공통컴포넌트화 (세컨더리 버튼) (리팩토링)
  *
  * 추후 작업
  * default size 값 확인하기
  */
 
-/**
- * sohyun@taskify.com
- * aaaaaaaa11
- * 대시보드 아이디 : 21
- * 유저 아이디 : 45
- * id : 27
- */
-
-import { createDashBoard, getDashBoardMembers } from '@/api/dashBoard'
+import { getDashBoardMembers } from '@/api/dashBoard'
 import { DASHBOARD_MEMBERS } from '@/mock/members'
 import { useState } from 'react'
+import styles from './members/Member.module.scss'
+import Member from './Member'
 
 export default function MemberList() {
   //   const [currentPage, setCurrentPage] = useState(1)
@@ -61,21 +56,30 @@ export default function MemberList() {
    */
 
   return (
-    <>
-      <button onClick={createDashBoard}>대시보드 생성</button>
-      <button onClick={handleDashBoardMembers}>대시보드 멤버 보기</button>
-      <button onClick={handlePrevPage}>
-        <img src="arrow_forward.svg" alt="구성원보기" />
-      </button>
-      <button onClick={handleNextPage}>
-        <img src="arrow_next.svg" alt="구성원보기" />
-      </button>
-      {DASHBOARD_MEMBERS.members.map((member) => (
-        <li key={member.id}>
-          {/* <img src={member.profileImageUrl} alt="프로필 사진" /> */}
-          <span>{member.nickname}</span>
-        </li>
-      ))}
-    </>
+    <section className={styles.container}>
+      {/* <button onClick={handleDashBoardMembers}>대시보드 멤버 보기</button> */}
+      <div className={styles['card-info']}>
+        <span className={styles['card-title']}>구성원</span>
+        <div className={styles['card-action']}>
+          <span className={styles.pages}>1 페이지 중 1</span>
+          <div>
+            <button onClick={handlePrevPage} className={styles['left-arrow-button']}>
+              <img src="arrow_forward.svg" alt="구성원보기" />
+            </button>
+            <button onClick={handleNextPage} className={styles['right-arrow-button']}>
+              <img src="arrow_next.svg" alt="구성원보기" />
+            </button>
+          </div>
+        </div>
+      </div>
+      <h3 className={styles['sub-title']}>이름</h3>
+      <div>
+        {DASHBOARD_MEMBERS.members.map((member) => (
+          <li key={member.id} className={styles.table}>
+            <Member nickname={member.nickname} />
+          </li>
+        ))}
+      </div>
+    </section>
   )
 }

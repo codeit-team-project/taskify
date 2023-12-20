@@ -1,0 +1,108 @@
+.container {
+  width: 62rem;
+  border-radius: 0.5rem;
+  background: var(--color-white);
+}
+
+.card-info {
+  padding: 2.6rem 2.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-black_33);
+}
+
+.card-action {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.pages {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-black_33);
+}
+
+.left-arrow-button {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 4px 0px 0px 4px;
+  border: 1px solid var(--color-gray30);
+  background: var(--color-white);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow:
+      0px 2px 3px -1px rgba(0, 0, 0, 0.1),
+      0px 1px 0px 0px rgba(25, 28, 33, 0.02),
+      0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+  }
+
+  &:active {
+    box-shadow: inset -12px -8px 40px var(--color-gray10);
+  }
+}
+
+.right-arrow-button {
+  width: 4rem;
+  height: 4rem;
+  border-radius: 0px 4px 4px 0px;
+  border: 1px solid var(--color-gray30);
+  background: var(--color-white);
+  cursor: pointer;
+
+  &:hover {
+    box-shadow:
+      0px 2px 3px -1px rgba(0, 0, 0, 0.1),
+      0px 1px 0px 0px rgba(25, 28, 33, 0.02),
+      0px 0px 0px 1px rgba(25, 28, 33, 0.08);
+  }
+
+  &:active {
+    box-shadow: inset -12px -8px 40px var(--color-gray10);
+  }
+}
+
+.sub-title {
+  padding: 0.8rem 2.8rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--color-gray40);
+}
+
+.table {
+  padding: 1.6rem 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-gray20);
+  list-style: none;
+}
+
+.name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nickname {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--color-black_33);
+}
+
+.member-button {
+  padding: 0.7rem 2.9rem;
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 0.4rem;
+  border: 1px solid var(--color-gray30);
+  background: var(--color-white);
+}
