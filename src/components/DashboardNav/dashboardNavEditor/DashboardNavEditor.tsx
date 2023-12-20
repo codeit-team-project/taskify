@@ -12,6 +12,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import styles from './DashboardNavEditor.module.scss'
 import MemberType from '@/types/MemberType'
+import { useEffect, useState } from 'react'
 
 export default function DashboardNavEditor({
   isOwner = false,
@@ -22,8 +23,15 @@ export default function DashboardNavEditor({
   boardId?: number
   members?: { members: MemberType[]; totalCount: number } | null
 }) {
-  // 데스크톱 화면에선 member가 5명 이상이면 4개만 표시하고 나머지는 +1
-  // 타블렛, 모바일 화면에선 member가 3명 이상이면 2개만 표시하고 나머지는 +1
+  const [windowSize, setWindowSize] = useState(window.innerWidth)
+  const handleView = () => {
+    setWindowSize(window.innerWidth)
+  }
+  useEffect(() => {
+    handleView()
+    window.addEventListener('resize', handleView)
+    return () => window.removeEventListener('resize', handleView)
+  }, [])
 
   return (
     <div className={styles['editor-section']}>
@@ -43,19 +51,54 @@ export default function DashboardNavEditor({
       </div>
       {members && (
         <div className={styles['members-section']}>
-          {members.members.map((member) => {
-            return (
-              <div className={styles['member-img-list']} key={member.id}>
-                <Image
-                  src={member.profileImageUrl}
-                  alt="profile"
-                  width={36}
-                  height={36}
-                  className={styles['member-img']}
-                />
-              </div>
-            )
-          })}
+          {windowSize > 744 ? (
+            <div
+              className={styles['member-img-list']}
+              style={{ width: `${members.totalCount >= 5 ? 14 : members.totalCount * 3}rem` }}
+            >
+              {members.members.map((member, ind) => {
+                if (ind <= 3) {
+                  return (
+                    <Image
+                      key={member.id}
+                      src={member.profileImageUrl}
+                      alt="profile"
+                      width={36}
+                      height={36}
+                      className={styles['member-img']}
+                    />
+                  )
+                }
+              })}
+              {members.totalCount > 4 && (
+                <div className={styles['rest-member-img']}>+{members.totalCount - 4}</div>
+              )}
+            </div>
+          ) : (
+            <div
+              className={styles['member-img-list']}
+              style={{ width: `${members.totalCount >= 3 ? 10 : members.totalCount * 3}rem` }}
+            >
+              {' '}
+              {members.members.map((member, ind) => {
+                if (ind <= 1) {
+                  return (
+                    <Image
+                      key={member.id}
+                      src={member.profileImageUrl}
+                      alt="profile"
+                      width={36}
+                      height={36}
+                      className={styles['member-img']}
+                    />
+                  )
+                }
+              })}
+              {members.totalCount > 2 && (
+                <div className={styles['rest-member-img']}>+{members.totalCount - 2}</div>
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>
