@@ -1,4 +1,4 @@
-import styles from './members/Member.module.scss'
+import styles from './Member.module.scss'
 
 interface MemberProps {
   nickname: string

@@ -19,7 +19,7 @@
 import { getDashBoardMembers } from '@/api/dashBoard'
 import { DASHBOARD_MEMBERS } from '@/mock/members'
 import { useState } from 'react'
-import styles from './members/Member.module.scss'
+import styles from './Member.module.scss'
 import Member from './Member'
 
 export default function MemberList() {
