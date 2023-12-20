@@ -6,7 +6,7 @@
 
 import Image from 'next/image'
 import styles from './Sidebar.module.scss'
-import EllipseIcon from '@/components/icons/Ellipse'
+import EllipseIcon from '@/components/ui/icons/Ellipse'
 
 interface SidebarItemProps {
   board: {
@@ -27,7 +27,12 @@ export default function SidebarItem({ board }: SidebarItemProps) {
       <button className={styles.menu}>{board.title}</button>
       <span className={styles['icon-wrapper']}>
         {board.createdByMe && (
-          <Image src="crown_icon.svg" className={styles.icon} alt="내가 만든 대시보드" fill />
+          <Image
+            src="assets/crown_icon.svg"
+            className={styles.icon}
+            alt="내가 만든 대시보드"
+            fill
+          />
         )}
       </span>
     </>
