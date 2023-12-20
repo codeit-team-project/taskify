@@ -1,10 +1,10 @@
 import { InvitedDashboardListType } from '@/types/invitedDashboardListType'
 import styles from './invitedDashboard.module.scss'
 
-interface invitedDashboardProps {
+interface InvitedDashboardProps {
   list: InvitedDashboardListType
 }
-export default function InvitedDashBoard({ list }: invitedDashboardProps) {
+export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
   return (
     <section className={styles['container']}>
       <h2 className={styles['title']}>초대받은 대시보드</h2>

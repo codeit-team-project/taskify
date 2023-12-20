@@ -1,8 +1,8 @@
-import InvitedDashBoard from '@/components/inviteddashboard/index'
+import InvitedDashBoard from '@/components/invitedDashBoardTemp/InvitedDashBoardTemp'
 import {
   InvitedDashboardItemType,
   InvitedDashboardListType,
-} from '@/types/invitedDashboardListType'
+} from '@/types/invitedDashboardListTypeTemp'
 
 const TEMP_LIST = [
   {
