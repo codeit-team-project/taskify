@@ -36,7 +36,5 @@ export async function getDashBoardMembers({ page, size, id }: QueryProps) {
     },
   )
   const data = await res.json()
-  console.log(data)
-
   return data
 }

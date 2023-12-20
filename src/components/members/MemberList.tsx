@@ -15,35 +15,42 @@
  * 추후 작업
  * default size 값 확인하기
  */
+import { useEffect, useState } from 'react'
 
 import { getDashBoardMembers } from '@/api/dashBoard'
-import { DASHBOARD_MEMBERS } from '@/mock/members'
-import { useState } from 'react'
+// import { DASHBOARD_MEMBERS } from '@/mock/members'
+
 import styles from './Member.module.scss'
+
 import Member from './Member'
+import { DashBoardMembers } from '@/types/member'
+import Pagination from '@/components/pagination/Pagination'
+
+// api 연동 후 삭제 예정
+const TEST_BOARD_ID = 21
+const START_PAGE = 1
+
+interface DashBoardAPIType {
+  members: DashBoardMembers[]
+  totalCount: number
+}
 
 export default function MemberList() {
-  //   const [currentPage, setCurrentPage] = useState(1)
-  const [startPage, setStartPage] = useState(1)
+  const [memberList, setMemberList] = useState<DashBoardMembers[]>()
+  const [memberCount, setMemberCount] = useState(0)
 
-  const lastPage =
-    DASHBOARD_MEMBERS.totalCount !== null ? Math.ceil(DASHBOARD_MEMBERS.totalCount / 2) : 0
-
-  const handleDashBoardMembers = ({ page, id = 21 }: any) => {
-    getDashBoardMembers({ page, id })
+  // react-query 사용하면 useEffect 지우고, handleDashBoardMembers 수정
+  const handleDashBoardMembers = async (page: number, id = TEST_BOARD_ID) => {
+    const data = await getDashBoardMembers({ page, id })
+    const { members, totalCount }: DashBoardAPIType = data
+    setMemberList(members)
+    setMemberCount(totalCount)
+    console.log(data) // 삭제 예정
   }
 
-  const handlePrevPage = () => {
-    if (startPage === 1) return
-    setStartPage((prev) => prev - 1)
-    getDashBoardMembers({ page: startPage - 1, id: 21 })
-  }
-
-  const handleNextPage = () => {
-    if (startPage === lastPage) return
-    setStartPage((prev) => prev + 1)
-    getDashBoardMembers({ page: startPage + 1, id: 21 })
-  }
+  useEffect(() => {
+    handleDashBoardMembers(START_PAGE, TEST_BOARD_ID)
+  }, [])
 
   /**
    * 마지막 페이지를 계산한다 (완료)
@@ -57,24 +64,16 @@ export default function MemberList() {
 
   return (
     <section className={styles.container}>
-      {/* <button onClick={handleDashBoardMembers}>대시보드 멤버 보기</button> */}
       <div className={styles['card-info']}>
         <span className={styles['card-title']}>구성원</span>
         <div className={styles['card-action']}>
           <span className={styles.pages}>1 페이지 중 1</span>
-          <div>
-            <button onClick={handlePrevPage} className={styles['left-arrow-button']}>
-              <img src="arrow_forward.svg" alt="구성원보기" />
-            </button>
-            <button onClick={handleNextPage} className={styles['right-arrow-button']}>
-              <img src="arrow_next.svg" alt="구성원보기" />
-            </button>
-          </div>
+          <Pagination count={memberCount} handleDashBoardMembers={handleDashBoardMembers} />
         </div>
       </div>
       <h3 className={styles['sub-title']}>이름</h3>
       <div>
-        {DASHBOARD_MEMBERS.members.map((member) => (
+        {memberList?.map((member) => (
           <li key={member.id} className={styles.table}>
             <Member nickname={member.nickname} />
           </li>

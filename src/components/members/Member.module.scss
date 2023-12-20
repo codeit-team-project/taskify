@@ -29,46 +29,6 @@
   color: var(--color-black_33);
 }
 
-.left-arrow-button {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 4px 0px 0px 4px;
-  border: 1px solid var(--color-gray30);
-  background: var(--color-white);
-  cursor: pointer;
-
-  &:hover {
-    box-shadow:
-      0px 2px 3px -1px rgba(0, 0, 0, 0.1),
-      0px 1px 0px 0px rgba(25, 28, 33, 0.02),
-      0px 0px 0px 1px rgba(25, 28, 33, 0.08);
-  }
-
-  &:active {
-    box-shadow: inset -12px -8px 40px var(--color-gray10);
-  }
-}
-
-.right-arrow-button {
-  width: 4rem;
-  height: 4rem;
-  border-radius: 0px 4px 4px 0px;
-  border: 1px solid var(--color-gray30);
-  background: var(--color-white);
-  cursor: pointer;
-
-  &:hover {
-    box-shadow:
-      0px 2px 3px -1px rgba(0, 0, 0, 0.1),
-      0px 1px 0px 0px rgba(25, 28, 33, 0.02),
-      0px 0px 0px 1px rgba(25, 28, 33, 0.08);
-  }
-
-  &:active {
-    box-shadow: inset -12px -8px 40px var(--color-gray10);
-  }
-}
-
 .sub-title {
   padding: 0.8rem 2.8rem;
   font-size: 1.6rem;
