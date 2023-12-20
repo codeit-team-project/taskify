@@ -11,9 +11,8 @@ import Link from 'next/link'
 import styles from './MainNav.module.scss'
 
 function MainNav({ theme = 'light' }) {
-  const logoSrc = theme === 'light' ? 'assets/images/logoLight.svg' : 'assets/images/logoDark.svg'
-  const logoTitleSrc =
-    theme === 'light' ? 'assets/images/logoTitleLight.svg' : 'assets/images/logoTitleDark.svg'
+  const logoSrc = `assets/images/logo${theme === 'light' ? 'Light' : 'Dark'}.svg`
+  const logoTitleSrc = `assets/images/logoTitle${theme === 'light' ? 'Light' : 'Dark'}.svg`
 
   return (
     <nav className={styles['nav-container']} data-theme={theme}>
