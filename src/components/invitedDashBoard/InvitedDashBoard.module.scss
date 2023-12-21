@@ -122,6 +122,14 @@ section.container {
           color: var(--color-violet);
         }
       }
+      .no-searched-invitation-text {
+        padding: 3rem 0;
+        color: var(--color-gray40);
+        font-size: 1.8rem;
+        font-weight: 400;
+        line-height: 1;
+        text-align: center;
+      }
     }
   }
 
