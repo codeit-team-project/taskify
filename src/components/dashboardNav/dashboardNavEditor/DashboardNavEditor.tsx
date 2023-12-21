@@ -23,9 +23,12 @@ export default function DashboardNavEditor({
   boardId?: number
   members?: { members: MemberType[]; totalCount: number } | null
 }) {
-  const [windowSize, setWindowSize] = useState(window.innerWidth)
+  const [windowSize, setWindowSize] = useState(0)
   const handleView = () => {
-    setWindowSize(window.innerWidth)
+    if (typeof window === undefined) setWindowSize(0)
+    else {
+      setWindowSize(window.innerWidth)
+    }
   }
   useEffect(() => {
     handleView()
