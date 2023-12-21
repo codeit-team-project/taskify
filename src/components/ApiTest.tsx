@@ -3,12 +3,12 @@
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createDashBoard } from '@/api/dashboards/createDashboards'
-import { geteDashBoardList } from '@/api/dashboards/getDashboards'
-import { geteDashBoardsDetail } from '@/api/dashboards/getDashboardsDetail'
+import { getDashBoardList } from '@/api/dashboards/getDashboards'
+import { getDashBoardsDetail } from '@/api/dashboards/getDashboardsDetail'
 import { editDashBoard } from '@/api/dashboards/editDashboards'
 import { deleteDashBoard } from '@/api/dashboards/deleteDashboards'
 import { createDashBoardInvitations } from '@/api/dashboards/createDashboardsInvitations'
-import { geteDashBoardInvitations } from '@/api/dashboards/getDashboardsInvitations'
+import { getDashBoardInvitations } from '@/api/dashboards/getDashboardsInvitations'
 import { DashBoardListType, DashBoardType } from '@/types/dashBoardType'
 import { InvitationsType } from '@/types/invitedDashBoardListType'
 
@@ -32,7 +32,7 @@ export default function ApiTest() {
   // 2. 대시보드 목록조회
   const { data: dashBoardList } = useQuery<DashBoardListType>({
     queryKey: ['dashBoards'],
-    queryFn: geteDashBoardList,
+    queryFn: getDashBoardList,
   })
   console.log(dashBoardList)
 
@@ -40,7 +40,7 @@ export default function ApiTest() {
   const boardId = 60
   const { data: dashBoardDetail } = useQuery<DashBoardType>({
     queryKey: ['dashBoardsDetail', boardId],
-    queryFn: () => geteDashBoardsDetail(boardId),
+    queryFn: () => getDashBoardsDetail(boardId),
   })
   console.log(dashBoardDetail)
 
@@ -100,7 +100,7 @@ export default function ApiTest() {
   // 7. 대시보드 초대 불러오기
   const { data: dashBoardsInvitations } = useQuery<InvitationsType>({
     queryKey: ['dashBoardsInvitations', boardId],
-    queryFn: () => geteDashBoardInvitations(boardId),
+    queryFn: () => getDashBoardInvitations(boardId),
   })
   console.log(dashBoardsInvitations)
 

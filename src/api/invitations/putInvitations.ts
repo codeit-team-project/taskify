@@ -7,7 +7,7 @@ interface PutInvitationsType {
   data: InvitedAcceptedType
 }
 
-export const editDashBoard = async ({ id, data }: PutInvitationsType) => {
+export const putInvitations = async ({ id, data }: PutInvitationsType) => {
   const response = await axiosInstance.put<InvitationType>(`/invitations/${id}`, data)
   return response.data
 }
