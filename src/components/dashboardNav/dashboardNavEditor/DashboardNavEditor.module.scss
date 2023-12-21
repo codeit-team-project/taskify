@@ -1,6 +1,8 @@
+@import '@/styles/mixin.scss';
+
 .editor-section {
   display: flex;
-  gap: 1rem;
+  gap: 3rem;
   & .button-section {
     display: flex;
     gap: 1rem;
@@ -13,6 +15,11 @@
       color: var(--color-gray50);
       background: transparent;
       padding: 0.8rem 1.6rem;
+    }
+    @include mobile {
+      img {
+        display: none;
+      }
     }
   }
 
@@ -63,5 +70,10 @@
         z-index: 5;
       }
     }
+  }
+  & .spacing-bar {
+    width: 1px;
+    height: 38px;
+    background-color: var(--gray-gray_D9D9D9, #d9d9d9);
   }
 }

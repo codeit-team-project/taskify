@@ -103,6 +103,10 @@ export default function DashboardNavEditor({
               )}
             </div>
           )}
+          <div
+            className={styles['spacing-bar']}
+            style={{ marginLeft: `${windowSize > 744 ? 3 : 1}rem` }}
+          ></div>
         </div>
       )}
     </div>
