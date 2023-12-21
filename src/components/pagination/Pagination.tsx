@@ -3,7 +3,7 @@ import styles from './Pagination.module.scss'
 
 interface PaginationProps {
   // handleDashBoardMembers: (startPage: number, id?: number) => Promise<void>
-  handleDashBoardMembers: any
+  handleDashBoardMembers: any // 정확한 타입으로 변경하기
   count: number
 }
 
