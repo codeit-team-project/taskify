@@ -10,6 +10,7 @@ import { FormContext } from '@/context/formContext'
 import axiosInstance from '@/utils/axiosinstance'
 import { format } from 'date-fns'
 import Tags from '@/components/modalInput/Tags'
+import { createCard } from '@/api/cards'
 
 interface CreateTodoInterface {
   onClose: () => void
@@ -21,7 +22,6 @@ export default function CreateTodo({ onClose }: CreateTodoInterface) {
   const columnId = 91
   const handleCreateCard = async () => {
     const formData = new FormData()
-
     formData.append('image', obj.imageUrl)
     const response = await axiosInstance.post(`${team}/columns/${columnId}/card-image`, formData, {
       headers: {
@@ -39,7 +39,9 @@ export default function CreateTodo({ onClose }: CreateTodoInterface) {
       tags: obj.tags,
       imageUrl: response.data.imageUrl,
     }
-    await axiosInstance.post(`${team}/cards`, dataObj)
+
+    await createCard(dataObj)
+    // await axiosInstance.post(`${team}/cards`, dataObj)
   }
 
   return (
