@@ -61,8 +61,8 @@ export default function DashboardNavEditor({
               className={styles['member-img-list']}
               style={{ width: `${members.totalCount >= 5 ? 14 : members.totalCount * 3}rem` }}
             >
-              {members.members.map((member, ind) => {
-                if (ind <= 3) {
+              {members.members.slice(0, 4).map((member) => {
+                if (member) {
                   return (
                     <Image
                       key={member.id}
@@ -84,8 +84,8 @@ export default function DashboardNavEditor({
               className={styles['member-img-list']}
               style={{ width: `${members.totalCount >= 3 ? 10 : members.totalCount * 3}rem` }}
             >
-              {members.members.map((member, ind) => {
-                if (ind <= 1) {
+              {members.members.slice(0, 2).map((member) => {
+                if (member) {
                   return (
                     <Image
                       key={member.id}
