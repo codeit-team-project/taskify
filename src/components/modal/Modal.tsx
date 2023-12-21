@@ -18,7 +18,6 @@ export default function Modal() {
   }
 
   const containerClassName = `${styles.container} ${showModal ? styles['dark-background'] : ''}`
-
   return (
     <div className={containerClassName}>
       <button onClick={handleOpenModal}>모달을엽시다</button>
