@@ -1,3 +1,9 @@
+/* 드롭다운 컴포넌트 
+
+TODO - 로그아웃 기능 구현할 것.
+- dashboardNav 컴포넌트의 프로필을 누르면 드롭다운 메뉴가 나옴
+*/
+
 import Link from 'next/link'
 import styles from './Dropdown.module.scss'
 
