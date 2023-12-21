@@ -12,11 +12,12 @@ import Link from 'next/link'
 import { useState } from 'react'
 import styles from './DashboardNav.module.scss'
 import DashboardNavEditor from './dashboardNavEditor/DashboardNavEditor'
+import Dropdown from './dropdown/Dropdown'
 import {
   mockupUser,
   mockDashboardMemberSmallList,
   mockDashboardInfo,
-  mockDashboardMemberManyList,
+  // mockDashboardMemberManyList,
 } from './mockup'
 
 const MY_DASHBOARD_INFO = {
@@ -24,26 +25,6 @@ const MY_DASHBOARD_INFO = {
   title: '내 대시보드',
   createdByMe: true,
   userId: 1,
-}
-
-function DropMenu() {
-  return (
-    <div className={styles['dropmenu-container']}>
-      <div className={styles['button-container']}>
-        <button className={styles['menu-button']}>로그아웃</button>
-      </div>
-      <div className={styles['button-container']}>
-        <button className={styles['menu-button']}>
-          <Link href="/my">내 정보</Link>
-        </button>
-      </div>
-      <div className={styles['button-container']}>
-        <button className={styles['menu-button']}>
-          <Link href="/mydashboard">내 대시보드</Link>
-        </button>
-      </div>
-    </div>
-  )
 }
 
 export default function DashboardNav({ isMyDashboard = true }) {
@@ -91,7 +72,7 @@ export default function DashboardNav({ isMyDashboard = true }) {
           <div className={styles['nickname']}>{mockupUser.user.nickname}</div>
         </button>
       </div>
-      {isVisible && <DropMenu />}
+      {isVisible && <Dropdown />}
     </nav>
   )
 }
