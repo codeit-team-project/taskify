@@ -84,6 +84,8 @@ video {
   border: 0;
   font-size: 100%;
   box-sizing: border-box;
+  margin-block-start: 0;
+  margin-block-end: 0;
 }
 
 article,

@@ -18,11 +18,18 @@
 
   --color-red: #d6173a;
   --color-green: #7ac555;
+  --color-green20: #86d549;
   --color-purple: #760dde;
   --color-orange: #ffa500;
-  --color-blue: #76a5ea;
-  --color-pink: #e876ea;
+  --color-orange20: #d58d49;
 
+  --color-blue10: #dbe6f7;
+  --color-blue20: #76a5ea;
+  --color-blue30: #4981d5;
+
+  --color-pink10: #f7dbf0;
+  --color-pink20: #e876ea;
+  --color-pink30: #d549b6;
   /* Font */
   font-size: 62.5%;
 }
