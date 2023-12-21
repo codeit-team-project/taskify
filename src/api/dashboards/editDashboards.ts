@@ -1,12 +1,12 @@
 import axiosInstance from '@/commons/lib/axiosInstance'
+import { DashBoardType, DashBoardVauleType } from '@/types/dashBoardType'
 
-// 나중에 이 타입은 types로 옮겨야 함
-interface DashBoard {
-  title: string
-  color: string
+interface EditDashBoardType {
+  dashBoardId: number
+  data: DashBoardVauleType
 }
 
-export const editDashBoard = async (dashBoardId: number, data: DashBoard) => {
-  const response = await axiosInstance.put(`/dashboards/${dashBoardId}`, data)
+export const editDashBoard = async ({ dashBoardId, data }: EditDashBoardType) => {
+  const response = await axiosInstance.put<DashBoardType>(`/dashboards/${dashBoardId}`, data)
   return response.data
 }

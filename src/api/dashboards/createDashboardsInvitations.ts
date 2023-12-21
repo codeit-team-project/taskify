@@ -1,14 +1,13 @@
 import axiosInstance from '@/commons/lib/axiosInstance'
+import { InvitationsValue } from '@/types/invitations'
+import { InvitationType } from '@/types/invitedDashBoardListType'
 
-// 나중에 타입에 대한 확실한 정의 필요
-interface CreateInvitations {
+interface CreateInvitationsType {
   id: number
-  data: {
-    email: string
-  }
+  data: InvitationsValue
 }
 
-export const createDashBoardInvitations = async ({ id, data }: CreateInvitations) => {
-  const response = await axiosInstance.post(`/dashboards/${id}/invitations`, data)
+export const createDashBoardInvitations = async ({ id, data }: CreateInvitationsType) => {
+  const response = await axiosInstance.post<InvitationType>(`/dashboards/${id}/invitations`, data)
   return response.data
 }
