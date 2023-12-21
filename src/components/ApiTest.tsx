@@ -1,68 +1,69 @@
-// react-query 사용하기
+// ⭐️⭐️⭐️ react-query 사용하기 샘플 코드
+// 이 파일을 나중에 삭제 예정입니다.
 
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { createDashBoard } from '@/api/dashboards/createDashboards'
-import { geteDashBoardsList } from '@/api/dashboards/getDashboards'
+import { geteDashBoardList } from '@/api/dashboards/getDashboards'
 import { geteDashBoardsDetail } from '@/api/dashboards/getDashboardsDetail'
 import { editDashBoard } from '@/api/dashboards/editDashboards'
 import { deleteDashBoard } from '@/api/dashboards/deleteDashboards'
 import { createDashBoardInvitations } from '@/api/dashboards/createDashboardsInvitations'
 import { geteDashBoardInvitations } from '@/api/dashboards/getDashboardsInvitations'
+import { DashBoardListType, DashBoardType } from '@/types/dashBoardType'
+import { InvitationsType } from '@/types/invitedDashBoardListType'
 
 export default function ApiTest() {
   const queryClient = useQueryClient()
 
   // 1. 대시보드 생성하기
-  const { mutate } = useMutation({ mutationFn: createDashBoard })
-
-  const handleCreateDashBoard = async () => {
-    try {
-      const res = await mutate({ title: 'Sample Dashboard', color: '#123456' })
-      console.log(res) // 응답은 가는데 왜 res가 undefined인지 모르겠다
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
-  // 2. 대시보드 목록조회
-  // prettier-ignore
-  const { data: dashBoardsList } = useQuery({ queryKey: ['dashBoards'], queryFn: geteDashBoardsList })
-  console.log(dashBoardsList)
-
-  // 3. 대시보드 상세조회
-  const boardId = 60
-  const { data: dashBoardsDetail } = useQuery({
-    queryKey: ['dashBoardsDetail', boardId],
-    queryFn: () => geteDashBoardsDetail(boardId),
-  })
-  console.log(dashBoardsDetail)
-
-  // 4. 대시보드 수정
-  interface DashBoard {
-    title: string
-    color: string
-  }
-
-  const mutation = useMutation({
-    mutationFn: ({ id, dashboardData }: { id: number; dashboardData: DashBoard }) => {
-      return editDashBoard(id, dashboardData)
+  const { mutate } = useMutation({
+    mutationFn: createDashBoard,
+    onSuccess: (data) => {
+      // 성공했을때 실행할 콜백
+      console.log(data)
     },
   })
 
-  const handleEditDashBoard = async () => {
+  // 1-1. 버튼 누르면 대시보드 생성하는 이벤트 핸들러
+  const handleCreateDashBoard = () => {
+    mutate({ title: 'Sample Dashboard', color: '#123456' })
+  }
+
+  // 2. 대시보드 목록조회
+  const { data: dashBoardList } = useQuery<DashBoardListType>({
+    queryKey: ['dashBoards'],
+    queryFn: geteDashBoardList,
+  })
+  console.log(dashBoardList)
+
+  // 3. 대시보드 상세조회
+  const boardId = 60
+  const { data: dashBoardDetail } = useQuery<DashBoardType>({
+    queryKey: ['dashBoardsDetail', boardId],
+    queryFn: () => geteDashBoardsDetail(boardId),
+  })
+  console.log(dashBoardDetail)
+
+  // 4. 대시보드 수정
+  const { mutate: editDashBoardMutation } = useMutation({
+    mutationFn: editDashBoard,
+    onSuccess: (data) => {
+      // 성공했을때 실행할 콜백
+      console.log(data)
+    },
+  })
+
+  // 4-1. 버튼 누르면 대시보드 수정하는 이벤트 핸들러
+  const handleEditDashBoard = () => {
     try {
-      const res = await mutation.mutate({
-        id: 57,
-        dashboardData: { title: 'Edit Dashboard', color: '#ffffff' },
-      })
-      console.log(res) // 응답은 가는데 왜 res가 undefined인지 모르겠다
+      editDashBoardMutation({ dashBoardId: 65, data: { title: 'edit', color: '#ffffff' } })
     } catch (error) {
       console.log(error)
     }
   }
 
   // 5. 대시보드 삭제
-  const deleteMutation = useMutation({
+  const { mutate: deleteMutation } = useMutation({
     mutationFn: (dashBoardId: number) => deleteDashBoard(dashBoardId),
     // 대시보드 삭제 성공 시, 캐시 업데이트 (delete 요청후에 get 요청이 간것을 확인할 수 있음)
     onSuccess: () => {
@@ -70,33 +71,34 @@ export default function ApiTest() {
     },
   })
 
+  // 5-1. 버튼 누르면 대시보드 삭제하는 이벤트 핸들러
   const handleDeleteDashBoard = () => {
     try {
-      deleteMutation.mutate(57)
+      deleteMutation(60)
     } catch (error) {
       console.log(error)
     }
   }
 
   // 6. 대시보드 초대하기
-  const { mutate: createInvitations } = useMutation({ mutationFn: createDashBoardInvitations })
+  const { mutate: createInvitations } = useMutation({
+    mutationFn: createDashBoardInvitations,
+    onSuccess: (data) => {
+      console.log(data)
+    },
+  })
 
+  // 6-1. 버튼 누르면 대시보드 초대하는 이벤트 핸들러
   const handleCreateInvitations = async () => {
     try {
-      const res = await createInvitations({
-        id: 60,
-        data: {
-          email: 'sohyun@taskify.com', // 이미 초대된 멤버라서 추가 테스트 못함
-        },
-      })
-      console.log(res) // 응답은 가는데 왜 res가 undefined인지 모르겠다
+      createInvitations({ id: 60, data: { email: 'sohyun@taskify.com' } }) // 이미 초대된 멤버임(참고)
     } catch (error) {
       console.log(error)
     }
   }
 
   // 7. 대시보드 초대 불러오기
-  const { data: dashBoardsInvitations } = useQuery({
+  const { data: dashBoardsInvitations } = useQuery<InvitationsType>({
     queryKey: ['dashBoardsInvitations', boardId],
     queryFn: () => geteDashBoardInvitations(boardId),
   })
@@ -106,13 +108,21 @@ export default function ApiTest() {
     <>
       <h2>뮤테이션 관련 테스트 버튼</h2>
       <h3>대시보드 생성하기</h3>
-      <button onClick={handleCreateDashBoard}>대시보드 생성 버튼</button>
-      <h3>대시보드 상세 조회</h3>
-      <button onClick={handleEditDashBoard}>대시보드 상세 조회 버튼</button>
+      <div style={{ padding: '1rem 0' }}>
+        <button onClick={handleCreateDashBoard}>대시보드 생성 버튼</button>
+      </div>
+      <h3>대시보드 수정</h3>
+      <div style={{ padding: '1rem 0' }}>
+        <button onClick={handleEditDashBoard}>대시보드 수정 버튼</button>
+      </div>
       <h3>대시보드 삭제</h3>
-      <button onClick={handleDeleteDashBoard}>대시보드 삭제 버튼</button>
+      <div style={{ padding: '1rem 0' }}>
+        <button onClick={handleDeleteDashBoard}>대시보드 삭제 버튼</button>
+      </div>
       <h3>대시보드 초대</h3>
-      <button onClick={handleCreateInvitations}>대시보드 초대 버튼</button>
+      <div style={{ padding: '1rem 0' }}>
+        <button onClick={handleCreateInvitations}>대시보드 초대 버튼</button>
+      </div>
     </>
   )
 }
