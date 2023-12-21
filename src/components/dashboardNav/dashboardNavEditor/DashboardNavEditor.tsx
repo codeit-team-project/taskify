@@ -14,15 +14,17 @@ import styles from './DashboardNavEditor.module.scss'
 import MemberType from '@/types/MemberType'
 import { useEffect, useState } from 'react'
 
+interface DashboardNavEditorProps {
+  isOwner?: boolean
+  boardId?: number
+  members?: { members: MemberType[]; totalCount: number } | null
+}
+
 export default function DashboardNavEditor({
   isOwner = false,
   boardId = 1,
   members = null,
-}: {
-  isOwner?: boolean
-  boardId?: number
-  members?: { members: MemberType[]; totalCount: number } | null
-}) {
+}: DashboardNavEditorProps) {
   const [windowSize, setWindowSize] = useState(0)
   const handleView = () => {
     if (typeof window === undefined) setWindowSize(0)
