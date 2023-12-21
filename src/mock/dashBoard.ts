@@ -1,0 +1,50 @@
+// 대시보드 목록 조회 mock 데이터
+export const DASH_BOARD_DATA = {
+  dashboards: [
+    {
+      id: 1,
+      title: '비브리지',
+      color: '#E876EA',
+      createdAt: '2023-12-19T04:51:09.082Z',
+      updatedAt: '2023-12-19T04:51:09.082Z',
+      createdByMe: true,
+      userId: 1,
+    },
+    {
+      id: 2,
+      title: '코드잇',
+      color: '#76A5EA',
+      createdAt: '2023-12-19T04:51:09.082Z',
+      updatedAt: '2023-12-19T04:51:09.082Z',
+      createdByMe: true,
+      userId: 1,
+    },
+    {
+      id: 3,
+      title: '3분기 계획',
+      color: '#FFA500',
+      createdAt: '2023-12-19T04:51:09.082Z',
+      updatedAt: '2023-12-19T04:51:09.082Z',
+      createdByMe: false,
+      userId: 1,
+    },
+    {
+      id: 4,
+      title: '회의록',
+      color: '#760DDE',
+      createdAt: '2023-12-19T04:51:09.082Z',
+      updatedAt: '2023-12-19T04:51:09.082Z',
+      createdByMe: false,
+      userId: 1,
+    },
+    {
+      id: 5,
+      title: '중요 문서함',
+      color: '#7AC555',
+      createdAt: '2023-12-19T04:51:09.082Z',
+      updatedAt: '2023-12-19T04:51:09.082Z',
+      createdByMe: false,
+      userId: 1,
+    },
+  ],
+}
