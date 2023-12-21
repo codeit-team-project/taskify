@@ -82,7 +82,6 @@ export default function DashboardNavEditor({
               className={styles['member-img-list']}
               style={{ width: `${members.totalCount >= 3 ? 10 : members.totalCount * 3}rem` }}
             >
-              {' '}
               {members.members.map((member, ind) => {
                 if (ind <= 1) {
                   return (

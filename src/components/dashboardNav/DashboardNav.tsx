@@ -39,7 +39,7 @@ export default function DashboardNav({ isMyDashboard = true }) {
             {mockDashboardInfo.title}
             {mockDashboardInfo.createdByMe && (
               <span>
-                <Image src="assets/crown_icon.svg" alt="owner" width={20} height={20} />{' '}
+                <Image src="assets/crown_icon.svg" alt="owner" width={20} height={20} />
               </span>
             )}
           </>
