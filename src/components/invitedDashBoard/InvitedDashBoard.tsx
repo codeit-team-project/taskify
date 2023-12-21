@@ -1,15 +1,53 @@
-import { InvitedDashBoardListType } from '@/types/invitedDashBoardListType'
-import styles from './invitedDashboard.module.scss'
+import { useState } from 'react'
+import styles from './InvitedDashBoard.module.scss'
+import {
+  InvitedDashBoardItemType,
+  InvitedDashBoardListType,
+} from '@/types/invitedDashBoardListType'
+import useDebounce from '@/hooks/useDebounce'
+import { getInvitations } from '@/pages/mydashboard'
+import useDidMountEffect from '@/hooks/useDidMountEffect'
 
 interface InvitedDashboardProps {
   list: InvitedDashBoardListType
 }
+
 export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
+  const [tableData, setTableData] = useState<InvitedDashBoardListType>(list)
+  const [searchTitle, setSearchTitle] = useState('')
+  const debouncedSearchTitle = useDebounce(searchTitle, 1000)
+
+  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTitle(event.target.value)
+  }
+
+  useDidMountEffect(() => {
+    const getInvitationsByTitle = async () => {
+      try {
+        const { invitations } = await getInvitations(debouncedSearchTitle)
+
+        const newInvitations: InvitedDashBoardListType = invitations.filter(
+          (item: InvitedDashBoardItemType) => !item.inviteAccepted,
+        )
+
+        setTableData(newInvitations)
+      } catch (error) {
+        console.error('Error fetching data:', error)
+        return {
+          props: {
+            list: null,
+          },
+        }
+      }
+    }
+    getInvitationsByTitle()
+  }, [debouncedSearchTitle])
+
   return (
     <section className={styles['container']}>
       <h2 className={styles['title']}>초대받은 대시보드</h2>
 
-      {list ? (
+      {tableData && debouncedSearchTitle ? (
         <table className={styles['invited-dashboard-table']}>
           <colgroup>
             <col className={styles['column-first']} />
@@ -26,7 +64,14 @@ export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
                     width="24px"
                     height="24px"
                   />
-                  <input className={styles['search-input']} placeholder="검색" type="text" />
+                  <input
+                    id="title"
+                    className={styles['search-input']}
+                    placeholder="검색"
+                    type="text"
+                    value={searchTitle}
+                    onChange={handleInputChange}
+                  />
                 </form>
               </th>
             </tr>
@@ -37,18 +82,19 @@ export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
             </tr>
           </thead>
           <tbody>
-            {list.map((item) => (
-              <tr key={item.id} className={styles['dashboard-item']}>
-                <td className={styles['dashboard-name']}>{item.dashboard.title}</td>
-                <td className={styles['inviter-name']}>{item.invitee.nickname}</td>
-                <td>
-                  <div className={styles['button-container']}>
-                    <button className={styles['button-accept']}>수락</button>
-                    <button className={styles['button-decline']}>거절</button>
-                  </div>
-                </td>
-              </tr>
-            ))}
+            {tableData.length > 1 &&
+              tableData?.map((item) => (
+                <tr key={item.id} className={styles['dashboard-item']}>
+                  <td className={styles['dashboard-name']}>{item.dashboard.title}</td>
+                  <td className={styles['inviter-name']}>{item.invitee.nickname}</td>
+                  <td>
+                    <div className={styles['button-container']}>
+                      <button className={styles['button-accept']}>수락</button>
+                      <button className={styles['button-decline']}>거절</button>
+                    </div>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       ) : (

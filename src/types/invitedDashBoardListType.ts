@@ -38,4 +38,4 @@ export type InvitedDashBoardItemType = {
   updatedAt: string
 }
 
-export type InvitedDashBoardListType = InvitedDashBoardItemType[] | null
+export type InvitedDashBoardListType = InvitedDashBoardItemType[] | []
