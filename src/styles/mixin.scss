@@ -3,14 +3,14 @@
 $mobile: 376px;
 $tablet: 745px;
 
-// 브라우저 크기가 745px 미만일 때
+// 브라우저 크기가 744px 이하일 때
 @mixin tablet {
   @media (max-width: $tablet) {
     @content;
   }
 }
 
-// 브라우저 크기가 375px 미만일 때
+// 브라우저 크기가 375px 이하일 때
 @mixin mobile {
   @media (max-width: $mobile) {
     @content;
