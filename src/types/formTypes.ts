@@ -10,7 +10,6 @@ export interface SignupFormValueType extends SigninFormValueType {
 }
 
 export interface SignInputProps {
-  id: string
   placeholder: string
   labelName: string
   onChange?: ChangeHandler
