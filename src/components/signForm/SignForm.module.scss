@@ -1,8 +1,14 @@
 @import '@/styles/mixin.scss';
 
 .signinput-container {
-  padding: 1.5rem 0;
-  min-width: 350px;
+  padding: 1.2rem 0;
+  width: 52rem;
+  @include tablet-narrow {
+    width: 35rem;
+  }
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .error-message {

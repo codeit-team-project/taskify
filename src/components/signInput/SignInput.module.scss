@@ -2,8 +2,6 @@
 
 .input-container {
   width: 100%;
-  max-width: 520px;
-  min-width: 300px;
   position: relative;
   & label {
     display: block;
@@ -13,6 +11,7 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    padding-bottom: 0.7rem;
   }
   & input {
     box-sizing: border-box;
@@ -30,7 +29,7 @@
   & .eye-button {
     position: absolute;
     right: 1rem;
-    top: 3rem;
+    top: 3.7rem;
   }
 }
 
