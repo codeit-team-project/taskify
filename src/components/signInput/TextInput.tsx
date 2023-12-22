@@ -10,7 +10,7 @@ import { forwardRef } from 'react'
 import { SignInputProps } from '@/types/formTypes'
 import styles from './SignInput.module.scss'
 
-const EmailInput = forwardRef<HTMLInputElement, SignInputProps>(
+const TextInput = forwardRef<HTMLInputElement, SignInputProps>(
   ({ placeholder, labelName, onChange, onBlur, name = '', hasError }, ref) => {
     return (
       <div className={styles['input-container']}>
@@ -34,6 +34,6 @@ const EmailInput = forwardRef<HTMLInputElement, SignInputProps>(
     )
   },
 )
-EmailInput.displayName = 'EmailInput'
+TextInput.displayName = 'TextInput'
 
-export default EmailInput
+export default TextInput
