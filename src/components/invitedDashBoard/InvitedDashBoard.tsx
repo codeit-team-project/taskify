@@ -1,12 +1,10 @@
 import { useState } from 'react'
 import styles from './InvitedDashBoard.module.scss'
-import {
-  InvitedDashBoardItemType,
-  InvitedDashBoardListType,
-} from '@/types/invitedDashBoardListType'
 import useDebounce from '@/hooks/useDebounce'
 import useDidMountEffect from '@/hooks/useDidMountEffect'
 import { getInvitations } from '@/api/invitations/getInvitations'
+import { putInvitation } from '@/api/invitations/putInvitation'
+import { InvitationType } from '@/types/invitedDashBoardListType'
 
 type InvitationsStatus =
   | 'noInvitations'
@@ -19,16 +17,29 @@ interface NoSearchedInvitationsProps {
 }
 
 interface InvitationsProps {
-  invitationList: InvitedDashBoardListType
+  invitationList: InvitationType[]
 }
 
 interface InvitedDashboardProps {
-  list: InvitedDashBoardListType
+  list: InvitationType[]
+}
+
+const respondToInvitation = async (id: number, inviteAccepted: boolean) => {
+  try {
+    await putInvitation({
+      id,
+      data: {
+        inviteAccepted,
+      },
+    })
+  } catch (error) {
+    console.error('Error fetching data:', error)
+  }
 }
 
 const getInvitationsType = (
-  debouncedSearchTitle: string | null,
-  invitationList: any[] | null,
+  debouncedSearchTitle: string,
+  invitationList: InvitationType[],
 ): InvitationsStatus => {
   if (!debouncedSearchTitle) {
     return invitationList && invitationList.length > 1 ? 'totalInvitations' : 'noInvitations'
@@ -73,8 +84,22 @@ function Invitations({ invitationList }: InvitationsProps) {
       <td className={styles['inviter-name']}>{item.invitee.nickname}</td>
       <td>
         <div className={styles['button-container']}>
-          <button className={styles['button-accept']}>수락</button>
-          <button className={styles['button-decline']}>거절</button>
+          <button
+            className={styles['button-accept']}
+            onClick={() => {
+              respondToInvitation(item.id, true)
+            }}
+          >
+            수락
+          </button>
+          <button
+            className={styles['button-decline']}
+            onClick={() => {
+              respondToInvitation(item.id, false)
+            }}
+          >
+            거절
+          </button>
         </div>
       </td>
     </tr>
@@ -82,7 +107,7 @@ function Invitations({ invitationList }: InvitationsProps) {
 }
 
 export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
-  const [invitationList, setInvitationList] = useState<InvitedDashBoardListType>(list)
+  const [invitationList, setInvitationList] = useState<InvitationType[]>(list)
   const [searchTitle, setSearchTitle] = useState('')
   const debouncedSearchTitle = useDebounce(searchTitle, 1000)
 
@@ -97,18 +122,13 @@ export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
       try {
         const { invitations } = await getInvitations(debouncedSearchTitle)
 
-        const newInvitations: InvitedDashBoardListType = invitations.filter(
-          (item: InvitedDashBoardItemType) => !item.inviteAccepted,
+        const newInvitations: InvitationType[] = invitations.filter(
+          (item: InvitationType) => !item.inviteAccepted,
         )
 
         setInvitationList(newInvitations)
       } catch (error) {
         console.error('Error fetching data:', error)
-        return {
-          props: {
-            list: null,
-          },
-        }
       }
     }
     getInvitationsByTitle()
