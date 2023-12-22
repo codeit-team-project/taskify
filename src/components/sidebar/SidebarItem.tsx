@@ -1,9 +1,3 @@
-/**
- * @TODO
- * 대시보드 response types 분리
- * api 연동 후 mock 데이터 삭제
- */
-
 import Image from 'next/image'
 import styles from './Sidebar.module.scss'
 import EllipseIcon from '@/components/ui/icons/Ellipse'
