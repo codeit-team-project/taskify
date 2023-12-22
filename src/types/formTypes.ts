@@ -1,13 +1,5 @@
 import { ChangeHandler, FieldErrors } from 'react-hook-form'
-
-export interface SigninFormValueType {
-  email: string
-  password: string
-}
-
-export interface SignupFormValueType extends SigninFormValueType {
-  passwordRepeat: string
-}
+import { SignInFormValueType, SignUpFormValueType } from './auth'
 
 export interface SignInputProps {
   placeholder: string
@@ -15,5 +7,5 @@ export interface SignInputProps {
   onChange?: ChangeHandler
   onBlur?: ChangeHandler
   name?: string
-  hasError?: {} | FieldErrors<SigninFormValueType>
+  hasError?: {} | FieldErrors<SignInFormValueType | SignUpFormValueType>
 }
