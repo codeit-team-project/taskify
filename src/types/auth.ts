@@ -1,0 +1,16 @@
+import { UserType } from './users'
+
+export interface SignInFormValueType {
+  email: string
+  password: string
+}
+
+export interface LoginType {
+  user: UserType
+  accessToken: string
+}
+
+export interface PasswordCheckVauleType {
+  password: string
+  newPassword: string
+}

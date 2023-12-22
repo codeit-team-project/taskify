@@ -2,14 +2,14 @@
 
 const nextConfig = {
   reactStrictMode: true,
-  async rewrites() {
-    return [
-      {
-        source: '/api/invitations',
-        destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/invitations`,
-      },
-    ]
-  },
+  // async rewrites() {
+  //   return [
+  //     {
+  //       source: '/api/invitations',
+  //       destination: `${process.env.NEXT_PUBLIC_API_BASE_URL}/invitations`,
+  //     },
+  //   ]
+  // },
   images: {
     remotePatterns: [
       {
