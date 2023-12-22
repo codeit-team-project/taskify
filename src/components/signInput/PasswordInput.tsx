@@ -12,7 +12,7 @@ import { SignInputProps } from '@/types/formTypes'
 import styles from './SignInput.module.scss'
 
 const PasswordInput = forwardRef<HTMLInputElement, SignInputProps>(
-  ({ id, placeholder, labelName, onChange, onBlur, name, hasError }, ref) => {
+  ({ placeholder, labelName, onChange, onBlur, name = '', hasError }, ref) => {
     const [currentType, setCurrentType] = useState('password')
     const [isOpenEye, setIsOpenEye] = useState(false)
 
@@ -23,7 +23,7 @@ const PasswordInput = forwardRef<HTMLInputElement, SignInputProps>(
 
     return (
       <div className={styles['input-container']}>
-        <label htmlFor={id} className={styles['label']}>
+        <label htmlFor={name} className={styles['label']}>
           {labelName}
         </label>
         <button onClick={handleClickEye} className={styles['eye-button']} type="button">
@@ -35,7 +35,7 @@ const PasswordInput = forwardRef<HTMLInputElement, SignInputProps>(
           />
         </button>
         <input
-          id={id}
+          id={name}
           ref={ref}
           name={name}
           type={currentType}
@@ -43,7 +43,9 @@ const PasswordInput = forwardRef<HTMLInputElement, SignInputProps>(
           className={styles['input']}
           onChange={onChange}
           onBlur={onBlur}
-          data-error={hasError === undefined || !Object.keys(hasError).includes(id) ? false : true}
+          data-error={
+            hasError === undefined || !Object.keys(hasError).includes(name) ? false : true
+          }
         />
       </div>
     )
