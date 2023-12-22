@@ -6,7 +6,7 @@ TODO - onSubmit 코드 구현할 것.
 
 import { useForm } from 'react-hook-form'
 import SignInput from '@/components/signInput/SignInput'
-import SigninFormValueType from '@/types/SigninFormValueType'
+import { SigninFormValueType } from '@/types/formTypes'
 import { emailReg, passwordReg } from '@/utils/validChecker'
 import styles from './SigninForm.module.scss'
 

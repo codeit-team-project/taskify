@@ -3,35 +3,11 @@
 
 import Image from 'next/image'
 import React, { forwardRef, useState } from 'react'
-import { ChangeHandler, FieldErrors } from 'react-hook-form'
-import SigninFormValueType from '@/types/SigninFormValueType'
+import { SignInputProps } from '@/types/formTypes'
 import styles from './SignInput.module.scss'
 
-interface SignInputProps {
-  id: string
-  iType: string
-  placeholder: string
-  labelName: string
-  onChange?: ChangeHandler
-  onBlur?: ChangeHandler
-  name?: string
-  hasError?: {} | FieldErrors<SigninFormValueType>
-}
-
 const SignInput = forwardRef<HTMLInputElement, SignInputProps>(
-  (
-    {
-      id = '',
-      iType = 'text',
-      placeholder = '',
-      labelName = '',
-      onChange,
-      onBlur,
-      name = '',
-      hasError = {},
-    },
-    ref,
-  ) => {
+  ({ id, iType, placeholder, labelName, onChange, onBlur, name, hasError }, ref) => {
     const [changeType, setChangeType] = useState(iType)
     const [isOpenEye, setIsOpenEye] = useState(false)
 
