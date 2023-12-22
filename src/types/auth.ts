@@ -5,6 +5,11 @@ export interface SignInFormValueType {
   password: string
 }
 
+export interface SignUpFormValueType extends SignInFormValueType {
+  nickname: string
+  passwordRepeat: string
+}
+
 export interface LoginType {
   user: UserType
   accessToken: string
