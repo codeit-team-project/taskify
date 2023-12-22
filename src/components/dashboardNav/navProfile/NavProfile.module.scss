@@ -1,0 +1,25 @@
+@import '@/styles/mixin.scss';
+
+.profile-section {
+  border: none;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  & img {
+    border: 2px solid white;
+    border-radius: 100%;
+  }
+  & .nickname {
+    border: none;
+    background: transparent;
+    color: var(--color-black_33);
+    font-family: 'Pretendard';
+    font-size: 1.6rem;
+    font-weight: 500;
+    @include mobile {
+      display: none;
+    }
+  }
+}
