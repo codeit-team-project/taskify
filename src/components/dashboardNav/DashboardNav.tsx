@@ -23,16 +23,16 @@ import {
 import useDropdown from '@/hooks/useDropdown'
 import NavProfile from './navProfile/NavProfile'
 
-const EXCEPT_EDITOR = ['mydashboard', 'my']
+const EXCEPT_EDITOR = ['/mydashboard', '/my']
 
-export default function DashboardNav({ whatPage = 'mydashboard' }) {
+export default function DashboardNav({ whatPage = '/mydashboard' }) {
   const [isVisible, handleOpenDropdown, handleCloseDropdown] = useDropdown()
   return (
     <nav className={styles['nav-container']}>
-      <div className={styles['title-section']} data-my-dashboard={whatPage === 'mydashboard'}>
-        {whatPage === 'mydashboard' ? (
+      <div className={styles['title-section']} data-my-dashboard={whatPage === '/mydashboard'}>
+        {whatPage === '/mydashboard' ? (
           <Link href="/mydashboard">내 대시보드</Link>
-        ) : whatPage === 'my' ? (
+        ) : whatPage === '/my' ? (
           <span>계정관리</span>
         ) : (
           <>
