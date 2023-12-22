@@ -20,7 +20,7 @@
     letter-spacing: -2px;
     font-size: 1.6rem;
     font-weight: 500;
-    @media (max-width: 600px) {
+    @include tablet-narrow {
       display: none;
     }
   }
