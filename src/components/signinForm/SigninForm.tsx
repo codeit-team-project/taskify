@@ -5,7 +5,8 @@ TODO - onSubmit 코드 구현할 것.
  */
 
 import { useForm } from 'react-hook-form'
-import SignInput from '@/components/signInput/SignInput'
+import EmailInput from '@/components/signInput/EmailInput'
+import PasswordInput from '@/components/signInput/PasswordInput'
 import { SigninFormValueType } from '@/types/formTypes'
 import { emailReg, passwordReg } from '@/utils/regExpressions'
 import styles from './SigninForm.module.scss'
@@ -27,9 +28,8 @@ export default function SigninForm() {
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={styles['signinput-container']}>
-        <SignInput
+        <EmailInput
           id="email"
-          iType="text"
           placeholder="이메일을 입력해 주세요."
           labelName="이메일"
           {...register('email', {
@@ -49,9 +49,8 @@ export default function SigninForm() {
       </div>
 
       <div className={styles['signinput-container']}>
-        <SignInput
+        <PasswordInput
           id="password"
-          iType="password"
           placeholder="비밀번호를 입력해 주세요."
           labelName="비밀번호"
           {...register('password', {
