@@ -1,3 +1,9 @@
+import DashboardLayout from '@/components/ui/layout/DashboardLayout'
+
 export default function DashBoardPage() {
-  return <>대시보드 페이지</>
+  return (
+    <>
+      <DashboardLayout>대시보드 페이지</DashboardLayout>
+    </>
+  )
 }

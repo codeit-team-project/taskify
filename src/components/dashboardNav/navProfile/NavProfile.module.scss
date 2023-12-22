@@ -1,24 +1,26 @@
 @import '@/styles/mixin.scss';
 
 .profile-section {
+  padding: 0;
   border: none;
   background: transparent;
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
   & img {
     border: 2px solid white;
     border-radius: 100%;
   }
   & .nickname {
     border: none;
+    padding-left: 1rem;
     background: transparent;
     color: var(--color-black_33);
     font-family: 'Pretendard';
+    letter-spacing: -2px;
     font-size: 1.6rem;
     font-weight: 500;
-    @include mobile {
+    @include tablet-narrow {
       display: none;
     }
   }

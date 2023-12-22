@@ -37,7 +37,6 @@
   @include mobile {
     flex-direction: column;
     font-size: 1.2rem;
-    min-width: 10em;
     & .info-section {
       position: relative;
       bottom: 3rem;
