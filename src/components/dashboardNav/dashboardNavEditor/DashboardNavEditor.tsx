@@ -60,7 +60,7 @@ export default function DashboardNavEditor({
           {windowSize > 744 ? (
             <div
               className={styles['member-img-list']}
-              style={{ width: `${members.totalCount >= 5 ? 14 : members.totalCount * 3}rem` }}
+              style={{ width: `${members.totalCount >= 5 ? 15 : members.totalCount * 3 + 1}rem` }}
             >
               {members.members.slice(0, 4).map((member) => {
                 if (member) {

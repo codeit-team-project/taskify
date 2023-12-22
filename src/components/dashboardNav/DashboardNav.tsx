@@ -16,9 +16,9 @@ import DashboardNavEditor from './dashboardNavEditor/DashboardNavEditor'
 import Dropdown from './dropdown/Dropdown'
 import {
   mockupUser,
-  mockDashboardMemberSmallList,
+  // mockDashboardMemberSmallList,
   mockDashboardInfo,
-  // mockDashboardMemberManyList,
+  mockDashboardMemberManyList,
 } from './mockup'
 import useDropdown from '@/hooks/useDropdown'
 import NavProfile from './navProfile/NavProfile'
@@ -50,7 +50,7 @@ export default function DashboardNav({ whatPage = '/mydashboard' }) {
           <DashboardNavEditor
             isOwner={mockDashboardInfo.createdByMe}
             boardId={mockDashboardInfo.id}
-            members={mockDashboardMemberSmallList}
+            members={mockDashboardMemberManyList}
           />
         )}
         <NavProfile
