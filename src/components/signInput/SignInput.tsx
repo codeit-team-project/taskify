@@ -2,7 +2,7 @@
  */
 
 import Image from 'next/image'
-import React, { forwardRef, useState } from 'react'
+import { forwardRef, useState } from 'react'
 import { SignInputProps } from '@/types/formTypes'
 import styles from './SignInput.module.scss'
 
