@@ -6,10 +6,8 @@
   }
   padding: 1.6rem 1.6rem 1.6rem 34rem;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  min-width: 33rem;
   width: 100%;
+  min-width: 98rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -39,8 +37,18 @@
 @include tablet {
   .nav-container {
     justify-content: flex-end;
+    padding-left: 17rem;
+    min-width: 54rem;
   }
   .title-section {
     display: none;
+  }
+}
+
+@include mobile {
+  .nav-container {
+    height: 6rem;
+    padding: 1.3rem 1.3rem 1.3rem 1.3rem;
+    min-width: 37.5rem;
   }
 }

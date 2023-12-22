@@ -43,12 +43,12 @@ export default function DashboardNavEditor({
     <div className={styles['editor-section']}>
       <div className={styles['button-section']}>
         {isOwner && (
-          <Link href={`/dashboard/${String(boardId)}/edit`}>
-            <button className={styles['button']}>
+          <button className={styles['button']}>
+            <Link href={`/dashboard/${String(boardId)}/edit`}>
               <Image src="assets/settingIcon.svg" alt="setting icon" width={20} height={20} />
               관리
-            </button>
-          </Link>
+            </Link>
+          </button>
         )}
         <button className={styles['button']}>
           <Image src="assets/addIcon.svg" alt="add icon" width={20} height={20} />
@@ -60,7 +60,7 @@ export default function DashboardNavEditor({
           {windowSize > 744 ? (
             <div
               className={styles['member-img-list']}
-              style={{ width: `${members.totalCount >= 5 ? 14 : members.totalCount * 3}rem` }}
+              style={{ width: `${members.totalCount >= 5 ? 15 : members.totalCount * 3 + 1}rem` }}
             >
               {members.members.slice(0, 4).map((member) => {
                 if (member) {
@@ -104,10 +104,7 @@ export default function DashboardNavEditor({
               )}
             </div>
           )}
-          <div
-            className={styles['spacing-bar']}
-            style={{ marginLeft: `${windowSize > 744 ? 3 : 1}rem` }}
-          ></div>
+          <div className={styles['spacing-bar']}></div>
         </div>
       )}
     </div>
