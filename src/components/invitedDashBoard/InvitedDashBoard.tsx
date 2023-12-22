@@ -5,8 +5,8 @@ import {
   InvitedDashBoardListType,
 } from '@/types/invitedDashBoardListType'
 import useDebounce from '@/hooks/useDebounce'
-import { getInvitations } from '@/pages/mydashboard'
 import useDidMountEffect from '@/hooks/useDidMountEffect'
+import { getInvitations } from '@/api/invitations/getInvitations'
 
 type InvitationsStatus =
   | 'noInvitations'
@@ -83,7 +83,7 @@ function Invitations({ invitationList }: InvitationsProps) {
 
 export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
   const [invitationList, setInvitationList] = useState<InvitedDashBoardListType>(list)
-  const [searchTitle, setSearchTitle] = useState('aaaa')
+  const [searchTitle, setSearchTitle] = useState('')
   const debouncedSearchTitle = useDebounce(searchTitle, 1000)
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {

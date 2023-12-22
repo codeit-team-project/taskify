@@ -1,9 +1,13 @@
 import axiosInstance from '@/commons/lib/axiosInstance'
 import { InvitationsAboutMeType } from '@/types/invitations'
 
-// 실제 해당 api 사용하실때 쿼리스트링 수정해서 사용해주세요.
+export const getInvitations = async (title?: string) => {
+  try {
+    const query = title ? `size=10&title=${title}` : 'size=10'
+    const response = await axiosInstance.get<InvitationsAboutMeType>(`/invitations?${query}`)
 
-export const getInvitations = async () => {
-  const response = await axiosInstance.get<InvitationsAboutMeType>('/invitations')
-  return response.data
+    return response.data
+  } catch (error) {
+    throw error
+  }
 }

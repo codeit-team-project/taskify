@@ -1,3 +1,4 @@
+import { getInvitations } from '@/api/invitations/getInvitations'
 import InvitedDashBoard from '@/components/invitedDashBoard/InvitedDashBoard'
 import {
   InvitedDashBoardItemType,
@@ -103,27 +104,5 @@ export async function getServerSideProps() {
         list: null,
       },
     }
-  }
-}
-
-export const getInvitations = async (title?: string) => {
-  try {
-    const query = title ? `size=10&title=${title}` : 'size=10'
-    const response = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/invitations?${query}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.NEXT_PUBLIC_ACCESS_TOKEN}`,
-      },
-    })
-
-    if (!response.ok) {
-      throw new Error()
-    } else {
-      const result = await response.json()
-      return result
-    }
-  } catch (error) {
-    throw error
   }
 }
