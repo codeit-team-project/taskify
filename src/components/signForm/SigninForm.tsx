@@ -1,13 +1,12 @@
 /* signin 페이지에 사용할 Form 컴포넌트
 
-TODO - onSubmit 코드 구현할 것.
 TODO - onSubmit 할 때 만약 비밀번호가 잘못됐다든가 등 error가 발생하면 errors 객체를 통해 에러 문구 띄우는 코드 구현할 것.
 - react-hook-form을 사용하여 구현
  */
 
 import { useForm } from 'react-hook-form'
-import TextInput from '@/components/signInput/TextInput'
 import PasswordInput from '@/components/signInput/PasswordInput'
+import TextInput from '@/components/signInput/TextInput'
 import { SignInFormValueType } from '@/types/auth'
 import { emailValidationRules, passwordValidationRules } from '@/utils/formInputValidationRules'
 import styles from './SignForm.module.scss'
@@ -55,6 +54,7 @@ export default function SigninForm() {
           </div>
         )}
       </div>
+      <button>로그인</button>
     </form>
   )
 }

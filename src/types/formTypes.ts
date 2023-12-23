@@ -4,8 +4,10 @@ import { SignInFormValueType, SignUpFormValueType } from './auth'
 export interface SignInputProps {
   placeholder: string
   labelName: string
-  onChange?: ChangeHandler
-  onBlur?: ChangeHandler
+  onChange: ChangeHandler
+  onBlur: ChangeHandler
   name?: string
-  hasError?: {} | FieldErrors<SignInFormValueType | SignUpFormValueType>
+  check?: boolean
+  setCheck?: (state: boolean) => void
+  hasError: {} | FieldErrors<SignInFormValueType | SignUpFormValueType>
 }

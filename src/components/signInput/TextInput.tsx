@@ -6,12 +6,22 @@
 - 나머지 인자인 onChange, onBlur, name은 상위 컴포넌트로부터 register 객체를 받아옴.
 */
 
-import { forwardRef } from 'react'
+import { ChangeEvent, forwardRef } from 'react'
 import { SignInputProps } from '@/types/formTypes'
 import styles from './SignInput.module.scss'
 
 const TextInput = forwardRef<HTMLInputElement, SignInputProps>(
-  ({ placeholder, labelName, onChange, onBlur, name = '', hasError }, ref) => {
+  ({ placeholder, labelName, onChange, onBlur, name = '', hasError, setCheck, check }, ref) => {
+    const handleBlur = (e: ChangeEvent) => {
+      onBlur(e)
+      if (setCheck) setCheck(!check)
+    }
+
+    const handleChange = (e: ChangeEvent) => {
+      onChange(e)
+      if (setCheck) setCheck(!check)
+    }
+
     return (
       <div className={styles['input-container']}>
         <label htmlFor={name} className={styles['label']}>
@@ -24,8 +34,8 @@ const TextInput = forwardRef<HTMLInputElement, SignInputProps>(
           type="text"
           placeholder={placeholder}
           className={styles['input']}
-          onChange={onChange}
-          onBlur={onBlur}
+          onChange={handleChange}
+          onBlur={handleBlur}
           data-error={
             hasError === undefined || !Object.keys(hasError).includes(name) ? false : true
           }

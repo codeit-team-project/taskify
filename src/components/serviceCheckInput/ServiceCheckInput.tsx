@@ -3,6 +3,7 @@
 TODO - 이용약관 모달 창 만들기. 지금은 임시로 alert 로 구현함
 */
 
+import { ChangeEvent } from 'react'
 import styles from './ServiceCheckInput.module.scss'
 
 // function ServiceTerm(){
@@ -12,14 +13,22 @@ import styles from './ServiceCheckInput.module.scss'
 //   </div>)
 // }
 
-export default function ServiceChekInput() {
+interface ServiceCheckInputProps {
+  setBlank: (s: boolean) => void
+}
+
+export default function ServiceChekInput({ setBlank }: ServiceCheckInputProps) {
   const openServiceTerm = () => {
     alert('이용약관 임시 창')
   }
 
+  const handleClickBox = (e: ChangeEvent<HTMLInputElement>) => {
+    setBlank(!e.target.checked)
+  }
+
   return (
     <div className={styles['service-term']}>
-      <input type="checkbox" />
+      <input type="checkbox" onChange={handleClickBox} />
       <button onClick={openServiceTerm} className={styles['service-term-button']}>
         이용약관
       </button>

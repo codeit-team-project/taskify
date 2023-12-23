@@ -3,9 +3,13 @@
 - react-hook-form을 사용하여 구현
  */
 
+import { isAxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
-import TextInput from '@/components/signInput/TextInput'
+import { useEffect, useState } from 'react'
+import { createUser } from '@/api/users/createUser'
+import ServiceChekInput from '@/components/serviceCheckInput/ServiceCheckInput'
 import PasswordInput from '@/components/signInput/PasswordInput'
+import TextInput from '@/components/signInput/TextInput'
 import { SignUpFormValueType } from '@/types/auth'
 import {
   emailValidationRules,
@@ -13,9 +17,6 @@ import {
   passwordValidationRules,
 } from '@/utils/formInputValidationRules'
 import styles from './SignForm.module.scss'
-import { createUser } from '@/api/users/createUser'
-import { isAxiosError } from 'axios'
-import ServiceChekInput from '../serviceCheckInput/ServiceCheckInput'
 
 export default function SignupForm() {
   const {
@@ -24,6 +25,24 @@ export default function SignupForm() {
     formState: { errors },
     getValues,
   } = useForm<SignUpFormValueType>({ mode: 'all' })
+  const [isDisable, setIsDisable] = useState(true)
+  const [blankBox, setBlankBox] = useState(true)
+  const [checkValues, setCheckValues] = useState(true)
+
+  useEffect(() => {
+    if (
+      Object.keys(errors).length === 0 &&
+      getValues('email') &&
+      getValues('password') &&
+      getValues('nickname') &&
+      getValues('passwordRepeat') &&
+      !blankBox
+    ) {
+      setIsDisable(false)
+    } else {
+      setIsDisable(true)
+    }
+  }, [errors, getValues, checkValues, blankBox])
 
   const onSubmit = () => {
     const res = createUser({
@@ -54,6 +73,8 @@ export default function SignupForm() {
           labelName="이메일"
           {...register('email', emailValidationRules)}
           hasError={errors}
+          check={checkValues}
+          setCheck={setCheckValues}
         />
         {errors.email && (
           <div className={styles['error-message']} role="alert">
@@ -68,6 +89,8 @@ export default function SignupForm() {
           labelName="닉네임"
           {...register('nickname', nicknameValidationRules)}
           hasError={errors}
+          check={checkValues}
+          setCheck={setCheckValues}
         />
         {errors.nickname && (
           <div className={styles['error-message']} role="alert">
@@ -82,6 +105,8 @@ export default function SignupForm() {
           labelName="비밀번호"
           {...register('password', passwordValidationRules)}
           hasError={errors}
+          check={checkValues}
+          setCheck={setCheckValues}
         />
         {errors.password && (
           <div className={styles['error-message']} role="alert">
@@ -101,6 +126,8 @@ export default function SignupForm() {
             },
           })}
           hasError={errors}
+          check={checkValues}
+          setCheck={setCheckValues}
         />
         {errors.passwordRepeat && (
           <div className={styles['error-message']} role="alert">
@@ -110,9 +137,9 @@ export default function SignupForm() {
       </div>
 
       <div className={styles['signinput-container']}>
-        <ServiceChekInput />
+        <ServiceChekInput setBlank={setBlankBox} />
       </div>
-      <button>제출</button>
+      <button disabled={isDisable}>제출</button>
     </form>
   )
 }
