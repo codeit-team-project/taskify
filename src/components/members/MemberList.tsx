@@ -7,7 +7,7 @@
  * 4. router path로 /dashboard/boardid/edit 페이지에서 대시보드 아이디 받기
  */
 import { useEffect, useState } from 'react'
-import { keepPreviousData, useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
 import styles from './Member.module.scss'
 
 import { getDashBoardMembers } from '@/api/members/getMembers'
@@ -15,7 +15,6 @@ import { DashBoardMembers } from '@/types/members'
 
 import Pagination from '@/components/pagination/Pagination'
 import MemberItem from './MemberItem'
-import { deleteDashBoardMember } from '@/api/members/deleteMembers'
 
 interface MomberListProps {
   dashBoardId: number
@@ -46,22 +45,6 @@ export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
     }
   }, [currentPage, dashBoardId, isPlaceholderData, hasMorePage, queryClient])
 
-  const { mutate } = useMutation({
-    mutationKey: ['deleteMember'],
-    mutationFn: (memberId: number) => deleteDashBoardMember(memberId),
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dashBoardMembers', dashBoardId] })
-    },
-  })
-
-  const handleDeleteMember = (id: number) => () => {
-    console.log('삭제시작')
-    console.log(`삭제할 멤버 아이디 ${id}`)
-
-    mutate(158)
-    console.log('삭제완료')
-  }
-
   return (
     <section className={styles.container}>
       <div className={styles['card-info']}>
@@ -77,15 +60,7 @@ export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
       <div>
         {data?.members.map((member) => (
           <li key={member.id} className={styles.table}>
-            {/* <MemberItem nickname={member.nickname} /> */}
-            <div className={styles['name-wrapper']}>
-              {/* 이미지 컴포넌트 구현예정 */}
-              <img src="circle.svg" />
-              <span className={styles.nickname}>{member.nickname}</span>
-            </div>
-            <button className={styles['member-button']} onClick={handleDeleteMember(member.id)}>
-              삭제
-            </button>
+            <MemberItem member={member} dashBoardId={dashBoardId} />
           </li>
         ))}
       </div>
