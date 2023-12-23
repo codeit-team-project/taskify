@@ -13,8 +13,8 @@ import styles from './Member.module.scss'
 import { getDashBoardMembers } from '@/api/members/getMembers'
 import { DashBoardMembers } from '@/types/members'
 
-import Member from './Member'
 import Pagination from '@/components/pagination/Pagination'
+import MemberItem from './MemberItem'
 
 interface MomberListProps {
   dashBoardId: number
@@ -60,7 +60,7 @@ export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
       <div>
         {data?.members.map((member) => (
           <li key={member.id} className={styles.table}>
-            <Member nickname={member.nickname} />
+            <MemberItem nickname={member.nickname} />
           </li>
         ))}
       </div>

@@ -1,10 +1,10 @@
 import styles from './Member.module.scss'
 
-interface MemberProps {
+interface MemberItemProps {
   nickname: string
 }
 
-export default function Member({ nickname }: MemberProps) {
+export default function MemberItem({ nickname }: MemberItemProps) {
   return (
     <>
       <div className={styles['name-wrapper']}>
