@@ -4,12 +4,18 @@ import styles from './Pagination.module.scss'
 
 interface PaginationProps {
   count: number
+  pageSize: number
   currentPage: number
   setCurrentPage: Dispatch<SetStateAction<number>>
 }
 
-export default function Pagination({ count, currentPage, setCurrentPage }: PaginationProps) {
-  const lastPage = count === 1 ? '' : Math.ceil(count / 2)
+export default function Pagination({
+  count,
+  pageSize,
+  currentPage,
+  setCurrentPage,
+}: PaginationProps) {
+  const lastPage = count === 1 ? '' : Math.ceil(count / pageSize)
 
   const forwardButtonStyle = classNames(styles.forward, {
     [styles['forward-default']]: currentPage === 1,

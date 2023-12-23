@@ -5,9 +5,6 @@
  * 2. 삭제 버튼 UI 공통컴포넌트화 (세컨더리 버튼) (리팩토링)
  * 3. 유저프로필 이미지
  * 4. router path로 /dashboard/boardid/edit 페이지에서 대시보드 아이디 받기
- *
- * 추후 작업
- * default size 값 확인하기
  */
 import { useEffect, useState } from 'react'
 import { QueryClient, keepPreviousData, useQuery } from '@tanstack/react-query'
@@ -26,23 +23,24 @@ interface MomberListProps {
 const queryClient = new QueryClient()
 
 export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
+  const pageSize = 2 // data per page
   const [currentPage, setCurrentPage] = useState(1)
 
   const { data, isPlaceholderData } = useQuery<DashBoardMembers>({
     queryKey: ['dashBoardMembers', dashBoardId, currentPage],
-    queryFn: () => getDashBoardMembers(dashBoardId, currentPage),
+    queryFn: () => getDashBoardMembers(dashBoardId, currentPage, pageSize),
     placeholderData: keepPreviousData,
     staleTime: 3000,
   })
 
-  const hasMorePage = data && currentPage < data?.totalCount
+  const hasMorePage = data && currentPage < data?.totalCount / pageSize
 
   // Prefetch the next page
   useEffect(() => {
     if (!isPlaceholderData && hasMorePage) {
       queryClient.prefetchQuery({
-        queryKey: ['dashBoardMembers', currentPage + 1],
-        queryFn: () => getDashBoardMembers(dashBoardId, currentPage + 1),
+        queryKey: ['dashBoardMembers', dashBoardId, currentPage + 1],
+        queryFn: () => getDashBoardMembers(dashBoardId, currentPage + 1, pageSize),
       })
     }
   }, [currentPage, dashBoardId, isPlaceholderData, hasMorePage])
@@ -53,6 +51,7 @@ export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
         <span className={styles['card-title']}>구성원</span>
         <Pagination
           count={data ? data?.totalCount : 1}
+          pageSize={pageSize}
           setCurrentPage={setCurrentPage}
           currentPage={currentPage}
         />
