@@ -20,10 +20,6 @@
   justify-content: center;
   align-items: center;
   color: var(--color-black_33);
-  font-size: 2rem;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
   & .container {
     display: flex;
     flex-direction: column;
@@ -47,6 +43,12 @@
       justify-content: center;
       align-items: flex-end;
       gap: 3rem;
+    }
+    & .greeting-container {
+      font-size: 2rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
     }
     & .link-container {
       font-size: 1.6rem;

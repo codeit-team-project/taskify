@@ -1,7 +1,5 @@
 /* signun 페이지에 사용할 Form 컴포넌트
 
-TODO - onSubmit 코드 구현할 것.
-TODO - onSubmit 할 때 만약 비밀번호가 잘못됐다든가 등 error가 발생하면 errors 객체를 통해 에러 문구 띄우는 코드 구현할 것.
 - react-hook-form을 사용하여 구현
  */
 
@@ -15,6 +13,9 @@ import {
   passwordValidationRules,
 } from '@/utils/formInputValidationRules'
 import styles from './SignForm.module.scss'
+import { createUser } from '@/api/users/createUser'
+import { isAxiosError } from 'axios'
+import ServiceChekInput from '../serviceCheckInput/ServiceCheckInput'
 
 export default function SignupForm() {
   const {
@@ -25,10 +26,18 @@ export default function SignupForm() {
   } = useForm<SignUpFormValueType>({ mode: 'all' })
 
   const onSubmit = () => {
-    // post request 보내는 코드
-    console.log(getValues('email'))
-    console.log(getValues('password'))
-    console.log(getValues('passwordRepeat'))
+    const res = createUser({
+      data: {
+        email: getValues('email'),
+        nickname: getValues('nickname'),
+        password: getValues('password'),
+      },
+    })
+    if (isAxiosError(res)) {
+      console.log('failed')
+    } else {
+      console.log('ok')
+    }
   }
 
   const passwordRepeatChecker = (passwordRepeatValue: string) => {
@@ -99,6 +108,11 @@ export default function SignupForm() {
           </div>
         )}
       </div>
+
+      <div className={styles['signinput-container']}>
+        <ServiceChekInput />
+      </div>
+      <button>제출</button>
     </form>
   )
 }
