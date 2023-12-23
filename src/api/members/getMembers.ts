@@ -5,7 +5,7 @@ import { DashBoardMembers } from '@/types/members'
 
 export const getDashBoardMembers = async (dashBoardId: number, currentPage: number) => {
   const response = await axiosInstance.get<DashBoardMembers>(
-    `/members?dashboardId=${dashBoardId}&page=${currentPage}&size=1`,
+    `/members?dashboardId=${dashBoardId}&page=${currentPage}&size=2`,
   )
   return response.data
 }

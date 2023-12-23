@@ -1,33 +1,38 @@
-import { useState } from 'react'
+import { Dispatch, SetStateAction, useEffect } from 'react'
 import styles from './Pagination.module.scss'
+import { getDashBoardMembers } from '@/api/members/getMembers'
+import { QueryClient } from '@tanstack/react-query'
 
 interface PaginationProps {
-  // handleDashBoardMembers: (startPage: number, id?: number) => Promise<void>
-  handleDashBoardMembers: any // 정확한 타입으로 변경하기
   count: number
+  currentPage: number
+  setCurrentPage: Dispatch<SetStateAction<number>>
 }
+// const queryClient = new QueryClient()
 
-// api 연동 후 삭제 예정
-const TEST_BOARD_ID = 21
-
-export default function Pagination({ handleDashBoardMembers, count }: PaginationProps) {
-  const [startPage, setStartPage] = useState(1)
+export default function Pagination({ count, currentPage, setCurrentPage }: PaginationProps) {
   const lastPage = count !== null ? Math.ceil(count / 2) : 0
 
-  const forwardButtonDefaultStyle = startPage === 1 ? styles['forward-default'] : ''
-  const nextButtonDefaultStyle = startPage === lastPage ? styles['next-default'] : ''
+  const forwardButtonDefaultStyle = currentPage === 1 ? styles['forward-default'] : ''
+  const nextButtonDefaultStyle = currentPage === lastPage ? styles['next-default'] : ''
 
   const handlePrevPage = () => {
-    if (startPage === 1) return
-    setStartPage((prev) => prev - 1)
-    handleDashBoardMembers(startPage - 1, TEST_BOARD_ID)
+    if (currentPage === 1) return
+    setCurrentPage((prev) => prev - 1)
   }
 
   const handleNextPage = () => {
-    if (startPage === lastPage) return
-    setStartPage((prev) => prev + 1)
-    handleDashBoardMembers(startPage + 1, TEST_BOARD_ID)
+    if (currentPage === lastPage) return
+    setCurrentPage((prev) => prev + 1)
   }
+
+  // useEffect(() => {
+  //   // 만약에 호출해야할 데이터가 있다면 prefetch를 해줘
+  //   queryClient.prefetchQuery({
+  //     queryKey: ['dashBoardMembers', currentPage + 1],
+  //     queryFn: () => getDashBoardMembers(119, currentPage + 1),
+  //   })
+  // }, [currentPage, queryClient])
 
   return (
     <div>
