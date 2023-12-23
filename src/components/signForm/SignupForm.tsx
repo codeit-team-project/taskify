@@ -71,6 +71,8 @@ export default function SignupForm() {
       .catch((e) => {
         if (e.response.status === 409) {
           alert('이미 사용 중인 이메일입니다!')
+        } else if (e.response.status === 400) {
+          alert(`${e.response.data.message}`)
         } else return
       })
   }
