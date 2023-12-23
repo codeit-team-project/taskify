@@ -28,19 +28,24 @@ const queryClient = new QueryClient()
 export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
   const [currentPage, setCurrentPage] = useState(1)
 
-  const { data } = useQuery<DashBoardMembers>({
+  const { data, isPlaceholderData } = useQuery<DashBoardMembers>({
     queryKey: ['dashBoardMembers', dashBoardId, currentPage],
     queryFn: () => getDashBoardMembers(dashBoardId, currentPage),
     placeholderData: keepPreviousData,
     staleTime: 3000,
   })
 
+  const hasMorePage = data && currentPage < data?.totalCount
+
+  // Prefetch the next page
   useEffect(() => {
-    queryClient.prefetchQuery({
-      queryKey: ['dashBoardMembers', currentPage],
-      queryFn: () => getDashBoardMembers(dashBoardId, currentPage),
-    })
-  }, [currentPage, dashBoardId])
+    if (!isPlaceholderData && hasMorePage) {
+      queryClient.prefetchQuery({
+        queryKey: ['dashBoardMembers', currentPage + 1],
+        queryFn: () => getDashBoardMembers(dashBoardId, currentPage + 1),
+      })
+    }
+  }, [currentPage, dashBoardId, isPlaceholderData, hasMorePage])
 
   return (
     <section className={styles.container}>
