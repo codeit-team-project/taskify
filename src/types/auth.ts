@@ -11,8 +11,8 @@ export interface SignUpFormValueType extends SignInFormValueType {
 }
 
 export interface LoginType {
-  user: UserType
-  accessToken: string
+  user: UserType | null
+  accessToken: string | null
 }
 
 export interface PasswordCheckVauleType {
