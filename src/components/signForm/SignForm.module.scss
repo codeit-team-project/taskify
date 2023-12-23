@@ -28,6 +28,7 @@
 
 .submit-button {
   font-size: 1.8rem;
+  margin: 2rem 0;
   width: 100%;
   font-style: normal;
   font-weight: 500;
@@ -35,10 +36,9 @@
   color: white;
   padding: 1.4rem;
   border-radius: 8px;
+  background: var(--color-violet);
+
   &[data-disable='true'] {
     background: var(--color-gray40);
-  }
-  &[data-disable='false'] {
-    background: var(--color-violet);
   }
 }

@@ -160,7 +160,7 @@ export default function SignupForm() {
         <ServiceChekInput setBlank={setBlankBox} />
       </div>
       <button className={styles['submit-button']} disabled={isDisable} data-disable={isDisable}>
-        제출
+        회원가입
       </button>
     </form>
   )
