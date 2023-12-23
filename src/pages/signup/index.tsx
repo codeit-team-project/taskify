@@ -15,8 +15,9 @@ export default function SignUpPage() {
   const router = useRouter()
 
   useEffect(() => {
-    if (auth) {
-      router.push('/mydashboard')
+    console.log(auth)
+    if (auth.user) {
+      router.push('/dashboard')
     }
   }, [auth, router])
 

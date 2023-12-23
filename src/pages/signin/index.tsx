@@ -15,8 +15,8 @@ export default function SignInPage() {
   const router = useRouter()
 
   useEffect(() => {
-    if (auth) {
-      router.push('/mydashboard')
+    if (auth.user) {
+      router.push('/dashboard')
     }
   }, [auth, router])
 

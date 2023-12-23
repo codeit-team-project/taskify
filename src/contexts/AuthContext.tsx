@@ -7,12 +7,12 @@ const NONE_USER: LoginType = {
 }
 
 interface AuthContextProps {
-  auth: LoginType | null
+  auth: LoginType
   setAuth: null | ((s: LoginType) => void)
 }
 
 const INITIAL_AUTH_CONTEXT: AuthContextProps = {
-  auth: null,
+  auth: NONE_USER,
   setAuth: null,
 }
 
