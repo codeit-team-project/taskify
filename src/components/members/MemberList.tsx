@@ -33,7 +33,7 @@ export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
     staleTime: 3000,
   })
 
-  const hasMorePage = data && currentPage < data?.totalCount / pageSize
+  const hasMorePage = data && currentPage < Math.ceil(data?.totalCount / pageSize)
 
   // Prefetch the next page
   useEffect(() => {

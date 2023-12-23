@@ -15,7 +15,7 @@ export default function Pagination({
   currentPage,
   setCurrentPage,
 }: PaginationProps) {
-  const lastPage = count === 1 ? '' : Math.ceil(count / pageSize)
+  const lastPage = Math.ceil(count / pageSize)
 
   const forwardButtonStyle = classNames(styles.forward, {
     [styles['forward-default']]: currentPage === 1,
