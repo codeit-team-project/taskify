@@ -41,7 +41,7 @@
 }
 
 .menus {
-  padding: 1.6rem;
+  padding: 1.2rem;
   display: flex;
   align-items: center;
   list-style: none;
@@ -49,7 +49,7 @@
 
 .menu {
   background: none;
-  padding-left: 1.6rem;
+  padding-left: 1.2rem;
   border: none;
   color: var(--color-gray50);
   font-size: 1.8rem;
@@ -65,6 +65,10 @@
   .container {
     width: 16rem;
     padding: 2rem 1.2rem;
+  }
+
+  .menus {
+    padding: 1.2rem 1rem;
   }
 
   .menu {
