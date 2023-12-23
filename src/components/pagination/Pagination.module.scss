@@ -1,50 +1,50 @@
+.card-action {
+  display: flex;
+  align-items: center;
+  gap: 1.6rem;
+}
+
+.pages {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-black_33);
+}
+
 @mixin arrow-button {
   width: 4rem;
   height: 4rem;
   border: 1px solid var(--color-gray30);
   background: var(--color-white);
   cursor: pointer;
-}
 
-@mixin action {
-  @include arrow-button;
-  &:hover {
+  &:not(.forward-default):not(.next-default):hover {
     box-shadow:
       0px 2px 3px -1px rgba(0, 0, 0, 0.1),
       0px 1px 0px 0px rgba(25, 28, 33, 0.02),
       0px 0px 0px 1px rgba(25, 28, 33, 0.08);
   }
 
-  &:active {
+  &:not(.forward-default):not(.next-default):active {
     box-shadow: inset -12px -8px 40px var(--color-gray10);
   }
 }
 
-.arrow-button {
-  @include arrow-button;
-  @include action;
-}
-
 .forward {
   @include arrow-button;
-  @include action;
   border-radius: 4px 0px 0px 4px;
 }
 
 .next {
   @include arrow-button;
-  @include action;
   border-radius: 0px 4px 4px 0px;
 }
 
 .forward-default {
-  @include arrow-button;
-  border-radius: 4px 0px 0px 4px;
+  @extend .forward;
   opacity: 0.5;
 }
 
 .next-default {
-  @include arrow-button;
-  border-radius: 0px 4px 4px 0px;
+  @extend .next;
   opacity: 0.5;
 }
