@@ -12,49 +12,63 @@
 
 import { QueryClient, useQuery } from '@tanstack/react-query'
 import styles from './Member.module.scss'
+import p from '../pagination/Pagination.module.scss'
 
 import { getDashBoardMembers } from '@/api/members/getMembers'
-import { getDashBoardList } from '@/api/dashboards/getDashboards'
+// import { getDashBoardList } from '@/api/dashboards/getDashboards'
 import { DashBoardMembers } from '@/types/members'
-import { DashBoardListType } from '@/types/dashBoardType'
+// import { DashBoardListType } from '@/types/dashBoardType'
 
-import Pagination from '@/components/pagination/Pagination'
+// import Pagination from '@/components/pagination/Pagination'
 import Member from './Member'
+import { useEffect, useState } from 'react'
 
 interface MomberListProps {
   dashBoardId: number
 }
 
 export default function MemberList({ dashBoardId = 116 }: MomberListProps) {
-  // const [memberList, setMemberList] = useState<DashBoardMembers[]>()
-  // const [memberCount, setMemberCount] = useState(0)
-
-  // // react-query 사용하면 useEffect 지우고, handleDashBoardMembers 수정
-  // const handleDashBoardMembers = async (page: number, id = TEST_BOARD_ID) => {
-  //   const data = await getDashBoardMembers({ page, id })
-  //   const { members, totalCount }: DashBoardAPIType = data
-  //   setMemberList(members)
-  //   setMemberCount(totalCount)
-  // }
-
-  //
+  const [currentPage, setCurrentPage] = useState(1)
 
   const queryClient = new QueryClient()
-  queryClient.prefetchQuery
 
-  // 2. 대시보드 목록조회
-  const { data: dashBoardList } = useQuery<DashBoardListType>({
-    queryKey: ['dashBoards'],
-    queryFn: getDashBoardList,
-  })
-  console.log(dashBoardList)
-
-  const { data } = useQuery<DashBoardMembers>({
-    queryKey: ['dashBoardMembers', dashBoardId],
-    queryFn: () => getDashBoardMembers(dashBoardId),
+  const { data, isPlaceholderData } = useQuery<DashBoardMembers>({
+    queryKey: ['dashBoardMembers', dashBoardId, currentPage],
+    queryFn: () => getDashBoardMembers(dashBoardId, currentPage),
   })
 
   console.log(data)
+  console.log(isPlaceholderData)
+
+  //******************************** */
+
+  // const [startPage, setStartPage] = useState(1)
+  const lastPage = data?.totalCount !== undefined ? Math.ceil(data?.totalCount / 2) : 0
+
+  const forwardButtonDefaultStyle = currentPage === 1 ? styles['forward-default'] : ''
+  const nextButtonDefaultStyle = currentPage === lastPage ? styles['next-default'] : ''
+
+  const handlePrevPage = () => {
+    if (currentPage === 1) return
+    setCurrentPage((prev) => prev - 1)
+  }
+
+  const handleNextPage = () => {
+    if (currentPage === lastPage) return
+    setCurrentPage((prev) => prev + 1)
+  }
+
+  // hasMore 값 만들기..?
+
+  useEffect(() => {
+    // 만약에 호출해야할 데이터가 있다면 prefetch를 해줘
+    if (!isPlaceholderData) {
+      queryClient.prefetchQuery({
+        queryKey: ['dashBoardMembers', currentPage + 1],
+        queryFn: () => getDashBoardMembers(dashBoardId, currentPage + 1),
+      })
+    }
+  }, [currentPage, dashBoardId, isPlaceholderData, queryClient])
 
   return (
     <section className={styles.container}>
@@ -62,7 +76,21 @@ export default function MemberList({ dashBoardId = 116 }: MomberListProps) {
         <span className={styles['card-title']}>구성원</span>
         <div className={styles['card-action']}>
           <span className={styles.pages}>1 페이지 중 1</span>
-          <Pagination count={data ? data?.totalCount : 0} />
+          {/* <Pagination count={data ? data?.totalCount : 0} /> */}
+          <div>
+            <button
+              onClick={handlePrevPage}
+              className={(p['arrow-button'], p.forward, forwardButtonDefaultStyle)}
+            >
+              <img src="arrow_forward.svg" alt="구성원보기" />
+            </button>
+            <button
+              onClick={handleNextPage}
+              className={(p['arrow-button'], p.next, nextButtonDefaultStyle)}
+            >
+              <img src="arrow_next.svg" alt="구성원보기" />
+            </button>
+          </div>
         </div>
       </div>
       <h3 className={styles['sub-title']}>이름</h3>
