@@ -1,10 +1,8 @@
 /**
  * @TODO 구성원 컴포넌트
- * 1. 반응형 스타일링
- * 2. 삭제 기능
- * 2. 삭제 버튼 UI 공통컴포넌트화 (세컨더리 버튼) (리팩토링)
- * 3. 유저프로필 이미지
- * 4. router path로 /dashboard/boardid/edit 페이지에서 대시보드 아이디 받기
+ * 1. 유저프로필 이미지 (리팩토링)
+ * 2. 버튼 UI 공통컴포넌트화 (세컨더리 버튼) (리팩토링)
+ * 3. router path로 /dashboard/boardid/edit 페이지에서 대시보드 아이디 받기
  */
 import { useEffect, useState } from 'react'
 import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
