@@ -1,3 +1,5 @@
+@import '@/styles/mixin.scss';
+
 .card-action {
   display: flex;
   align-items: center;
@@ -27,6 +29,11 @@
   &:not(.forward-default):not(.next-default):active {
     box-shadow: inset -12px -8px 40px var(--color-gray10);
   }
+
+  @include mobile {
+    width: 3.6rem;
+    height: 3.6rem;
+  }
 }
 
 .forward {
@@ -47,4 +54,14 @@
 .next-default {
   @extend .next;
   opacity: 0.5;
+}
+
+@include mobile {
+  .card-action {
+    gap: 1.2rem;
+  }
+
+  .pages {
+    font-size: 1.2rem;
+  }
 }
