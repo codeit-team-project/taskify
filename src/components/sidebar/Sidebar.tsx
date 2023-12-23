@@ -1,10 +1,18 @@
 import Image from 'next/image'
+import { useQuery } from '@tanstack/react-query'
 
-import { DASH_BOARD_DATA } from '@/mock/dashBoard'
-import SidebarItem from './SidebarItem'
 import styles from './Sidebar.module.scss'
+import { getDashBoardList } from '@/api/dashboards/getDashboards'
+import SidebarItem from './SidebarItem'
+
+import { DashBoardListType } from '@/types/dashBoardType'
 
 export default function Sidebar() {
+  const { data } = useQuery<DashBoardListType>({
+    queryKey: ['dashBoards'],
+    queryFn: getDashBoardList,
+  })
+
   return (
     <section className={styles.container}>
       <div className={styles.logo}>
@@ -24,8 +32,8 @@ export default function Sidebar() {
           <Image src="assets/add_box.svg" alt="대시보드 추가하기 버튼" fill />
         </button>
       </div>
-      <div style={{ width: '100%', height: '100%' }}>
-        {DASH_BOARD_DATA.dashboards.map((board) => (
+      <div>
+        {data?.dashboards.map((board) => (
           <li key={board.id} className={styles.menus}>
             <SidebarItem board={board} />
           </li>
