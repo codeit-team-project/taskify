@@ -29,7 +29,7 @@ export default function ServiceChekInput({ setBlank }: ServiceCheckInputProps) {
   return (
     <div className={styles['service-term']}>
       <input type="checkbox" onChange={handleClickBox} />
-      <button onClick={openServiceTerm} className={styles['service-term-button']}>
+      <button type="button" onClick={openServiceTerm} className={styles['service-term-button']}>
         이용약관
       </button>
       에 동의합니다.
