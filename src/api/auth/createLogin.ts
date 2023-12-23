@@ -7,5 +7,5 @@ interface CreateLoginType {
 
 export const createLogin = async ({ data }: CreateLoginType) => {
   const response = await axiosInstance.post<LoginType>('/auth/login', data)
-  return response.data
+  return response
 }
