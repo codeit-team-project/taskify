@@ -1,5 +1,8 @@
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 import styles from './Invitation.module.scss'
+
 import { InvitationType } from '@/types/invitedDashBoardListType'
+import { deleteDashBoardInvitation } from '@/api/dashboards/deleteDashboardsInvitations'
 
 interface InvitationItemProps {
   dashBoardId: number
@@ -7,11 +10,22 @@ interface InvitationItemProps {
 }
 
 export default function InvitationItem({ dashBoardId, invitation }: InvitationItemProps) {
-  console.log(dashBoardId)
+  const queryClient = useQueryClient()
 
-  const handleDeleteInvitation = (id: number) => () => {
+  const { mutate } = useMutation({
+    mutationKey: ['deleteInvitation'],
+    mutationFn: ({ dashBoardId, invitationId }: { dashBoardId: number; invitationId: number }) =>
+      deleteDashBoardInvitation({ dashBoardId, invitationId }),
+    // 대시보드 삭제 성공 시, 캐시 업데이트 (delete 요청후에 get 요청이 간것을 확인할 수 있음)
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['dashBoardsInvitations', dashBoardId] })
+    },
+  })
+
+  const handleDeleteInvitation = (invitationId: number) => () => {
     // 초대하기 취소
-    console.log(id)
+    console.log(invitationId)
+    mutate({ dashBoardId, invitationId })
   }
 
   return (
