@@ -1,20 +1,22 @@
 /* signun 페이지에 사용할 Form 컴포넌트
 
-TODO - 시간 난다면 request 받는 중에 isPending 값을 true로 두고, 
-      isPending 이 true일 때엔 spinner.gif를 띄우고 버튼 disabled로 상태 바꾸다가
-      response를 받으면 spinner.gif 사라지게 하면서 다시 버튼 활상화 시키는 코드를 짜볼 것...
 TODO - onSubmit 함수에서 error response 받을 때 alert 창 띄우는 코드를 나중에 모달창 띄우는 코드로 바꿀 것. (아님 토스트 메세지를 쓰던가 커스텀 alert를 써도 이쁠듯?)
- */
+TODO - LoadingSpinner 을 불러올 때 createModalPortal 안 쓰고 그냥 대충 렌더링만 하는 식으로 코드를 짰습니다 (모달창 띄우는 코드랑 충돌할까봐...) 나중에 연아님 코드 합치고 modalPortal에 spinner 띄우는 코드로 바꿔볼게용
+*/
 
+import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
-import { useRouter } from 'next/router'
 import { useCallback, useEffect, useState } from 'react'
+import { useRouter } from 'next/router'
+import { useMutation } from '@tanstack/react-query'
 
 import { createUser } from '@/api/users/createUser'
+import LoadingSpinner from '@/components/loadingSpinner/LoadingSpinner'
 import ServiceChekInput from '@/components/serviceCheckInput/ServiceCheckInput'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import TextInput from '@/components/signInput/TextInput'
-import { SignUpFormValueType } from '@/types/auth'
+import { SignUpTempValueType } from '@/types/auth'
+import { SignUpFormValueType } from '@/types/users'
 import {
   emailValidationRules,
   nicknameValidationRules,
@@ -29,7 +31,7 @@ export default function SignupForm() {
     handleSubmit,
     formState: { errors },
     getValues,
-  } = useForm<SignUpFormValueType>({ mode: 'all' })
+  } = useForm<SignUpTempValueType>({ mode: 'all' })
   // isDisable: 회원가입 버튼의 활성 여부를 나타내는 state
   const [isDisable, setIsDisable] = useState(true)
   // blankBox: 이용약관 체크박스가 빈 칸인지를 나타내는 state
@@ -37,6 +39,7 @@ export default function SignupForm() {
   // checkValues: input에서 이벤트가 일어날 때마다 값이 바뀌는 state
   const [checkValues, setCheckValues] = useState(true)
   const router = useRouter()
+  const [isPending, setIsPending] = useState(false)
 
   // checkSubmitAble 함수: input에 올바른 값이 있는지, 이용약관 checkbox에 체크가 되어있는지 확인하는 함수
   const checkSubmitAble = useCallback(() => {
@@ -54,27 +57,35 @@ export default function SignupForm() {
     }
   }, [getValues, blankBox, errors])
 
+  const { mutate } = useMutation({
+    mutationKey: ['create-user-key'],
+    mutationFn: (data: SignUpFormValueType) => createUser({ data: data }),
+    onMutate: () => {
+      setIsPending(true)
+    },
+    onSuccess: () => {
+      console.log('signup succeed!')
+      alert('가입이 완료되었습니다!')
+      router.push('/signin')
+    },
+    onError: (error: AxiosError) => {
+      if (error?.response?.status === 400) {
+        alert(`${error?.response?.data?.message}`)
+      } else if (error?.response?.status === 409) {
+        alert('이미 사용 중인 이메일입니다!')
+      } else return
+    },
+    onSettled: () => {
+      setIsPending(false)
+    },
+  })
+
   const onSubmit = () => {
-    createUser({
-      data: {
-        email: getValues('email'),
-        nickname: getValues('nickname'),
-        password: getValues('password'),
-      },
+    mutate({
+      email: getValues('email'),
+      nickname: getValues('nickname'),
+      password: getValues('password'),
     })
-      .then((response) => {
-        if (response.status < 300 && response.status >= 200) {
-          alert('가입이 완료되었습니다!')
-          router.push('/signin')
-        }
-      })
-      .catch((e) => {
-        if (e.response.status === 409) {
-          alert('이미 사용 중인 이메일입니다!')
-        } else if (e.response.status === 400) {
-          alert(`${e.response.data.message}`)
-        } else return
-      })
   }
 
   useEffect(() => {
@@ -89,6 +100,11 @@ export default function SignupForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {isPending && (
+        <>
+          <LoadingSpinner />
+        </>
+      )}
       <div className={styles['signinput-container']}>
         <TextInput
           placeholder="이메일을 입력해 주세요."

@@ -1,3 +1,5 @@
+// TODO - users.ts 파일과 중복되는 코드 삭제하고 SignUpTempValueType도 정리할 예정.
+
 import { UserType } from './users'
 
 export interface SignInFormValueType {
@@ -5,7 +7,7 @@ export interface SignInFormValueType {
   password: string
 }
 
-export interface SignUpFormValueType extends SignInFormValueType {
+export interface SignUpTempValueType extends SignInFormValueType {
   nickname: string
   passwordRepeat: string
 }
