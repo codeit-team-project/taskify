@@ -14,7 +14,7 @@
  * 6. 페이지네이션 기능 붙이기
  */
 
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import { createDashBoardInvitations } from '@/api/dashboards/createDashboardsInvitations'
 import { getDashBoardInvitations } from '@/api/dashboards/getDashboardsInvitations'
@@ -22,34 +22,51 @@ import { InvitationsType } from '@/types/invitedDashBoardListType'
 
 import styles from './Invitation.module.scss'
 import InvitationItem from './InvitationItem'
+import { getDashBoardMembers } from '@/api/members/getMembers'
+import { DashBoardMembers } from '@/types/members'
 
 interface InvitationListProps {
   dashBoardId: number
 }
 
 export default function InvitationList({ dashBoardId = 119 }: InvitationListProps) {
-  // 대시보드 초대하기
-  const { mutate: createInvitations } = useMutation({
-    mutationFn: createDashBoardInvitations,
-    onSuccess: (data) => {
-      console.log(data)
-    },
-  })
-
-  // 버튼 누르면 대시보드 초대하는 이벤트 핸들러
-  const handleCreateInvitation = async () => {
-    try {
-      createInvitations({ id: 119, data: { email: 'dev_junghyun@taskify.com' } })
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const queryClient = useQueryClient()
 
   const { data } = useQuery<InvitationsType>({
     queryKey: ['dashBoardsInvitations', dashBoardId],
     queryFn: () => getDashBoardInvitations(dashBoardId),
   })
   console.log(data)
+
+  // 대시보드 초대하기
+  const { mutate: createInvitation } = useMutation({
+    mutationKey: ['createInvitation'],
+    mutationFn: createDashBoardInvitations,
+    // 초대 후 상태 업데이트
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['dashBoardsInvitations', dashBoardId] })
+    },
+  })
+
+  // 버튼 누르면 대시보드 초대하는 이벤트 핸들러
+  const handleCreateInvitation = async () => {
+    try {
+      createInvitation({
+        id: dashBoardId,
+        data: {
+          email: 'dev_code@taskify.com',
+        },
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
+  const { data: aaa } = useQuery<DashBoardMembers>({
+    queryKey: ['dashBoardMembers', dashBoardId],
+    queryFn: () => getDashBoardMembers(dashBoardId),
+  })
+  console.log(aaa)
 
   return (
     <section className={styles.container}>
@@ -89,3 +106,5 @@ updatedAt: "2023-12-24T19:40:39.203Z"
  * invitations: []
  * totalCount: 0
  */
+
+// 초대아이디 69, invitee id 89
