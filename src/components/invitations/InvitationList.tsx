@@ -4,7 +4,7 @@
  * 1. 대시보드 초대하고 response 확인하기 (default accepted 여부 확인 => null)
  * 2. 초대내역 불러오기 api 연동 (초대 했지만 당사자 승낙여부 기다리는 목록)
  * ㄴ inviteAccepted: null(초기)
- * 2-1. 당사자가 초대를 거절하면 초대 내역에 포함되는지 여부 확인
+ * 2-1. 당사자가 초대를 거절하면 초대 내역에서 미포함 됨
  * 2-2. 당자자가 초대를 수락하면 초대 내역에 미포함 => 구성원(멤버)에 포함됨
  * 3. 초대하기 버튼을 눌렀을때 초대가 되고, 내역에 반영
  * ㄴ 중복으로 초대가 가능한 상황 발견
@@ -62,7 +62,11 @@ export default function InvitationList({ dashBoardId = 119 }: InvitationListProp
       <div>
         {data?.invitations.map((invitation) => (
           <li key={invitation.id} className={styles.table}>
-            <InvitationItem invitation={invitation} dashBoardId={dashBoardId} />
+            <InvitationItem
+              dashBoardId={dashBoardId}
+              invitationId={invitation.id}
+              email={invitation.invitee.email}
+            />
           </li>
         ))}
       </div>
