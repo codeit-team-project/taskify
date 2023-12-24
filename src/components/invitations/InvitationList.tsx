@@ -13,10 +13,9 @@
  * 5. 초대하기 모달 상세 작업
  * 6. 페이지네이션 기능 붙이기
  */
+import { useState } from 'react'
+import { useQuery } from '@tanstack/react-query'
 
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-
-import { createDashBoardInvitations } from '@/api/dashboards/createDashboardsInvitations'
 import { getDashBoardInvitations } from '@/api/dashboards/getDashboardsInvitations'
 import { InvitationsType } from '@/types/invitedDashBoardListType'
 
@@ -24,13 +23,14 @@ import styles from './Invitation.module.scss'
 import InvitationItem from './InvitationItem'
 import { getDashBoardMembers } from '@/api/members/getMembers'
 import { DashBoardMembers } from '@/types/members'
+import InvitationModal from './InvitationModal'
 
 interface InvitationListProps {
   dashBoardId: number
 }
 
 export default function InvitationList({ dashBoardId = 119 }: InvitationListProps) {
-  const queryClient = useQueryClient()
+  const [isOpenModal, setIsOpenModal] = useState(false)
 
   const { data } = useQuery<InvitationsType>({
     queryKey: ['dashBoardsInvitations', dashBoardId],
@@ -38,29 +38,7 @@ export default function InvitationList({ dashBoardId = 119 }: InvitationListProp
   })
   console.log(data)
 
-  // 대시보드 초대하기
-  const { mutate: createInvitation } = useMutation({
-    mutationKey: ['createInvitation'],
-    mutationFn: createDashBoardInvitations,
-    // 초대 후 상태 업데이트
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dashBoardsInvitations', dashBoardId] })
-    },
-  })
-
-  // 버튼 누르면 대시보드 초대하는 이벤트 핸들러
-  const handleCreateInvitation = async () => {
-    try {
-      createInvitation({
-        id: dashBoardId,
-        data: {
-          email: 'dev_code@taskify.com',
-        },
-      })
-    } catch (error) {
-      console.log(error)
-    }
-  }
+  const handleOpenModal = () => setIsOpenModal(true)
 
   const { data: aaa } = useQuery<DashBoardMembers>({
     queryKey: ['dashBoardMembers', dashBoardId],
@@ -69,25 +47,28 @@ export default function InvitationList({ dashBoardId = 119 }: InvitationListProp
   console.log(aaa)
 
   return (
-    <section className={styles.container}>
-      <div className={styles['card-info']}>
-        <span className={styles['card-title']}>초대 내역</span>
-        <div>페이지네이션</div>
-        <button onClick={handleCreateInvitation}>초대하기</button>
-      </div>
-      <h3 className={styles['sub-title']}>이메일</h3>
-      <div>
-        {data?.invitations.map((invitation) => (
-          <li key={invitation.id} className={styles.table}>
-            <InvitationItem
-              dashBoardId={dashBoardId}
-              invitationId={invitation.id}
-              email={invitation.invitee.email}
-            />
-          </li>
-        ))}
-      </div>
-    </section>
+    <>
+      <section className={styles.container}>
+        <div className={styles['card-info']}>
+          <span className={styles['card-title']}>초대 내역</span>
+          <div>페이지네이션</div>
+          <button onClick={handleOpenModal}>초대하기</button>
+        </div>
+        <h3 className={styles['sub-title']}>이메일</h3>
+        <div>
+          {data?.invitations.map((invitation) => (
+            <li key={invitation.id} className={styles.table}>
+              <InvitationItem
+                dashBoardId={dashBoardId}
+                invitationId={invitation.id}
+                email={invitation.invitee.email}
+              />
+            </li>
+          ))}
+        </div>
+      </section>
+      {isOpenModal && <InvitationModal dashBoardId={dashBoardId} />}
+    </>
   )
 }
 
