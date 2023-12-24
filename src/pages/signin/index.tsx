@@ -15,6 +15,7 @@ export default function SignInPage() {
   const router = useRouter()
 
   useEffect(() => {
+    // TODO - token이 만료될 때를 대비해 나중에는 user 정보가 있는지 없는지에 따라 router.push하도록 코드를 바꾸자.
     if (token) {
       router.push('/dashboard')
     }
