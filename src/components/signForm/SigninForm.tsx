@@ -28,7 +28,7 @@ export default function SigninForm() {
     getValues,
   } = useForm<SignInFormValueType>({ mode: 'all' })
   const router = useRouter()
-  const { auth, setAuth } = useAuthContext()
+  const { token, setToken } = useAuthContext()
   const [isPending, setIsPending] = useState(false)
 
   const { mutate } = useMutation({
@@ -39,13 +39,11 @@ export default function SigninForm() {
     },
     onSuccess: (response) => {
       console.log('login succeed!')
-      const validUser = {
-        user: response?.data?.user,
-        accessToken: response?.data?.accessToken,
-      }
-      if (setAuth) {
-        setAuth(validUser)
-        console.log(auth)
+      const accessToken = response?.data?.accessToken
+      if (setToken && accessToken && typeof window !== undefined) {
+        setToken(accessToken)
+        localStorage.setItem('accessToken', accessToken)
+        console.log(token)
       }
       router.push('/mydashboard')
     },

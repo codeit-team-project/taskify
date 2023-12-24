@@ -1,27 +1,26 @@
 import { PropsWithChildren, createContext, useState } from 'react'
-import { LoginType } from '@/types/auth'
 
-const NONE_USER: LoginType = {
-  user: null,
-  accessToken: null,
-}
+const SAVED_TOKEN = typeof window !== 'undefined' ? localStorage.getItem('accessToken') : null
 
 interface AuthContextProps {
-  auth: LoginType
-  setAuth: null | ((s: LoginType) => void)
+  token: string | null
+  setToken: null | ((s: string) => void)
 }
 
 const INITIAL_AUTH_CONTEXT: AuthContextProps = {
-  auth: NONE_USER,
-  setAuth: null,
+  token: SAVED_TOKEN,
+  setToken: null,
 }
 
 const AuthContext = createContext(INITIAL_AUTH_CONTEXT)
 
 export const AuthProvider = ({ children }: PropsWithChildren) => {
-  const [auth, setAuth] = useState<LoginType>(NONE_USER)
-
-  return <AuthContext.Provider value={{ auth, setAuth }}>{children}</AuthContext.Provider>
+  const [token, setToken] = useState(INITIAL_AUTH_CONTEXT.token ?? '')
+  return (
+    <AuthContext.Provider value={{ token: token, setToken: setToken }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
 
 export default AuthContext

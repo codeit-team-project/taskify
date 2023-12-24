@@ -11,15 +11,14 @@ import SignupForm from '@/components/signForm/SignupForm'
 import useAuthContext from '@/hooks/useAuth'
 
 export default function SignUpPage() {
-  const { auth } = useAuthContext()
+  const { token } = useAuthContext()
   const router = useRouter()
 
   useEffect(() => {
-    console.log(auth)
-    if (auth.user) {
+    if (token) {
       router.push('/dashboard')
     }
-  }, [auth, router])
+  }, [token, router])
 
   return (
     <SignLayout isSignin={false}>
