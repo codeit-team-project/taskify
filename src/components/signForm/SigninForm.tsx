@@ -1,22 +1,24 @@
 /* signin 페이지에 사용할 Form 컴포넌트 
 
-TODO - 시간 난다면 request 받는 중에 isPending 값을 true로 두고, 
-      isPending 이 true일 때엔 spinner.gif를 띄우고 버튼 disabled로 상태 바꾸다가
-      response를 받으면 spinner.gif 사라지게 하면서 다시 버튼 활상화 시키는 코드를 짜볼 것...
-TODO - onSubmit 함수에서 error response 받을 때 alert 창 띄우는 코드를 나중에 모달창 띄우는 코드로 바꿀 것. (아님 토스트 메세지를 쓰던가 커스텀 alert를 써도 이쁠듯?)
+TODO - onSubmit에서 error 받을 때 alert 창 띄우는 코드를 모달창 띄우는 코드로 바꿀 것. (아님 토스트 메세지를 쓰던가 커스텀 alert를 써도 이쁠듯?)
+TODO - LoadingSpinner 을 불러올 때 createModalPortal 안 쓰고 그냥 대충 렌더링만 하는 식으로 코드를 짰습니다 (모달창 띄우는 코드랑 충돌할까봐...) 나중에 연아님 코드 합치고 modalPortal에 spinner 띄우는 코드로 바꿔볼게용
 */
 
+import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/router'
+import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
 
 import { createLogin } from '@/api/auth/createLogin'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import TextInput from '@/components/signInput/TextInput'
+import useAuthContext from '@/hooks/useAuth'
 import { SignInFormValueType } from '@/types/auth'
 import { emailValidationRules, passwordValidationRules } from '@/utils/formInputValidationRules'
 
 import styles from './SignForm.module.scss'
-import useAuthContext from '@/hooks/useAuth'
+import LoadingSpinner from '../loadingSpinner/LoadingSpinner'
 
 export default function SigninForm() {
   const {
@@ -27,39 +29,52 @@ export default function SigninForm() {
   } = useForm<SignInFormValueType>({ mode: 'all' })
   const router = useRouter()
   const { auth, setAuth } = useAuthContext()
+  const [isPending, setIsPending] = useState(false)
+
+  const { mutate } = useMutation({
+    mutationKey: ['create-login-key'],
+    mutationFn: (data: SignInFormValueType) => createLogin({ data: data }),
+    onMutate: () => {
+      setIsPending(true)
+    },
+    onSuccess: (response) => {
+      console.log('login succeed!')
+      const validUser = {
+        user: response?.data?.user,
+        accessToken: response?.data?.accessToken,
+      }
+      if (setAuth) {
+        setAuth(validUser)
+        console.log(auth)
+      }
+      router.push('/mydashboard')
+    },
+    onError: (error: AxiosError) => {
+      if (error?.response?.status === 400) {
+        alert(`${error?.response?.data?.message}`)
+      } else if (error?.response?.status === 404) {
+        alert('존재하지 않는 유저입니다!')
+      } else return
+    },
+    onSettled: () => {
+      setIsPending(false)
+    },
+  })
 
   const onSubmit = () => {
-    createLogin({
-      data: {
-        email: getValues('email'),
-        password: getValues('password'),
-      },
+    mutate({
+      email: getValues('email'),
+      password: getValues('password'),
     })
-      .then((response) => {
-        if (response.status < 300 && response.status >= 200) {
-          // TODO access token 저장해서 context로 뿌리는 코드.
-          const loginUser = {
-            user: response?.data?.user,
-            accessToken: response?.data?.accessToken,
-          }
-          if (setAuth) {
-            setAuth(loginUser)
-            console.log(auth)
-          }
-          router.push('/dashboard')
-        }
-      })
-      .catch((e) => {
-        if (e.response.status === 400) {
-          alert(`${e.response.data.message}`)
-        } else if (e.response.status === 404) {
-          alert('존재하지 않는 유저입니다!')
-        } else return
-      })
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
+      {isPending && (
+        <>
+          <LoadingSpinner />
+        </>
+      )}
       <div className={styles['signinput-container']}>
         <TextInput
           placeholder="이메일을 입력해 주세요."
@@ -87,7 +102,9 @@ export default function SigninForm() {
           </div>
         )}
       </div>
-      <button className={styles['submit-button']}>로그인</button>
+      <button disabled={isPending} className={styles['submit-button']}>
+        로그인
+      </button>
     </form>
   )
 }
