@@ -1,7 +1,7 @@
 /* signun 페이지에 사용할 Form 컴포넌트
 
 TODO - onSubmit 함수에서 error response 받을 때 alert 창 띄우는 코드를 나중에 모달창 띄우는 코드로 바꿀 것. (아님 토스트 메세지를 쓰던가 커스텀 alert를 써도 이쁠듯?)
-TODO - LoadingSpinner 을 불러올 때 createModalPortal 안 쓰고 그냥 대충 렌더링만 하는 식으로 코드를 짰습니다 (모달창 띄우는 코드랑 충돌할까봐...) 나중에 연아님 코드 합치고 modalPortal에 spinner 띄우는 코드로 바꿔볼게용
+TODO - isPending을 통해 로딩스피너 활용하는 코드 추가할 것. 
 */
 
 import { AxiosError } from 'axios'
@@ -11,7 +11,6 @@ import { useRouter } from 'next/router'
 import { useMutation } from '@tanstack/react-query'
 
 import { createUser } from '@/api/users/createUser'
-import LoadingSpinner from '@/components/loadingSpinner/LoadingSpinner'
 import ServiceChekInput from '@/components/serviceCheckInput/ServiceCheckInput'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import TextInput from '@/components/signInput/TextInput'
@@ -100,11 +99,6 @@ export default function SignupForm() {
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      {isPending && (
-        <>
-          <LoadingSpinner />
-        </>
-      )}
       <div className={styles['signinput-container']}>
         <TextInput
           placeholder="이메일을 입력해 주세요."
@@ -177,7 +171,11 @@ export default function SignupForm() {
       <div className={styles['signinput-container']}>
         <ServiceChekInput setBlank={setBlankBox} />
       </div>
-      <button className={styles['submit-button']} disabled={isDisable} data-disable={isDisable}>
+      <button
+        className={styles['submit-button']}
+        disabled={isDisable || isPending}
+        data-disable={isDisable}
+      >
         회원가입
       </button>
     </form>
