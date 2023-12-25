@@ -7,10 +7,6 @@ interface CreateUserType {
 }
 
 export const createUser = async ({ data }: CreateUserType) => {
-  const response = await axiosInstance.post<UserType>('/users', data, {
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  })
+  const response = await axiosInstance.post<UserType>('/users', data)
   return response
 }
