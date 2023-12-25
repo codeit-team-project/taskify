@@ -7,6 +7,7 @@
  * ㄴ 초대하기 버튼스타일링 (+ 빈응형)
  */
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import styles from './InvitationModal.module.scss'
 import { createDashBoardInvitations } from '@/api/dashboards/createDashboardsInvitations'
 
 interface InvitationModalProps {
@@ -39,9 +40,18 @@ export default function InvitationModal({ dashBoardId }: InvitationModalProps) {
   }
 
   return (
-    <div>
-      초대하기 모달
-      <button onClick={handleCreateInvitation}>초대하기</button>
+    <div className={styles.container}>
+      <h2 className={styles.title}>초대하기</h2>
+      <div className={styles.contents}>
+        <p className={styles['sub-title']}>이메일</p>
+        <input className={styles.input} />
+      </div>
+      <div className={styles.buttons}>
+        <button className={styles['default-button']}>취소</button>
+        <button className={styles['primary-button']} onClick={handleCreateInvitation}>
+          초대
+        </button>
+      </div>
     </div>
   )
 }
