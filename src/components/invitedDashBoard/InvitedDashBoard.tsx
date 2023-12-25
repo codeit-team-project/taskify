@@ -79,10 +79,16 @@ function NoSearchedInvitations({ debouncedSearchTitle }: NoSearchedInvitationsPr
 
 function Invitations({ invitationList }: InvitationsProps) {
   return invitationList.map((item) => (
-    <tr key={item.id} className={styles['dashboard-item']}>
-      <td className={styles['dashboard-name']}>{item.dashboard.title}</td>
-      <td className={styles['inviter-name']}>{item.invitee.nickname}</td>
-      <td>
+    <tr key={item.id} className={styles['invitation-item-container']}>
+      <td className={styles['dashboard-title']}>
+        <p className={styles['column-title']}>이름</p>
+        {item.dashboard.title}
+      </td>
+      <td className={styles['inviter-name']}>
+        <p className={styles['column-title']}>초대자</p>
+        {item.invitee.nickname}
+      </td>
+      <td className={styles['response']}>
         <div className={styles['button-container']}>
           <button
             className={styles['button-accept']}
@@ -168,9 +174,9 @@ export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
               </th>
             </tr>
             <tr className={styles['column-title-container']}>
-              <th>이름</th>
-              <th>초대자</th>
-              <th>수락 여부</th>
+              <th className={styles['column-title']}>이름</th>
+              <th className={styles['column-title']}>초대자</th>
+              <th className={styles['column-title']}>수락 여부</th>
             </tr>
           </thead>
           <tbody>

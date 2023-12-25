@@ -1,9 +1,24 @@
+@import '@/styles/mixin.scss';
+
 section.container {
-  width: fit-content;
-  min-width: 102.2rem;
   padding: 3.2rem 0;
   border-radius: 8px;
   background: var(--color-white);
+
+  @include tablet {
+    width: 100%;
+  }
+
+  .column-title {
+    color: var(--color-gray40);
+    font-size: 1.6rem;
+    font-weight: 400;
+    line-height: 1;
+    text-align: left;
+    @include mobile {
+      font-size: 1.4rem;
+    }
+  }
 
   h2.title {
     padding-left: 2.8rem;
@@ -11,25 +26,51 @@ section.container {
     font-weight: 700;
     color: var(--color-black_33);
     text-align: left;
+    @include mobile {
+      padding-left: 1.6rem;
+      font-size: 2rem;
+    }
   }
 
   table.invited-dashboard-table {
     margin-top: 2rem;
     border-collapse: collapse;
-
+    border-spacing: 0;
+    @include tablet {
+      width: 100%;
+    }
+    colgroup {
+      @include mobile {
+        display: none;
+      }
+    }
     col.column-first {
       width: 37.6rem;
+      @include tablet {
+        width: auto;
+        max-width: 21rem;
+      }
     }
     col.column-second {
       width: 30.2rem;
+      @include tablet {
+        width: auto;
+        max-width: 11.2rem;
+      }
     }
     col.column-third {
       width: 34.4rem;
+      @include tablet {
+        width: auto;
+        max-width: 18.2rem;
+      }
     }
     thead {
       .search-form-wrapper {
         padding: 0 2.8rem;
-
+        @include mobile {
+          padding: 0 1.6rem;
+        }
         form {
           display: flex;
           align-items: center;
@@ -53,6 +94,9 @@ section.container {
             font-size: 1.6rem;
             font-weight: 400;
             line-height: 1;
+            @include mobile {
+              font-size: 1.4rem;
+            }
             &::placeholder {
               color: var(--color-gray40);
             }
@@ -60,14 +104,11 @@ section.container {
         }
       }
       .column-title-container {
-        th {
+        @include mobile {
+          display: none;
+        }
+        th.column-title {
           padding: 2.4rem 0;
-          color: var(--color-gray40);
-          font-size: 1.6rem;
-          font-weight: 400;
-          line-height: 1;
-          text-align: left;
-
           &:first-of-type {
             padding-left: 2.8rem;
           }
@@ -76,50 +117,93 @@ section.container {
     }
 
     tbody {
-      .dashboard-name,
-      .inviter-name {
-        color: var(--color-black_33);
-        font-size: 1.6rem;
-        font-weight: 400;
-        line-height: 1;
-      }
-
-      .dashboard-item {
+      .invitation-item-container {
         border-bottom: 1px solid #ccc;
+        @include mobile {
+          display: block;
+          padding: 1.6rem;
+        }
         td {
-          padding: 2.6rem 0;
+          padding: 2rem 1.6rem 2rem 0;
+          @include mobile {
+            padding: 10rem;
+          }
           &:first-of-type {
             padding-left: 3.6rem;
+            @include tablet {
+              padding-left: 2.8rem;
+            }
+            @include mobile {
+              margin-bottom: 1rem;
+            }
           }
-        }
-      }
-      .button-container {
-        display: flex;
-        width: 17.8rem;
-        height: 3.2rem;
-        gap: 10px;
-        .button {
-          width: 8.4rem;
-          padding: 0.7rem 2.9rem;
-          border-radius: 4px;
-          font-size: 1.4rem;
-          font-weight: 500;
-          line-height: 1;
-          text-align: center;
-          white-space: nowrap;
-          cursor: pointer;
-        }
-        .button-accept {
-          @extend .button;
-          background-color: var(--color-violet);
-          border: 0;
-          color: var(--color-white);
-        }
-        .button-decline {
-          @extend .button;
-          border: 1px solid var(--color-violet);
-          background-color: var(--color-white);
-          color: var(--color-violet);
+          &.dashboard-title,
+          &.inviter-name {
+            color: var(--color-black_33);
+            font-size: 1.6rem;
+            font-weight: 400;
+            line-height: 1;
+            @include mobile {
+              display: flex;
+              gap: 2.8rem;
+              padding: 0;
+              font-size: 1.4rem;
+            }
+            .column-title {
+              display: none;
+              @include mobile {
+                display: block;
+                width: 3.7rem;
+                white-space: nowrap;
+              }
+            }
+          }
+          &.response {
+            @include mobile {
+              display: block;
+              margin-top: 1.6rem;
+              padding: 0;
+            }
+            .button-container {
+              display: flex;
+              gap: 10px;
+              .button {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 8.4rem;
+                height: 3.2rem;
+                border-radius: 4px;
+                font-size: 1.4rem;
+                font-weight: 500;
+                line-height: 1;
+                text-align: center;
+                white-space: nowrap;
+                cursor: pointer;
+                @include tablet {
+                  width: 7.2rem;
+                  height: 3rem;
+                }
+                @include mobile {
+                  width: 50%;
+                  height: 2.8rem;
+                  font-size: 1.2rem;
+                }
+              }
+              .button-accept {
+                @extend .button;
+                background-color: var(--color-violet);
+                border: 0;
+                color: var(--color-white);
+              }
+              .button-decline {
+                @extend .button;
+                border: 1px solid var(--color-violet);
+                background-color: var(--color-white);
+                color: var(--color-violet);
+              }
+            }
+          }
         }
       }
       .no-searched-invitation-text {
@@ -129,6 +213,9 @@ section.container {
         font-weight: 400;
         line-height: 1;
         text-align: center;
+        @include mobile {
+          font-size: 1.4rem;
+        }
       }
     }
   }
@@ -139,15 +226,28 @@ section.container {
     justify-items: center;
     gap: 2.4rem;
     padding: 6.6rem 0 12.8rem 0;
+    @include tablet {
+      width: 100%;
+    }
+    @include mobile {
+      padding: 10.5rem 0 15.4rem;
+    }
     img.no-invitation-icon {
       width: 10rem;
       height: 10rem;
+      @include mobile {
+        width: 6rem;
+        height: 6rem;
+      }
     }
     p.no-invitation-text {
       color: var(--color-gray40);
       font-size: 1.8rem;
       font-weight: 400;
       line-height: 1;
+      @include mobile {
+        font-size: 1.4rem;
+      }
     }
   }
 }

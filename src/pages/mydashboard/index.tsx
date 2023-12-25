@@ -1,6 +1,7 @@
 import { getInvitations } from '@/api/invitations/getInvitations'
 import InvitedDashBoard from '@/components/invitedDashBoard/InvitedDashBoard'
-import { InvitationType, ReceivedInvitationsType } from '@/types/InvitationType'
+import { ReceivedInvitationsType } from '@/types/invitations'
+import { InvitationType } from '@/types/invitedDashBoardListType'
 
 export default function MyDashboardPage({ ...pageProps }) {
   return (
