@@ -1,12 +1,11 @@
 .container {
   padding: 2.8rem;
   width: 54rem;
-  height: 27.6rem;
   display: flex;
   flex-direction: column;
   gap: 2.8rem;
   border-radius: 0.8rem;
-  background: var(--color-violet_8); // white로 변경예정
+  background: var(--color-white);
 }
 
 .title {
@@ -77,4 +76,9 @@
   @include button;
   color: var(--color-white);
   background: var(--color-primary);
+}
+
+.inActive {
+  opacity: 0.7;
+  cursor: default;
 }
