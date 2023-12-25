@@ -30,6 +30,24 @@
       & img {
         display: block;
       }
+      & .logo-img-wrapper {
+        position: relative;
+        width: 16.5rem;
+        height: 19rem;
+        @include mobile {
+          width: 11.5em;
+          height: 13rem;
+        }
+      }
+      & .logo-title-img-wrapper {
+        position: relative;
+        width: 20rem;
+        height: 5.5rem;
+        @include mobile {
+          width: 14em;
+          height: 3.8rem;
+        }
+      }
       & .logo-img {
         width: 16.5rem;
         height: 19rem;
