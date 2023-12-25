@@ -6,6 +6,8 @@
  * ㄴ 예외 상황에 따른 에러 message 스타일링 (칼럼 모달 디자인 참고) (완료)
  * ㄴ 초대하기 버튼스타일링 (+ 빈응형)
  * ㄴ isPending, 에러일때 비활성화 스타일 (완료)
+ * ㄴ 모달 반응형 스타일링 (완료)
+ * pending일때 로딩스피너 보여주기 (초대 완료일때만)
  */
 import { ChangeEvent, useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
@@ -46,6 +48,10 @@ export default function InvitationModal({ dashBoardId, onClose }: InvitationModa
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
+
+    if (inputValue) {
+      setErrorMessage('')
+    }
   }
 
   const handleCreateInvitation = async () => {
