@@ -1,14 +1,10 @@
-export interface SignUpFormValueType {
-  email: string
-  nickname: string
-  password: string
-}
+/* 유저의 정보값에 쓰일 types */
 
 export interface UserType {
   id: number
   email: string
   nickname: string
-  profileImageUrl?: string | null
+  profileImageUrl: string | null
   createdAt: string
   updatedAt: string
 }

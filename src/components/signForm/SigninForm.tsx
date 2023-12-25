@@ -14,7 +14,7 @@ import { createLogin } from '@/api/auth/createLogin'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import TextInput from '@/components/signInput/TextInput'
 import useAuthContext from '@/hooks/useAuth'
-import { SignInFormValueType } from '@/types/auth'
+import { SignInDataType } from '@/types/auth'
 import { emailValidationRules, passwordValidationRules } from '@/utils/formInputValidationRules'
 
 import styles from './SignForm.module.scss'
@@ -25,14 +25,14 @@ export default function SigninForm() {
     handleSubmit,
     formState: { errors },
     getValues,
-  } = useForm<SignInFormValueType>({ mode: 'all' })
+  } = useForm<SignInDataType>({ mode: 'all' })
   const router = useRouter()
   const { token, setToken } = useAuthContext()
   const [isPending, setIsPending] = useState(false)
 
   const { mutate } = useMutation({
     mutationKey: ['create-login-key'],
-    mutationFn: (data: SignInFormValueType) => createLogin({ data: data }),
+    mutationFn: (data: SignInDataType) => createLogin({ data: data }),
     onMutate: () => {
       setIsPending(true)
     },

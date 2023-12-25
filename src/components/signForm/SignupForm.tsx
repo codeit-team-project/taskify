@@ -14,8 +14,8 @@ import { createUser } from '@/api/users/createUser'
 import ServiceChekInput from '@/components/serviceCheckInput/ServiceCheckInput'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import TextInput from '@/components/signInput/TextInput'
-import { SignUpTempValueType } from '@/types/auth'
-import { SignUpFormValueType } from '@/types/users'
+import { SignUpInputsType } from '@/types/formTypes'
+import { SignUpDataType } from '@/types/auth'
 import {
   emailValidationRules,
   nicknameValidationRules,
@@ -30,7 +30,7 @@ export default function SignupForm() {
     handleSubmit,
     formState: { errors },
     getValues,
-  } = useForm<SignUpTempValueType>({ mode: 'all' })
+  } = useForm<SignUpInputsType>({ mode: 'all' })
   // isDisable: 회원가입 버튼의 활성 여부를 나타내는 state
   const [isDisable, setIsDisable] = useState(true)
   // blankBox: 이용약관 체크박스가 빈 칸인지를 나타내는 state
@@ -58,7 +58,7 @@ export default function SignupForm() {
 
   const { mutate } = useMutation({
     mutationKey: ['create-user-key'],
-    mutationFn: (data: SignUpFormValueType) => createUser({ data: data }),
+    mutationFn: (data: SignUpDataType) => createUser({ data: data }),
     onMutate: () => {
       setIsPending(true)
     },
