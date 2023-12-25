@@ -54,13 +54,13 @@
   font-size: 1.6rem;
   font-weight: 500;
   border-radius: 0.8rem;
-  border: 1px solid var(--color-gray30);
   background: var(--color-white);
 }
 
 .default-button {
   @include button;
   color: var(--color-gray50);
+  border: 1px solid var(--color-gray30);
 }
 
 .primary-button {

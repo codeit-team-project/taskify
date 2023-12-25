@@ -38,7 +38,13 @@ export default function InvitationList({ dashBoardId = 119 }: InvitationListProp
   })
   console.log(data)
 
-  const handleOpenModal = () => setIsOpenModal(true)
+  const handleOpenModal = () => {
+    setIsOpenModal(true)
+  }
+
+  const handleCloseModal = () => {
+    setIsOpenModal(false)
+  }
 
   const { data: aaa } = useQuery<DashBoardMembers>({
     queryKey: ['dashBoardMembers', dashBoardId],
@@ -67,7 +73,7 @@ export default function InvitationList({ dashBoardId = 119 }: InvitationListProp
           ))}
         </div>
       </section>
-      {isOpenModal && <InvitationModal dashBoardId={dashBoardId} />}
+      {isOpenModal && <InvitationModal dashBoardId={dashBoardId} onClose={handleCloseModal} />}
     </>
   )
 }
