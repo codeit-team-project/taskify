@@ -5,11 +5,15 @@
  * ㄴ 버튼을 클릭했을 때 data 유효성 검사 (4가지 예외 상황)
  * ㄴ 예외 상황에 따른 에러 message 스타일링 (칼럼 모달 디자인 참고)
  * ㄴ 초대하기 버튼스타일링 (+ 빈응형)
+ * ㄴ isPending, 에러일때 비활성화 스타일
  */
+import { ChangeEvent, useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
+import { AxiosError } from 'axios'
+
 import styles from './InvitationModal.module.scss'
 import { createDashBoardInvitations } from '@/api/dashboards/createDashboardsInvitations'
-import { ChangeEvent, useState } from 'react'
+import classNames from 'classnames'
 
 interface InvitationModalProps {
   dashBoardId: number
@@ -20,36 +24,56 @@ export default function InvitationModal({ dashBoardId, onClose }: InvitationModa
   const queryClient = useQueryClient()
 
   const [inputValue, setInputValue] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
-  const { mutate: createInvitation } = useMutation({
+  const { mutate: createInvitation, isPending } = useMutation({
     mutationKey: ['createInvitation'],
     mutationFn: createDashBoardInvitations,
-    onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dashBoardsInvitations', dashBoardId] })
+    // onSuccess 로직을 분리하는 방법?
+    onSuccess: async () => {
+      queryClient.invalidateQueries({
+        queryKey: ['dashBoardsInvitations', dashBoardId],
+      })
+      setErrorMessage('')
+      await onClose()
+    },
+    onError: (error) => {
+      console.log(isPending)
+
+      if (error instanceof AxiosError) {
+        setErrorMessage(error.response?.data.message)
+      }
     },
   })
+  console.log(`pending: ${isPending}`)
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
-    console.log(e.target.value)
     setInputValue(e.target.value)
   }
 
-  // 버튼 누르면 대시보드 초대하는 이벤트 핸들러
   const handleCreateInvitation = async () => {
     if (!inputValue) {
       console.log('인풋없음') // 비활성화일때 스타일링
       return
     }
 
-    console.log('초대하기 활성화')
+    createInvitation({
+      id: dashBoardId,
+      data: {
+        email: inputValue,
+      },
+    })
 
+    /** await가 적용되지 않는 이유, res가 undefined인 이유, 에러 처리 */
     // try {
-    //   createInvitation({
+    //   const res = await createInvitation({
+    //     // 'await' has no effect on the type of this expression.ts(80007)
     //     id: dashBoardId,
     //     data: {
     //       email: 'dev_code@taskify.com',
     //     },
     //   })
+    //   console.log(res) // undefined
     // } catch (error) {
     //   console.log(error)
     // }
@@ -60,7 +84,12 @@ export default function InvitationModal({ dashBoardId, onClose }: InvitationModa
       <h2 className={styles.title}>초대하기</h2>
       <div className={styles.contents}>
         <p className={styles['sub-title']}>이메일</p>
-        <input className={styles.input} onChange={handleChangeInput} value={inputValue} />
+        <input
+          className={classNames(styles.input, { [styles['input-error']]: !!errorMessage })}
+          onChange={handleChangeInput}
+          value={inputValue}
+        />
+        {errorMessage && <p className={styles.errorMessage}>{errorMessage}</p>}
       </div>
       <div className={styles.buttons}>
         <button className={styles['default-button']} onClick={() => onClose()}>
