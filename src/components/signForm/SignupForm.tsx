@@ -6,7 +6,7 @@ TODO - isPending을 통해 로딩스피너 활용하는 코드 추가할 것.
 
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
-import { useCallback, useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useRouter } from 'next/router'
 import { useMutation } from '@tanstack/react-query'
 
@@ -28,33 +28,15 @@ export default function SignupForm() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid },
     getValues,
   } = useForm<SignUpInputsType>({ mode: 'all' })
   // isDisable: 회원가입 버튼의 활성 여부를 나타내는 state
-  const [isDisable, setIsDisable] = useState(true)
   // blankBox: 이용약관 체크박스가 빈 칸인지를 나타내는 state
   const [blankBox, setBlankBox] = useState(true)
   // checkValues: input에서 이벤트가 일어날 때마다 값이 바뀌는 state
-  const [checkValues, setCheckValues] = useState(true)
   const router = useRouter()
   const [isPending, setIsPending] = useState(false)
-
-  // checkSubmitAble 함수: input에 올바른 값이 있는지, 이용약관 checkbox에 체크가 되어있는지 확인하는 함수
-  const checkSubmitAble = useCallback(() => {
-    if (
-      Object.keys(errors).length === 0 &&
-      getValues('email') &&
-      getValues('password') &&
-      getValues('nickname') &&
-      getValues('passwordRepeat') &&
-      !blankBox
-    ) {
-      setIsDisable(false)
-    } else {
-      setIsDisable(true)
-    }
-  }, [getValues, blankBox, errors])
 
   const { mutate } = useMutation({
     mutationKey: ['create-user-key'],
@@ -87,10 +69,6 @@ export default function SignupForm() {
     })
   }
 
-  useEffect(() => {
-    checkSubmitAble()
-  }, [checkSubmitAble, checkValues])
-
   const passwordRepeatChecker = (passwordRepeatValue: string) => {
     if (getValues('password') !== passwordRepeatValue) {
       return '비밀번호가 일치하지 않습니다.'
@@ -105,8 +83,6 @@ export default function SignupForm() {
           labelName="이메일"
           {...register('email', emailValidationRules)}
           hasError={errors}
-          check={checkValues}
-          setCheck={setCheckValues}
         />
         {errors.email && (
           <div className={styles['error-message']} role="alert">
@@ -121,8 +97,6 @@ export default function SignupForm() {
           labelName="닉네임"
           {...register('nickname', nicknameValidationRules)}
           hasError={errors}
-          check={checkValues}
-          setCheck={setCheckValues}
         />
         {errors.nickname && (
           <div className={styles['error-message']} role="alert">
@@ -137,8 +111,6 @@ export default function SignupForm() {
           labelName="비밀번호"
           {...register('password', passwordValidationRules)}
           hasError={errors}
-          check={checkValues}
-          setCheck={setCheckValues}
         />
         {errors.password && (
           <div className={styles['error-message']} role="alert">
@@ -158,8 +130,6 @@ export default function SignupForm() {
             },
           })}
           hasError={errors}
-          check={checkValues}
-          setCheck={setCheckValues}
         />
         {errors.passwordRepeat && (
           <div className={styles['error-message']} role="alert">
@@ -173,8 +143,8 @@ export default function SignupForm() {
       </div>
       <button
         className={styles['submit-button']}
-        disabled={isDisable || isPending}
-        data-disable={isDisable}
+        disabled={!isValid || blankBox || isPending}
+        data-disable={!isValid || blankBox || isPending}
       >
         회원가입
       </button>

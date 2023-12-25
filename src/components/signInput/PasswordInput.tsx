@@ -7,24 +7,14 @@
 */
 
 import Image from 'next/image'
-import { forwardRef, useState, ChangeEvent } from 'react'
+import { forwardRef, useState } from 'react'
 import { SignInputProps } from '@/types/formTypes'
 import styles from './SignInput.module.scss'
 
 const PasswordInput = forwardRef<HTMLInputElement, SignInputProps>(
-  ({ placeholder, labelName, onChange, onBlur, name = '', hasError, check, setCheck }, ref) => {
+  ({ placeholder, labelName, onChange, onBlur, name = '', hasError }, ref) => {
     const [currentType, setCurrentType] = useState('password')
     const [isOpenEye, setIsOpenEye] = useState(false)
-
-    const handleChange = (e: ChangeEvent) => {
-      onChange(e)
-      if (setCheck) setCheck(!check)
-    }
-
-    const handleBlur = (e: ChangeEvent) => {
-      onBlur(e)
-      if (setCheck) setCheck(!check)
-    }
 
     const handleClickEye = () => {
       setCurrentType(currentType === 'text' ? 'password' : 'text')
@@ -51,8 +41,8 @@ const PasswordInput = forwardRef<HTMLInputElement, SignInputProps>(
           type={currentType}
           placeholder={placeholder}
           className={styles['input']}
-          onChange={handleChange}
-          onBlur={handleBlur}
+          onChange={onChange}
+          onBlur={onBlur}
           data-error={
             hasError === undefined || !Object.keys(hasError).includes(name) ? false : true
           }

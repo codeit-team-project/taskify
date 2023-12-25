@@ -21,7 +21,5 @@ export interface SignInputProps {
   onChange: ChangeHandler
   onBlur: ChangeHandler
   name?: string
-  check?: boolean
-  setCheck?: (state: boolean) => void
   hasError: {} | FieldErrors<SignInInputsType | SignUpInputsType>
 }
