@@ -31,10 +31,8 @@ export default function SignupForm() {
     formState: { errors, isValid },
     getValues,
   } = useForm<SignUpInputsType>({ mode: 'all' })
-  // isDisable: 회원가입 버튼의 활성 여부를 나타내는 state
   // blankBox: 이용약관 체크박스가 빈 칸인지를 나타내는 state
   const [blankBox, setBlankBox] = useState(true)
-  // checkValues: input에서 이벤트가 일어날 때마다 값이 바뀌는 state
   const router = useRouter()
   const [isPending, setIsPending] = useState(false)
 
