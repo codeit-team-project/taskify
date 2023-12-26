@@ -4,6 +4,9 @@
   max-width: 62rem;
   width: 100%;
   min-height: 47.7rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   border-radius: 0.8rem;
   background: var(--color-white);
   box-shadow:
@@ -21,6 +24,7 @@
     'email email email';
   column-gap: 1.6rem;
   row-gap: 2.8rem;
+  white-space: nowrap;
 }
 
 .info {
@@ -28,6 +32,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 18.6rem;
 }
 
 .title {
@@ -54,6 +59,7 @@
   grid-area: button;
   padding: 0.8rem 1.6rem;
   display: flex;
+  justify-content: center;
   align-items: center;
   gap: 0.8rem;
   border-radius: 0.4rem;
@@ -97,34 +103,45 @@
 @include tablet {
   .container {
     max-width: 54.4rem;
+    width: 100%;
   }
 
   .info {
-    gap: auto;
+    gap: 10rem;
+  }
+}
+
+@include tablet-narrow {
+  .description {
+    grid-template-areas:
+      'title title title'
+      'email email button';
+    grid-row-gap: 1.2rem;
+  }
+
+  .info {
+    gap: 0;
+  }
+
+  .action {
+    width: 100%;
   }
 }
 
 @include mobile {
   .container {
     max-width: 28.4rem;
-    max-height: 48.6rem;
+    min-height: 40.6rem;
   }
 
   .description {
     padding: 2.4rem 2rem 0.5rem 2rem;
-    grid-template-areas:
-      'title title'
-      'email button';
-    grid-row-gap: 1.2rem;
-  }
-
-  .title {
-    font-size: 2rem;
   }
 
   .action {
     height: 2.8rem;
     padding: 0.7rem 1.2rem;
+    justify-content: center;
     font-size: 1.2rem;
   }
 
