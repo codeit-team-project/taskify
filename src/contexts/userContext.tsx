@@ -20,17 +20,13 @@ export const UserContext = createContext<UserContextProps>({
 })
 
 export function UserContextProvider({ children }: PropsWithChildren) {
-  let savedUser
-  if (typeof window !== 'undefined') {
-    savedUser = JSON.parse(localStorage.getItem('user')!)
-  }
+  const savedUser = getCookie('user')
   const [user, setUser] = useState<UserType | null>(savedUser)
 
   // 브라우저 cookie에 user 데이터를 저장하는 메소드
   // 로그인 시 실행될 메소드
   const handleUserDataSave = (data: UserType) => {
     if (typeof window !== 'undefined') {
-      localStorage.setItem('user', JSON.stringify(data))
       setCookie('user', JSON.stringify(data))
       const savedData = getCookie('user')
       setUser(() => {
