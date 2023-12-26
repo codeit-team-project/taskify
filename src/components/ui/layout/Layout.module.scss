@@ -10,3 +10,70 @@
     padding: 6rem 0 0 6.7rem;
   }
 }
+
+// SignLayout 스타일
+.sign-layout-body {
+  display: flex;
+  position: absolute;
+  inset: 0;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-black_33);
+  & .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    & .logo-container {
+      & img {
+        display: block;
+      }
+      & .logo-img-wrapper {
+        position: relative;
+        width: 16.5rem;
+        height: 19rem;
+        @include mobile {
+          width: 11.5em;
+          height: 13rem;
+        }
+      }
+      & .logo-title-img-wrapper {
+        position: relative;
+        width: 20rem;
+        height: 5.5rem;
+        @include mobile {
+          width: 14em;
+          height: 3.8rem;
+        }
+      }
+      & .logo-img {
+        width: 16.5rem;
+        height: 19rem;
+      }
+      & .logo-title-img {
+        width: 20rem;
+        height: 5.5rem;
+      }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-end;
+      gap: 3rem;
+    }
+    & .greeting-container {
+      font-size: 2rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+    & .link-container {
+      font-size: 1.6rem;
+      & a {
+        color: var(--color-violet);
+        text-decoration: underline;
+      }
+    }
+  }
+}

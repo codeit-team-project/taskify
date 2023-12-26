@@ -1,15 +1,22 @@
-/* signin 페이지에 사용할 Form 컴포넌트
+/* signin 페이지에 사용할 Form 컴포넌트 
 
-TODO - onSubmit 코드 구현할 것.
-TODO - onSubmit 할 때 만약 비밀번호가 잘못됐다든가 등 error가 발생하면 errors 객체를 통해 에러 문구 띄우는 코드 구현할 것.
-- react-hook-form을 사용하여 구현
- */
+TODO - onSubmit에서 error 받을 때 alert 창 띄우는 코드를 모달창 띄우는 코드로 바꿀 것. (아님 토스트 메세지를 쓰던가 커스텀 alert를 써도 이쁠듯?)
+TODO - isPending을 통해 로딩스피너 활용하는 코드 추가할 것. 
+*/
 
+import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
-import TextInput from '@/components/signInput/TextInput'
+import { useState } from 'react'
+import { useRouter } from 'next/router'
+import { useMutation } from '@tanstack/react-query'
+
+import { createLogin } from '@/api/auth/createLogin'
 import PasswordInput from '@/components/signInput/PasswordInput'
-import { SignInFormValueType } from '@/types/auth'
+import TextInput from '@/components/signInput/TextInput'
+import useAuthContext from '@/hooks/useAuth'
+import { SignInDataType } from '@/types/auth'
 import { emailValidationRules, passwordValidationRules } from '@/utils/formInputValidationRules'
+
 import styles from './SignForm.module.scss'
 
 export default function SigninForm() {
@@ -18,12 +25,44 @@ export default function SigninForm() {
     handleSubmit,
     formState: { errors },
     getValues,
-  } = useForm<SignInFormValueType>({ mode: 'all' })
+  } = useForm<SignInDataType>({ mode: 'all' })
+  const router = useRouter()
+  const { token, setToken } = useAuthContext()
+  const [isPending, setIsPending] = useState(false)
+
+  const { mutate } = useMutation({
+    mutationKey: ['create-login-key'],
+    mutationFn: (data: SignInDataType) => createLogin({ data: data }),
+    onMutate: () => {
+      setIsPending(true)
+    },
+    onSuccess: (response) => {
+      console.log('login succeed!')
+      const accessToken = response?.data?.accessToken
+      if (setToken && accessToken && typeof window !== undefined) {
+        setToken(accessToken)
+        localStorage.setItem('accessToken', accessToken)
+        console.log(token)
+      }
+      router.push('/mydashboard')
+    },
+    onError: (error: AxiosError) => {
+      if (error?.response?.status === 400) {
+        alert(`${error?.response?.data?.message}`)
+      } else if (error?.response?.status === 404) {
+        alert('존재하지 않는 유저입니다!')
+      } else return
+    },
+    onSettled: () => {
+      setIsPending(false)
+    },
+  })
 
   const onSubmit = () => {
-    // post request 보내는 코드
-    console.log(getValues('email'))
-    console.log(getValues('password'))
+    mutate({
+      email: getValues('email'),
+      password: getValues('password'),
+    })
   }
 
   return (
@@ -55,6 +94,9 @@ export default function SigninForm() {
           </div>
         )}
       </div>
+      <button disabled={isPending} className={styles['submit-button']}>
+        로그인
+      </button>
     </form>
   )
 }
