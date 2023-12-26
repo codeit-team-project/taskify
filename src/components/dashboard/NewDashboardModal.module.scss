@@ -97,7 +97,6 @@
   cursor: default;
 }
 
-// 반응형 점검
 @include mobile {
   .container {
     padding: 2rem;
