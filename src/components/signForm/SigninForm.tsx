@@ -8,7 +8,7 @@ TODO - isPending을 통해 로딩스피너 활용하는 코드 추가할 것.
 
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useMutation } from '@tanstack/react-query'
 
@@ -20,6 +20,7 @@ import { emailValidationRules, passwordValidationRules } from '@/utils/formInput
 
 import styles from './SignForm.module.scss'
 import { setCookie } from '@/utils/cookie'
+import { UserContext } from '@/contexts/userContext'
 
 export default function SigninForm() {
   const {
@@ -30,6 +31,7 @@ export default function SigninForm() {
   } = useForm<SignInDataType>({ mode: 'all' })
   const router = useRouter()
   const [isPending, setIsPending] = useState(false)
+  const { handleUserDataSave } = useContext(UserContext)
 
   const { mutate } = useMutation({
     mutationKey: ['create-login-key'],
@@ -38,14 +40,11 @@ export default function SigninForm() {
       setIsPending(true)
     },
     onSuccess: (response) => {
-      // NOTE - accesstoken의 만료시간 6000초
+      const userData = response?.data?.user
       const accessToken = response?.data?.accessToken
       if (accessToken) {
-        setCookie('accessToken', accessToken, {
-          path: '/',
-          secure: true,
-          maxAge: 6000,
-        })
+        setCookie('accessToken', accessToken)
+        handleUserDataSave(userData)
       }
       router.push('/mydashboard')
     },

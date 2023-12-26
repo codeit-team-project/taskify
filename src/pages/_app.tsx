@@ -7,6 +7,7 @@ import { CookiesProvider } from 'react-cookie'
 import { useRouter } from 'next/router'
 import { getCookie } from '@/utils/cookie'
 import { useEffect } from 'react'
+import { UserContextProvider } from '@/contexts/userContext'
 
 const queryClient = new QueryClient()
 
@@ -24,10 +25,12 @@ export default function App({ Component, pageProps }: AppProps) {
   }, [router, savedToken])
 
   return (
-    <CookiesProvider>
-      <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
-      </QueryClientProvider>
-    </CookiesProvider>
+    <QueryClientProvider client={queryClient}>
+      <CookiesProvider>
+        <UserContextProvider>
+          <Component {...pageProps} />
+        </UserContextProvider>
+      </CookiesProvider>
+    </QueryClientProvider>
   )
 }
