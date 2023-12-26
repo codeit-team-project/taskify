@@ -12,6 +12,7 @@
  * 4. 취소하기 버튼을 눌렀을때 초대 취소가 되고, 내역에 반영
  * 5. 초대하기 모달 상세 작업
  * 6. 페이지네이션 기능 붙이기
+ * 7. 페이지에 들어갔을때 사이즈 재확인
  */
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
@@ -55,12 +56,17 @@ export default function InvitationList({ dashBoardId = 119 }: InvitationListProp
   return (
     <>
       <section className={styles.container}>
-        <div className={styles['card-info']}>
-          <span className={styles['card-title']}>초대 내역</span>
-          <div>페이지네이션</div>
-          <button onClick={handleOpenModal}>초대하기</button>
+        <div className={styles.description}>
+          <div className={styles.info}>
+            <span className={styles.title}>초대 내역</span>
+            <div>페이지네이션</div>
+          </div>
+          <button onClick={handleOpenModal} className={styles.action}>
+            <img src="assets/add_box.svg" />
+            초대하기
+          </button>
+          <span className={styles.item}>이메일</span>
         </div>
-        <h3 className={styles['sub-title']}>이메일</h3>
         <div>
           {data?.invitations.map((invitation) => (
             <li key={invitation.id} className={styles.table}>
@@ -95,3 +101,10 @@ updatedAt: "2023-12-24T19:40:39.203Z"
  */
 
 // 초대아이디 69, invitee id 89
+
+// grid-template-columns: 1fr auto;
+// grid-template-areas:
+//     "title title title button"
+//     "email email email email";
+
+// grid-area: button;
