@@ -2,12 +2,12 @@
  * @TODO
  * 사이드바 "+" 클릭시 대시보드 생성 모달 나타남
  * /mydashboard 페이지에서 새로운 대시보드 "+" 클릭시 대시보드 생성 모달 나타남
- * 모달에서 대시보드 이름과 색을 선택해야 '생성' 버튼이 활성화
- * '생성'버튼을 누르면 대시보드가 생성이 되고 해당 대시보드 상세/boardid로 이동
+ * 모달에서 대시보드 이름과 색을 선택해야 '생성' 버튼이 활성화 (완료)
+ * '생성'버튼을 누르면 대시보드가 생성이 되고 해당 대시보드 상세/boardid로 이동 (완료)
  * color palette 이벤트 핸들러 (리팩토링)
  */
-
-import { ChangeEvent, MouseEvent, useState } from 'react'
+import { useRouter } from 'next/router'
+import { ChangeEvent, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 
 import classNames from 'classnames'
@@ -22,35 +22,36 @@ interface NewDashboardModalProps {
 }
 
 export default function NewDashboardModal({ onClose }: NewDashboardModalProps) {
+  const router = useRouter()
+
   const [title, setTitle] = useState('')
   const [selectedColor, setSelectedColor] = useState(DEFAULT_COLOR)
 
   const { mutate } = useMutation({
     mutationKey: ['createDashboard'],
     mutationFn: createDashBoard,
+    onSuccess: (data) => {
+      router.push(`/dashboard/${data.id}`)
+    },
   })
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
 
-  const handleChangeColor = (color: string) => (e: MouseEvent<HTMLDivElement>) => {
-    console.log(color)
-    console.log(e.target)
-    console.log((e.target as HTMLSpanElement).id)
-
+  const handleChangeColor = (color: string) => () => {
     setSelectedColor(color)
   }
 
-  console.log(selectedColor)
-
   const handleCreateDashboard = () => {
-    console.log(title)
+    if (!title || !selectedColor) {
+      return
+    }
 
-    // mutate({
-    //   title,
-    //   color: '#ffffff',
-    // })
+    mutate({
+      title,
+      color: selectedColor,
+    })
   }
 
   return (
@@ -78,7 +79,12 @@ export default function NewDashboardModal({ onClose }: NewDashboardModalProps) {
         <button className={styles['default-button']} onClick={() => onClose()}>
           취소
         </button>
-        <button className={classNames(styles['primary-button'])} onClick={handleCreateDashboard}>
+        <button
+          className={classNames(styles['primary-button'], {
+            [styles.inActive]: !title || !selectedColor,
+          })}
+          onClick={handleCreateDashboard}
+        >
           생성
         </button>
       </div>
