@@ -2,6 +2,8 @@
 
 TODO - onSubmit에서 error 받을 때 alert 창 띄우는 코드를 모달창 띄우는 코드로 바꿀 것. (아님 토스트 메세지를 쓰던가 커스텀 alert를 써도 이쁠듯?)
 TODO - isPending을 통해 로딩스피너 활용하는 코드 추가할 것. 
+로그인 버튼을 누르면 response 200을 받을 때 accessToken을 localStorage에 저장함
+이 때 저장된 토큰은 6000초가 지나면 자동으로 삭제됨
 */
 
 import { AxiosError } from 'axios'
