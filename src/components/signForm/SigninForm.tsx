@@ -36,15 +36,12 @@ export default function SigninForm() {
       setIsPending(true)
     },
     onSuccess: (response) => {
-      // NOTE - accesstoken의 만료날짜 6000초
-      console.log('login succeed!')
+      // NOTE - accesstoken의 만료시간 6000초
       const accessToken = response?.data?.accessToken
       if (accessToken) {
-        setCookie('savedToken', accessToken, {
+        setCookie('accessToken', accessToken, {
           path: '/',
-          httpOnly: true,
           secure: true,
-          sameSite: 'none',
           maxAge: 6000,
         })
       }
