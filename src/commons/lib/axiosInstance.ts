@@ -2,12 +2,39 @@ import axios from 'axios'
 import { getCookie } from '@/utils/cookie'
 const TEAM_URL = '1-02'
 
-const accessToken = getCookie('accessToken')
-
 const axiosInstance = axios.create({
   baseURL: `https://sp-taskify-api.vercel.app/${TEAM_URL}`,
 })
 
-axiosInstance.defaults.headers.common['Authorization'] = `Bearer ${accessToken}`
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const accessToken = getCookie('accessToken')
+    config.headers['Authorization'] = `Bearer ${accessToken}`
+    return config
+  },
+  (error) => {
+    return Promise.reject(error)
+  },
+)
+
+axiosInstance.interceptors.response.use(
+  (response) => {
+    return response
+  },
+  async (error) => {
+    if (typeof window !== 'undefined') {
+      switch (error?.response?.status) {
+        case 401:
+          alert('로그인이 필요합니다!')
+          window.location.href = '/signin'
+          break
+        case 404:
+          window.location.href = '/404'
+          break
+      }
+    }
+    return error
+  },
+)
 
 export default axiosInstance
