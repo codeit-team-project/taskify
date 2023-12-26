@@ -13,11 +13,11 @@ import { useMutation } from '@tanstack/react-query'
 import { createLogin } from '@/api/auth/createLogin'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import TextInput from '@/components/signInput/TextInput'
-import useAuthContext from '@/hooks/useAuth'
 import { SignInDataType } from '@/types/auth'
 import { emailValidationRules, passwordValidationRules } from '@/utils/formInputValidationRules'
 
 import styles from './SignForm.module.scss'
+import { setCookie } from '@/utils/cookie'
 
 export default function SigninForm() {
   const {
@@ -27,7 +27,6 @@ export default function SigninForm() {
     getValues,
   } = useForm<SignInDataType>({ mode: 'all' })
   const router = useRouter()
-  const { token, setToken } = useAuthContext()
   const [isPending, setIsPending] = useState(false)
 
   const { mutate } = useMutation({
@@ -39,10 +38,12 @@ export default function SigninForm() {
     onSuccess: (response) => {
       console.log('login succeed!')
       const accessToken = response?.data?.accessToken
-      if (setToken && accessToken && typeof window !== undefined) {
-        setToken(accessToken)
-        localStorage.setItem('accessToken', accessToken)
-        console.log(token)
+      if (accessToken) {
+        setCookie('savedToken', accessToken, {
+          path: '/',
+          secure: '/',
+          sameSite: 'none',
+        })
       }
       router.push('/mydashboard')
     },
