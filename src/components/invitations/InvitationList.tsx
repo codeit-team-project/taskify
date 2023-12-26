@@ -14,6 +14,7 @@ import { InvitationsType } from '@/types/invitedDashBoardListType'
 import InvitationItem from './InvitationItem'
 import InvitationModal from './InvitationModal'
 import Pagination from '@/components/pagination/Pagination'
+import AddBoxIcon from '@/components/ui/icons/AddBox'
 
 interface InvitationListProps {
   dashBoardId: number
@@ -67,7 +68,7 @@ export default function InvitationList({ dashBoardId = 119 }: InvitationListProp
             />
           </div>
           <button onClick={handleOpenModal} className={styles.action}>
-            <img src="assets/add_box.svg" />
+            <AddBoxIcon color="white" size={18} />
             초대하기
           </button>
           <span className={styles.item}>이메일</span>
