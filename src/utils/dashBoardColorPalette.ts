@@ -20,3 +20,5 @@ export const COLOR_PALETTE = [
     hexCode: '#E876EA',
   },
 ]
+
+export const DEFAULT_COLOR = COLOR_PALETTE[0].hexCode

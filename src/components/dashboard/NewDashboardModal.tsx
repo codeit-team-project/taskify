@@ -4,15 +4,16 @@
  * /mydashboard 페이지에서 새로운 대시보드 "+" 클릭시 대시보드 생성 모달 나타남
  * 모달에서 대시보드 이름과 색을 선택해야 '생성' 버튼이 활성화
  * '생성'버튼을 누르면 대시보드가 생성이 되고 해당 대시보드 상세/boardid로 이동
+ * color palette 이벤트 핸들러 (리팩토링)
  */
 
-import { ChangeEvent, useState } from 'react'
+import { ChangeEvent, MouseEvent, useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 
 import classNames from 'classnames'
 import styles from './NewDashboardModal.module.scss'
 import { createDashBoard } from '@/api/dashboards/createDashboards'
-import { COLOR_PALETTE } from '@/utils/dashBoardColorPalette'
+import { COLOR_PALETTE, DEFAULT_COLOR } from '@/utils/dashBoardColorPalette'
 
 import EllipseIcon from '@/components/ui/icons/Ellipse'
 
@@ -22,6 +23,7 @@ interface NewDashboardModalProps {
 
 export default function NewDashboardModal({ onClose }: NewDashboardModalProps) {
   const [title, setTitle] = useState('')
+  const [selectedColor, setSelectedColor] = useState(DEFAULT_COLOR)
 
   const { mutate } = useMutation({
     mutationKey: ['createDashboard'],
@@ -31,6 +33,16 @@ export default function NewDashboardModal({ onClose }: NewDashboardModalProps) {
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
+
+  const handleChangeColor = (color: string) => (e: MouseEvent<HTMLDivElement>) => {
+    console.log(color)
+    console.log(e.target)
+    console.log((e.target as HTMLSpanElement).id)
+
+    setSelectedColor(color)
+  }
+
+  console.log(selectedColor)
 
   const handleCreateDashboard = () => {
     console.log(title)
@@ -50,7 +62,16 @@ export default function NewDashboardModal({ onClose }: NewDashboardModalProps) {
       </div>
       <div className={styles.colors}>
         {COLOR_PALETTE.map((palette) => (
-          <EllipseIcon key={palette.color} size={30} color={palette.hexCode} />
+          <div
+            key={palette.color}
+            onClick={handleChangeColor(palette.hexCode)}
+            className={styles.color}
+          >
+            {selectedColor === palette.hexCode && (
+              <img src="/assets/checkIcon.svg" className={styles.check} />
+            )}
+            <EllipseIcon size={30} color={palette.hexCode} />
+          </div>
         ))}
       </div>
       <div className={styles.buttons}>
