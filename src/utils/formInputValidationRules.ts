@@ -35,3 +35,5 @@ export const nicknameValidationRules = {
   required: '닉네임은 필수 입력입니다.',
   ...noRequiredNicknameValidationRules,
 }
+
+export const imgFileValidationRules = {}
