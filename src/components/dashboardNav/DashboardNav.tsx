@@ -1,10 +1,8 @@
 /* DashboardNav 바 컴포넌트
 
-- 내 대시보드, 대시보드 페이지에 들어갈 DashboardNav 바 컴포넌트
-- boolean형 인자 isMyPage를 받고,
-    1. if true 라면 DashboardNavEditor 컴포넌트는 렌더링하지 않음.
-    2. if false 라면 대시보드 정보를 출력, DashboardNavEditor 컴포넌트를 렌더링.
- */
+- DashboardLayout 컴포넌트를 감싸는 컴포넌트
+- 대시보드 페이지 위에 보이는 DashboardNav 바 컴포넌트 
+*/
 
 import Image from 'next/image'
 import styles from './BoardNav.module.scss'
