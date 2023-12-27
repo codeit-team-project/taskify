@@ -51,6 +51,10 @@ export default function EditDashboard({ boardId }: EditDashboardProps) {
   }
 
   const handleUpdateDashboard = () => {
+    if (!title || !selectedColor) {
+      return
+    }
+
     if (data?.color === selectedColor && data?.title === title) {
       return
     }
