@@ -2,6 +2,8 @@
 
 TODO - onSubmit에서 error 받을 때 alert 창 띄우는 코드를 모달창 띄우는 코드로 바꿀 것. (아님 토스트 메세지를 쓰던가 커스텀 alert를 써도 이쁠듯?)
 TODO - isPending을 통해 로딩스피너 활용하는 코드 추가할 것. 
+로그인 버튼을 누르면 response 200을 받을 때 accessToken을 localStorage에 저장함
+이 때 저장된 토큰은 6000초가 지나면 자동으로 삭제됨
 */
 
 import { AxiosError } from 'axios'
@@ -13,11 +15,11 @@ import { useMutation } from '@tanstack/react-query'
 import { createLogin } from '@/api/auth/createLogin'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import TextInput from '@/components/signInput/TextInput'
-import useAuthContext from '@/hooks/useAuth'
 import { SignInDataType } from '@/types/auth'
 import { emailValidationRules, passwordValidationRules } from '@/utils/formInputValidationRules'
 
 import styles from './SignForm.module.scss'
+import { setCookie } from '@/utils/cookie'
 
 export default function SigninForm() {
   const {
@@ -27,7 +29,6 @@ export default function SigninForm() {
     getValues,
   } = useForm<SignInDataType>({ mode: 'all' })
   const router = useRouter()
-  const { token, setToken } = useAuthContext()
   const [isPending, setIsPending] = useState(false)
 
   const { mutate } = useMutation({
@@ -37,12 +38,9 @@ export default function SigninForm() {
       setIsPending(true)
     },
     onSuccess: (response) => {
-      console.log('login succeed!')
       const accessToken = response?.data?.accessToken
-      if (setToken && accessToken && typeof window !== undefined) {
-        setToken(accessToken)
-        localStorage.setItem('accessToken', accessToken)
-        console.log(token)
+      if (accessToken) {
+        setCookie('accessToken', accessToken)
       }
       router.push('/mydashboard')
     },
