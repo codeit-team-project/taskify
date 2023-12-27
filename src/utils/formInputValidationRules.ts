@@ -20,8 +20,7 @@ export const passwordValidationRules = {
   },
 }
 
-export const nicknameValidationRules = {
-  required: '닉네임은 필수 입력입니다.',
+export const noRequiredNicknameValidationRules = {
   maxLength: {
     value: 10,
     message: '열 자 이하로 작성해 주세요.',
@@ -30,4 +29,9 @@ export const nicknameValidationRules = {
     value: nicknameReg,
     message: '닉네임에는 공백이나 특수문자가 들어갈 수 없어요.',
   },
+}
+
+export const nicknameValidationRules = {
+  required: '닉네임은 필수 입력입니다.',
+  ...noRequiredNicknameValidationRules,
 }
