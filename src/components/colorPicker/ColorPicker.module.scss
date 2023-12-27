@@ -1,3 +1,5 @@
+@import '@/styles/mixin.scss';
+
 .colors {
   display: flex;
   gap: 1rem;
@@ -9,6 +11,12 @@
   border-radius: 50%;
   background-color: #7ac555; // default
   cursor: pointer;
+}
+
+.invisible {
+  @include mobile {
+    display: none;
+  }
 }
 
 .color-green {

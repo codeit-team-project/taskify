@@ -4,6 +4,7 @@
  * 컬러를 선택할때매다 컬러가 변경되고, 전달 받은 color와 일치하면 체크표시가 보인다.
  */
 
+import classNames from 'classnames'
 import styles from './ColorPicker.module.scss'
 import { COLOR_PALETTE } from '@/components/colorPicker/dashBoardColorPalette'
 
@@ -22,7 +23,9 @@ export default function ColorPicker({ selectedColor, handleChangeColor }: ColorP
       {COLOR_PALETTE.map((palette) => (
         <div
           key={palette.color}
-          className={styles[`color-${palette.color}`]}
+          className={classNames(styles[`color-${palette.color}`], {
+            [styles['invisible']]: selectedColor !== palette.hexCode,
+          })}
           onClick={handleClickColor(palette.hexCode)}
         >
           {selectedColor === palette.hexCode && (
