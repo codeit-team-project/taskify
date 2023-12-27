@@ -4,9 +4,9 @@
 - 유저의 프로필을 받아 프로필 이미지와 유저 닉네임을 렌더링하는 컴포넌트
 */
 
-import { FocusEventHandler, MouseEventHandler, useCallback, useState, useEffect } from 'react'
+import { FocusEventHandler, MouseEventHandler } from 'react'
 import Image from 'next/image'
-import { useMutation } from '@tanstack/react-query'
+import { useQuery } from '@tanstack/react-query'
 
 import { getUser } from '@/api/users/getUser'
 import { UserType } from '@/types/users'
@@ -21,21 +21,10 @@ export default function NavProfile({
   onOpen: handleOpenDropdown,
   onClose: handleCloseDropdown,
 }: NavProfileProps) {
-  const [userInfo, setUserInfo] = useState<UserType>()
-
-  const { mutate } = useMutation({
-    mutationKey: ['get-user-key'],
-    mutationFn: useCallback(() => getUser(), []),
-    onSuccess: (response) => {
-      setUserInfo(() => {
-        return { ...response }
-      })
-    },
+  const { data: userInfo } = useQuery<UserType>({
+    queryKey: ['get-user-key'],
+    queryFn: () => getUser(),
   })
-
-  useEffect(() => {
-    mutate()
-  }, [mutate])
 
   return (
     <button
