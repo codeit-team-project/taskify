@@ -1,0 +1,124 @@
+@import '@/styles/mixin.scss';
+
+.container {
+  padding: 2.8rem;
+  width: 62rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+  border-radius: 0.8rem;
+  background: var(--color-white);
+}
+
+.info {
+  display: flex;
+  justify-content: space-between;
+}
+
+.title {
+  padding: 0.4rem 0;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-black_33);
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.description {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--color-black_33);
+}
+
+.input {
+  padding: 1.5rem 1.6rem 1.4rem 1.6rem;
+  font-size: 1.6rem;
+  color: var(--color-black_33);
+  font-weight: 400;
+  border-radius: 0.6rem;
+  border: 1px solid var(--color-gray30);
+  background: var(--color-white);
+  outline: none;
+
+  &:focus {
+    border: 1px solid var(--color-primary);
+  }
+}
+
+.colors {
+  display: flex;
+  gap: 1rem;
+}
+
+.color {
+  cursor: pointer;
+}
+
+.check {
+  position: absolute;
+  padding: 0.3rem;
+  width: 3rem;
+  height: 3rem;
+}
+
+.button {
+  display: flex;
+  gap: 1.2rem;
+  justify-content: flex-end;
+}
+
+@mixin button {
+  padding: 0.7em 2.9rem;
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 0.4rem;
+  background: var(--color-white);
+  outline: none;
+
+  @include mobile {
+    padding: 0.7rem 2.5rem;
+    font-size: 1.2rem;
+  }
+}
+
+.primary-button {
+  @include button;
+  color: var(--color-white);
+  background: var(--color-primary);
+}
+
+.inActive {
+  opacity: 0.7;
+  cursor: default;
+}
+
+@include tablet {
+  .container {
+    max-width: 54.4rem;
+  }
+}
+
+@include mobile {
+  .container {
+    padding: 2rem;
+    width: 28.4rem;
+    gap: 1.6rem;
+  }
+
+  .title {
+    padding-top: 0.8rem;
+  }
+
+  .description {
+    font-size: 1.6rem;
+  }
+
+  .input {
+    padding: 1.3rem 1.6rem 1.2rem 1.6rem;
+    font-size: 1.4rem;
+  }
+}
