@@ -72,7 +72,11 @@ export default function EditDashboard({ boardId }: EditDashboardProps) {
     <section className={styles.container}>
       <div className={styles.info}>
         <span className={styles.title}>{data?.title}</span>
-        <ColorPicker handleChangeColor={handleChangeColor} selectedColor={selectedColor} />
+        <ColorPicker
+          handleChangeColor={handleChangeColor}
+          selectedColor={selectedColor}
+          isVisibleAllColors={false}
+        />
       </div>
       <div className={styles.contents}>
         <p className={styles.description}>대시보드 이름</p>
