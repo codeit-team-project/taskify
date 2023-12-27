@@ -41,7 +41,6 @@ export function UserContextProvider({ children }: PropsWithChildren) {
     if (typeof window !== 'undefined') {
       removeCookie('user')
       setUser(null)
-      console.log(getCookie('user'))
     }
   }
 
