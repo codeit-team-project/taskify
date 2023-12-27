@@ -1,0 +1,44 @@
+.colors {
+  display: flex;
+  gap: 1rem;
+}
+
+@mixin color {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: #7ac555; // default
+  cursor: pointer;
+}
+
+.color-green {
+  @include color;
+  background-color: #7ac555;
+}
+
+.color-purple {
+  @include color;
+  background-color: #760dde;
+}
+
+.color-orange {
+  @include color;
+  background-color: #ffa500;
+}
+
+.color-blue {
+  @include color;
+  background-color: #76a5ea;
+}
+
+.color-pink {
+  @include color;
+  background-color: #e876ea;
+}
+
+.check {
+  position: absolute;
+  padding: 0.3rem;
+  width: 3rem;
+  height: 3rem;
+}

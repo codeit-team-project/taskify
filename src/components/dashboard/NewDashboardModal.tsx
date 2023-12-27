@@ -11,7 +11,7 @@ import { useMutation } from '@tanstack/react-query'
 import classNames from 'classnames'
 import styles from './NewDashboardModal.module.scss'
 import { createDashBoard } from '@/api/dashboards/createDashboards'
-import { COLOR_PALETTE, DEFAULT_COLOR } from '@/utils/dashBoardColorPalette'
+import { COLOR_PALETTE, DEFAULT_COLOR } from '@/components/colorPicker/dashBoardColorPalette'
 
 import EllipseIcon from '@/components/ui/icons/Ellipse'
 

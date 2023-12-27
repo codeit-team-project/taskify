@@ -11,41 +11,30 @@
 import { ChangeEvent, useState } from 'react'
 import classNames from 'classnames'
 
-import { COLOR_PALETTE, DEFAULT_COLOR } from '@/utils/dashBoardColorPalette'
 import styles from './EditDashboard.module.scss'
+import ColorPicker from '@/components/colorPicker/ColorPicker'
 
-import EllipseIcon from '@/components/ui/icons/Ellipse'
+import { DEFAULT_COLOR } from '@/components/colorPicker/dashBoardColorPalette'
 
 export default function EditDashboard() {
   const [title, setTitle] = useState('')
-  const [selectedColor, setSelectedColor] = useState(DEFAULT_COLOR)
+  const [selectedColor, setSelectedColor] = useState(DEFAULT_COLOR) // 기존 설정값 넣어주기
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setTitle(e.target.value)
   }
 
-  const handleChangeColor = (color: string) => () => {
+  const handleChangeColor = (color: string) => {
     setSelectedColor(color)
   }
+
+  console.log(selectedColor)
 
   return (
     <section className={styles.container}>
       <div className={styles.info}>
         <span className={styles.title}>대시보드 이름</span>
-        <div className={styles.colors}>
-          {COLOR_PALETTE.map((palette) => (
-            <div
-              key={palette.color}
-              onClick={handleChangeColor(palette.hexCode)}
-              className={styles.color}
-            >
-              {selectedColor === palette.hexCode && (
-                <img src="/assets/checkIcon.svg" className={styles.check} />
-              )}
-              <EllipseIcon size={30} color={palette.hexCode} />
-            </div>
-          ))}
-        </div>
+        <ColorPicker handleChangeColor={handleChangeColor} selectedColor={selectedColor} />
       </div>
       <div className={styles.contents}>
         <p className={styles.description}>대시보드 이름</p>
