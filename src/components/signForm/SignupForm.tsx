@@ -43,7 +43,6 @@ export default function SignupForm() {
       setIsPending(true)
     },
     onSuccess: () => {
-      console.log('signup succeed!')
       alert('가입이 완료되었습니다!')
       router.push('/signin')
     },
