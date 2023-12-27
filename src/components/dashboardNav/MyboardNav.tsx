@@ -7,7 +7,6 @@
 import Link from 'next/link'
 import styles from './BoardNav.module.scss'
 import Dropdown from './dropdown/Dropdown'
-import { mockupUser } from './mockup'
 import useDropdown from '@/hooks/useDropdown'
 import NavProfile from './navProfile/NavProfile'
 
@@ -26,11 +25,7 @@ export default function MyboardNav({ pageTitle }: MyboardNavProps) {
         </Link>
       </div>
       <div className={styles['nav-info-section']}>
-        <NavProfile
-          onOpen={handleOpenDropdown}
-          onClose={handleCloseDropdown}
-          userInfo={mockupUser}
-        />
+        <NavProfile onOpen={handleOpenDropdown} onClose={handleCloseDropdown} />
       </div>
       {isVisible && <Dropdown />}
     </nav>

@@ -8,7 +8,7 @@ import Image from 'next/image'
 import styles from './BoardNav.module.scss'
 import DashboardNavEditor from './dashboardNavEditor/DashboardNavEditor'
 import Dropdown from './dropdown/Dropdown'
-import { mockupUser, mockDashboardInfo, mockDashboardMemberManyList } from './mockup'
+import { mockDashboardInfo, mockDashboardMemberManyList } from './mockup'
 import useDropdown from '@/hooks/useDropdown'
 import NavProfile from './navProfile/NavProfile'
 
@@ -33,11 +33,7 @@ export default function DashboardNav() {
           boardId={mockDashboardInfo.id}
           members={mockDashboardMemberManyList}
         />
-        <NavProfile
-          onOpen={handleOpenDropdown}
-          onClose={handleCloseDropdown}
-          userInfo={mockupUser}
-        />
+        <NavProfile onOpen={handleOpenDropdown} onClose={handleCloseDropdown} />
       </div>
       {isVisible && <Dropdown />}
     </nav>
