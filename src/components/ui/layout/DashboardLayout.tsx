@@ -6,15 +6,21 @@ TODO - 시간 난다면 theme 도 개발해보기.
   나타내기 때문에 MyPageLayout과 분리해둠.
 */
 
-import { PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
 import DashboardNav from '@/components/dashboardNav/DashboardNav'
 import Sidebar from '@/components/sidebar/Sidebar'
+import { DashBoardType } from '@/types/dashBoardType'
 import styles from './Layout.module.scss'
 
-export default function DashboardLayout({ children }: PropsWithChildren) {
+interface DashboradLayoutProps {
+  children: ReactNode
+  dashboardInfo?: DashBoardType
+}
+
+export default function DashboardLayout({ children, dashboardInfo }: DashboradLayoutProps) {
   return (
     <>
-      <DashboardNav />
+      <DashboardNav dashboardInfo={dashboardInfo} />
       <Sidebar />
       <article className={styles['article-content']}>{children}</article>
     </>
