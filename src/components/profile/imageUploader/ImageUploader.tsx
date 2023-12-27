@@ -22,7 +22,7 @@ const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
           // BUG - 왜 안되는건지 도저히 모르겠습니다.. help ㅠㅠ
           console.log(tempUrl)
           setPreview(tempUrl)
-          setImgUrl(tempUrl)
+          setImgUrl(tempUrl.slice(5))
         }
         return () => {
           if (typeof window !== 'undefined') {
@@ -37,7 +37,7 @@ const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
       <div className={styles['input-container']}>
         <label htmlFor={name}>
           <div>
-            <img src={preview} alt="thumbnail img" />
+            <img src={`${preview}`} alt="thumbnail img" />
           </div>
         </label>
         <input id={name} ref={ref} name={name} type="file" onChange={onChange} accept="image/*" />
