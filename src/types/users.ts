@@ -10,5 +10,5 @@ export interface UserType {
 }
 
 export interface UserImageUploadValueType {
-  profileImageUrl: string
+  profileImageUrl: FormData
 }

@@ -33,7 +33,7 @@ export interface SignInputProps {
 // profile input 컴포넌트 props
 export interface ProfileInputProps {
   onChange: ChangeHandler
-  setImgUrl: (s: string) => void
+  setImgFormData: (s: FormData) => void
   watch: UseFormWatch<any>
   savedImg: string | null | undefined
   name?: string
