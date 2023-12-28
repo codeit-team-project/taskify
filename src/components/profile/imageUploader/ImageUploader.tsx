@@ -6,6 +6,7 @@
 import { forwardRef, useEffect, useState } from 'react'
 import { ProfileInputProps } from '@/types/formTypes'
 import styles from './ImageUploader.module.scss'
+import Image from 'next/image'
 
 const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
   ({ onChange, name = '', savedImg, watch }, ref) => {
@@ -33,7 +34,7 @@ const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
     return (
       <div className={styles['input-container']}>
         <label htmlFor={name}>
-          <div>{preview && <img src={preview} alt="thumbnail img" />}</div>
+          <div>{preview && <Image src={preview} alt="thumbnail img" layout="fill" />}</div>
         </label>
         <input id={name} ref={ref} name={name} type="file" onChange={onChange} accept="image/*" />
       </div>
