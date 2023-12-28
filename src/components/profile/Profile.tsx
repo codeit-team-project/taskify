@@ -41,6 +41,7 @@ export default function Profile() {
   const { mutate } = useMutation({
     mutationKey: ['edit-profile-key'],
     mutationFn: () => {
+      // 이미지 input 값이 있을 경우
       if (getValues('image')?.length > 0) {
         console.log(getValues('image')[0])
         console.log(getValues('image'))
@@ -52,6 +53,7 @@ export default function Profile() {
       }
     },
     onSuccess: (response) => {
+      // 닉네임 input이 있을 경우와 없을 경우 둘 다 처리함
       const newData = {
         nickname: getValues('nickname') ? getValues('nickname') : (userProfile?.nickname as string),
         profileImageUrl: response.data.profileImageUrl as string,
@@ -60,6 +62,7 @@ export default function Profile() {
       return response
     },
     onError: (e) => {
+      // 이미지 input이 없을 경우에도 닉네임 input 있을 때 없을 때 둘 다 처리 가능
       const newData = {
         nickname: getValues('nickname') ? getValues('nickname') : (userProfile?.nickname as string),
         profileImageUrl: userProfile?.profileImageUrl as string,
@@ -68,12 +71,14 @@ export default function Profile() {
       return e
     },
     onSettled: async () => {
+      // 변경된 데이터 refetch
       alert('저장되었습니다.')
       setIsEditing(false)
       await queryClient.invalidateQueries()
     },
   })
 
+  // 수정 취소 버튼
   const handleCancelEdit: MouseEventHandler = (e) => {
     e.preventDefault()
     setIsEditing(false)
