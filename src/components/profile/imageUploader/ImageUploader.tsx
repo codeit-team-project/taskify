@@ -12,7 +12,6 @@ const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
     const [preview, setPreview] = useState(savedImg === '' || null || undefined ? null : savedImg)
     const previewWatcher = watch('image')
     const formData = new FormData()
-    console.log(hasError)
 
     // profile img 미리보기 코드
     useEffect(() => {

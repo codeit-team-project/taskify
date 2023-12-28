@@ -10,7 +10,7 @@ import { useForm } from 'react-hook-form'
 import { ProfileInputsType } from '@/types/formTypes'
 import { noRequiredNicknameValidationRules } from '@/utils/formInputValidationRules'
 import TextInput from '../signInput/TextInput'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '@/api/users/getUser'
 import { UserType } from '@/types/users'
 import Image from 'next/image'
@@ -27,6 +27,7 @@ export default function Profile() {
     getValues,
     watch,
   } = useForm<ProfileInputsType>({ mode: 'all' })
+
   const { data: userProfile } = useQuery<UserType>({
     queryKey: ['profile-key'],
     queryFn: () => getUser(),
@@ -35,23 +36,37 @@ export default function Profile() {
   const [isEditing, setIsEditing] = useState(false)
   // 이미지를 업로드할 때 쓸 imgFormData state
   const [imgFormData, setImgFormData] = useState<FormData>()
+  const queryClient = useQueryClient()
 
   const { mutate } = useMutation({
-    mutationKey: ['create-img-key', 'edit-profile-key'],
-    mutationFn: (data: FormData) => {
-      console.log(data.get('img'))
-      return createUserImageUpload({ profileImageUrl: data })
+    mutationKey: ['edit-profile-key'],
+    mutationFn: (data: FormData | undefined) => {
+      if (data && getValues('image')?.length > 0) {
+        return createUserImageUpload({ profileImageUrl: data })
+      } else {
+        throw new Error('이미지 값이 없습니다.')
+      }
     },
     onSuccess: (response) => {
       const newData = {
-        nickname: getValues('nickname'),
-        profileImageUrl: response.data.profileImageUrl,
+        nickname: getValues('nickname') ? getValues('nickname') : (userProfile?.nickname as string),
+        profileImageUrl: response.data.profileImageUrl as string,
       }
       editUser({ data: { ...newData } })
       return response
     },
     onError: (e) => {
+      const newData = {
+        nickname: getValues('nickname') ? getValues('nickname') : (userProfile?.nickname as string),
+        profileImageUrl: userProfile?.profileImageUrl as string,
+      }
+      editUser({ data: { ...newData } })
       return e
+    },
+    onSettled: async () => {
+      alert('저장되었습니다.')
+      setIsEditing(false)
+      await queryClient.invalidateQueries()
     },
   })
 
@@ -69,11 +84,7 @@ export default function Profile() {
       setIsEditing(true)
     }
     if (isValid && isEditing) {
-      if (!imgFormData) return
-      console.log(imgFormData.get('img'))
       mutate(imgFormData)
-      alert('저장되었습니다.')
-      setIsEditing(false)
     } else {
       return
     }
