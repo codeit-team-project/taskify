@@ -4,11 +4,16 @@ export interface InvitationsValue {
   email: string
 }
 
-export interface InvitationsAboutMeType {
-  cursorId: number
-  invitations: InvitationType[]
-}
-
 export interface InvitedAcceptedType {
   inviteAccepted: boolean
+}
+
+export interface ReceivedInvitationsType {
+  cursorId: number
+  invitations: InvitationType[] | []
+}
+
+export type PutInvitationType = {
+  id: number
+  data: InvitedAcceptedType
 }
