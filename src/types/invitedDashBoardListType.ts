@@ -9,6 +9,7 @@ export interface InvitationType {
   invitee: {
     nickname: string
     id: number
+    email: string
   }
   inviteAccepted: boolean
   createdAt: string
