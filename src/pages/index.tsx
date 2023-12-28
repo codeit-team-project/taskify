@@ -1,32 +1,38 @@
+import Image from 'next/image'
+import Link from 'next/link'
 import HomeLayout from '@/components/ui/layout/HomeLayout'
 import styles from './Homepage.module.scss'
 
 export default function Home() {
   return (
     <HomeLayout>
-      <div>
+      <div className={styles.body}>
         <header>
-          <div></div>
+          <div className={styles.img}>
+            <Image src="/assets/homeImgs/desktop.png" alt="header img" layout="fill" />
+          </div>
           <h1>
             새로운 일정 관리 <span>Taskify</span>
           </h1>
-          <div>센스있게 일정을 관리해보세요!</div>
-          <button>로그인하기</button>
+          <div className={styles.description}>센스있게 일정을 관리해보세요!</div>
+          <button>
+            <Link href="/signin">로그인하기</Link>
+          </button>
         </header>
 
-        <section>
+        <section className={styles['main-section']}>
           <div>
             <h3>Point 1</h3>
-            <div>
+            <div className={styles.description}>
               일의 우선순위를 <br />
               관리하세요
             </div>
           </div>
-          <div></div>
+          <div className={styles['img-container1']}></div>
         </section>
 
-        <section>
-          <div></div>
+        <section className={styles['main-section']}>
+          <div className={styles['img-container2']}></div>
           <div>
             <h3>Point 2</h3>
             <div>
