@@ -20,9 +20,13 @@ export default function InvitationModal({ dashBoardId, onClose }: InvitationModa
   const queryClient = useQueryClient()
 
   const [inputValue, setInputValue] = useState('')
-  const [errorMessage, setErrorMessage] = useState('')
+  // const [errorMessage, setErrorMessage] = useState('')
 
-  const { mutate: createInvitation, isPending } = useMutation({
+  const {
+    mutate: createInvitation,
+    isPending,
+    error,
+  } = useMutation({
     mutationKey: ['createInvitation'],
     mutationFn: createDashBoardInvitations,
     // onSuccess 로직을 분리하는 방법
@@ -30,22 +34,30 @@ export default function InvitationModal({ dashBoardId, onClose }: InvitationModa
       queryClient.invalidateQueries({
         queryKey: ['dashBoardsInvitations', dashBoardId],
       })
-      setErrorMessage('')
+      // setErrorMessage('')
       onClose()
     },
-    onError: (error) => {
-      if (error instanceof AxiosError) {
-        setErrorMessage(error.response?.data.message)
-      }
-    },
+    // onError: (error) => {
+    //   if (error instanceof AxiosError) {
+    //     setErrorMessage(error.response?.data.message)
+    //   }
+    // },
   })
+  console.log(error)
+
+  const errorMessage = (function () {
+    if (error instanceof AxiosError) {
+      return error.response?.data.message ?? ''
+    }
+    return ''
+  })()
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
 
-    if (inputValue) {
-      setErrorMessage('')
-    }
+    // if (inputValue) {
+    //   setErrorMessage('')
+    // }
   }
 
   const handleCreateInvitation = async () => {
