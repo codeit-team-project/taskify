@@ -1,133 +1,96 @@
 @import '@/styles/mixin.scss';
 
-.container {
-  width: 62rem;
-  height: 35.5rem;
-  border-radius: 8px;
-  padding: 3rem 2.8rem;
-  background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: flex-start;
-  @include tablet {
-    min-width: 55rem;
+.saved-img {
+  img {
     width: 100%;
   }
+  position: relative;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 6px;
+  background-color: var(--color-gray20);
   @include mobile {
-    min-width: 29rem;
-    height: 42.2rem;
-    padding: 2.8rem 2rem;
-  }
-
-  .saved-img {
-    img {
-      width: 100%;
-    }
-    position: relative;
-    width: 18rem;
-    height: 18rem;
-    border-radius: 6px;
-    background-color: var(--color-gray20);
-    @include mobile {
-      width: 10rem;
-      height: 10rem;
-    }
-  }
-
-  h1 {
-    color: var(--color-black_33);
-    font-size: 2.4rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    @include mobile {
-      font-size: 2rem;
-    }
-  }
-
-  form {
-    width: 100%;
-    h3 {
-      color: var(--color-black_33);
-      font-size: 1.6rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      padding-bottom: 0.7rem;
-    }
-    & .email-input {
-      font-size: 1.3rem;
-      display: flex;
-      width: 100%;
-      border-radius: 8px;
-      border: 1px solid var(--color-gray30);
-      color: var(--color-gray50);
-      background: white;
-      font-weight: 500;
-      padding: 1.3rem 4.1rem 1.6rem 1.6rem;
-    }
-
-    .inputs {
-      display: grid;
-      grid-template-columns: 18rem auto;
-      gap: 2rem;
-      @include mobile {
-        grid-template-columns: 1fr;
-        grid-template-rows: 10rem auto;
-      }
-    }
-    .input-wrapper {
-      display: flex;
-      flex-direction: column;
-      gap: 2rem;
-    }
-  }
-
-  .button-wrapper {
-    width: 100%;
-    display: flex;
-    padding-top: 2rem;
-    gap: 1rem;
-    justify-content: flex-end;
-    button {
-      font-size: 1.4rem;
-      width: 8.4rem;
-      height: 3rem;
-      border-radius: 4px;
-      color: white;
-      background: var(--color-violet);
-    }
-    .cancel-button {
-      font-size: 1.4rem;
-      width: 8.4rem;
-      height: 3rem;
-      border-radius: 4px;
-      color: white;
-      background: var(--color-red);
-    }
-    [data-isediting='false'].cancel-button {
-      display: none;
-    }
-  }
-  .error-message {
-    height: 0;
-    padding-top: 0.6rem;
-    color: var(--color-red);
-    font-size: 1.4rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    @include tablet {
-      font-size: 1.2rem;
-    }
-    @include mobile {
-      font-size: 1rem;
-    }
+    width: 10rem;
+    height: 10rem;
   }
 }
 
-[data-isediting='true'].container {
-  outline: 3px solid var(--color-violet);
-  box-shadow: var(--box-shadow-md);
+.form {
+  width: 100%;
+  h3 {
+    color: var(--color-black_33);
+    font-size: 1.6rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    padding-bottom: 0.7rem;
+  }
+  & .email-input {
+    font-size: 1.3rem;
+    display: flex;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--color-gray30);
+    color: var(--color-gray50);
+    background: white;
+    font-weight: 500;
+    padding: 1.3rem 4.1rem 1.6rem 1.6rem;
+  }
+
+  .inputs {
+    display: grid;
+    grid-template-columns: 18rem auto;
+    gap: 2rem;
+    @include mobile {
+      grid-template-columns: 1fr;
+      grid-template-rows: 10rem auto;
+    }
+  }
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  padding-top: 2rem;
+  gap: 1rem;
+  justify-content: flex-end;
+  button {
+    font-size: 1.4rem;
+    width: 8.4rem;
+    height: 3rem;
+    border-radius: 4px;
+    color: white;
+    background: var(--color-violet);
+  }
+  .cancel-button {
+    font-size: 1.4rem;
+    width: 8.4rem;
+    height: 3rem;
+    border-radius: 4px;
+    color: white;
+    background: var(--color-red);
+  }
+  [data-isediting='false'].cancel-button {
+    display: none;
+  }
+}
+.error-message {
+  height: 0;
+  padding-top: 0.6rem;
+  color: var(--color-red);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  @include tablet {
+    font-size: 1.2rem;
+  }
+  @include mobile {
+    font-size: 1rem;
+  }
 }

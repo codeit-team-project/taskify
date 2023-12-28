@@ -12,6 +12,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '@/api/users/getUser'
 import { createUserImageUpload } from '@/api/users/createUserImageUpload'
 import { editUser } from '@/api/users/editUser'
+import EditFormLayout from '@/components/editForm/EditFormLayout'
 import ReadonlyInput from '@/components/signInput/ReadonlyInput'
 import TextInput from '@/components/signInput/TextInput'
 import { ProfileInputsType } from '@/types/formTypes'
@@ -101,8 +102,7 @@ export default function Profile() {
   }
 
   return (
-    <div className={styles.container} data-isediting={isEditing}>
-      <h1 className={styles.title}>프로필</h1>
+    <EditFormLayout isEditing={isEditing} title="프로필">
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className={styles.inputs}>
           {isEditing ? (
@@ -162,6 +162,6 @@ export default function Profile() {
           </button>
         </div>
       </form>
-    </div>
+    </EditFormLayout>
   )
 }
