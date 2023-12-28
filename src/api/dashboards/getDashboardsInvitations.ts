@@ -6,10 +6,10 @@ export const getDashBoardInvitations = async (
   currentPage: number = 1,
   size: number = 5,
 ) => {
-  const QUERY_STRING = `?page=${currentPage}&size=${size}`
+  const query = `?page=${currentPage}&size=${size}`
 
   const response = await axiosInstance.get<InvitationsType>(
-    `/dashboards/${dashBoardId}/invitations${QUERY_STRING}`,
+    `/dashboards/${dashBoardId}/invitations${query}`,
   )
   return response.data
 }
