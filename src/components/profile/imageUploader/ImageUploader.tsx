@@ -8,7 +8,7 @@ import { ProfileInputProps } from '@/types/formTypes'
 import styles from './ImageUploader.module.scss'
 
 const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
-  ({ onChange, name = '', hasError, savedImg, watch, setImgFormData }, ref) => {
+  ({ onChange, name = '', hasError, savedImg, watch }, ref) => {
     const [preview, setPreview] = useState(savedImg === '' || null || undefined ? null : savedImg)
     const previewWatcher = watch('image')
     const formData = new FormData()
@@ -20,7 +20,6 @@ const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
         file && formData.append('img', file)
         const tempUrl = URL.createObjectURL(file)
         setPreview(tempUrl)
-        setImgFormData(formData)
       }
       return () => {
         if (typeof window !== 'undefined') {

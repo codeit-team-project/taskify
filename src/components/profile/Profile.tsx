@@ -18,6 +18,7 @@ import { imgFileValidationRules } from '@/utils/formInputValidationRules'
 import { MouseEventHandler, useState } from 'react'
 import { editUser } from '@/api/users/editUser'
 import { createUserImageUpload } from '@/api/users/createUserImageUpload'
+import ReadonlyInput from '../signInput/ReadonlyInput'
 
 export default function Profile() {
   const {
@@ -35,14 +36,16 @@ export default function Profile() {
   // 현재 editing 상태인지 아닌지 체크하는 state
   const [isEditing, setIsEditing] = useState(false)
   // 이미지를 업로드할 때 쓸 imgFormData state
-  const [imgFormData, setImgFormData] = useState<FormData>()
   const queryClient = useQueryClient()
 
   const { mutate } = useMutation({
     mutationKey: ['edit-profile-key'],
-    mutationFn: (data: FormData | undefined) => {
-      if (data && getValues('image')?.length > 0) {
-        return createUserImageUpload({ profileImageUrl: data })
+    mutationFn: () => {
+      if (getValues('image')?.length > 0) {
+        console.log(getValues('image')[0])
+        const formData = new FormData()
+        formData.append('image', getValues('image')[0])
+        return createUserImageUpload({ profileImageUrl: formData })
       } else {
         throw new Error('이미지 값이 없습니다.')
       }
@@ -84,7 +87,7 @@ export default function Profile() {
       setIsEditing(true)
     }
     if (isValid && isEditing) {
-      mutate(imgFormData)
+      mutate()
     } else {
       return
     }
@@ -101,7 +104,6 @@ export default function Profile() {
               savedImg={userProfile?.profileImageUrl}
               hasError={errors}
               watch={watch}
-              setImgFormData={setImgFormData}
             />
           ) : (
             <div className={styles['saved-img']}>
@@ -135,8 +137,7 @@ export default function Profile() {
                 </>
               ) : (
                 <>
-                  <h3>닉네임</h3>
-                  <div className={styles['email-input']}>{userProfile?.nickname ?? ''}</div>
+                  <ReadonlyInput labelName="닉네임" inputText={userProfile?.nickname ?? ''} />
                 </>
               )}
             </div>
