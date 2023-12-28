@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, ChangeEvent } from 'react'
 import styles from './InvitedDashBoard.module.scss'
 import useDebounce from '@/hooks/useDebounce'
 import useDidMountEffect from '@/hooks/useDidMountEffect'
@@ -55,9 +55,10 @@ function NoInvitations() {
     <div className={styles['no-invitation-container']}>
       <img
         className={styles['no-invitation-icon']}
-        src="assets/icon-no-invitation.png"
+        src="/assets/icon-no-invitation.png"
         width="100px"
         height="100px"
+        alt="초대받은 대시보드가 없을 때 아이콘 이미지"
       />
       <p className={styles['no-invitation-text']}>아직 초대받은 대시보드가 없어요</p>
     </div>
@@ -117,7 +118,7 @@ export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
   const [searchTitle, setSearchTitle] = useState('')
   const debouncedSearchTitle = useDebounce(searchTitle, 1000)
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTitle(event.target.value)
   }
 
@@ -158,9 +159,10 @@ export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
                 <form>
                   <img
                     className={styles['search-icon']}
-                    src="assets/icon-search.png"
+                    src="/assets/icon-search.png"
                     width="24px"
                     height="24px"
+                    alt="검색 아이콘 이미지"
                   />
                   <input
                     id="title"
