@@ -88,6 +88,7 @@
     width: 100%;
     display: flex;
     padding-top: 2rem;
+    gap: 1rem;
     justify-content: flex-end;
     button {
       font-size: 1.4rem;
@@ -96,6 +97,17 @@
       border-radius: 4px;
       color: white;
       background: var(--color-violet);
+    }
+    .cancel-button {
+      font-size: 1.4rem;
+      width: 8.4rem;
+      height: 3rem;
+      border-radius: 4px;
+      color: white;
+      background: var(--color-red);
+    }
+    [data-isediting='false'].cancel-button {
+      display: none;
     }
   }
   .error-message {

@@ -15,7 +15,7 @@ import { getUser } from '@/api/users/getUser'
 import { UserType } from '@/types/users'
 import Image from 'next/image'
 import { imgFileValidationRules } from '@/utils/formInputValidationRules'
-import { useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 import { editUser } from '@/api/users/editUser'
 import { createUserImageUpload } from '@/api/users/createUserImageUpload'
 
@@ -54,6 +54,12 @@ export default function Profile() {
       return e
     },
   })
+
+  const handleCancelEdit = (e: ChangeEvent) => {
+    e.preventDefault()
+    setIsEditing(false)
+    return
+  }
 
   const onSubmit = () => {
     if (!isValid) {
@@ -126,6 +132,13 @@ export default function Profile() {
           </div>
         </div>
         <div className={styles['button-wrapper']}>
+          <button
+            className={styles['cancel-button']}
+            data-isediting={isEditing}
+            onClick={handleCancelEdit}
+          >
+            취소
+          </button>
           <button disabled={!isValid} className={styles.button}>
             {isEditing ? '저장' : '변경'}
           </button>
