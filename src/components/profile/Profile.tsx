@@ -111,7 +111,7 @@ export default function Profile() {
           {isEditing ? (
             <ImageUploader
               {...register('image', imgFileValidationRules)}
-              savedImg={userProfile?.profileImageUrl}
+              savedImg={userProfile?.profileImageUrl as string | null}
               watch={watch}
             />
           ) : (

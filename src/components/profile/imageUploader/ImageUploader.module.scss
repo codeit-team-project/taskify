@@ -13,13 +13,17 @@
   img {
     width: 100%;
   }
-  position: relative;
   width: 18rem;
   height: 18rem;
   border-radius: 6px;
   background-color: var(--color-gray20);
+  position: relative;
   @include mobile {
     width: 10rem;
     height: 10rem;
+  }
+  .label-container {
+    position: relative;
+    display: block;
   }
 }
