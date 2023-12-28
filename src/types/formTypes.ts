@@ -27,6 +27,7 @@ export interface SignInputProps {
   onChange: ChangeHandler
   onBlur: ChangeHandler
   name?: string
+  disable?: boolean
   hasError: {} | FieldErrors<SignInInputsType | SignUpInputsType>
 }
 
