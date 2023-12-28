@@ -43,21 +43,22 @@ export default function Profile() {
     mutationFn: () => {
       // 이미지 input 값이 있을 경우
       if (getValues('image')?.length > 0) {
-        console.log(getValues('image')[0])
-        console.log(getValues('image'))
         const formData = new FormData()
         formData.append('image', getValues('image')[0])
-        return createUserImageUpload({ profileImageUrl: formData })
+        return createUserImageUpload(formData)
       } else {
         throw new Error('이미지 값이 없습니다.')
       }
     },
     onSuccess: (response) => {
       // 닉네임 input이 있을 경우와 없을 경우 둘 다 처리함
+      console.log(response)
       const newData = {
         nickname: getValues('nickname') ? getValues('nickname') : (userProfile?.nickname as string),
-        profileImageUrl: response.data.profileImageUrl as string,
+        profileImageUrl: response.profileImageUrl,
       }
+      console.log('success')
+      console.log(newData)
       editUser({ data: { ...newData } })
       return response
     },
