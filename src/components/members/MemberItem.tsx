@@ -28,7 +28,7 @@ export default function MemberItem({ dashBoardId, member }: MemberItemProps) {
     <>
       <div className={styles['name-wrapper']}>
         {/* 이미지 컴포넌트 구현예정 */}
-        <img src="circle.svg" />
+        <img src="/circle.svg" />
         <span className={styles.nickname}>{member.nickname}</span>
       </div>
       <button className={styles['member-button']} onClick={handleDeleteMember(member.id)}>
