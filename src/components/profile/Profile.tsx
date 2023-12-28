@@ -15,7 +15,7 @@ import { getUser } from '@/api/users/getUser'
 import { UserType } from '@/types/users'
 import Image from 'next/image'
 import { imgFileValidationRules } from '@/utils/formInputValidationRules'
-import { ChangeEvent, useState } from 'react'
+import { MouseEventHandler, useState } from 'react'
 import { editUser } from '@/api/users/editUser'
 import { createUserImageUpload } from '@/api/users/createUserImageUpload'
 
@@ -39,7 +39,7 @@ export default function Profile() {
   const { mutate } = useMutation({
     mutationKey: ['create-img-key', 'edit-profile-key'],
     mutationFn: (data: FormData) => {
-      console.log(data)
+      console.log(data.get('img'))
       return createUserImageUpload({ profileImageUrl: data })
     },
     onSuccess: (response) => {
@@ -55,7 +55,7 @@ export default function Profile() {
     },
   })
 
-  const handleCancelEdit = (e: ChangeEvent) => {
+  const handleCancelEdit: MouseEventHandler = (e) => {
     e.preventDefault()
     setIsEditing(false)
     return
