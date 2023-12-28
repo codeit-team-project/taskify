@@ -37,7 +37,7 @@ export interface ProfileInputProps {
   watch: UseFormWatch<any>
   savedImg: string | null | undefined
   name?: string
-  hasError: {} | FieldErrors<ProfileInputsType>
+  hasError?: {} | FieldErrors<ProfileInputsType>
 }
 
 // profile input request 타입

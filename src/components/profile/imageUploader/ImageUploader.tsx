@@ -8,7 +8,7 @@ import { ProfileInputProps } from '@/types/formTypes'
 import styles from './ImageUploader.module.scss'
 
 const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
-  ({ onChange, name = '', hasError, savedImg, watch }, ref) => {
+  ({ onChange, name = '', savedImg, watch }, ref) => {
     const [preview, setPreview] = useState(savedImg === '' || null || undefined ? null : savedImg)
     const previewWatcher = watch('image')
 

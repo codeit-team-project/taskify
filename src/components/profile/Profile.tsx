@@ -4,21 +4,23 @@
 - 닉네임 변경 기능
  */
 
+import { MouseEventHandler, useState } from 'react'
+import { useForm } from 'react-hook-form'
+import Image from 'next/image'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+
+import { getUser } from '@/api/users/getUser'
+import { createUserImageUpload } from '@/api/users/createUserImageUpload'
+import { editUser } from '@/api/users/editUser'
+import ReadonlyInput from '@/components/signInput/ReadonlyInput'
+import TextInput from '@/components/signInput/TextInput'
+import { ProfileInputsType } from '@/types/formTypes'
+import { UserType } from '@/types/users'
+import { imgFileValidationRules } from '@/utils/formInputValidationRules'
+import { noRequiredNicknameValidationRules } from '@/utils/formInputValidationRules'
+
 import ImageUploader from './imageUploader/ImageUploader'
 import styles from './Profile.module.scss'
-import { useForm } from 'react-hook-form'
-import { ProfileInputsType } from '@/types/formTypes'
-import { noRequiredNicknameValidationRules } from '@/utils/formInputValidationRules'
-import TextInput from '../signInput/TextInput'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { getUser } from '@/api/users/getUser'
-import { UserType } from '@/types/users'
-import Image from 'next/image'
-import { imgFileValidationRules } from '@/utils/formInputValidationRules'
-import { MouseEventHandler, useState } from 'react'
-import { editUser } from '@/api/users/editUser'
-import { createUserImageUpload } from '@/api/users/createUserImageUpload'
-import ReadonlyInput from '../signInput/ReadonlyInput'
 
 export default function Profile() {
   const {
@@ -109,7 +111,6 @@ export default function Profile() {
             <ImageUploader
               {...register('image', imgFileValidationRules)}
               savedImg={userProfile?.profileImageUrl}
-              hasError={errors}
               watch={watch}
             />
           ) : (
