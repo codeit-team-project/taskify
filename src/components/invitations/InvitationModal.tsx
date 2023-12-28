@@ -59,20 +59,6 @@ export default function InvitationModal({ dashBoardId, onClose }: InvitationModa
         email: inputValue,
       },
     })
-
-    /** await가 적용되지 않는 이유, res가 undefined인 이유, 에러 처리 */
-    // try {
-    //   const res = await createInvitation({
-    //     // 'await' has no effect on the type of this expression.ts(80007)
-    //     id: dashBoardId,
-    //     data: {
-    //       email: 'dev_code@taskify.com',
-    //     },
-    //   })
-    //   console.log(res) // undefined
-    // } catch (error) {
-    //   console.log(error)
-    // }
   }
 
   return (
