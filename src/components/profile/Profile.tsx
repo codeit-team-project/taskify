@@ -45,7 +45,7 @@ export default function Profile() {
     onSuccess: (response) => {
       const newData = {
         nickname: getValues('nickname'),
-        profileImageUrl: response.profileImageUrl,
+        profileImageUrl: response.data.profileImageUrl,
       }
       editUser({ data: { ...newData } })
       return response
