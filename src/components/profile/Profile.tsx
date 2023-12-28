@@ -70,7 +70,7 @@ export default function Profile() {
     }
     if (isValid && isEditing) {
       if (!imgFormData) return
-      console.log(imgFormData.get('profileImageUrl'))
+      console.log(imgFormData.get('img'))
       mutate(imgFormData)
       alert('저장되었습니다.')
       setIsEditing(false)
