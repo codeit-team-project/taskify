@@ -32,3 +32,8 @@
     }
   }
 }
+[data-isediting='true'].container {
+  outline: 2px solid var(--color-violet);
+  box-shadow: var(--box-shadow-md);
+  background-color: var(--color-violet_8);
+}
