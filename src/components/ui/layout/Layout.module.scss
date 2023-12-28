@@ -2,12 +2,15 @@
 
 // NOTE - nav height는 항상 7rem, sidebar width는 항상 30rem, 16rem, 6.7rem이라 이렇게 코드를 짬
 .article-content {
-  padding: 7rem 0 0 30rem;
+  margin: 7rem 0 0 30rem;
+  padding: 2rem;
+  background: var(--color-gray10);
+
   @include tablet {
-    padding: 7rem 0 0 16rem;
+    margin: 7rem 0 0 16rem;
   }
   @include mobile {
-    padding: 6rem 0 0 6.7rem;
+    margin: 6rem 0 0 6.7rem;
   }
 }
 
