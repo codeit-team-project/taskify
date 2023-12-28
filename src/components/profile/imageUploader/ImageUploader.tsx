@@ -11,13 +11,11 @@ const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
   ({ onChange, name = '', hasError, savedImg, watch }, ref) => {
     const [preview, setPreview] = useState(savedImg === '' || null || undefined ? null : savedImg)
     const previewWatcher = watch('image')
-    const formData = new FormData()
 
     // profile img 미리보기 코드
     useEffect(() => {
       if (previewWatcher && previewWatcher.length > 0) {
         const file = previewWatcher[0]
-        file && formData.append('img', file)
         const tempUrl = URL.createObjectURL(file)
         setPreview(tempUrl)
       }
