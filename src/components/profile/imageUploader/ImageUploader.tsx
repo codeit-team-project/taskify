@@ -4,9 +4,10 @@
 */
 
 import { forwardRef, useEffect, useState } from 'react'
+import Image from 'next/image'
+
 import { ProfileInputProps } from '@/types/formTypes'
 import styles from './ImageUploader.module.scss'
-import Image from 'next/image'
 
 const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
   ({ onChange, name = '', savedImg, watch }, ref) => {
