@@ -20,6 +20,13 @@ export interface ProfileInputsType {
   image: FileList
 }
 
+// mypage 페이지 프로필 input 종류 타입
+export interface PasswordModifierInputsType {
+  currentPsw: string
+  newPsw: string
+  newPswCheck: string
+}
+
 // sign input 컴포넌트 props
 export interface SignInputProps {
   placeholder: string

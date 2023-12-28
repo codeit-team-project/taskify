@@ -30,6 +30,7 @@ export default function Profile() {
     formState: { errors, isValid },
     getValues,
     watch,
+    resetField,
   } = useForm<ProfileInputsType>({ mode: 'all' })
 
   const { data: userProfile } = useQuery<UserType>({
@@ -83,6 +84,8 @@ export default function Profile() {
   // 수정 취소 버튼
   const handleCancelEdit: MouseEventHandler = (e) => {
     e.preventDefault()
+    resetField('nickname')
+    resetField('image')
     setIsEditing(false)
     return
   }
