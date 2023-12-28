@@ -55,13 +55,10 @@ export default function Profile() {
     },
     onSuccess: (response) => {
       // 닉네임 input이 있을 경우와 없을 경우 둘 다 처리함
-      console.log(response)
       const newData = {
         nickname: getValues('nickname') ? getValues('nickname') : (userProfile?.nickname as string),
         profileImageUrl: response.profileImageUrl,
       }
-      console.log('success')
-      console.log(newData)
       editUser({ data: { ...newData } })
       return response
     },
