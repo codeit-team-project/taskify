@@ -40,15 +40,16 @@ export default function Profile() {
   // 이미지를 업로드할 때 쓸 imgFormData state
   const queryClient = useQueryClient()
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationKey: ['edit-profile-key'],
     mutationFn: () => {
-      // 이미지 input 값이 있을 경우
       if (getValues('image')?.length > 0) {
+        // 이미지 input 값이 있을 경우 mutationFn을 실행하고 onSuccess 콜백 실행
         const formData = new FormData()
         formData.append('image', getValues('image')[0])
         return createUserImageUpload(formData)
       } else {
+        // 이미지 값이 없을 경우 onError 콜백 실행
         throw new Error('이미지 값이 없습니다.')
       }
     },
@@ -159,7 +160,7 @@ export default function Profile() {
           >
             취소
           </button>
-          <button disabled={!isValid} className={styles.button}>
+          <button disabled={!isValid || isPending} className={styles.button}>
             {isEditing ? '저장' : '변경'}
           </button>
         </div>
