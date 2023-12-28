@@ -24,6 +24,7 @@
     img {
       width: 100%;
     }
+    position: relative;
     width: 18rem;
     height: 18rem;
     border-radius: 6px;
@@ -114,7 +115,7 @@
   }
 }
 
-[data-isEditing='true'].container {
+[data-isediting='true'].container {
   outline: 3px solid var(--color-violet);
   box-shadow: var(--box-shadow-md);
 }

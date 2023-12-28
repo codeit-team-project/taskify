@@ -13,10 +13,11 @@ import TextInput from '../signInput/TextInput'
 import { useMutation, useQuery } from '@tanstack/react-query'
 import { getUser } from '@/api/users/getUser'
 import { UserType } from '@/types/users'
-import { ProfileReqType } from '@/types/formTypes'
+import Image from 'next/image'
 import { imgFileValidationRules } from '@/utils/formInputValidationRules'
 import { useState } from 'react'
 import { editUser } from '@/api/users/editUser'
+import { createUserImageUpload } from '@/api/users/createUserImageUpload'
 
 export default function Profile() {
   const {
@@ -30,14 +31,27 @@ export default function Profile() {
     queryKey: ['profile-key'],
     queryFn: () => getUser(),
   })
+  // 현재 editing 상태인지 아닌지 체크하는 state
   const [isEditing, setIsEditing] = useState(false)
-  const [imgUrl, setImgUrl] = useState(userProfile?.profileImageUrl ?? '')
+  // 이미지를 업로드할 때 쓸 imgFormData state
+  const [imgFormData, setImgFormData] = useState<FormData>()
 
   const { mutate } = useMutation({
-    mutationKey: ['edit-profile-key'],
-    mutationFn: (data: ProfileReqType) => editUser({ data: { ...data } }),
+    mutationKey: ['create-img-key', 'edit-profile-key'],
+    mutationFn: (data: FormData) => {
+      console.log(data)
+      return createUserImageUpload({ profileImageUrl: data })
+    },
+    onSuccess: (response) => {
+      const newData = {
+        nickname: getValues('nickname'),
+        profileImageUrl: response.profileImageUrl,
+      }
+      editUser({ data: { ...newData } })
+      return response
+    },
     onError: (e) => {
-      console.log(e)
+      return e
     },
   })
 
@@ -49,15 +63,9 @@ export default function Profile() {
       setIsEditing(true)
     }
     if (isValid && isEditing) {
-      const changedNickname =
-        getValues('nickname') === '' ? userProfile?.nickname : getValues('nickname')
-      const changedImg = getValues('image') ? imgUrl : userProfile?.profileImageUrl
-      const newData: ProfileReqType = {
-        nickname: changedNickname ?? '',
-        profileImageUrl: changedImg ?? '',
-      }
-      console.log(newData)
-      mutate(newData)
+      if (!imgFormData) return
+      console.log(imgFormData.get('profileImageUrl'))
+      mutate(imgFormData)
       alert('저장되었습니다.')
       setIsEditing(false)
     } else {
@@ -66,9 +74,9 @@ export default function Profile() {
   }
 
   return (
-    <div className={styles.container} data-isEditing={isEditing}>
+    <div className={styles.container} data-isediting={isEditing}>
       <h1 className={styles.title}>프로필</h1>
-      <form className={styles.form} onSubmit={handleSubmit(onSubmit)}>
+      <form className={styles.form} onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
         <div className={styles.inputs}>
           {isEditing ? (
             <ImageUploader
@@ -76,11 +84,16 @@ export default function Profile() {
               savedImg={userProfile?.profileImageUrl}
               hasError={errors}
               watch={watch}
-              setImgUrl={setImgUrl}
+              setImgFormData={setImgFormData}
             />
           ) : (
             <div className={styles['saved-img']}>
-              <img src={userProfile?.profileImageUrl ?? '/assets/settingIcon.svg'} />
+              <Image
+                src={userProfile?.profileImageUrl ?? '/assets/addIcon.svg'}
+                alt="img preview"
+                layout="fill"
+                priority={true}
+              />
             </div>
           )}
           <div className={styles['input-wrapper']}>

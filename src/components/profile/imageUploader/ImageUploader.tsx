@@ -8,37 +8,36 @@ import { ProfileInputProps } from '@/types/formTypes'
 import styles from './ImageUploader.module.scss'
 
 const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
-  ({ onChange, name = '', hasError, savedImg, watch, setImgUrl }, ref) => {
+  ({ onChange, name = '', hasError, savedImg, watch, setImgFormData }, ref) => {
+    const [preview, setPreview] = useState(savedImg === '' || null || undefined ? null : savedImg)
     const previewWatcher = watch('image')
-    const [preview, setPreview] = useState(savedImg ? savedImg : '/assets/addIcon.svg')
+    const formData = new FormData()
+    console.log(hasError)
 
-    // profile img 미리보기
+    // profile img 미리보기 코드
     useEffect(() => {
-      if (ref) {
-        if (previewWatcher && previewWatcher.length > 0) {
-          console.log(previewWatcher)
-          const file = previewWatcher[0]
-          const tempUrl = URL.createObjectURL(file)
-          // BUG - 왜 안되는건지 도저히 모르겠습니다.. help ㅠㅠ
-          console.log(tempUrl)
-          setPreview(tempUrl)
-          setImgUrl(tempUrl.slice(5))
-        }
-        return () => {
-          if (typeof window !== 'undefined') {
-            setPreview('')
-            window.URL.revokeObjectURL(preview)
+      if (previewWatcher && previewWatcher.length > 0) {
+        const file = previewWatcher[0]
+        file && formData.append('imgs', file)
+        const tempUrl = URL.createObjectURL(file)
+        setPreview(tempUrl)
+        setImgFormData(formData)
+      }
+      return () => {
+        if (typeof window !== 'undefined') {
+          if (preview) {
+            URL.revokeObjectURL(preview)
+            setPreview(null)
           }
         }
       }
-    }, [previewWatcher])
+      // BUG - dependency에 preview를 넣으면 무한렌더링이 되는데 왜 그런지 모르겠습니다..
+    }, [previewWatcher, name])
 
     return (
       <div className={styles['input-container']}>
         <label htmlFor={name}>
-          <div>
-            <img src={`${preview}`} alt="thumbnail img" />
-          </div>
+          <div>{preview && <img src={preview} alt="thumbnail img" />}</div>
         </label>
         <input id={name} ref={ref} name={name} type="file" onChange={onChange} accept="image/*" />
       </div>
