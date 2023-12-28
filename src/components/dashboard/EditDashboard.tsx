@@ -35,6 +35,7 @@ export default function EditDashboard({ boardId }: EditDashboardProps) {
     mutationFn: (data: DashBoardVauleType) => editDashBoard(boardId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['dashBoardsDetail', boardId] })
+      queryClient.invalidateQueries({ queryKey: ['dashBoards'] })
     },
   })
 
