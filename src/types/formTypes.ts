@@ -17,7 +17,7 @@ export interface SignUpInputsType extends SignInInputsType {
 // mypage 페이지 프로필 input 종류 타입
 export interface ProfileInputsType {
   nickname: string
-  image: File
+  image: FileList
 }
 
 // sign input 컴포넌트 props

@@ -43,6 +43,7 @@ export default function Profile() {
     mutationFn: () => {
       if (getValues('image')?.length > 0) {
         console.log(getValues('image')[0])
+        console.log(getValues('image'))
         const formData = new FormData()
         formData.append('image', getValues('image')[0])
         return createUserImageUpload({ profileImageUrl: formData })
