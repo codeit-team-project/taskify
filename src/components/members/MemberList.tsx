@@ -21,7 +21,7 @@ interface MomberListProps {
 export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
   const queryClient = useQueryClient()
 
-  const pageSize = 2 // data per page
+  const pageSize = 4 // data per page
   const [currentPage, setCurrentPage] = useState(1)
 
   const { data, isPlaceholderData } = useQuery<DashBoardMembers>({
