@@ -11,7 +11,7 @@ import classNames from 'classnames'
 import styles from './EditDashboard.module.scss'
 import ColorPicker from '@/components/colorPicker/ColorPicker'
 
-import { DashBoardType, DashBoardVauleType } from '@/types/dashBoardType'
+import { DashBoardType, DashBoardValueType } from '@/types/dashBoardType'
 import { getDashBoardsDetail } from '@/api/dashboards/getDashboardsDetail'
 import { editDashBoard } from '@/api/dashboards/editDashboards'
 
@@ -32,7 +32,7 @@ export default function EditDashboard({ boardId }: EditDashboardProps) {
 
   const { mutate: updateDashBoard } = useMutation({
     mutationKey: ['updateDashBoard'],
-    mutationFn: (data: DashBoardVauleType) => editDashBoard(boardId, data),
+    mutationFn: (data: DashBoardValueType) => editDashBoard(boardId, data),
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['dashBoardsDetail', boardId] })
       queryClient.invalidateQueries({ queryKey: ['dashBoards'] })
