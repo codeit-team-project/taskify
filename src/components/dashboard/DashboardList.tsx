@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query'
+import styles from './DashboardList.module.scss'
 
 import DashboardItem from './DashboardItem'
 
@@ -13,15 +14,17 @@ export default function DashboardList() {
 
   return (
     <section>
-      {data?.dashboards.map((dashboard) => (
-        <li key={dashboard.id}>
-          <DashboardItem
-            dashBoardId={dashboard.id}
-            title={dashboard.title}
-            color={dashboard.color}
-          />
-        </li>
-      ))}
+      <div className={styles.boards}>
+        {data?.dashboards.map((dashboard) => (
+          <li key={dashboard.id} className={styles.list}>
+            <DashboardItem
+              dashBoardId={dashboard.id}
+              title={dashboard.title}
+              color={dashboard.color}
+            />
+          </li>
+        ))}
+      </div>
       <div>페이지네이션</div>
     </section>
   )

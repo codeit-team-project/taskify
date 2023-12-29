@@ -1,3 +1,4 @@
+import styles from './DashboardList.module.scss'
 import EllipseIcon from '@/components/ui/icons/Ellipse'
 
 interface DashboardItemProps {
@@ -10,10 +11,15 @@ export default function DashboardItem({ dashBoardId, title, color }: DashboardIt
   console.log(dashBoardId)
 
   return (
-    <div>
-      <EllipseIcon size={8} color={color} />
-      <span>{title}</span>
-      <img src="/arrow_next.svg" />
+    <div className={styles.button}>
+      <div className={styles.contents}>
+        <EllipseIcon size={8} color={color} />
+        <span className={styles.description}>
+          <span className={styles.title}>{title}</span>
+          <img src="/assets/crown_icon.svg" />
+        </span>
+      </div>
+      <img src="/arrow_next.svg" className={styles.icon} />
     </div>
   )
 }

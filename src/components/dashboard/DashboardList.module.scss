@@ -1,0 +1,47 @@
+.boards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  row-gap: 1.2rem;
+  column-gap: 1.3rem;
+}
+
+.list {
+  list-style: none;
+}
+
+.button {
+  padding: 2.4rem;
+  max-width: 33.2rem;
+  height: 7rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 0.8rem;
+  border: 1px solid var(--color-gray30);
+  background: var(--color-white);
+  cursor: pointer;
+}
+
+.contents {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.description {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  white-space: nowrap;
+}
+
+.title {
+  font-size: 1.6rem;
+  color: var(--color-black_33);
+  font-weight: 600;
+}
+
+.icon {
+  width: 1.8rem;
+  height: 1.8rem;
+}
