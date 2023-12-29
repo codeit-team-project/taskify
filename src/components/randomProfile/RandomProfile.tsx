@@ -4,13 +4,11 @@
 - 임의의 배경색이 지정되었고 가운데에 이메일 첫글자가 들어간 svg를 리턴.
 */
 
-import { useQuery } from '@tanstack/react-query'
-
-import { getUser } from '@/api/users/getUser'
-import { UserType } from '@/types/users'
+import EllipseIcon from '../ui/icons/Ellipse'
 
 interface RandomProfileProps {
   radius: number
+  letter: string
 }
 
 // 알파벳에 따라 색상 string을 리턴하는 함수
@@ -29,32 +27,26 @@ const selectColor = (letter: string) => {
   }
 }
 
-export default function RandomProfile({ radius }: RandomProfileProps) {
-  const { data: userInfo } = useQuery<UserType>({
-    queryKey: ['user-email-key'],
-    queryFn: () => getUser(),
-  })
-
-  const first = userInfo?.email[0].toUpperCase() ?? 'A'
-  const colorHexCode = selectColor(first)
+export default function RandomProfile({ radius: size, letter }: RandomProfileProps) {
+  const bigLetter = letter.toUpperCase()
+  const colorHexCode = selectColor(bigLetter)
 
   return (
     <div>
-      <svg xmlns="http://www.w3.org/2000/svg" width={radius * 2} height={radius * 2} fill="none">
-        <circle cx={radius} cy={radius} r={radius} fill={colorHexCode} />
+      <EllipseIcon size={size * 2} color={colorHexCode}>
         <text
           id="text"
           fill="#ffffff"
-          font-size={radius}
+          font-size={size}
           font-weight="700"
           alignment-baseline="middle"
           text-anchor="middle"
-          x={radius}
-          y={radius}
+          x={size}
+          y={size}
         >
-          {first}
+          {bigLetter}
         </text>
-      </svg>
+      </EllipseIcon>
     </div>
   )
 }
