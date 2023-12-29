@@ -20,6 +20,12 @@
   border: 1px solid var(--color-gray30);
   background: var(--color-white);
   cursor: pointer;
+  transition: all 500ms ease;
+
+  &:hover {
+    background: var(--color-violet_8);
+    box-shadow: var(--box-shadow-md);
+  }
 }
 
 .contents {

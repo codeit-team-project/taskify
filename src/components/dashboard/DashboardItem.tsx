@@ -2,14 +2,11 @@ import styles from './DashboardList.module.scss'
 import EllipseIcon from '@/components/ui/icons/Ellipse'
 
 interface DashboardItemProps {
-  dashBoardId: number
   title: string
   color: string
 }
 
-export default function DashboardItem({ dashBoardId, title, color }: DashboardItemProps) {
-  console.log(dashBoardId)
-
+export default function DashboardItem({ title, color }: DashboardItemProps) {
   return (
     <div className={styles.button}>
       <div className={styles.contents}>
