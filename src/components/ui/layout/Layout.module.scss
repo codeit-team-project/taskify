@@ -6,19 +6,16 @@
 // 1.5rem을 더한 값을 padding으로 설정
 
 .article-content {
-  padding: 1.5rem;
-  padding-top: 8.5rem;
-  padding-left: 31.5rem;
-  background-color: var(--color-gray10);
-  width: 100%;
-  height: 100%;
+  margin: 7rem 0 0 30rem;
+  padding: 2rem;
+  background: var(--color-gray10);
+
   @include tablet {
-    padding-left: 17.5rem;
+    margin: 7rem 0 0 16rem;
   }
   @include mobile {
-    padding: 1rem;
-    padding-top: 7em;
-    padding-left: 7.7rem;
+    margin: 6rem 0 0 6.7rem;
+    padding: 1.2rem;
   }
 }
 
