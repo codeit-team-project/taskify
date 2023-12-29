@@ -45,13 +45,13 @@ export default function DashboardNavEditor({
         {isOwner && (
           <button className={styles['button']}>
             <Link href={`/dashboard/${String(boardId)}/edit`}>
-              <Image src="assets/settingIcon.svg" alt="setting icon" width={20} height={20} />
+              <Image src="/assets/settingIcon.svg" alt="setting icon" width={20} height={20} />
               관리
             </Link>
           </button>
         )}
         <button className={styles['button']}>
-          <Image src="assets/addIcon.svg" alt="add icon" width={20} height={20} />
+          <Image src="/assets/addIcon.svg" alt="add icon" width={20} height={20} />
           초대하기
         </button>
       </div>

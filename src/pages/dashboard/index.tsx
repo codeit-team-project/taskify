@@ -1,3 +1,5 @@
+// localhost:3000/dashboard 페이지
+
 import DashboardLayout from '@/components/ui/layout/DashboardLayout'
 
 export default function DashBoardPage() {

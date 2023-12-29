@@ -12,7 +12,7 @@ export default function LoadingSpinner() {
     <div className={styles['spinner-body']}>
       <div className={styles['spinner-container']}>
         <Image
-          src="assets/Spinner-1s-200px.gif"
+          src="/assets/Spinner-1s-200px.gif"
           unoptimized={true}
           width={200}
           height={200}
