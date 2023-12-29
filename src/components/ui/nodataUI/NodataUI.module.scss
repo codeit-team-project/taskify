@@ -1,0 +1,32 @@
+@import '@/styles/mixin.scss';
+
+div.no-invitation-container {
+  display: grid;
+  justify-content: center;
+  justify-items: center;
+  gap: 2.4rem;
+  padding: 6.6rem 0 12.8rem 0;
+  @include tablet {
+    width: 100%;
+  }
+  @include mobile {
+    padding: 10.5rem 0 15.4rem;
+  }
+  img.no-invitation-icon {
+    width: 10rem;
+    height: 10rem;
+    @include mobile {
+      width: 6rem;
+      height: 6rem;
+    }
+  }
+  p.no-invitation-text {
+    color: var(--color-gray40);
+    font-size: 1.8rem;
+    font-weight: 400;
+    line-height: 1;
+    @include mobile {
+      font-size: 1.4rem;
+    }
+  }
+}
