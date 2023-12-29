@@ -1,8 +1,20 @@
+@import '@/styles/mixin.scss';
+
 .container {
   padding: 2rem;
+  max-width: 102.2rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
+
+  @include tablet {
+    gap: 1rem;
+  }
+
+  @include mobile {
+    gap: 0.8rem;
+  }
 }
 
 .boards {
@@ -10,6 +22,16 @@
   grid-template-columns: repeat(3, 1fr);
   row-gap: 1.2rem;
   column-gap: 1.3rem;
+
+  @include tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+
+  @include mobile {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0.6rem;
+  }
 }
 
 .list {
@@ -18,7 +40,6 @@
 
 .button {
   padding: 2.4rem;
-  max-width: 33.2rem;
   height: 7rem;
   display: flex;
   justify-content: space-between;
@@ -58,6 +79,11 @@
   font-size: 1.6rem;
   color: var(--color-black_33);
   font-weight: 600;
+  white-space: nowrap;
+
+  @include mobile {
+    font-size: 1.4rem;
+  }
 }
 
 .add-icon {
@@ -74,5 +100,6 @@
 }
 
 .page {
+  display: flex;
   justify-content: end;
 }

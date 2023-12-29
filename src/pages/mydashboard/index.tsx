@@ -1,15 +1,16 @@
 import { getInvitations } from '@/api/invitations/getInvitations'
 import DashboardList from '@/components/dashboard/DashboardList'
 import InvitedDashBoard from '@/components/invitedDashBoard/InvitedDashBoard'
+import DashboardLayout from '@/components/ui/layout/DashboardLayout'
 import { ReceivedInvitationsType } from '@/types/invitations'
 import { InvitationType } from '@/types/invitedDashBoardListType'
 
 export default function MyDashboardPage({ ...pageProps }) {
   return (
-    <>
+    <DashboardLayout>
       <DashboardList />
       <InvitedDashBoard list={pageProps.list} />
-    </>
+    </DashboardLayout>
   )
 }
 
