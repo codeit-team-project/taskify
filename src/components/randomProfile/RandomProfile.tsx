@@ -32,21 +32,19 @@ export default function RandomProfile({ size, email }: RandomProfileProps) {
   const colorHexCode = selectColor(bigLetter)
 
   return (
-    <div>
-      <EllipseIcon size={size} color={colorHexCode}>
-        <text
-          id="text"
-          fill="#ffffff"
-          font-size={size / 2}
-          font-weight="700"
-          alignment-baseline="middle"
-          text-anchor="middle"
-          x={size / 2}
-          y={size / 2}
-        >
-          {bigLetter}
-        </text>
-      </EllipseIcon>
-    </div>
+    <EllipseIcon size={size} color={colorHexCode}>
+      <text
+        id="text"
+        fill="#ffffff"
+        font-size={size / 2}
+        font-weight="700"
+        alignment-baseline="middle"
+        text-anchor="middle"
+        x={size / 2}
+        y={size / 2}
+      >
+        {bigLetter}
+      </text>
+    </EllipseIcon>
   )
 }
