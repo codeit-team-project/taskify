@@ -22,10 +22,16 @@
   cursor: pointer;
   transition: all 500ms ease;
 
-  &:hover {
+  &:not(.add-button):hover {
     background: var(--color-violet_8);
     box-shadow: var(--box-shadow-md);
   }
+}
+
+.add-button {
+  @extend .button;
+  justify-content: center;
+  gap: 1.2rem;
 }
 
 .contents {
@@ -45,6 +51,14 @@
   font-size: 1.6rem;
   color: var(--color-black_33);
   font-weight: 600;
+}
+
+.add-icon {
+  width: 2.2rem;
+  height: 2.2rem;
+  padding: 0.3rem;
+  border-radius: 0.4rem;
+  background: var(--color-violet_8);
 }
 
 .icon {
