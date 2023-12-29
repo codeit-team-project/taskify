@@ -19,7 +19,7 @@
     font-family: 'Pretendard';
     font-size: 1.6rem;
     font-weight: 500;
-    @include tablet-narrow {
+    @include mobile {
       display: none;
     }
   }

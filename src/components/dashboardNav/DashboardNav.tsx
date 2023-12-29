@@ -3,7 +3,6 @@
 - DashboardLayout 컴포넌트를 감싸는 컴포넌트
 - 대시보드 페이지 위에 보이는 DashboardNav 바 컴포넌트 
 - boardId 값을 받으면 해당 보드의 title, 멤버 수 등 정보를 나타냄
-- boardId 값이 없으면 /dashboard 페이지로 인지하고 아무 정보도 나타내지 않음.
 */
 
 import Image from 'next/image'

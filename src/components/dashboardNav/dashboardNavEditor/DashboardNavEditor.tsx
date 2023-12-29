@@ -70,7 +70,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
               <div
                 className={styles['member-img-list']}
                 style={{
-                  width: `${memberData.totalCount >= 5 ? 15 : memberData.totalCount * 3 + 1}rem`,
+                  width: `${memberData.totalCount >= 5 ? 17 : memberData.totalCount * 3 + 2}rem`,
                 }}
               >
                 {memberData.members.slice(0, 4).map((member) => {
@@ -101,7 +101,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
               <div
                 className={styles['member-img-list']}
                 style={{
-                  width: `${memberData.totalCount >= 3 ? 10 : memberData.totalCount * 3}rem`,
+                  width: `${memberData.totalCount >= 3 ? 10 : memberData.totalCount * 3 + 2}rem`,
                 }}
               >
                 {memberData.members.slice(0, 2).map((member) => {
