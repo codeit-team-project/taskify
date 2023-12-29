@@ -126,8 +126,7 @@ export default function Profile() {
           )}
           <div className={styles['input-wrapper']}>
             <div className={styles['email-wrapper']}>
-              <h3>이메일</h3>
-              <div className={styles['email-input']}>{userProfile?.email ?? ''}</div>
+              <ReadonlyInput labelName="이메일" inputText={userProfile?.email ?? ''} />
             </div>
             <div className={styles['nickname-input']}>
               {isEditing ? (

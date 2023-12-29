@@ -1,10 +1,5 @@
 @import '@/styles/mixin.scss';
 
-// NOTE
-// nav height는 항상 7rem, 7rem, 6rem
-// sidebar width는 항상 30rem, 16rem, 6.7rem이므로
-// 1.5rem을 더한 값을 padding으로 설정
-
 .article-content {
   margin: 7rem 0 0 30rem;
   padding: 2rem;
