@@ -1,6 +1,6 @@
 @import '@/styles/mixin.scss';
 
-div.no-invitation-container {
+.container {
   display: grid;
   justify-content: center;
   justify-items: center;
@@ -12,7 +12,7 @@ div.no-invitation-container {
   @include mobile {
     padding: 10.5rem 0 15.4rem;
   }
-  img.no-invitation-icon {
+  img.icon {
     width: 10rem;
     height: 10rem;
     @include mobile {
@@ -20,7 +20,7 @@ div.no-invitation-container {
       height: 6rem;
     }
   }
-  p.no-invitation-text {
+  p.text {
     color: var(--color-gray40);
     font-size: 1.8rem;
     font-weight: 400;
