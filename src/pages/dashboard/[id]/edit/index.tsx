@@ -8,7 +8,7 @@ export default function DashBoardDetailPage() {
   const boardId = router.query.id
 
   return (
-    <DashboardLayout>
+    <DashboardLayout boardId={Number(boardId)}>
       <EditDashboard boardId={Number(boardId)} />
     </DashboardLayout>
   )
