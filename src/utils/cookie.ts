@@ -7,7 +7,7 @@ export const setCookie = (name: string, value: string) => {
   return cookies.set(name, value, {
     path: '/',
     secure: true,
-    maxAge: 6000,
+    maxAge: 80000,
   })
 }
 
