@@ -15,15 +15,15 @@ interface RandomProfileProps {
 const selectColor = (letter: string) => {
   const letterAscii = letter.charCodeAt(0)
   if (letterAscii <= 70) {
-    return '#7AC555'
+    return '#C4B1A2'
   } else if (letterAscii <= 75) {
-    return '#760DDE'
+    return '#9DD7ED'
   } else if (letterAscii <= 80) {
-    return '#FFA500'
+    return '#FDD446'
   } else if (letterAscii <= 85) {
-    return '#76A5EA'
+    return '#FFC85A'
   } else {
-    return '#E876EA'
+    return '#A3C4A2'
   }
 }
 
