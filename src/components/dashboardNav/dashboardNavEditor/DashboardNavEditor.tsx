@@ -26,7 +26,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
   const [isVisible, handleOpenModal, handleCloseModal] = useDropdown()
 
   const { data: memberData } = useQuery<DashBoardMembers>({
-    queryKey: ['dashBoardMembers'],
+    queryKey: ['dashBoardMembers', boardId],
     queryFn: () => getDashBoardMembers(boardId),
     staleTime: 3000,
   })
