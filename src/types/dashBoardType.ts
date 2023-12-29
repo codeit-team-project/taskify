@@ -1,4 +1,4 @@
-export interface DashBoardVauleType {
+export interface DashBoardValueType {
   title: string
   color: string
 }
