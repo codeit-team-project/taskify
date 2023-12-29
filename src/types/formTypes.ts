@@ -22,9 +22,9 @@ export interface ProfileInputsType {
 
 // mypage 페이지 프로필 input 종류 타입
 export interface PasswordModifierInputsType {
-  currentPsw: string
-  newPsw: string
-  newPswCheck: string
+  currentPassword: string
+  newPassword: string
+  newPasswordRepeat: string
 }
 
 // sign input 컴포넌트 props

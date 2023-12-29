@@ -77,7 +77,7 @@ export default function Profile() {
       // 변경된 데이터 refetch
       alert('저장되었습니다.')
       setIsEditing(false)
-      await queryClient.invalidateQueries()
+      await queryClient.invalidateQueries({ queryKey: ['profile-key', 'edit-profile-key'] })
     },
   })
 

@@ -51,20 +51,20 @@ export default function PasswordModifier() {
     onSettled: async () => {
       // 변경된 데이터 refetch
       setIsEditing(false)
-      resetField('currentPsw')
-      resetField('newPsw')
-      resetField('newPswCheck')
-      await queryClient.invalidateQueries()
+      resetField('currentPassword')
+      resetField('newPassword')
+      resetField('newPasswordRepeat')
+      await queryClient.invalidateQueries({ queryKey: ['psw-key'] })
     },
   })
 
   // 수정 취소 버튼
   const handleCancelEdit: MouseEventHandler = (e) => {
     e.preventDefault()
-    queryClient.invalidateQueries()
-    resetField('currentPsw')
-    resetField('newPsw')
-    resetField('newPswCheck')
+    queryClient.invalidateQueries({ queryKey: ['psw-key'] })
+    resetField('currentPassword')
+    resetField('newPassword')
+    resetField('newPasswordRepeat')
     setIsEditing(false)
     return
   }
@@ -75,8 +75,8 @@ export default function PasswordModifier() {
     }
     if (isValid && isEditing) {
       const newData = {
-        password: getValues('currentPsw'),
-        newPassword: getValues('newPsw'),
+        password: getValues('currentPassword'),
+        newPassword: getValues('newPassword'),
       }
       mutate(newData)
     } else {
@@ -85,7 +85,7 @@ export default function PasswordModifier() {
   }
 
   const passwordRepeatChecker = (passwordRepeatValue: string) => {
-    if (getValues('newPsw') !== passwordRepeatValue) {
+    if (getValues('newPassword') !== passwordRepeatValue) {
       return '비밀번호가 일치하지 않습니다.'
     }
   }
@@ -101,12 +101,12 @@ export default function PasswordModifier() {
                   <PasswordInput
                     placeholder="현재 비밀번호 입력"
                     labelName="현재 비밀번호"
-                    {...register('currentPsw', passwordValidationRules)}
+                    {...register('currentPassword', passwordValidationRules)}
                     hasError={errors}
                   />
-                  {errors.currentPsw && (
+                  {errors.currentPassword && (
                     <div className={styles['error-message']} role="alert">
-                      {errors.currentPsw.message}
+                      {errors.currentPassword.message}
                     </div>
                   )}
                 </div>
@@ -115,12 +115,12 @@ export default function PasswordModifier() {
                   <PasswordInput
                     placeholder="새 비밀번호 입력"
                     labelName="새 비밀번호"
-                    {...register('newPsw', passwordValidationRules)}
+                    {...register('newPassword', passwordValidationRules)}
                     hasError={errors}
                   />
-                  {errors.newPsw && (
+                  {errors.newPassword && (
                     <div className={styles['error-message']} role="alert">
-                      {errors.newPsw.message}
+                      {errors.newPassword.message}
                     </div>
                   )}
                 </div>
@@ -129,7 +129,7 @@ export default function PasswordModifier() {
                   <PasswordInput
                     placeholder="새 비밀번호 확인"
                     labelName="새 비밀번호 확인"
-                    {...register('newPswCheck', {
+                    {...register('newPasswordRepeat', {
                       required: '비밀번호를 확인해 주세요.',
                       validate: {
                         check: passwordRepeatChecker,
@@ -137,9 +137,9 @@ export default function PasswordModifier() {
                     })}
                     hasError={errors}
                   />
-                  {errors.newPswCheck && (
+                  {errors.newPasswordRepeat && (
                     <div className={styles['error-message']} role="alert">
-                      {errors.newPswCheck.message}
+                      {errors.newPasswordRepeat.message}
                     </div>
                   )}
                 </div>
