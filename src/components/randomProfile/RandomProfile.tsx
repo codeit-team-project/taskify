@@ -8,7 +8,7 @@ import EllipseIcon from '../ui/icons/Ellipse'
 
 interface RandomProfileProps {
   size: number
-  letter: string
+  email: string
 }
 
 // 알파벳에 따라 색상 string을 리턴하는 함수
@@ -27,8 +27,8 @@ const selectColor = (letter: string) => {
   }
 }
 
-export default function RandomProfile({ size, letter }: RandomProfileProps) {
-  const bigLetter = letter.toUpperCase()
+export default function RandomProfile({ size, email }: RandomProfileProps) {
+  const bigLetter = email[0].toUpperCase()
   const colorHexCode = selectColor(bigLetter)
 
   return (
