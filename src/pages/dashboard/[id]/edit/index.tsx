@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router'
 
+import styles from './index.module.scss'
+
 import EditDashboard from '@/components/dashboard/EditDashboard'
 import DashboardLayout from '@/components/ui/layout/DashboardLayout'
 import MemberList from '@/components/members/MemberList'
@@ -11,16 +13,17 @@ export default function DashBoardDetailPage() {
 
   return (
     <DashboardLayout>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '1.2rem',
-        }}
-      >
+      <div className={styles.container}>
+        <div className={styles.action}>
+          <img src="/arrow_forward.svg" className={styles.icon} />
+          <span className={styles.text}>돌아가기</span>
+        </div>
         <EditDashboard boardId={boardId} />
         <MemberList dashBoardId={boardId} />
         <InvitationList dashBoardId={boardId} />
+        <div className={styles.wrapper}>
+          <button className={styles.button}>대시보드 삭제하기</button>
+        </div>
       </div>
     </DashboardLayout>
   )
