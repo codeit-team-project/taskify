@@ -36,7 +36,7 @@ export default function DashboardNav({ boardId }: DashboardNavProps) {
         <>
           {boardInfo?.title}
           {boardInfo?.createdByMe && (
-            <span>
+            <span className={styles.spacing}>
               <Image src="/assets/crown_icon.svg" alt="owner" width={20} height={20} />
             </span>
           )}

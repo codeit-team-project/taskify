@@ -33,6 +33,9 @@
     align-items: center;
     gap: 1rem;
   }
+  & .spacing {
+    padding-left: 1rem;
+  }
 }
 
 @include tablet {
