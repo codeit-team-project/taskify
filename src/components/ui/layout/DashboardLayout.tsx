@@ -13,7 +13,7 @@ import styles from './Layout.module.scss'
 
 interface DashboardLayoutProps {
   children: ReactNode
-  boardId?: Number
+  boardId: number
 }
 
 export default function DashboardLayout({ children, boardId }: DashboardLayoutProps) {
