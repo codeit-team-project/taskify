@@ -17,6 +17,7 @@ import useDropdown from '@/hooks/useDropdown'
 import { DashBoardType } from '@/types/dashBoardType'
 
 import styles from './BoardNav.module.scss'
+import Link from 'next/link'
 
 interface DashboardNavProps {
   boardId: number
@@ -34,7 +35,7 @@ export default function DashboardNav({ boardId }: DashboardNavProps) {
     <nav className={styles['nav-container']}>
       <div className={styles['title-section']}>
         <>
-          {boardInfo?.title}
+          <Link href={`/dashboard/${boardId}`}>{boardInfo?.title}</Link>
           {boardInfo?.createdByMe && (
             <span className={styles.spacing}>
               <Image src="/assets/crown_icon.svg" alt="owner" width={20} height={20} />
