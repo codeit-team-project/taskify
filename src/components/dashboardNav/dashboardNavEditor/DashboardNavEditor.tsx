@@ -77,7 +77,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
                     return (
                       <Image
                         key={member.id}
-                        src={member.profileImageUrl}
+                        src={member.profileImageUrl ?? '/assets/no-profile.png'}
                         alt="profile"
                         width={36}
                         height={36}
