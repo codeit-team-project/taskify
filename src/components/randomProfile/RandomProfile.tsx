@@ -7,7 +7,7 @@
 import EllipseIcon from '../ui/icons/Ellipse'
 
 interface RandomProfileProps {
-  radius: number
+  size: number
   letter: string
 }
 
@@ -27,22 +27,22 @@ const selectColor = (letter: string) => {
   }
 }
 
-export default function RandomProfile({ radius: size, letter }: RandomProfileProps) {
+export default function RandomProfile({ size, letter }: RandomProfileProps) {
   const bigLetter = letter.toUpperCase()
   const colorHexCode = selectColor(bigLetter)
 
   return (
     <div>
-      <EllipseIcon size={size * 2} color={colorHexCode}>
+      <EllipseIcon size={size} color={colorHexCode}>
         <text
           id="text"
           fill="#ffffff"
-          font-size={size}
+          font-size={size / 2}
           font-weight="700"
           alignment-baseline="middle"
           text-anchor="middle"
-          x={size}
-          y={size}
+          x={size / 2}
+          y={size / 2}
         >
           {bigLetter}
         </text>
