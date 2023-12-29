@@ -36,10 +36,10 @@ export default function RandomProfile({ size, email }: RandomProfileProps) {
       <text
         id="text"
         fill="#ffffff"
-        font-size={size / 2}
-        font-weight="700"
-        alignment-baseline="middle"
-        text-anchor="middle"
+        fontSize={size / 2}
+        fontWeight="700"
+        alignmentBaseline="middle"
+        textAnchor="middle"
         x={size / 2}
         y={size / 2}
       >
