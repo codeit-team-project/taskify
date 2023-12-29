@@ -32,7 +32,7 @@ export default function SignLayout({ children, isSignin }: SignLayoutProps) {
             <div className={styles['logo-container']}>
               <div className={styles['logo-img-wrapper']}>
                 <Image
-                  src="assets/large_logo.svg"
+                  src="/assets/large_logo.svg"
                   alt="logo"
                   className={styles['logo-img']}
                   layout="fill"
@@ -40,7 +40,7 @@ export default function SignLayout({ children, isSignin }: SignLayoutProps) {
               </div>
               <div className={styles['logo-title-img-wrapper']}>
                 <Image
-                  src="assets/large_Taskify.svg"
+                  src="/assets/large_Taskify.svg"
                   alt="logo title"
                   className={styles['logo-title-img']}
                   layout="fill"
