@@ -35,13 +35,22 @@
   & .members-section {
     display: flex;
     gap: 1rem;
+
     @include tablet {
       padding: 0;
       gap: 0;
     }
     & .member-img-list {
       position: relative;
-      & img {
+      white-space: nowrap;
+      & img,
+      svg {
+        border: 2px solid white;
+        border-radius: 100%;
+        position: absolute;
+      }
+      & .svg-container {
+        display: inline;
         border: 2px solid white;
         border-radius: 100%;
         position: absolute;

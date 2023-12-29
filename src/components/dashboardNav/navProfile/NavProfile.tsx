@@ -10,6 +10,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { getUser } from '@/api/users/getUser'
 import { UserType } from '@/types/users'
+import RandomProfile from '@/components/randomProfile/RandomProfile'
 import styles from './NavProfile.module.scss'
 
 interface NavProfileProps {
@@ -32,12 +33,11 @@ export default function NavProfile({
       onClick={handleOpenDropdown}
       onBlur={handleCloseDropdown}
     >
-      <Image
-        src={userInfo?.profileImageUrl || '/assets/no-profile.png'}
-        alt="profile img"
-        width={36}
-        height={36}
-      />
+      {userInfo?.profileImageUrl ? (
+        <Image src={userInfo?.profileImageUrl} alt="profile img" width={36} height={36} />
+      ) : (
+        <RandomProfile size={36} email={userInfo?.email || 'a'} />
+      )}
       <div className={styles['nickname']}>{userInfo?.nickname}</div>
     </button>
   )

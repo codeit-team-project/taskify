@@ -15,6 +15,7 @@ import InvitationModal from '@/components/invitations/InvitationModal'
 import useDropdown from '@/hooks/useDropdown'
 import { DashBoardMembers } from '@/types/members'
 import styles from './DashboardNavEditor.module.scss'
+import RandomProfile from '@/components/randomProfile/RandomProfile'
 
 interface DashboardNavEditorProps {
   isOwner?: boolean
@@ -75,14 +76,20 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
                 {memberData.members.slice(0, 4).map((member) => {
                   if (member) {
                     return (
-                      <Image
-                        key={member.id}
-                        src={member.profileImageUrl ?? '/assets/no-profile.png'}
-                        alt="profile"
-                        width={36}
-                        height={36}
-                        className={styles['member-img']}
-                      />
+                      <>
+                        {member.profileImageUrl ? (
+                          <Image
+                            key={member.id}
+                            src={member.profileImageUrl}
+                            alt="profile"
+                            width={36}
+                            height={36}
+                            className={styles['member-img']}
+                          />
+                        ) : (
+                          <RandomProfile size={36} email={member.email} />
+                        )}
+                      </>
                     )
                   }
                 })}
@@ -100,14 +107,20 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
                 {memberData.members.slice(0, 2).map((member) => {
                   if (member) {
                     return (
-                      <Image
-                        key={member.id}
-                        src={member.profileImageUrl ?? '/assets/no-profile.png'}
-                        alt="profile"
-                        width={36}
-                        height={36}
-                        className={styles['member-img']}
-                      />
+                      <>
+                        {member.profileImageUrl ? (
+                          <Image
+                            key={member.id}
+                            src={member.profileImageUrl}
+                            alt="profile"
+                            width={36}
+                            height={36}
+                            className={styles['member-img']}
+                          />
+                        ) : (
+                          <RandomProfile size={36} email={member.email} />
+                        )}
+                      </>
                     )
                   }
                 })}
