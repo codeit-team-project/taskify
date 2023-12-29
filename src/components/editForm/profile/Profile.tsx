@@ -77,7 +77,7 @@ export default function Profile() {
       // 변경된 데이터 refetch
       alert('저장되었습니다.')
       setIsEditing(false)
-      await queryClient.invalidateQueries({ queryKey: ['profile-key', 'edit-profile-key'] })
+      await queryClient.invalidateQueries({ queryKey: ['profile-key'] })
     },
   })
 
@@ -125,12 +125,10 @@ export default function Profile() {
             </div>
           )}
           <div className={styles['input-wrapper']}>
-            <div className={styles['email-wrapper']}>
-              <ReadonlyInput labelName="이메일" inputText={userProfile?.email ?? ''} />
-            </div>
-            <div className={styles['nickname-input']}>
+            <ReadonlyInput labelName="이메일" inputText={userProfile?.email ?? ''} />
+            <>
               {isEditing ? (
-                <>
+                <div>
                   <TextInput
                     placeholder={userProfile?.nickname ?? ''}
                     labelName="닉네임"
@@ -142,13 +140,13 @@ export default function Profile() {
                       {errors.nickname.message}
                     </div>
                   )}
-                </>
+                </div>
               ) : (
                 <>
                   <ReadonlyInput labelName="닉네임" inputText={userProfile?.nickname ?? ''} />
                 </>
               )}
-            </div>
+            </>
           </div>
         </div>
         <div className={styles['button-wrapper']}>

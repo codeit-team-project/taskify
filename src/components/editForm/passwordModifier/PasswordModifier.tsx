@@ -38,6 +38,7 @@ export default function PasswordModifier() {
       setIsEditing(true)
     },
     onSuccess: () => {
+      setIsEditing(false)
       alert('비밀번호가 변경되었습니다!')
     },
     onError: (error) => {
@@ -46,11 +47,9 @@ export default function PasswordModifier() {
       } else if (error.response.status === 404) {
         alert('존재하지 않는 유저입니다')
       }
-      console.log(error)
     },
     onSettled: async () => {
       // 변경된 데이터 refetch
-      setIsEditing(false)
       resetField('currentPassword')
       resetField('newPassword')
       resetField('newPasswordRepeat')
@@ -93,65 +92,63 @@ export default function PasswordModifier() {
   return (
     <EditFormLayout isEditing={isEditing} title="비밀번호 변경">
       <form className={styles.form} onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data">
-        <div className={styles.inputs}>
-          <div className={styles['input-wrapper']}>
-            {isEditing ? (
-              <>
-                <div>
-                  <PasswordInput
-                    placeholder="현재 비밀번호 입력"
-                    labelName="현재 비밀번호"
-                    {...register('currentPassword', passwordValidationRules)}
-                    hasError={errors}
-                  />
-                  {errors.currentPassword && (
-                    <div className={styles['error-message']} role="alert">
-                      {errors.currentPassword.message}
-                    </div>
-                  )}
-                </div>
+        <div className={styles['inputs']}>
+          {isEditing ? (
+            <>
+              <div>
+                <PasswordInput
+                  placeholder="현재 비밀번호 입력"
+                  labelName="현재 비밀번호"
+                  {...register('currentPassword', passwordValidationRules)}
+                  hasError={errors}
+                />
+                {errors.currentPassword && (
+                  <div className={styles['error-message']} role="alert">
+                    {errors.currentPassword.message}
+                  </div>
+                )}
+              </div>
 
-                <div>
-                  <PasswordInput
-                    placeholder="새 비밀번호 입력"
-                    labelName="새 비밀번호"
-                    {...register('newPassword', passwordValidationRules)}
-                    hasError={errors}
-                  />
-                  {errors.newPassword && (
-                    <div className={styles['error-message']} role="alert">
-                      {errors.newPassword.message}
-                    </div>
-                  )}
-                </div>
+              <div>
+                <PasswordInput
+                  placeholder="새 비밀번호 입력"
+                  labelName="새 비밀번호"
+                  {...register('newPassword', passwordValidationRules)}
+                  hasError={errors}
+                />
+                {errors.newPassword && (
+                  <div className={styles['error-message']} role="alert">
+                    {errors.newPassword.message}
+                  </div>
+                )}
+              </div>
 
-                <div>
-                  <PasswordInput
-                    placeholder="새 비밀번호 확인"
-                    labelName="새 비밀번호 확인"
-                    {...register('newPasswordRepeat', {
-                      required: '비밀번호를 확인해 주세요.',
-                      validate: {
-                        check: passwordRepeatChecker,
-                      },
-                    })}
-                    hasError={errors}
-                  />
-                  {errors.newPasswordRepeat && (
-                    <div className={styles['error-message']} role="alert">
-                      {errors.newPasswordRepeat.message}
-                    </div>
-                  )}
-                </div>
-              </>
-            ) : (
-              <>
-                <ReadonlyInput labelName="현재 비밀번호" inputText="현재 비밀번호 입력" />
-                <ReadonlyInput labelName="새 비밀번호" inputText="새 비밀번호 입력" />
-                <ReadonlyInput labelName="새 비밀번호 확인" inputText="새 비밀번호 확인" />
-              </>
-            )}
-          </div>
+              <div>
+                <PasswordInput
+                  placeholder="새 비밀번호 확인"
+                  labelName="새 비밀번호 확인"
+                  {...register('newPasswordRepeat', {
+                    required: '비밀번호를 확인해 주세요.',
+                    validate: {
+                      check: passwordRepeatChecker,
+                    },
+                  })}
+                  hasError={errors}
+                />
+                {errors.newPasswordRepeat && (
+                  <div className={styles['error-message']} role="alert">
+                    {errors.newPasswordRepeat.message}
+                  </div>
+                )}
+              </div>
+            </>
+          ) : (
+            <>
+              <ReadonlyInput labelName="현재 비밀번호" inputText="현재 비밀번호 입력" />
+              <ReadonlyInput labelName="새 비밀번호" inputText="새 비밀번호 입력" />
+              <ReadonlyInput labelName="새 비밀번호 확인" inputText="새 비밀번호 확인" />
+            </>
+          )}
         </div>
 
         <div className={styles['button-wrapper']}>
