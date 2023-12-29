@@ -11,14 +11,20 @@ export default function DashBoardDetailPage() {
   const router = useRouter()
   const boardId = Number(router.query.id)
 
+  const handleMoveToPage = () => {
+    router.push(`/dashboard/${boardId}`)
+  }
+
   return (
     <DashboardLayout>
       <div className={styles.container}>
         <div className={styles.action}>
           <img src="/arrow_forward.svg" className={styles.icon} />
-          <span className={styles.text}>돌아가기</span>
+          <span className={styles.text} onClick={handleMoveToPage}>
+            돌아가기
+          </span>
         </div>
-        <EditDashboard boardId={boardId} />
+        <EditDashboard dashBoardId={boardId} />
         <MemberList dashBoardId={boardId} />
         <InvitationList dashBoardId={boardId} />
         <div className={styles.wrapper}>
