@@ -87,7 +87,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
                             className={styles['member-img']}
                           />
                         ) : (
-                          <RandomProfile size={36} email={member.email} />
+                          <RandomProfile size={36} key={member.id} email={member.email} />
                         )}
                       </>
                     )
@@ -118,7 +118,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
                             className={styles['member-img']}
                           />
                         ) : (
-                          <RandomProfile size={36} email={member.email} />
+                          <RandomProfile size={36} key={member.id} email={member.email} />
                         )}
                       </>
                     )
