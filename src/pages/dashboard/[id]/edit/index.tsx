@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import styles from './index.module.scss'
+import { deleteDashBoard } from '@/api/dashboards/deleteDashboards'
 
 import EditDashboard from '@/components/dashboard/EditDashboard'
 import DashboardLayout from '@/components/ui/layout/DashboardLayout'
@@ -9,7 +11,20 @@ import InvitationList from '@/components/invitations/InvitationList'
 
 export default function DashBoardDetailPage() {
   const router = useRouter()
+  const queryClient = useQueryClient()
   const boardId = Number(router.query.id)
+
+  const { mutate: deleteMutation } = useMutation({
+    mutationFn: (dashBoardId: number) => deleteDashBoard(dashBoardId),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['dashBoards'] })
+      router.push('/mydashboard')
+    },
+  })
+
+  const handleDeleteDashboard = () => {
+    deleteMutation(boardId)
+  }
 
   const handleMoveToPage = () => {
     router.push(`/dashboard/${boardId}`)
@@ -28,7 +43,9 @@ export default function DashBoardDetailPage() {
         <MemberList dashBoardId={boardId} />
         <InvitationList dashBoardId={boardId} />
         <div className={styles.wrapper}>
-          <button className={styles.button}>대시보드 삭제하기</button>
+          <button className={styles.button} onClick={handleDeleteDashboard}>
+            대시보드 삭제하기
+          </button>
         </div>
       </div>
     </DashboardLayout>
