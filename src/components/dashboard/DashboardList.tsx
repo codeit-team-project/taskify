@@ -41,7 +41,7 @@ export default function DashboardList() {
   }, [currentPage, isPlaceholderData, hasMorePage, queryClient])
 
   return (
-    <section>
+    <section className={styles.container}>
       <div className={styles.boards}>
         <div className={styles['add-button']}>
           <span className={styles.title}>새로운 대시보드</span>
@@ -49,16 +49,22 @@ export default function DashboardList() {
         </div>
         {data?.dashboards.map((dashboard) => (
           <li key={dashboard.id} className={styles.list} onClick={handleMoveToPage(dashboard.id)}>
-            <DashboardItem title={dashboard.title} color={dashboard.color} />
+            <DashboardItem
+              title={dashboard.title}
+              color={dashboard.color}
+              createdByMe={dashboard.createdByMe}
+            />
           </li>
         ))}
       </div>
-      <Pagination
-        count={data ? data?.totalCount : 1}
-        pageSize={pageSize}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+      <div className={styles.page}>
+        <Pagination
+          count={data ? data?.totalCount : 1}
+          pageSize={pageSize}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
+      </div>
     </section>
   )
 }
