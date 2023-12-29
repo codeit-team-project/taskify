@@ -3,8 +3,8 @@ import { DashBoardMembers } from '@/types/members'
 
 export const getDashBoardMembers = async (
   dashBoardId: number,
-  currentPage: number,
-  size: number,
+  currentPage?: number,
+  size?: number,
 ) => {
   const QUERY_STRING = `${currentPage ? `&page=${currentPage}` : ''}${size ? `&size=${size}` : ''}`
 
