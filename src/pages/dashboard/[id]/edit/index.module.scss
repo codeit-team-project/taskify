@@ -51,6 +51,7 @@
   color: var(--color-black_33);
   border-radius: 0.8rem;
   border: 1px solid var(--color-gray30);
+  white-space: nowrap;
 
   @include mobile {
     padding: 1.6rem 8.2rem;
