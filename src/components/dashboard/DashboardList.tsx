@@ -1,24 +1,44 @@
 import { useRouter } from 'next/router'
-import { useQuery } from '@tanstack/react-query'
+import { useEffect, useState } from 'react'
+import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
 import styles from './DashboardList.module.scss'
 
 import DashboardItem from './DashboardItem'
+import Pagination from '@/components/pagination/Pagination'
 
 import { getDashBoardList } from '@/api/dashboards/getDashboards'
 import { DashBoardListType } from '@/types/dashBoardType'
 
 export default function DashboardList() {
   const router = useRouter()
+  const queryClient = useQueryClient()
 
-  const { data } = useQuery<DashBoardListType>({
-    queryKey: ['dashBoards'],
-    queryFn: getDashBoardList,
+  const pageSize = 5 // data per page
+  const [currentPage, setCurrentPage] = useState(1)
+
+  const { data, isPlaceholderData } = useQuery<DashBoardListType>({
+    queryKey: ['dashBoards', currentPage, pageSize],
+    queryFn: () => getDashBoardList(currentPage, pageSize),
+    placeholderData: keepPreviousData,
+    staleTime: 3000,
   })
 
   const handleMoveToPage = (boardId: number) => () => {
     router.push(`/dashboard/${boardId}`)
   }
   console.log(data) // 삭제예정
+
+  const hasMorePage = data && currentPage < Math.ceil(data?.totalCount / pageSize)
+
+  // Prefetch the next page
+  useEffect(() => {
+    if (!isPlaceholderData && hasMorePage) {
+      queryClient.prefetchQuery({
+        queryKey: ['dashBoards', currentPage + 1],
+        queryFn: () => getDashBoardList(currentPage + 1, pageSize),
+      })
+    }
+  }, [currentPage, isPlaceholderData, hasMorePage, queryClient])
 
   return (
     <section>
@@ -33,7 +53,12 @@ export default function DashboardList() {
           </li>
         ))}
       </div>
-      <div>페이지네이션</div>
+      <Pagination
+        count={data ? data?.totalCount : 1}
+        pageSize={pageSize}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </section>
   )
 }
