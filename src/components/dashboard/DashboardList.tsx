@@ -28,7 +28,6 @@ export default function DashboardList() {
   const handleMoveToPage = (boardId: number) => () => {
     router.push(`/dashboard/${boardId}`)
   }
-  console.log(data) // 삭제예정
 
   const handleOpenModal = () => {
     setIsOpenModal(true)
