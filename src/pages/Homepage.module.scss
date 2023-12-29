@@ -8,82 +8,82 @@
   justify-content: center;
   align-items: center;
   gap: 10rem;
-  padding: 9rem;
+  padding: 6rem 1.6rem 26rem 1.6rem;
   @include tablet {
-    padding: 4rem;
+    padding-bottom: 16rem;
   }
   @include mobile {
-    gap: 4rem;
-    padding: 2rem;
+    gap: 5rem;
+    padding-top: 4rem;
   }
+}
 
-  header {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 3rem;
-    & .img {
-      position: relative;
-      width: 72.2rem;
-      height: 42.2rem;
-      @include tablet {
-        width: 53.7rem;
-        height: 31.4rem;
-      }
-      @include mobile {
-        width: 29rem;
-        height: 17rem;
-      }
+.header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 3rem;
+  & .img {
+    position: relative;
+    width: 72.2rem;
+    height: 42.2rem;
+    @include tablet {
+      width: 53.7rem;
+      height: 31.4rem;
     }
-    & h1 {
-      font-size: 7.6rem;
+    @include mobile {
+      width: 29rem;
+      height: 17rem;
+    }
+  }
+  & h1 {
+    font-size: 7.6rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 100px; /* 131.579% */
+    letter-spacing: -2px;
+    text-align: center;
+    white-space: nowrap;
+    & span {
+      color: var(--color-violet);
       font-style: normal;
       font-weight: 700;
-      line-height: 100px; /* 131.579% */
-      letter-spacing: -2px;
-      text-align: center;
-      white-space: nowrap;
-      & span {
-        color: var(--color-violet);
-        font-style: normal;
-        font-weight: 700;
-        line-height: 65px; /* 72.222% */
-        letter-spacing: -1px;
-      }
-      @include tablet {
-        font-size: 5.6rem;
-      }
-      @include mobile {
-        font-size: 4rem;
-        span {
-          display: block;
-          margin-top: -2rem;
-        }
-      }
-    }
-    & .description {
-      text-align: center;
-      font-size: 1.8rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
+      line-height: 65px; /* 72.222% */
       letter-spacing: -1px;
-      @include tablet {
-        font-size: 1.6rem;
-      }
-      @include mobile {
-        font-size: 1.2rem;
+    }
+    @include tablet {
+      font-size: 5.6rem;
+    }
+    @include mobile {
+      font-size: 4rem;
+      span {
+        display: block;
+        margin-top: -2rem;
       }
     }
-    & button {
-      color: white;
+  }
+  & .description {
+    text-align: center;
+    font-size: 1.8rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    letter-spacing: -1px;
+    @include tablet {
       font-size: 1.6rem;
-      border-radius: 8px;
-      background: var(--color-violet);
-      width: 27rem;
-      height: 5.5rem;
-      margin-top: 5rem;
     }
+    @include mobile {
+      font-size: 1.2rem;
+    }
+  }
+  & button {
+    color: white;
+    font-size: 1.6rem;
+    border-radius: 8px;
+    background: var(--color-violet);
+    width: 27rem;
+    height: 5.5rem;
+    margin-top: 5rem;
   }
 }
