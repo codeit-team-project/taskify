@@ -1,7 +1,9 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import { useRouter } from 'next/router'
 import { useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
+import classNames from 'classnames'
 
 import styles from './Sidebar.module.scss'
 import { getDashBoardList } from '@/api/dashboards/getDashboards'
@@ -11,7 +13,10 @@ import { DashBoardListType } from '@/types/dashBoardType'
 import NewDashboardModal from '@/components/dashboard/NewDashboardModal'
 
 export default function Sidebar() {
+  const router = useRouter()
   const [isModalOpen, setIsModalOpen] = useState(false)
+
+  const currentPage = Number(router.query.id)
 
   const { data } = useQuery<DashBoardListType>({
     queryKey: ['dashBoards'],
@@ -46,7 +51,13 @@ export default function Sidebar() {
         </div>
         <div className={styles.list}>
           {data?.dashboards.map((board) => (
-            <Link key={board.id} className={styles.menus} href={`/dashboard/${board.id}`}>
+            <Link
+              key={board.id}
+              href={`/dashboard/${board.id}`}
+              className={classNames(styles.menus, {
+                [styles.current]: currentPage === board.id,
+              })}
+            >
               <SidebarItem board={board} />
             </Link>
           ))}
