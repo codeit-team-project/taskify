@@ -22,7 +22,7 @@ export default function DashboardList() {
     queryKey: ['dashBoards', currentPage, pageSize],
     queryFn: () => getDashBoardList(currentPage, pageSize),
     placeholderData: keepPreviousData,
-    staleTime: 3000,
+    staleTime: 1000,
   })
 
   const handleMoveToPage = (boardId: number) => () => {
