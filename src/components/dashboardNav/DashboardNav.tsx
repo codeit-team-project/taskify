@@ -28,6 +28,8 @@ export default function DashboardNav({ boardId }: DashboardNavProps) {
   const { data: boardInfo } = useQuery<DashBoardType>({
     queryKey: ['dashBoardsDetail', boardId],
     queryFn: () => getDashBoardsDetail(boardId),
+    staleTime: 2000,
+    enabled: !!boardId,
   })
 
   return (

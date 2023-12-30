@@ -25,6 +25,7 @@ export default function NavProfile({
   const { data: userInfo } = useQuery<UserType>({
     queryKey: ['get-user-key'],
     queryFn: () => getUser(),
+    staleTime: 1000,
   })
 
   return (

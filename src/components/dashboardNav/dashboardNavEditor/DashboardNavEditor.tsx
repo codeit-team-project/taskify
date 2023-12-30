@@ -29,7 +29,8 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
   const { data: memberData } = useQuery<DashBoardMembers>({
     queryKey: ['dashBoardMembers', boardId],
     queryFn: () => getDashBoardMembers(boardId),
-    staleTime: 3000,
+    staleTime: 2000,
+    enabled: !!boardId,
   })
 
   const handleView = () => {
