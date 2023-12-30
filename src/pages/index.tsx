@@ -3,6 +3,7 @@ import { useRouter } from 'next/router'
 
 import HomeLayout from '@/components/ui/layout/HomeLayout'
 import styles from './Homepage.module.scss'
+import StyledDescription from '@/components/styledDescription/StyledDescription'
 
 export default function Home() {
   const router = useRouter()
@@ -63,6 +64,53 @@ export default function Home() {
             />
           </div>
         </section>
+
+        <footer className={styles.footer}>
+          <h2>생산성을 높이는 다양한 설정들</h2>
+          <section>
+            <StyledDescription
+              title="대시보드 설정"
+              description="대시보드 사진과 이름을 변경할 수 있어요."
+            >
+              <div className={styles.container}>
+                <Image
+                  src="/assets/homeImgs/img11.png"
+                  alt=""
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '80%', height: 'auto' }}
+                />
+              </div>
+            </StyledDescription>
+
+            <StyledDescription title="초대" description="새로운 팀원을 초대할 수 있어요.">
+              <div>
+                <Image
+                  src="/assets/homeImgs/img2.png"
+                  alt=""
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '55%', height: 'auto' }}
+                />
+              </div>
+            </StyledDescription>
+
+            <StyledDescription title="구성원" description="구성원을 초대하고 내보낼 수 있어요.">
+              <div className={styles.container}>
+                <Image
+                  src="/assets/homeImgs/img33.png"
+                  alt=""
+                  width={0}
+                  height={0}
+                  sizes="100vw"
+                  style={{ width: '60%', height: 'auto' }}
+                />
+              </div>
+            </StyledDescription>
+          </section>
+        </footer>
       </div>
     </HomeLayout>
   )

@@ -166,3 +166,36 @@
     }
   }
 }
+
+.footer {
+  display: flex;
+  gap: 5rem;
+  flex-direction: column;
+  place-items: flex-start center;
+  & h2 {
+    font-feature-settings:
+      'clig' off,
+      'liga' off;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+  }
+  @include tablet {
+    place-items: center center;
+  }
+
+  & .container {
+    position: relative;
+    top: 5rem;
+  }
+  & section {
+    display: flex;
+    place-items: center space-between;
+    gap: 3rem;
+    @include tablet {
+      flex-direction: column;
+      place-items: center center;
+    }
+  }
+}
