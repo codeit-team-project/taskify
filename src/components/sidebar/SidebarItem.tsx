@@ -10,7 +10,9 @@ interface SidebarItemProps {
 export default function SidebarItem({ board }: SidebarItemProps) {
   return (
     <>
-      <EllipseIcon size={8} color={board.color} />
+      <div>
+        <EllipseIcon size={8} color={board.color} />
+      </div>
       <button className={styles.menu}>{board.title}</button>
       <span className={styles['icon-wrapper']}>
         {board.createdByMe && (

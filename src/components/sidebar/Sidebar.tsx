@@ -35,7 +35,7 @@ export default function Sidebar() {
           <Image src="/assets/add_box.svg" alt="대시보드 추가하기 버튼" fill />
         </button>
       </div>
-      <div>
+      <div className={styles.list}>
         {data?.dashboards.map((board) => (
           <Link key={board.id} className={styles.menus} href={`/dashboard/${board.id}`}>
             <SidebarItem board={board} />
