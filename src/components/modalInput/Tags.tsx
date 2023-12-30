@@ -3,9 +3,11 @@ import styles from '@/components/modalInput/Tags.module.scss'
 import { KeyboardEvent } from 'react'
 import { FormContext } from '@/context/formContext'
 
-type Tag = string
+interface TagsProps {
+  EditTags?: Array<string>
+}
 
-export default function Tags({ EditTags = [] }: { EditTags?: Array<string> }) {
+export default function Tags({ EditTags = [] }: TagsProps) {
   const { tags, setTags } = useContext(FormContext)
   const colorArr = ['orange', 'blue', 'green', 'pink']
 
@@ -17,7 +19,7 @@ export default function Tags({ EditTags = [] }: { EditTags?: Array<string> }) {
     const inputValue = e.currentTarget.value
     if (e.key === 'Enter' && inputValue !== '') {
       const randomNum = Math.floor(Math.random() * 4)
-      setTags((prev: Tag[]) => [...prev, inputValue + '$' + colorArr[randomNum]])
+      setTags((prev: string[]) => [...prev, inputValue + '$' + colorArr[randomNum]])
       e.currentTarget.value = ''
     }
   }

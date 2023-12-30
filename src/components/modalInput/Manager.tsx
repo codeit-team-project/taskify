@@ -7,7 +7,7 @@ import { FormContext } from '@/context/formContext'
 
 export type managerListType = Members[]
 
-interface ManagerPropsType {
+interface ManagerProps {
   managerId?: number
   editName?: string
   profileImageUrl?: string
@@ -19,7 +19,7 @@ export default function Manager({
   editName = '',
   profileImageUrl = '',
   managerList = [],
-}: ManagerPropsType) {
+}: ManagerProps) {
   const {
     profileImage,
     setProfileImage,

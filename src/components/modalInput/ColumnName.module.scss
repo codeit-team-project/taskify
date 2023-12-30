@@ -13,9 +13,9 @@
 
 @mixin dropdownButton {
   width: 25rem;
-  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  border: 1px solid var(--color-gray30);
   border-radius: 6px;
-  background: var(--white-white_FFFFFF, #fff);
+  background: var(--color-white);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,10 +36,10 @@
   }
 }
 .dropdown {
-  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  border: 1px solid var(--color-gray30);
   border-radius: 6px;
   box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
-  background: var(--white-white_FFFFFF, #fff);
+  background: var(--color-white);
   position: absolute;
   top: 100%;
   ul {
@@ -47,7 +47,7 @@
     padding: 0;
   }
   li:hover {
-    color: var(--violet-violet_5534DA, #5534da);
-    background: var(--violet-violet-8, #f1effd);
+    color: var(--color-violet);
+    background: var(--color-violet_8);
   }
 }
