@@ -1,26 +1,25 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect } from 'react'
 import styles from '@/components/modalInput/DesCription.module.scss'
 import { FormContext } from '@/context/formContext'
 
-export default function DesCription() {
+export default function DesCription({ EditDesScription = '' }) {
   const { description, setDescription } = useContext(FormContext)
 
-  const handleDescription = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleDescription = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setDescription(e.target.value)
   }
-
+  useEffect(() => {
+    if (EditDesScription.length > 0) {
+      setDescription(EditDesScription)
+    }
+  }, [])
   return (
     <div className={styles.container}>
       <div>
         <span className={styles.text}>설명</span>
         <span className={styles.emphasis}>*</span>
       </div>
-      <input
-        type="textarea"
-        className={styles.textarea}
-        value={description}
-        onChange={handleDescription}
-      />
+      <textarea className={styles.textarea} value={description} onChange={handleDescription} />
     </div>
   )
 }
