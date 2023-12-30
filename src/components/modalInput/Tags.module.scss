@@ -16,7 +16,7 @@
   justify-content: flex-start;
   border-radius: 6px;
   flex-wrap: wrap;
-  border: 1px solid var(--gray-gray_D9D9D9, #d9d9d9);
+  border: 1px solid var(--color-gray30);
   overflow: hidden;
   ul {
     display: flex;
@@ -26,7 +26,7 @@
     top: 2rem;
   }
   input {
-    background: var(--white-white_FFFFFF, #fff);
+    background: var(--color-white);
     padding: 1rem;
     border: 0;
 
