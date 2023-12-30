@@ -21,7 +21,7 @@ export default function EllipseIcon({ size, color, children }: EllipseIconProps)
         r={size / 2}
         fill={color}
         stroke="white"
-        stroke-width="2"
+        strokeWidth={2}
       />
       {children}
     </svg>
