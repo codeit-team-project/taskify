@@ -4,6 +4,8 @@ import styles from './Member.module.scss'
 import { Members } from '@/types/members'
 import { deleteDashBoardMember } from '@/api/members/deleteMembers'
 
+import RandomProfile from '@/components/randomProfile/RandomProfile'
+
 interface MemberItemProps {
   dashBoardId: number
   member: Members
@@ -27,8 +29,7 @@ export default function MemberItem({ dashBoardId, member }: MemberItemProps) {
   return (
     <>
       <div className={styles['name-wrapper']}>
-        {/* 이미지 컴포넌트 구현예정 */}
-        <img src="/circle.svg" />
+        <RandomProfile size={30} email={member.email} />
         <span className={styles.nickname}>{member.nickname}</span>
       </div>
       <button className={styles['member-button']} onClick={handleDeleteMember(member.id)}>
