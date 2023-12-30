@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import styles from './index.module.scss'
@@ -26,18 +27,14 @@ export default function DashBoardDetailPage() {
     deleteMutation(boardId)
   }
 
-  const handleMoveToPage = () => {
-    router.push(`/dashboard/${boardId}`)
-  }
-
   return (
     <DashboardLayout>
       <div className={styles.container}>
         <div className={styles.action}>
-          <img src="/arrow_forward.svg" className={styles.icon} />
-          <span className={styles.text} onClick={handleMoveToPage}>
-            돌아가기
-          </span>
+          <Link href={`/dashboard/${boardId}`} className={styles.info}>
+            <img src="/arrow_forward.svg" className={styles.icon} />
+            <span className={styles.text}>돌아가기</span>
+          </Link>
         </div>
         <EditDashboard dashBoardId={boardId} />
         <MemberList dashBoardId={boardId} />
