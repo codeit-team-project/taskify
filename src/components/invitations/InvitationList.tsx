@@ -32,6 +32,7 @@ export default function InvitationList({ dashBoardId }: InvitationListProps) {
     queryFn: () => getDashBoardInvitations(dashBoardId, currentPage, pageSize),
     placeholderData: keepPreviousData,
     staleTime: 3000,
+    enabled: !!dashBoardId,
   })
 
   const handleOpenModal = () => {

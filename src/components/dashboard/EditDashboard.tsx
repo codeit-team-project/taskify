@@ -28,6 +28,7 @@ export default function EditDashboard({ dashBoardId }: EditDashboardProps) {
   const { data } = useQuery<DashBoardType>({
     queryKey: ['dashBoardsDetail', dashBoardId],
     queryFn: () => getDashBoardsDetail(dashBoardId),
+    enabled: !!dashBoardId,
   })
 
   const { mutate: updateDashBoard } = useMutation({

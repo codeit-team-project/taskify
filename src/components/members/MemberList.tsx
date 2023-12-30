@@ -29,6 +29,7 @@ export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
     queryFn: () => getDashBoardMembers(dashBoardId, currentPage, pageSize),
     placeholderData: keepPreviousData,
     staleTime: 3000,
+    enabled: !!dashBoardId,
   })
 
   const hasMorePage = data && currentPage < Math.ceil(data?.totalCount / pageSize)
