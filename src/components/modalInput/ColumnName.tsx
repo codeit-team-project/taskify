@@ -5,12 +5,12 @@ import arrowDown from '../../../public/assets/images/arrowDown.svg'
 import { ColumnType } from '@/types/columnsType'
 import { FormContext } from '@/context/formContext'
 
-interface EdicColumn {
+interface ColumnNameProps {
   editColumn: string
   editColumnId: number
   columnList: ColumnType[]
 }
-export default function ColumnName({ editColumnId, editColumn, columnList }: EdicColumn) {
+export default function ColumnName({ editColumnId, editColumn, columnList }: ColumnNameProps) {
   const { setColumnId, columnName, setColumnName } = useContext(FormContext)
 
   const [isOpen, setIsOpen] = useState(false)
