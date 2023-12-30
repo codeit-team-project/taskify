@@ -1,8 +1,14 @@
 @import '@/styles/mixin.scss';
 
 .signinput-container {
-  padding: 1.5rem 0;
-  min-width: 350px;
+  padding: 1.2rem 0;
+  width: 52rem;
+  @include tablet-narrow {
+    width: 35rem;
+  }
+  @include mobile {
+    width: 100%;
+  }
 }
 
 .error-message {
@@ -17,5 +23,22 @@
   }
   @include mobile {
     font-size: 1rem;
+  }
+}
+
+.submit-button {
+  font-size: 1.8rem;
+  margin: 2rem 0;
+  width: 100%;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  color: white;
+  padding: 1.4rem;
+  border-radius: 8px;
+  background: var(--color-violet);
+
+  &[data-disable='true'] {
+    background: var(--color-gray40);
   }
 }
