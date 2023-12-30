@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import Link from 'next/link'
 import { useQuery } from '@tanstack/react-query'
 
 import styles from './Sidebar.module.scss'
@@ -16,15 +17,17 @@ export default function Sidebar() {
   return (
     <section className={styles.container}>
       <div className={styles.logo}>
-        <Image src="/assets/large_logo.svg" alt="로고" width={29} height={34} priority />
-        <Image
-          src="/assets/large_Taskify.svg"
-          className={styles['logo-text']}
-          alt="로고"
-          width={80}
-          height={22}
-          priority
-        />
+        <Link href={'/mydashboard'}>
+          <Image src="/assets/large_logo.svg" alt="로고" width={29} height={34} priority />
+          <Image
+            src="/assets/large_Taskify.svg"
+            className={styles['logo-text']}
+            alt="로고"
+            width={80}
+            height={22}
+            priority
+          />
+        </Link>
       </div>
       <div className={styles['title-wrapper']}>
         <span className={styles.title}>Dash Boards</span>
@@ -34,9 +37,9 @@ export default function Sidebar() {
       </div>
       <div>
         {data?.dashboards.map((board) => (
-          <li key={board.id} className={styles.menus}>
+          <Link key={board.id} className={styles.menus} href={`/dashboard/${board.id}`}>
             <SidebarItem board={board} />
-          </li>
+          </Link>
         ))}
       </div>
     </section>
