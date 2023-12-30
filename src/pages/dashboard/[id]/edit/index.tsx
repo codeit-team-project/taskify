@@ -28,11 +28,7 @@ export default function DashBoardDetailPage() {
   }
 
   return (
-<<<<<<< HEAD
     <DashboardLayout boardId={Number(boardId)}>
-      <EditDashboard boardId={Number(boardId)} />
-=======
-    <DashboardLayout>
       <div className={styles.container}>
         <div className={styles.action}>
           <Link href={`/dashboard/${boardId}`} className={styles.info}>
@@ -49,7 +45,6 @@ export default function DashBoardDetailPage() {
           </button>
         </div>
       </div>
->>>>>>> 9778c1cb1b7270c763a402d0474bc5df2fe87cc1
     </DashboardLayout>
   )
 }
