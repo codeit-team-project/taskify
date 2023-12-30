@@ -16,25 +16,26 @@ import { getDashBoardsDetail } from '@/api/dashboards/getDashboardsDetail'
 import { editDashBoard } from '@/api/dashboards/editDashboards'
 
 interface EditDashboardProps {
-  boardId: number
+  dashBoardId: number
 }
 
-export default function EditDashboard({ boardId }: EditDashboardProps) {
+export default function EditDashboard({ dashBoardId }: EditDashboardProps) {
   const queryClient = useQueryClient()
 
   const [title, setTitle] = useState('')
   const [selectedColor, setSelectedColor] = useState('')
 
   const { data } = useQuery<DashBoardType>({
-    queryKey: ['dashBoardsDetail', boardId],
-    queryFn: () => getDashBoardsDetail(boardId),
+    queryKey: ['dashBoardsDetail', dashBoardId],
+    queryFn: () => getDashBoardsDetail(dashBoardId),
+    enabled: !!dashBoardId,
   })
 
   const { mutate: updateDashBoard } = useMutation({
     mutationKey: ['updateDashBoard'],
-    mutationFn: (data: DashBoardValueType) => editDashBoard(boardId, data),
+    mutationFn: (data: DashBoardValueType) => editDashBoard(dashBoardId, data),
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ['dashBoardsDetail', boardId] })
+      queryClient.invalidateQueries({ queryKey: ['dashBoardsDetail', dashBoardId] })
       queryClient.invalidateQueries({ queryKey: ['dashBoards'] })
     },
   })
