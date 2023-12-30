@@ -27,7 +27,6 @@ export default function DeadLine({ EditDeadLine = '' }) {
       </span>
       <DatePicker
         locale={ko}
-        // value={EditDeadLine}
         selected={dueDate}
         dateFormat="yyyy.MM.dd HH:mm"
         minDate={new Date()}

@@ -14,7 +14,6 @@ export default function ColumnName({ editColumnId, editColumn, columnList }: Edi
   const { setColumnId, columnName, setColumnName } = useContext(FormContext)
 
   const [isOpen, setIsOpen] = useState(false)
-  // dropdown메뉴 오픈
   const handleOpenClick = () => {
     setIsOpen(!isOpen)
   }
