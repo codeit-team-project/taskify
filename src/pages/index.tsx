@@ -23,6 +23,46 @@ export default function Home() {
           <div className={styles.description}>센스있게 일정을 관리해보세요!</div>
           <button onClick={handleMoveToSignin}>로그인하기</button>
         </header>
+
+        <section className={styles.section}>
+          <article>
+            <h3>Point 1</h3>
+            <p>
+              일의 우선순위를 <br />
+              관리하세요
+            </p>
+          </article>
+          <div className={styles['img-1']}>
+            <Image
+              src="/assets/homeImgs/img1.png"
+              alt=""
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+        </section>
+
+        <section className={styles.section}>
+          <article className={styles.article}>
+            <h3>Point 2</h3>
+            <p>
+              해야 할 일을 <br />
+              등록하세요
+            </p>
+          </article>
+          <div className={styles['img-2']}>
+            <Image
+              src="/assets/homeImgs/img2.png"
+              alt=""
+              width={0}
+              height={0}
+              sizes="100vw"
+              style={{ width: '100%', height: 'auto' }}
+            />
+          </div>
+        </section>
       </div>
     </HomeLayout>
   )
