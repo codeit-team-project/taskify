@@ -60,13 +60,13 @@ export default function Home() {
               width={0}
               height={0}
               sizes="100vw"
-              style={{ width: '100%', height: 'auto' }}
+              style={{ width: '100%', minWidth: '30rem', height: 'auto' }}
             />
           </div>
         </section>
 
         <footer className={styles.footer}>
-          <h2>생산성을 높이는 다양한 설정들</h2>
+          <h2>생산성을 높이는 다양한 설정들 ⚡</h2>
           <section>
             <StyledDescription
               title="대시보드 설정"
@@ -79,7 +79,7 @@ export default function Home() {
                   width={0}
                   height={0}
                   sizes="100vw"
-                  style={{ width: '80%', height: 'auto' }}
+                  style={{ width: '30rem', height: 'auto' }}
                 />
               </div>
             </StyledDescription>
@@ -92,20 +92,20 @@ export default function Home() {
                   width={0}
                   height={0}
                   sizes="100vw"
-                  style={{ width: '55%', height: 'auto' }}
+                  style={{ width: '20rem', height: 'auto' }}
                 />
               </div>
             </StyledDescription>
 
             <StyledDescription title="구성원" description="구성원을 초대하고 내보낼 수 있어요.">
-              <div className={styles.container}>
+              <div className={styles.container1}>
                 <Image
                   src="/assets/homeImgs/img33.png"
                   alt=""
                   width={0}
                   height={0}
                   sizes="100vw"
-                  style={{ width: '60%', height: 'auto' }}
+                  style={{ width: '28rem', height: 'auto' }}
                 />
               </div>
             </StyledDescription>
