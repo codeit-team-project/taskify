@@ -40,8 +40,8 @@ export default function RandomProfile({ size, email }: RandomProfileProps) {
         fontWeight="700"
         alignmentBaseline="middle"
         textAnchor="middle"
-        x={size / 2}
-        y={size / 2}
+        x={size / 2 + 1}
+        y={size / 2 + 1}
       >
         {bigLetter}
       </text>

@@ -2,7 +2,8 @@
 
 .container {
   padding: 2.8rem;
-  width: 62rem;
+  max-width: 62rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   gap: 2.8rem;
@@ -84,14 +85,15 @@
 
 @include tablet {
   .container {
-    max-width: 54.4rem;
+    min-width: 54.4rem;
   }
 }
 
 @include mobile {
   .container {
     padding: 2rem;
-    width: 28.4rem;
+    min-width: 28.4rem;
+    width: 100%;
     gap: 1.6rem;
   }
 

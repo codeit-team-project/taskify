@@ -10,7 +10,7 @@ import { DashBoardListType } from '@/types/dashBoardType'
 export default function Sidebar() {
   const { data } = useQuery<DashBoardListType>({
     queryKey: ['dashBoards'],
-    queryFn: getDashBoardList,
+    queryFn: () => getDashBoardList(),
   })
 
   return (
