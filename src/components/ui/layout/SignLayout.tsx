@@ -49,7 +49,7 @@ export default function SignLayout({ children, isSignin }: SignLayoutProps) {
             </div>
           </Link>
           <div className={styles['greeting-container']}>{messages.greeting}</div>
-          <div className={styles['form-container']}>{children}</div>
+          <>{children}</>
           <div className={styles['link-container']}>
             <span>{messages.guiding}</span>
             <Link href={messages.linkPath}>{messages.linkName}</Link>

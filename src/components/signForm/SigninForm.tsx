@@ -64,7 +64,7 @@ export default function SigninForm() {
   }
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form onSubmit={handleSubmit(onSubmit)} className={styles.form}>
       <div className={styles['signinput-container']}>
         <TextInput
           placeholder="이메일을 입력해 주세요."
