@@ -41,10 +41,10 @@ export default function Pagination({
       </span>
       <div>
         <button onClick={handlePrevPage} className={forwardButtonStyle}>
-          <img src="arrow_forward.svg" alt="이전 페이지" />
+          <img src="/arrow_forward.svg" alt="이전 페이지" />
         </button>
         <button onClick={handleNextPage} className={nextButtonStyle}>
-          <img src="arrow_next.svg" alt="다음 페이지" />
+          <img src="/arrow_next.svg" alt="다음 페이지" />
         </button>
       </div>
     </div>

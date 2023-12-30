@@ -11,8 +11,7 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    // eslint에서 recomment하는것 이외에 적용시킬 rules
-    "no-unused-vars": "error",
+    "@typescript-eslint/no-unused-vars": "error",
     "import/no-unresolved": "error",
     "react/jsx-props-no-spreading": "off",
     "prettier/prettier": [

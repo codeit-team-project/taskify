@@ -3,7 +3,6 @@
 .container {
   max-width: 62rem;
   width: 100%;
-  min-height: 47.7rem;
   display: flex;
   flex-direction: column;
   border-radius: 0.8rem;
@@ -101,8 +100,9 @@
 
 @include tablet {
   .container {
-    max-width: 54.4rem;
+    min-width: 28.4rem;
     width: 100%;
+    min-height: auto;
   }
 
   .info {
@@ -110,8 +110,13 @@
   }
 }
 
-@include tablet-narrow {
+@include mobile {
+  .container {
+    min-width: 28.4rem;
+  }
+
   .description {
+    padding: 2.4rem 2rem 2.8rem 2rem;
     grid-template-areas:
       'title title title'
       'email email button';
@@ -122,26 +127,12 @@
     gap: 0;
   }
 
-  .action {
-    width: 100%;
-  }
-}
-
-@include mobile {
-  .container {
-    max-width: 28.4rem;
-    min-height: 40.6rem;
-  }
-
   .title {
     font-size: 2rem;
   }
 
-  .description {
-    padding: 2.4rem 2rem 2.8rem 2rem;
-  }
-
   .action {
+    width: 100%;
     height: 2.8rem;
     padding: 0.7rem 1.2rem;
     justify-content: center;

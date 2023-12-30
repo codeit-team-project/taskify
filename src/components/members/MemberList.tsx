@@ -1,8 +1,6 @@
 /**
  * @TODO 구성원 컴포넌트
- * 1. 유저프로필 이미지 (리팩토링)
- * 2. 버튼 UI 공통컴포넌트화 (세컨더리 버튼) (리팩토링)
- * 3. router path로 /dashboard/boardid/edit 페이지에서 대시보드 아이디 받기
+ * 1. 버튼 UI 공통컴포넌트화 (세컨더리 버튼) (리팩토링)
  */
 import { useEffect, useState } from 'react'
 import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
@@ -21,7 +19,7 @@ interface MomberListProps {
 export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
   const queryClient = useQueryClient()
 
-  const pageSize = 2 // data per page
+  const pageSize = 4 // data per page
   const [currentPage, setCurrentPage] = useState(1)
 
   const { data, isPlaceholderData } = useQuery<DashBoardMembers>({
@@ -29,6 +27,7 @@ export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
     queryFn: () => getDashBoardMembers(dashBoardId, currentPage, pageSize),
     placeholderData: keepPreviousData,
     staleTime: 3000,
+    enabled: !!dashBoardId,
   })
 
   const hasMorePage = data && currentPage < Math.ceil(data?.totalCount / pageSize)

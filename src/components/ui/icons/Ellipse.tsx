@@ -15,7 +15,14 @@ export default function EllipseIcon({ size, color, children }: EllipseIconProps)
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
-      <circle cx={size / 2} cy={size / 2} r={size / 2} fill={color} />
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={size / 2}
+        fill={color}
+        stroke="white"
+        strokeWidth={2}
+      />
       {children}
     </svg>
   )

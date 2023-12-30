@@ -1,10 +1,10 @@
 // 데스크탑 퍼스트 스타일. 화면이 작아질 수록 스타일을 덮어쓰는 방식입니다.
 
-$tablet: 745px;
+$tablet: 1023px;
 $tablet-narrow: 601px;
-$mobile: 376px;
+$mobile: 743px;
 
-// 브라우저 크기가 744px 이하일 때
+// 브라우저 크기가 1023px 이하부터 744px 이상일 때
 @mixin tablet {
   @media (max-width: $tablet) {
     @content;
@@ -18,7 +18,7 @@ $mobile: 376px;
   }
 }
 
-// 브라우저 크기가 375px 이하일 때
+// 브라우저 크기가 743px 이하일 때
 @mixin mobile {
   @media (max-width: $mobile) {
     @content;
