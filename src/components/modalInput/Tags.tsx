@@ -19,7 +19,13 @@ export default function Tags({ EditTags = [] }: TagsProps) {
     const inputValue = e.currentTarget.value
     if (e.key === 'Enter' && inputValue !== '') {
       const randomNum = Math.floor(Math.random() * 4)
-      setTags((prev: string[]) => [...prev, inputValue + '$' + colorArr[randomNum]])
+      const newTag = inputValue + '$' + colorArr[randomNum]
+
+      const isDuplicated = tags.some((tag) => tag.split('$')[0] === inputValue)
+      if (isDuplicated) {
+        setTags((prev: string[]) => prev.filter((tag) => tag.split('$')[0] !== inputValue))
+      }
+      setTags((prev: string[]) => [...prev, newTag])
       e.currentTarget.value = ''
     }
   }
