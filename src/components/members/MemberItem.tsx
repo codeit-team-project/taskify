@@ -32,9 +32,11 @@ export default function MemberItem({ dashBoardId, member }: MemberItemProps) {
         <RandomProfile size={30} email={member.email} />
         <span className={styles.nickname}>{member.nickname}</span>
       </div>
-      <button className={styles['member-button']} onClick={handleDeleteMember(member.id)}>
-        삭제
-      </button>
+      {!member.isOwner && (
+        <button className={styles['member-button']} onClick={handleDeleteMember(member.id)}>
+          삭제
+        </button>
+      )}
     </>
   )
 }
