@@ -74,6 +74,7 @@
     font-weight: 400;
     line-height: normal;
     letter-spacing: -1px;
+    margin-bottom: 5rem;
     @include tablet {
       font-size: 1.6rem;
     }
@@ -88,7 +89,6 @@
     background: var(--color-violet);
     width: 27rem;
     height: 5.5rem;
-    margin-top: 5rem;
   }
 }
 

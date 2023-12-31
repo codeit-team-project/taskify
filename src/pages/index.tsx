@@ -1,16 +1,11 @@
 import Image from 'next/image'
-import { useRouter } from 'next/router'
+import Link from 'next/link'
 
 import HomeLayout from '@/components/ui/layout/HomeLayout'
 import styles from './Homepage.module.scss'
 import StyledDescription from '@/components/styledDescription/StyledDescription'
 
 export default function Home() {
-  const router = useRouter()
-
-  const handleMoveToSignin = () => {
-    router.push('/signin')
-  }
   return (
     <HomeLayout>
       <div className={styles.body}>
@@ -22,7 +17,9 @@ export default function Home() {
             새로운 일정 관리 <span>Taskify</span>
           </h1>
           <div className={styles.description}>센스있게 일정을 관리해보세요!</div>
-          <button onClick={handleMoveToSignin}>로그인하기</button>
+          <Link href="/signin">
+            <button>로그인하기</button>
+          </Link>
         </header>
         <section className={styles.section}>
           <article>
