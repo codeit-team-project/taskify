@@ -64,12 +64,14 @@ export default function DashboardList() {
           ))}
         </div>
         <div className={styles.page}>
-          <Pagination
-            count={data ? data?.totalCount : 1}
-            pageSize={pageSize}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
+          {data?.totalCount !== 0 && (
+            <Pagination
+              count={data ? data?.totalCount : 1}
+              pageSize={pageSize}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
+          )}
         </div>
       </section>
       {isOpenModal && <NewDashboardModal onClose={() => setIsOpenModal(false)} />}
