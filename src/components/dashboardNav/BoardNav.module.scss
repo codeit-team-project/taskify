@@ -8,6 +8,7 @@
   padding: 1.6rem 1.6rem 1.6rem 34rem;
   display: flex;
   width: 100%;
+  display: flex;
   min-width: 98rem;
   justify-content: space-between;
   align-items: center;
@@ -32,23 +33,26 @@
     align-items: center;
     gap: 1rem;
   }
+  & .spacing {
+    padding-left: 1rem;
+  }
 }
 
 @include tablet {
   .nav-container {
-    justify-content: flex-end;
-    padding-left: 17rem;
-    min-width: 54rem;
-  }
-  .title-section {
-    display: none;
+    padding-left: 18rem;
+    justify-content: space-between;
   }
 }
 
 @include mobile {
   .nav-container {
+    justify-content: flex-end;
     height: 6rem;
     padding: 1.3rem 1.3rem 1.3rem 1.3rem;
     min-width: 37.5rem;
+  }
+  .title-section {
+    display: none;
   }
 }

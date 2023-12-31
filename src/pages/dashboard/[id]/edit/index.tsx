@@ -28,7 +28,7 @@ export default function DashBoardDetailPage() {
   }
 
   return (
-    <DashboardLayout>
+    <DashboardLayout boardId={Number(boardId)}>
       <div className={styles.container}>
         <div className={styles.action}>
           <Link href={`/dashboard/${boardId}`} className={styles.info}>

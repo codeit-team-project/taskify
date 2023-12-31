@@ -5,15 +5,21 @@
   나타내기 때문에 MyPageLayout과 분리해둠.
 */
 
-import { PropsWithChildren } from 'react'
+import { ReactNode } from 'react'
+
 import DashboardNav from '@/components/dashboardNav/DashboardNav'
 import Sidebar from '@/components/sidebar/Sidebar'
 import styles from './Layout.module.scss'
 
-export default function DashboardLayout({ children }: PropsWithChildren) {
+interface DashboardLayoutProps {
+  children: ReactNode
+  boardId: number
+}
+
+export default function DashboardLayout({ children, boardId }: DashboardLayoutProps) {
   return (
     <>
-      <DashboardNav />
+      <DashboardNav boardId={boardId} />
       <Sidebar />
       <article className={styles['article-content']}>{children}</article>
     </>

@@ -1,6 +1,5 @@
 @import '@/styles/mixin.scss';
 
-// NOTE - nav height는 항상 7rem, sidebar width는 항상 30rem, 16rem, 6.7rem이라 이렇게 코드를 짬
 .article-content {
   margin: 7rem 0 0 30rem;
   padding: 2rem;
@@ -24,12 +23,19 @@
   justify-content: center;
   align-items: center;
   color: var(--color-black_33);
+
   & .container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     gap: 2rem;
+    width: 52rem;
+    @include mobile {
+      margin: auto;
+      width: 80%;
+      min-width: 30rem;
+    }
     & .logo-container {
       & img {
         display: block;

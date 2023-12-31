@@ -12,7 +12,7 @@ import styles from './Layout.module.scss'
 
 interface MyPageLayoutProps {
   children: ReactNode
-  title: 'my' | 'mydashboard'
+  title: 'my' | 'mydashboard' | 'dashboard'
 }
 
 export default function MyPageLayout({ children, title }: MyPageLayoutProps) {

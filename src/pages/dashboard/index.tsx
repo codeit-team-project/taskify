@@ -1,11 +1,11 @@
 // localhost:3000/dashboard 페이지
 
-import DashboardLayout from '@/components/ui/layout/DashboardLayout'
+import MyPageLayout from '@/components/ui/layout/MypageLayout'
 
 export default function DashBoardPage() {
   return (
     <>
-      <DashboardLayout>대시보드 페이지</DashboardLayout>
+      <MyPageLayout title="dashboard">대시보드 페이지</MyPageLayout>
     </>
   )
 }
