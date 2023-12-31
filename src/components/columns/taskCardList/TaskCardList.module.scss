@@ -1,0 +1,10 @@
+@import '@/styles/mixin.scss';
+
+.task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.6rem;
+  @include mobile {
+    gap: 1rem;
+  }
+}
