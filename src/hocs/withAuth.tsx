@@ -7,26 +7,24 @@ import { getCookie } from '@/utils/cookie'
 
 import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 
 const withAuth = (Component: NextPage) => {
   const AuthenticatedComponent = () => {
     const router = useRouter()
 
     const savedToken = getCookie('accessToken')
-    const [isAuth, setIsAuth] = useState(false)
 
+    // router.push 코드 때문에 CSR로 구현
     useEffect(() => {
       if (!savedToken) {
         alert('로그인 필수!')
         router.push('/signin')
-        return
-      } else {
-        setIsAuth(true)
       }
+      return
     }, [savedToken, router])
 
-    return !!isAuth ? <Component /> : null // Render whatever you want while the authentication occurs
+    return !!savedToken ? <Component /> : null
   }
 
   return AuthenticatedComponent
