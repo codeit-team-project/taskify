@@ -6,8 +6,9 @@
 import MyPageLayout from '@/components/ui/layout/MypageLayout'
 import Profile from '@/components/editForm/profile/Profile'
 import PasswordModifier from '@/components/editForm/passwordModifier/PasswordModifier'
+import withAuth from '@/hocs/withAuth'
 
-export default function MyPage() {
+function MyPage() {
   return (
     <>
       <MyPageLayout title="my">
@@ -17,3 +18,5 @@ export default function MyPage() {
     </>
   )
 }
+
+export default withAuth(MyPage)
