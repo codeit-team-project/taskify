@@ -11,7 +11,13 @@ import useDropdown from '@/hooks/useDropdown'
 import NavProfile from './navProfile/NavProfile'
 
 interface MyboardNavProps {
-  pageTitle?: 'mydashboard' | 'my'
+  pageTitle: 'mydashboard' | 'my' | 'dashboard'
+}
+
+const MY_PAGE_CATEGORY = {
+  mydashboard: '내 대시보드',
+  my: '계정 관리',
+  dashboard: '대시보드 관리',
 }
 
 export default function MyboardNav({ pageTitle }: MyboardNavProps) {
@@ -20,9 +26,7 @@ export default function MyboardNav({ pageTitle }: MyboardNavProps) {
   return (
     <nav className={styles['nav-container']}>
       <div className={styles['title-section']}>
-        <Link href={`/${pageTitle}`}>
-          {pageTitle === 'mydashboard' ? '내 대시보드' : '계정관리'}
-        </Link>
+        <Link href={`/${pageTitle}`}>{MY_PAGE_CATEGORY[pageTitle]}</Link>
       </div>
       <div className={styles['nav-info-section']}>
         <NavProfile onOpen={handleOpenDropdown} onClose={handleCloseDropdown} />

@@ -6,7 +6,8 @@
 - handleCloseDropdown 메소드는 드롭다운 메뉴를 닫는 메소드로 onBlur 시 실행됨
 */
 
-import { FocusEventHandler, MouseEventHandler, useState } from 'react'
+// import { FocusEventHandler, MouseEventHandler, useState } from 'react'
+import { MouseEventHandler, useState } from 'react'
 
 export default function useDropdown() {
   // isVisible이 true면 드롭다운이 보임
@@ -20,7 +21,7 @@ export default function useDropdown() {
     }, 200)
   }
 
-  const data: [boolean, MouseEventHandler, FocusEventHandler] = [
+  const data: [boolean, MouseEventHandler, () => void] = [
     isVisible,
     handleOpenDropdown,
     handleCloseDropdown,
