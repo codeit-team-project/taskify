@@ -7,17 +7,17 @@ import styles from './Footer.module.scss'
 const SNS_CATEGORY = [
   {
     name: 'github',
-    imgSrc: 'assets/images/footer-msg.svg',
+    imgSrc: '/assets/images/footer-msg.svg',
     link: 'https://github.com/codeit-team-project/taskify',
   },
   {
     name: 'facebook',
-    imgSrc: 'assets/images/footer-facebook.svg',
+    imgSrc: '/assets/images/footer-facebook.svg',
     link: 'https://github.com/codeit-team-project/taskify',
   },
   {
     name: 'instargram',
-    imgSrc: 'assets/images/footer-instargram.svg',
+    imgSrc: '/assets/images/footer-instargram.svg',
     link: 'https://github.com/codeit-team-project/taskify',
   },
 ]

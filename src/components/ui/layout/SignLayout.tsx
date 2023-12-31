@@ -32,24 +32,25 @@ export default function SignLayout({ children, isSignin }: SignLayoutProps) {
             <div className={styles['logo-container']}>
               <div className={styles['logo-img-wrapper']}>
                 <Image
-                  src="assets/large_logo.svg"
+                  src="/assets/large_logo.svg"
                   alt="logo"
                   className={styles['logo-img']}
-                  layout="fill"
+                  priority
+                  fill
                 />
               </div>
               <div className={styles['logo-title-img-wrapper']}>
                 <Image
-                  src="assets/large_Taskify.svg"
+                  src="/assets/large_Taskify.svg"
                   alt="logo title"
                   className={styles['logo-title-img']}
-                  layout="fill"
+                  fill
                 />
               </div>
             </div>
           </Link>
           <div className={styles['greeting-container']}>{messages.greeting}</div>
-          <div className={styles['form-container']}>{children}</div>
+          <>{children}</>
           <div className={styles['link-container']}>
             <span>{messages.guiding}</span>
             <Link href={messages.linkPath}>{messages.linkName}</Link>

@@ -1,10 +1,11 @@
+// localhost:3000/dashboard 페이지
+import MyPageLayout from '@/components/ui/layout/MypageLayout'
 import ColumnList from '@/components/columns/columnList/ColumnList'
-import DashboardLayout from '@/components/ui/layout/DashboardLayout'
 
 export default function DashBoardPage() {
   return (
-    <DashboardLayout>
+    <MyPageLayout title="dashboard">
       <ColumnList />
-    </DashboardLayout>
+    </MyPageLayout>
   )
 }

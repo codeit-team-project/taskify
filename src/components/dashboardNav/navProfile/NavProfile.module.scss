@@ -17,10 +17,9 @@
     background: transparent;
     color: var(--color-black_33);
     font-family: 'Pretendard';
-    letter-spacing: -2px;
     font-size: 1.6rem;
     font-weight: 500;
-    @include tablet-narrow {
+    @include tablet {
       display: none;
     }
   }

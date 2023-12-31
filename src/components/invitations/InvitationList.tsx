@@ -14,6 +14,7 @@ import { InvitationsType } from '@/types/invitedDashBoardListType'
 import InvitationItem from './InvitationItem'
 import InvitationModal from './InvitationModal'
 import Pagination from '@/components/pagination/Pagination'
+import NodataUI from '@/components/ui/nodataUI/NodataUI'
 
 interface InvitationListProps {
   dashBoardId: number
@@ -31,6 +32,7 @@ export default function InvitationList({ dashBoardId }: InvitationListProps) {
     queryFn: () => getDashBoardInvitations(dashBoardId, currentPage, pageSize),
     placeholderData: keepPreviousData,
     staleTime: 3000,
+    enabled: !!dashBoardId,
   })
 
   const handleOpenModal = () => {
@@ -73,15 +75,21 @@ export default function InvitationList({ dashBoardId }: InvitationListProps) {
           <span className={styles.item}>이메일</span>
         </div>
         <div>
-          {data?.invitations.map((invitation) => (
-            <li key={invitation.id} className={styles.table}>
-              <InvitationItem
-                dashBoardId={dashBoardId}
-                invitationId={invitation.id}
-                email={invitation.invitee.email}
-              />
-            </li>
-          ))}
+          {data?.totalCount === 0 ? (
+            <NodataUI text="초대 내역이 없어요" />
+          ) : (
+            <>
+              {data?.invitations.map((invitation) => (
+                <li key={invitation.id} className={styles.table}>
+                  <InvitationItem
+                    dashBoardId={dashBoardId}
+                    invitationId={invitation.id}
+                    email={invitation.invitee.email}
+                  />
+                </li>
+              ))}
+            </>
+          )}
         </div>
       </section>
       {isOpenModal && <InvitationModal dashBoardId={dashBoardId} onClose={handleCloseModal} />}

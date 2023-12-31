@@ -1,12 +1,7 @@
 import axiosInstance from '@/commons/lib/axiosInstance'
-import { DashBoardType, DashBoardVauleType } from '@/types/dashBoardType'
+import { DashBoardType, DashBoardValueType } from '@/types/dashBoardType'
 
-interface EditDashBoardType {
-  dashBoardId: number
-  data: DashBoardVauleType
-}
-
-export const editDashBoard = async ({ dashBoardId, data }: EditDashBoardType) => {
+export const editDashBoard = async (dashBoardId: number, data: DashBoardValueType) => {
   const response = await axiosInstance.put<DashBoardType>(`/dashboards/${dashBoardId}`, data)
   return response.data
 }

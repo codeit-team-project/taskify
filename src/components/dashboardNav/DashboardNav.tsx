@@ -1,65 +1,52 @@
 /* DashboardNav 바 컴포넌트
 
-TODO - 나중에 유저, 대시보드 api와 연동해 유저 profile과 nickname 데이터를 보여줄 것
-TODO - 유저 정보와 대시보드 정보는 context로 관리해야 할 거 같아서 인자로 받지 않고 지금은 mock 데이터를 사용함, 나중에 코드 수정할 것
-- 내 대시보드, 대시보드 페이지에 들어갈 DashboardNav 바 컴포넌트
-- boolean형 인자 isMyPage를 받고,
-    1. if true 라면 DashboardNavEditor 컴포넌트는 렌더링하지 않음.
-    2. if false 라면 대시보드 정보를 출력, DashboardNavEditor 컴포넌트를 렌더링.
- */
+- DashboardLayout 컴포넌트를 감싸는 컴포넌트
+- 대시보드 페이지 위에 보이는 DashboardNav 바 컴포넌트 
+- boardId 값을 받으면 해당 보드의 title, 멤버 수 등 정보를 나타냄
+*/
 
 import Image from 'next/image'
-import Link from 'next/link'
-import styles from './DashboardNav.module.scss'
-import DashboardNavEditor from './dashboardNavEditor/DashboardNavEditor'
-import Dropdown from './dropdown/Dropdown'
-import {
-  mockupUser,
-  // mockDashboardMemberSmallList,
-  mockDashboardInfo,
-  mockDashboardMemberManyList,
-} from './mockup'
+import { useQuery } from '@tanstack/react-query'
+
+import { getDashBoardsDetail } from '@/api/dashboards/getDashboardsDetail'
+import Dropdown from '@/components/dashboardNav/dropdown/Dropdown'
+import NavProfile from '@/components/dashboardNav/navProfile/NavProfile'
+import DashboardNavEditor from '@/components/dashboardNav/dashboardNavEditor/DashboardNavEditor'
 import useDropdown from '@/hooks/useDropdown'
-import NavProfile from './navProfile/NavProfile'
+import { DashBoardType } from '@/types/dashBoardType'
+
+import styles from './BoardNav.module.scss'
+import Link from 'next/link'
 
 interface DashboardNavProps {
-  pageTitle?: 'mydashboard' | 'my'
+  boardId: number
 }
 
-export default function DashboardNav({ pageTitle }: DashboardNavProps) {
+export default function DashboardNav({ boardId }: DashboardNavProps) {
   const [isVisible, handleOpenDropdown, handleCloseDropdown] = useDropdown()
+
+  const { data: boardInfo } = useQuery<DashBoardType>({
+    queryKey: ['dashBoardsDetail', boardId],
+    queryFn: () => getDashBoardsDetail(boardId),
+    staleTime: 2000,
+    enabled: !!boardId,
+  })
 
   return (
     <nav className={styles['nav-container']}>
-      <div className={styles['title-section']} data-my-dashboard={pageTitle}>
-        {pageTitle ? (
-          <Link href={`/${pageTitle}`}>
-            {pageTitle === 'mydashboard' ? '내 대시보드' : '계정관리'}
-          </Link>
-        ) : (
-          <>
-            {mockDashboardInfo?.title}
-            {mockDashboardInfo?.createdByMe && (
-              <span>
-                <Image src="assets/crown_icon.svg" alt="owner" width={20} height={20} />
-              </span>
-            )}
-          </>
-        )}
+      <div className={styles['title-section']}>
+        <>
+          <Link href={`/dashboard/${boardId}`}>{boardInfo?.title}</Link>
+          {boardInfo?.createdByMe && (
+            <span className={styles.spacing}>
+              <Image src="/assets/crown_icon.svg" alt="owner" width={20} height={20} />
+            </span>
+          )}
+        </>
       </div>
       <div className={styles['nav-info-section']}>
-        {!pageTitle && (
-          <DashboardNavEditor
-            isOwner={mockDashboardInfo.createdByMe}
-            boardId={mockDashboardInfo.id}
-            members={mockDashboardMemberManyList}
-          />
-        )}
-        <NavProfile
-          onOpen={handleOpenDropdown}
-          onClose={handleCloseDropdown}
-          userInfo={mockupUser}
-        />
+        <DashboardNavEditor isOwner={boardInfo?.createdByMe} boardId={boardId} />
+        <NavProfile onOpen={handleOpenDropdown} onClose={handleCloseDropdown} />
       </div>
       {isVisible && <Dropdown />}
     </nav>

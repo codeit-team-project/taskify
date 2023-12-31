@@ -1,0 +1,29 @@
+@import '@/styles/mixin.scss';
+
+.input-container {
+  input {
+    display: none;
+  }
+  label {
+    display: block;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+  img {
+    width: 100%;
+  }
+  width: 18rem;
+  height: 18rem;
+  border-radius: 6px;
+  background-color: var(--color-gray20);
+  position: relative;
+  @include mobile {
+    width: 10rem;
+    height: 10rem;
+  }
+  .label-container {
+    position: relative;
+    display: block;
+  }
+}
