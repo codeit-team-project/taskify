@@ -24,6 +24,7 @@ export default function CreateColumnModal({ dashBoardId, onClose }: CreateColumn
   const queryClient = useQueryClient()
 
   const [inputValue, setInputValue] = useState('')
+  const [errorMessage, setErrorMessage] = useState('')
 
   const { data } = useQuery<ColumnsType>({
     queryKey: ['getColumns', dashBoardId],
@@ -31,11 +32,13 @@ export default function CreateColumnModal({ dashBoardId, onClose }: CreateColumn
   })
   console.log(data) // 삭제 예정
 
+  const columnsTitle = data?.data.map((column) => column.title)
+  console.log(columnsTitle) // 삭제 예정
+
   const {
     mutate: createColumnMutation,
     isPending,
     isError,
-    error,
   } = useMutation({
     mutationKey: ['createColumn'],
     mutationFn: createColumn,
@@ -45,22 +48,29 @@ export default function CreateColumnModal({ dashBoardId, onClose }: CreateColumn
       })
       onClose()
     },
+    onError: (error) => {
+      if (isError && error instanceof AxiosError) {
+        return error.response?.data.message ?? ''
+      }
+    },
   })
-
-  const errorMessage = (function () {
-    if (isError && error instanceof AxiosError) {
-      return error.response?.data.message ?? ''
-    }
-    return ''
-  })()
 
   const handleChangeInput = (e: ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value)
+
+    if (inputValue) {
+      setErrorMessage('')
+    }
   }
   console.log(!inputValue.trim()) // 삭제 예정
 
   const handleCreateInvitation = async () => {
     const title = inputValue.trim()
+
+    if (columnsTitle?.includes(title)) {
+      setErrorMessage('중복된 컬럼 이름입니다.')
+      return
+    }
 
     if (!title || isPending) {
       return
