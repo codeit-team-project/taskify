@@ -59,7 +59,7 @@ export default function Home() {
             />
           </div>
         </section>
-        <footer className={styles.footer}>
+        <section className={styles['sub-section']}>
           <h2>생산성을 높이는 다양한 설정들 ⚡</h2>
           <section>
             <StyledDescription
@@ -102,7 +102,7 @@ export default function Home() {
               </div>
             </StyledDescription>
           </section>
-        </footer>
+        </section>
       </div>
     </HomeLayout>
   )
