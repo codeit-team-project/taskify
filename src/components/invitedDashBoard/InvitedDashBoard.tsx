@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, useEffect } from 'react'
+import { useState, ChangeEvent } from 'react'
 import styles from './InvitedDashBoard.module.scss'
 import useDebounce from '@/hooks/useDebounce'
 import { getInvitations } from '@/api/invitations/getInvitations'
@@ -21,9 +21,9 @@ interface InvitationsProps {
   invitationList: InvitationType[]
 }
 
-interface InvitedDashboardProps {
-  list: InvitationType[]
-}
+// interface InvitedDashboardProps {
+//   list: InvitationType[]
+// }
 
 const getInvitationsType = (
   debouncedSearchTitle: string,
@@ -74,7 +74,7 @@ function Invitations({ invitationList }: InvitationsProps) {
     mutationFn: putInvitation,
     onSuccess: () => {
       queryClient.invalidateQueries({
-        queryKey: ['getInvitations', ''],
+        queryKey: ['getInvitations'],
       })
     },
   })
@@ -120,7 +120,8 @@ function Invitations({ invitationList }: InvitationsProps) {
   ))
 }
 
-export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
+export default function InvitedDashBoard() {
+  // { list }: InvitedDashboardProps
   const [searchTitle, setSearchTitle] = useState('')
   const debouncedSearchTitle = useDebounce(searchTitle, 1000)
 
@@ -131,7 +132,7 @@ export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
 
   const invitationList = data
     ? data.invitations.filter((item: InvitationType) => !item.inviteAccepted)
-    : list
+    : []
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTitle(event.target.value)
