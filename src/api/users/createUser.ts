@@ -1,11 +1,12 @@
 import axiosInstance from '@/commons/lib/axiosInstance'
-import { SignUpFormValueType, UserType } from '@/types/users'
+import { UserType } from '@/types/users'
+import { SignUpDataType } from '@/types/auth'
 
 interface CreateUserType {
-  data: SignUpFormValueType
+  data: SignUpDataType
 }
 
 export const createUser = async ({ data }: CreateUserType) => {
   const response = await axiosInstance.post<UserType>('/users', data)
-  return response.data
+  return response
 }

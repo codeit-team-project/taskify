@@ -5,10 +5,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="b642aef4-61b8-479d-8fa1-76a246dfc384" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/components/modalComment/ModalComment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modalComment/ModalComment.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/modalInput/ColumnName.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modalInput/ColumnName.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/modalInput/Tags.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/modalInput/Tags.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dashboardNav/BoardNav.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboardNav/BoardNav.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dashboardNav/DashboardNav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboardNav/DashboardNav.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dashboardNav/MyboardNav.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboardNav/MyboardNav.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dashboardNav/dashboardNavEditor/DashboardNavEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboardNav/dashboardNavEditor/DashboardNavEditor.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/dashboardNav/navProfile/NavProfile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/dashboardNav/navProfile/NavProfile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/signForm/SignForm.module.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/signForm/SignForm.module.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/signForm/SigninForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/signForm/SigninForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/styles/globals.scss" beforeDir="false" afterPath="$PROJECT_DIR$/src/styles/globals.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/utils/cookie.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/cookie.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -18,7 +24,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="develop" />
+        <entry key="$PROJECT_DIR$" value="feat/modalHeaders" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -26,9 +32,9 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2aFZsBXSUG8b690zBD6N70k60wk" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -40,7 +46,7 @@
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "test",
+    "git-widget-placeholder": "Merging feat/modalInput",
     "last_opened_file_path": "C:/Users/yunaj/OneDrive/바탕 화면/taskifyProject",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -60,6 +66,7 @@
       <option name="presentableId" value="Default" />
       <updated>1703916493386</updated>
       <workItem from="1703916495446" duration="3291000" />
+      <workItem from="1704003629878" duration="367000" />
     </task>
     <servers />
   </component>

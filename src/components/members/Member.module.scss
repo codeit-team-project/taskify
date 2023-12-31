@@ -1,0 +1,109 @@
+@import '@/styles/mixin.scss';
+
+.container {
+  max-width: 62rem;
+  width: 100%;
+  border-radius: 0.5rem;
+  background: var(--color-white);
+  box-shadow: var(--box-shadow-md);
+}
+
+.card-info {
+  padding: 2.6rem 2.8rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-black_33);
+}
+
+.sub-title {
+  padding: 0.8rem 2.8rem;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--color-gray40);
+}
+
+.table {
+  padding: 1.6rem 2.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--color-gray20);
+  list-style: none;
+}
+
+.name-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+}
+
+.nickname {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--color-black_33);
+}
+
+.member-button {
+  padding: 0.7rem 2.9rem;
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 0.4rem;
+  border: 1px solid var(--color-gray30);
+  background: var(--color-white);
+  transition: background 300ms ease-in;
+
+  &:hover {
+    background: var(--color-violet_8);
+  }
+
+  &:active {
+    box-shadow: inset -12px -8px 40px var(--color-gray20);
+  }
+}
+
+@include tablet {
+  .container {
+    min-width: 54.4rem;
+  }
+}
+
+@include mobile {
+  .container {
+    min-width: 28.4rem;
+    width: 100%;
+    max-height: 33.7rem;
+    height: 100%;
+  }
+
+  .card-info {
+    padding: 2.2rem 2rem;
+  }
+
+  .card-title {
+    font-size: 2rem;
+  }
+
+  .sub-title {
+    font-size: 1.4rem;
+  }
+
+  .table {
+    padding: 1.2rem 2rem;
+  }
+
+  .nickname {
+    font-size: 1.4rem;
+  }
+
+  .member-button {
+    padding: 0.7rem 0.9rem;
+    font-size: 1.2rem;
+  }
+}

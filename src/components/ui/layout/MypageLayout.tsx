@@ -6,19 +6,19 @@ TODO - 시간 난다면 theme 도 개발해보기.
 */
 
 import { ReactNode } from 'react'
-import DashboardNav from '@/components/dashboardNav/DashboardNav'
+import MyboardNav from '@/components/dashboardNav/MyboardNav'
 import Sidebar from '@/components/sidebar/Sidebar'
 import styles from './Layout.module.scss'
 
 interface MyPageLayoutProps {
   children: ReactNode
-  title: 'my' | 'mydashboard'
+  title: 'my' | 'mydashboard' | 'dashboard'
 }
 
 export default function MyPageLayout({ children, title }: MyPageLayoutProps) {
   return (
     <>
-      <DashboardNav pageTitle={title} />
+      <MyboardNav pageTitle={title} />
       <Sidebar />
       <article className={styles['article-content']}>{children}</article>
     </>
