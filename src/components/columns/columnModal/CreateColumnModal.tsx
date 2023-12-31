@@ -1,16 +1,13 @@
 /**
  * @TODO 컬럼 생성 모달
- * 컬럼 생성 모달 UI (완료)
- * UI 반응형 (완료)
- * api 연동 (완료)
- * 에러케이스 보여주기 (완료)
+ * 모달 컨테이너로 감싸기
  */
 import { ChangeEvent, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
+import classNames from 'classnames'
 
 import styles from './CreateColumnModal.module.scss'
-import classNames from 'classnames'
 import { createColumn } from '@/api/columns/createColumn'
 import { getColumns } from '@/api/columns/getColumns'
 import { ColumnsType } from '@/types/columnsType'
@@ -30,10 +27,8 @@ export default function CreateColumnModal({ dashBoardId, onClose }: CreateColumn
     queryKey: ['getColumns', dashBoardId],
     queryFn: () => getColumns(dashBoardId),
   })
-  console.log(data) // 삭제 예정
 
   const columnsTitle = data?.data.map((column) => column.title)
-  console.log(columnsTitle) // 삭제 예정
 
   const {
     mutate: createColumnMutation,
@@ -62,7 +57,6 @@ export default function CreateColumnModal({ dashBoardId, onClose }: CreateColumn
       setErrorMessage('')
     }
   }
-  console.log(!inputValue.trim()) // 삭제 예정
 
   const handleCreateInvitation = async () => {
     const title = inputValue.trim()
