@@ -1,10 +1,11 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import styles from './InvitedDashBoard.module.scss'
 import useDebounce from '@/hooks/useDebounce'
-import useDidMountEffect from '@/hooks/useDidMountEffect'
 import { getInvitations } from '@/api/invitations/getInvitations'
 import { putInvitation } from '@/api/invitations/putInvitation'
 import { InvitationType } from '@/types/invitedDashBoardListType'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
+import { ReceivedInvitationsType } from '@/types/invitations'
 
 type InvitationsStatus =
   | 'noInvitations'
@@ -22,19 +23,6 @@ interface InvitationsProps {
 
 interface InvitedDashboardProps {
   list: InvitationType[]
-}
-
-const respondToInvitation = async (id: number, inviteAccepted: boolean) => {
-  try {
-    await putInvitation({
-      id,
-      data: {
-        inviteAccepted,
-      },
-    })
-  } catch (error) {
-    console.error('Error fetching data:', error)
-  }
 }
 
 const getInvitationsType = (
@@ -79,6 +67,25 @@ function NoSearchedInvitations({ debouncedSearchTitle }: NoSearchedInvitationsPr
 }
 
 function Invitations({ invitationList }: InvitationsProps) {
+  const queryClient = useQueryClient()
+
+  const { mutate: respondInvitation } = useMutation({
+    mutationKey: ['respondInvitation'],
+    mutationFn: putInvitation,
+    onSuccess: () => {
+      queryClient.invalidateQueries({
+        queryKey: ['getInvitations', ''],
+      })
+    },
+  })
+
+  const respondToInvitation = (id: number, inviteAccepted: boolean) => {
+    respondInvitation({
+      id,
+      inviteAccepted,
+    })
+  }
+
   return invitationList.map((item) => (
     <tr key={item.id} className={styles['invitation-item-container']}>
       <td className={styles['dashboard-title']}>
@@ -114,32 +121,23 @@ function Invitations({ invitationList }: InvitationsProps) {
 }
 
 export default function InvitedDashBoard({ list }: InvitedDashboardProps) {
-  const [invitationList, setInvitationList] = useState<InvitationType[]>(list)
   const [searchTitle, setSearchTitle] = useState('')
   const debouncedSearchTitle = useDebounce(searchTitle, 1000)
+
+  const { data } = useQuery<ReceivedInvitationsType>({
+    queryKey: ['getInvitations', debouncedSearchTitle],
+    queryFn: () => getInvitations(debouncedSearchTitle),
+  })
+
+  const invitationList = data
+    ? data.invitations.filter((item: InvitationType) => !item.inviteAccepted)
+    : list
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTitle(event.target.value)
   }
 
   const uiType = getInvitationsType(debouncedSearchTitle, invitationList)
-
-  useDidMountEffect(() => {
-    const getInvitationsByTitle = async () => {
-      try {
-        const { invitations } = await getInvitations(debouncedSearchTitle)
-
-        const newInvitations: InvitationType[] = invitations.filter(
-          (item: InvitationType) => !item.inviteAccepted,
-        )
-
-        setInvitationList(newInvitations)
-      } catch (error) {
-        console.error('Error fetching data:', error)
-      }
-    }
-    getInvitationsByTitle()
-  }, [debouncedSearchTitle])
 
   return (
     <section className={styles['container']}>
