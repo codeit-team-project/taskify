@@ -24,7 +24,6 @@ export default function Home() {
           <div className={styles.description}>센스있게 일정을 관리해보세요!</div>
           <button onClick={handleMoveToSignin}>로그인하기</button>
         </header>
-
         <section className={styles.section}>
           <article>
             <h3>Point 1</h3>
@@ -44,7 +43,6 @@ export default function Home() {
             />
           </div>
         </section>
-
         <section className={styles.section}>
           <article className={styles.article}>
             <h3>Point 2</h3>
@@ -64,7 +62,6 @@ export default function Home() {
             />
           </div>
         </section>
-
         <footer className={styles.footer}>
           <h2>생산성을 높이는 다양한 설정들 ⚡</h2>
           <section>
@@ -83,7 +80,6 @@ export default function Home() {
                 />
               </div>
             </StyledDescription>
-
             <StyledDescription title="초대" description="새로운 팀원을 초대할 수 있어요.">
               <div>
                 <Image
@@ -96,7 +92,6 @@ export default function Home() {
                 />
               </div>
             </StyledDescription>
-
             <StyledDescription title="구성원" description="구성원을 초대하고 내보낼 수 있어요.">
               <div className={styles.container1}>
                 <Image
