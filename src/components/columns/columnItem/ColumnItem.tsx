@@ -1,17 +1,30 @@
+import { ColumnType } from '@/types/columnsType'
 import ColumnTitle from '../columnTitle/ColumnTitle'
 import TaskCardList from '../taskCardList/TaskCardList'
 import styles from './ColumnItem.module.scss'
+import { useQuery } from '@tanstack/react-query'
+import { getCards } from '@/api/card/getCards'
+import { CardsType } from '@/types/cardsType'
 
 interface ColumnItemProps {
-  title: string
-  number: number
+  item: ColumnType
 }
+export default function ColumnItem({ item }: ColumnItemProps) {
+  const { id } = item
 
-export default function ColumnItem({ title, number }: ColumnItemProps) {
+  const { data } = useQuery<CardsType>({
+    queryKey: ['getColumns', id],
+    queryFn: () => getCards(id),
+  })
+
   return (
     <li className={styles['column-item']}>
-      <ColumnTitle title={title} number={number} />
-      <TaskCardList />
+      {data && (
+        <>
+          <ColumnTitle title={item.title} number={data.cards.length} />
+          <TaskCardList list={data.cards} />
+        </>
+      )}
     </li>
   )
 }
