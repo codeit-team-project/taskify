@@ -12,8 +12,8 @@ import Tags from '@/components/modalInput/Tags'
 import { getDashBoardMembers } from '@/api/members/getMembers'
 import { useQuery, useMutation } from '@tanstack/react-query'
 import {
-  createColumnImageUpload,
   CreateColumnImageUploadType,
+  createColumnImageUpload,
 } from '@/api/columns/createColumnImageUpload'
 import { CardValueType, createCard } from '@/api/cards/createCard'
 import { resetFormStatus } from '@/utils/resetFormState'
@@ -77,7 +77,7 @@ export default function CreateTodo({
         description: obj.description,
         dueDate: format(new Date(obj.dueDate), 'yyyy-MM-dd HH:mm'),
         tags: obj.tags,
-        imageUrl: imageUrl,
+        imageUrl: imageUrl as string,
       }
 
       try {
