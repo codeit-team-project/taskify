@@ -1,4 +1,3 @@
-import React from 'react'
 import styles from './ModalHeader.module.scss'
 import Image from 'next/image'
 import divider from '../../../public/assets/images/divider.svg'
@@ -18,7 +17,7 @@ export default function ModalHeader({ cardDetailData, columnName }: ModalHeaderP
       </div>
       <Image src={divider} alt="divider" width="20" height="20" />
       <ul className={styles.tag__wrapper}>
-        {cardDetailData.tags.map((tag) => {
+        {cardDetailData.tags.map((tag: string) => {
           const [tagName, color] = tag.split('$')
           return (
             <li key={tagName} className={`${styles.tag} ${color ? styles[color] : ''}`}>
