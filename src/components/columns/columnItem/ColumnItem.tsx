@@ -13,7 +13,7 @@ export default function ColumnItem({ item }: ColumnItemProps) {
   const { id } = item
 
   const { data } = useQuery<CardsType>({
-    queryKey: ['getColumns', id],
+    queryKey: ['getCards', id],
     queryFn: () => getCards(id),
   })
 

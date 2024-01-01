@@ -13,6 +13,7 @@ export default function ColumnList({ boardId }: ColumnListProps) {
   const { data } = useQuery<ColumnsType>({
     queryKey: ['getColumns', boardId],
     queryFn: () => getColumns(boardId),
+    enabled: !!boardId,
   })
 
   return (
