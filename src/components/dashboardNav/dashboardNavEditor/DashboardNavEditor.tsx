@@ -69,7 +69,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
           <div className={styles['members-section']}>
             {windowSize > 744 ? (
               <div
-                key={windowSize}
+                key={boardId}
                 className={styles['member-img-list']}
                 style={{
                   width: `${memberData.totalCount >= 5 ? 17 : memberData.totalCount * 3 + 2}rem`,
