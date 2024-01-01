@@ -4,7 +4,6 @@ import arrowDown from '../../../public/assets/images/arrowDown.svg'
 import Image from 'next/image'
 import { Members } from '@/types/members'
 import { FormContext } from '@/context/formContext'
-import RandomProfile from '../randomProfile/RandomProfile'
 
 export type managerListType = Members[]
 
@@ -45,8 +44,6 @@ export default function Manager({
       setProfileImage(profileImageUrl)
     }
   }, [])
-
-  console.log(managerList)
   return (
     <div className={styles.container}>
       <span className={styles.text}>담당자</span>
@@ -75,7 +72,7 @@ export default function Manager({
                   }}
                 >
                   <div className={styles.dropdown__assigneeUser__wrapper}>
-                    {person.profileImageUrl ? (
+                    {person.profileImageUrl && (
                       <Image
                         src={person.profileImageUrl}
                         alt="profileImage"
@@ -83,10 +80,7 @@ export default function Manager({
                         width={20}
                         height={20}
                       />
-                    ) : (
-                      <RandomProfile size={20} email={person.nickname} />
                     )}
-
                     {person.nickname}
                   </div>
                 </li>
