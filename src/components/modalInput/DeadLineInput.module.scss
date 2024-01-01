@@ -1,0 +1,22 @@
+@import '@/styles/mixin.scss';
+
+@mixin container {
+  width: 49rem;
+  position: relative;
+  border-radius: 6px;
+  border: 1px solid var(--color-gray30);
+  background: var(--color-white);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left: 2.5rem;
+  &:focus {
+    outline: 0;
+  }
+}
+
+.container {
+  @include container;
+  @include mobile {
+    width: 24rem;
+  }
+}
