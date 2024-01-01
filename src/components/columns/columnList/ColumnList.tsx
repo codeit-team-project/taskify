@@ -13,15 +13,24 @@ export default function ColumnList({ boardId }: ColumnListProps) {
   const { data } = useQuery<ColumnsType>({
     queryKey: ['getColumns', boardId],
     queryFn: () => getColumns(boardId),
+    retry: 1,
     enabled: !!boardId,
   })
 
   return (
     <>
       <ul className={styles['column-list']}>
-        {data?.data.map((item) => {
-          return <ColumnItem key={item.id} item={item} />
-        })}
+        {data ? (
+          <>
+            {data?.data.map((item) => {
+              return <ColumnItem key={item.id} item={item} />
+            })}
+          </>
+        ) : (
+          <>
+            <div> 대시보드가 존재하지 않습니다!</div>
+          </>
+        )}
         <AddColumnButton />
       </ul>
     </>

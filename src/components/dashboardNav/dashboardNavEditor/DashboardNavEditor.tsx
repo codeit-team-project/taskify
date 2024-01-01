@@ -29,6 +29,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
   const { data: memberData } = useQuery<DashBoardMembers>({
     queryKey: ['dashBoardMembers', boardId],
     queryFn: () => getDashBoardMembers(boardId),
+    retry: 1,
     staleTime: 2000,
     enabled: !!boardId,
   })
@@ -54,13 +55,23 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
         <div className={styles['button-section']}>
           {isOwner && (
             <button className={styles['button']}>
-              <Link href={`/dashboard/${String(boardId)}/edit`}>
+              <Link
+                href={
+                  memberData
+                    ? `/dashboard/${String(boardId)}/edit`
+                    : `/dashboard/${String(boardId)}`
+                }
+              >
                 <Image src="/assets/settingIcon.svg" alt="setting icon" width={20} height={20} />
                 관리
               </Link>
             </button>
           )}
-          <button onClick={handleOpenModal} className={styles['button']}>
+          <button
+            disabled={memberData ? false : true}
+            onClick={handleOpenModal}
+            className={styles['button']}
+          >
             <Image src="/assets/addIcon.svg" alt="add icon" width={20} height={20} />
             초대하기
           </button>

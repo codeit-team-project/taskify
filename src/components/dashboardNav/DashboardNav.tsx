@@ -30,6 +30,7 @@ export default function DashboardNav({ boardId }: DashboardNavProps) {
     queryFn: () => getDashBoardsDetail(boardId),
     staleTime: 2000,
     enabled: !!boardId,
+    retry: 1,
   })
 
   return (
