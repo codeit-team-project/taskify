@@ -23,10 +23,10 @@ interface CreateTodoInterface {
   columnId: number
   dashboardId: number
   onClose: () => void
-  dashBoardRefetchFunc: (columnId: number) => void
+  refetchColumnList: (columnId: number) => void
 }
 export default function CreateTodo({
-  dashBoardRefetchFunc,
+  refetchColumnList,
   onClose,
   dashboardId,
   columnId,
@@ -45,7 +45,7 @@ export default function CreateTodo({
   const createCardMutation = useMutation({
     mutationFn: (data: CardValueType) => createCard(data),
     onSuccess(_, variable) {
-      dashBoardRefetchFunc(variable.columnId)
+      refetchColumnList(variable.columnId)
       resetFormStatus(obj)
       onClose()
     },
