@@ -69,6 +69,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
           <div className={styles['members-section']}>
             {windowSize > 744 ? (
               <div
+                key={windowSize}
                 className={styles['member-img-list']}
                 style={{
                   width: `${memberData.totalCount >= 5 ? 17 : memberData.totalCount * 3 + 2}rem`,
@@ -130,7 +131,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
                 )}
               </div>
             )}
-            <div className={styles['spacing-bar']}></div>
+            <div key={`${windowSize}space`} className={styles['spacing-bar']}></div>
           </div>
         )}
       </div>
