@@ -1,3 +1,4 @@
+import Image from 'next/image'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import styles from './Member.module.scss'
 
@@ -29,12 +30,20 @@ export default function MemberItem({ dashBoardId, member }: MemberItemProps) {
   return (
     <>
       <div className={styles['name-wrapper']}>
-        <RandomProfile size={30} email={member.email} />
+        {member.profileImageUrl ? (
+          <div className={styles.profile}>
+            <Image src={member.profileImageUrl} alt="profile" fill className={styles.img} />
+          </div>
+        ) : (
+          <RandomProfile size={38} email={member.email} />
+        )}
         <span className={styles.nickname}>{member.nickname}</span>
       </div>
-      <button className={styles['member-button']} onClick={handleDeleteMember(member.id)}>
-        삭제
-      </button>
+      {!member.isOwner && (
+        <button className={styles['member-button']} onClick={handleDeleteMember(member.id)}>
+          삭제
+        </button>
+      )}
     </>
   )
 }

@@ -6,7 +6,7 @@
  */
 import { useRouter } from 'next/router'
 import { ChangeEvent, useState } from 'react'
-import { useMutation } from '@tanstack/react-query'
+import { useMutation, useQueryClient } from '@tanstack/react-query'
 
 import classNames from 'classnames'
 import styles from './NewDashboardModal.module.scss'
@@ -20,6 +20,7 @@ interface NewDashboardModalProps {
 
 export default function NewDashboardModal({ onClose }: NewDashboardModalProps) {
   const router = useRouter()
+  const queryClient = useQueryClient()
 
   const [title, setTitle] = useState('')
   const [selectedColor, setSelectedColor] = useState(DEFAULT_COLOR)
@@ -28,6 +29,7 @@ export default function NewDashboardModal({ onClose }: NewDashboardModalProps) {
     mutationKey: ['createDashboard'],
     mutationFn: createDashBoard,
     onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ['dashBoards'] })
       router.push(`/dashboard/${data.id}`)
     },
   })
