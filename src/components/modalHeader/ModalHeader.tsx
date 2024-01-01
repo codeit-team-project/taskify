@@ -1,6 +1,6 @@
 import styles from './ModalHeader.module.scss'
 import Image from 'next/image'
-import divider from '../../../public/assets/images/divider.svg'
+import divider from '/assets/images/divider.svg'
 import { CardType } from '@/types/cardsType'
 
 interface ModalHeaderProps {
