@@ -23,10 +23,10 @@ interface CreateTodoInterface {
   columnId: number
   dashboardId: number
   onClose: () => void
-  refetchFunc: (columnId: number) => void
+  dashBoardRefetchFunc: (columnId: number) => void
 }
 export default function CreateTodo({
-  refetchFunc,
+  dashBoardRefetchFunc,
   onClose,
   dashboardId,
   columnId,
@@ -45,10 +45,12 @@ export default function CreateTodo({
   const createCardMutation = useMutation({
     mutationFn: (data: CardValueType) => createCard(data),
     onSuccess(_, variable) {
-      refetchFunc(variable.columnId)
-
+      dashBoardRefetchFunc(variable.columnId)
       resetFormStatus(obj)
       onClose()
+    },
+    onError(error) {
+      console.log(error)
     },
   })
 
@@ -79,12 +81,7 @@ export default function CreateTodo({
         tags: obj.tags,
         imageUrl: imageUrl as string,
       }
-
-      try {
-        createCardMutation.mutate(dataObj)
-      } catch (error) {
-        console.log('createCardMutationError', error)
-      }
+      createCardMutation.mutate(dataObj)
     }
 
     const result = createModalInputValidation(obj)
