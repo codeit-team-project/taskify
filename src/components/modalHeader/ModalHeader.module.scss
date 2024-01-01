@@ -1,0 +1,59 @@
+.header {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.column__wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  .circle {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 50%;
+    background-color: var(--color-violet);
+    position: absolute;
+    top: 0.8rem;
+    left: 0.5rem;
+  }
+  .column {
+    display: flex;
+    padding: 4px 15px;
+    align-items: center;
+    gap: 6px;
+    font-size: 1.3rem;
+    border-radius: 11px;
+    background: var(--color-violet_8);
+    color: var(--color-violet);
+  }
+}
+
+.tag__wrapper {
+  display: flex;
+  column-gap: 0.7rem;
+}
+// 태그 default값
+.tag {
+  border-radius: 6px;
+  height: fit-content;
+  padding: 6px 5px;
+}
+
+.orange {
+  border: #f9eee3;
+  background-color: #f9eee3;
+  color: #d58d49;
+}
+.green {
+  border: #e7f7db;
+  background-color: #e7f7db;
+  color: #86d549;
+}
+.pink {
+  background-color: #f7dbf0;
+  color: #d549b6;
+}
+.blue {
+  background-color: #dbe6f7;
+  color: #4981d5;
+}
