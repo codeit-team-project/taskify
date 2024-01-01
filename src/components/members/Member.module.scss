@@ -43,6 +43,20 @@
   gap: 1.2rem;
 }
 
+.profile {
+  position: relative;
+  width: 3.8rem;
+  height: 3.8rem;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 1px solid var(--color-gray30);
+}
+
+.img {
+  border-radius: 50%;
+  padding: 2px;
+}
+
 .nickname {
   font-size: 1.6rem;
   font-weight: 400;

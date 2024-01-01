@@ -54,7 +54,6 @@ export default function Manager({
               <Image src={profileImage} alt="profile-image" width={30} height={30} />
             </div>
           ) : null}
-
           <span>{assigneeUserName}</span>
         </div>
         <Image src={arrowDown} alt="arrowdown" width={20} height={20} />
