@@ -1,0 +1,40 @@
+@import '@/styles/mixin.scss';
+
+.button-container {
+  padding-top: 6.8rem;
+  button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.2rem;
+    width: 35.4rem;
+    height: 7rem;
+    border-radius: 8px;
+    border: 1px solid var(--color-gray30);
+    background-color: var(--color-white);
+    .button-text {
+      color: var(--color-black_33);
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+  }
+  @include tablet {
+    padding-top: 2rem;
+    button {
+      width: 100%;
+    }
+  }
+  @include mobile {
+    button {
+      height: 6rem;
+      .button-text {
+        font-size: 1.6rem;
+      }
+    }
+    img {
+      width: 2rem;
+      height: 2rem;
+    }
+  }
+}
