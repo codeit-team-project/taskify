@@ -15,13 +15,9 @@
 }
 .assingee__wrapper {
   @include assingee__wrapper;
-  @include tablet {
-  }
-
   @include mobile {
     width: 32rem;
     height: 8rem;
-
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
@@ -36,11 +32,6 @@
 
 .profile {
   @include profile;
-  @include tablet {
-  }
-
-  @include mobile {
-  }
 }
 
 @mixin deadline {
@@ -56,7 +47,6 @@
   @include deadline;
   @include tablet {
   }
-
   @include mobile {
   }
 }
@@ -69,7 +59,6 @@
   font-weight: 600;
 }
 
-// 이미지
 .profileImage {
   width: 3rem;
   height: 3rem;
