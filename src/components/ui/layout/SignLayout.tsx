@@ -35,7 +35,8 @@ export default function SignLayout({ children, isSignin }: SignLayoutProps) {
                   src="/assets/large_logo.svg"
                   alt="logo"
                   className={styles['logo-img']}
-                  layout="fill"
+                  priority
+                  fill
                 />
               </div>
               <div className={styles['logo-title-img-wrapper']}>
@@ -43,13 +44,13 @@ export default function SignLayout({ children, isSignin }: SignLayoutProps) {
                   src="/assets/large_Taskify.svg"
                   alt="logo title"
                   className={styles['logo-title-img']}
-                  layout="fill"
+                  fill
                 />
               </div>
             </div>
           </Link>
           <div className={styles['greeting-container']}>{messages.greeting}</div>
-          <div className={styles['form-container']}>{children}</div>
+          <>{children}</>
           <div className={styles['link-container']}>
             <span>{messages.guiding}</span>
             <Link href={messages.linkPath}>{messages.linkName}</Link>

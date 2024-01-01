@@ -1,0 +1,23 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  row-gap: 0.5rem;
+  .textarea {
+    border: 1px solid var(--color-gray30);
+    height: 7rem;
+    border-radius: 0.8rem;
+    resize: none;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+.text {
+  font-size: 1.3rem;
+}
+.emphasis {
+  color: var(--color-primary);
+  font-size: 1.3rem;
+}

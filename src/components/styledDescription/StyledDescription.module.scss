@@ -1,0 +1,47 @@
+@import '@/styles/mixin.scss';
+
+.wrapper {
+  width: 38rem;
+  height: 38rem;
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  place-items: center center;
+  background-color: var(--color-black_4B);
+  max-width: 40rem;
+  @include mobile {
+    width: 100%;
+    min-width: 30rem;
+  }
+  & .img-container {
+    display: flex;
+    position: relative;
+    text-align: center;
+    place-items: center center;
+    padding: 1rem;
+    margin: 0 auto;
+  }
+  & .description-container {
+    padding: 3rem;
+    position: absolute;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    background-color: var(--color-black);
+    & h3 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      line-height: normal;
+      margin-bottom: 1.8rem;
+    }
+    & p {
+      font-size: 1.6rem;
+      line-height: normal;
+      @include mobile {
+        font-size: 1.3rem;
+      }
+    }
+  }
+}

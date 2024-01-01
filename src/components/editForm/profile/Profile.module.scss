@@ -1,0 +1,76 @@
+@import '@/styles/mixin.scss';
+
+.saved-img {
+  img {
+    width: 100%;
+  }
+  position: relative;
+  width: 18rem;
+  height: 18rem;
+  border-radius: 6px;
+  background-color: var(--color-gray20);
+  @include mobile {
+    width: 10rem;
+    height: 10rem;
+  }
+}
+
+.form {
+  width: 100%;
+  .inputs {
+    display: grid;
+    grid-template-columns: 18rem auto;
+    gap: 2rem;
+    @include mobile {
+      grid-template-columns: 1fr;
+      grid-template-rows: 10rem auto;
+    }
+  }
+  .input-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+}
+
+.button-wrapper {
+  width: 100%;
+  display: flex;
+  padding-top: 2rem;
+  gap: 1rem;
+  justify-content: flex-end;
+  button {
+    font-size: 1.4rem;
+    width: 8.4rem;
+    height: 3rem;
+    border-radius: 4px;
+    color: white;
+    background: var(--color-violet);
+  }
+  .cancel-button {
+    font-size: 1.4rem;
+    width: 8.4rem;
+    height: 3rem;
+    border-radius: 4px;
+    color: white;
+    background: var(--color-red);
+  }
+  [data-isediting='false'].cancel-button {
+    display: none;
+  }
+}
+.error-message {
+  height: 0;
+  padding-top: 0.6rem;
+  color: var(--color-red);
+  font-size: 1.4rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  @include tablet {
+    font-size: 1.2rem;
+  }
+  @include mobile {
+    font-size: 1rem;
+  }
+}
