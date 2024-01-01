@@ -26,15 +26,12 @@ export default function CreateColumnModal({ dashBoardId, onClose }: CreateColumn
   const { data } = useQuery<ColumnsType>({
     queryKey: ['getColumns', dashBoardId],
     queryFn: () => getColumns(dashBoardId),
+    enabled: !!dashBoardId,
   })
 
   const columnsTitle = data?.data.map((column) => column.title)
 
-  const {
-    mutate: createColumnMutation,
-    isPending,
-    isError,
-  } = useMutation({
+  const { mutate: createColumnMutation, isPending } = useMutation({
     mutationKey: ['createColumn'],
     mutationFn: createColumn,
     onSuccess: () => {
@@ -44,8 +41,8 @@ export default function CreateColumnModal({ dashBoardId, onClose }: CreateColumn
       onClose()
     },
     onError: (error) => {
-      if (isError && error instanceof AxiosError) {
-        return error.response?.data.message ?? ''
+      if (error instanceof AxiosError) {
+        setErrorMessage(error.response?.data.message)
       }
     },
   })
@@ -61,12 +58,12 @@ export default function CreateColumnModal({ dashBoardId, onClose }: CreateColumn
   const handleCreateInvitation = async () => {
     const title = inputValue.trim()
 
-    if (columnsTitle?.includes(title)) {
-      setErrorMessage('중복된 컬럼 이름입니다.')
+    if (!title || isPending) {
       return
     }
 
-    if (!title || isPending) {
+    if (columnsTitle?.includes(title)) {
+      setErrorMessage('중복된 컬럼 이름입니다.')
       return
     }
 
