@@ -61,12 +61,14 @@ export default function InvitationList({ dashBoardId }: InvitationListProps) {
         <div className={styles.description}>
           <div className={styles.info}>
             <span className={styles.title}>초대 내역</span>
-            <Pagination
-              count={data ? data?.totalCount : 1}
-              pageSize={pageSize}
-              setCurrentPage={setCurrentPage}
-              currentPage={currentPage}
-            />
+            {data?.totalCount !== 0 && (
+              <Pagination
+                count={data ? data?.totalCount : 1}
+                pageSize={pageSize}
+                setCurrentPage={setCurrentPage}
+                currentPage={currentPage}
+              />
+            )}
           </div>
           <button onClick={handleOpenModal} className={styles.action}>
             <img src="/assets/add_box_white.svg" alt="초대하기" />

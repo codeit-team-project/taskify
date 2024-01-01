@@ -1,7 +1,8 @@
 @import '@/styles/mixin.scss';
 
 section.container {
-  padding: 3.2rem 0;
+  width: fit-content;
+  padding-top: 3.2rem;
   border-radius: 8px;
   background: var(--color-white);
 
@@ -118,7 +119,9 @@ section.container {
 
     tbody {
       .invitation-item-container {
-        border-bottom: 1px solid #ccc;
+        &:not(:last-of-type) {
+          border-bottom: 1px solid var(--color-gray20);
+        }
         @include mobile {
           display: block;
           padding: 1.6rem;
