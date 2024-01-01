@@ -1,0 +1,32 @@
+@import '@/styles/mixin.scss';
+
+.column-list {
+  display: flex;
+  overflow-x: scroll;
+  height: calc(100vh - 6rem);
+  > li {
+    padding-left: 2rem;
+    padding-right: 2rem;
+    padding-bottom: 2rem;
+    background-color: var(--color-gray10);
+    &:not(:last-of-type) {
+      border-right: 2px solid var(--color-gray20);
+    }
+  }
+  @include tablet {
+    flex-direction: column;
+    > li {
+      &:not(:last-of-type) {
+        border-right: 0;
+        border-bottom: 2px solid var(--color-gray20);
+      }
+    }
+  }
+  @include mobile {
+    > li {
+      padding-left: 1.2rem;
+      padding-right: 1.2rem;
+      padding-bottom: 1.2rem;
+    }
+  }
+}

@@ -1,6 +1,7 @@
 @import '@/styles/mixin.scss';
 
 .nav-container {
+  z-index: 50;
   height: 7rem;
   min-width: 50rem;
   width: 100%;
