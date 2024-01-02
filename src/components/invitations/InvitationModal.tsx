@@ -1,8 +1,3 @@
-/**
- * @TODO 초대하기 모달
- * 공통 modal container로 변경하기
- * pending일때 로딩스피너 보여주기 (초대 완료일때만)
- */
 import { ChangeEvent, useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'

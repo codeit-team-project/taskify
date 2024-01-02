@@ -5,6 +5,7 @@ section.container {
   padding-top: 3.2rem;
   border-radius: 8px;
   background: var(--color-white);
+  box-shadow: var(--box-shadow-md);
 
   @include tablet {
     width: 100%;

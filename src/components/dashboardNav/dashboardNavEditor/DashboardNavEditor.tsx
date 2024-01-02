@@ -8,6 +8,7 @@ TODO - 나중에 시간 되면 멤버 사진 누르면 멤버 리스트가 드�
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useQuery } from '@tanstack/react-query'
 
 import { getDashBoardMembers } from '@/api/members/getMembers'
@@ -16,6 +17,7 @@ import useDropdown from '@/hooks/useDropdown'
 import { DashBoardMembers } from '@/types/members'
 import styles from './DashboardNavEditor.module.scss'
 import RandomProfile from '@/components/randomProfile/RandomProfile'
+import ModalContainer from '@/components/dashboardModal/ModalContainer'
 import FloatingButton from '../floatingButton/FloatingButton'
 
 interface DashboardNavEditorProps {
@@ -49,7 +51,13 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
 
   return (
     <>
-      {isVisible && <InvitationModal dashBoardId={boardId} onClose={handleCloseModal} />}
+      {isVisible &&
+        createPortal(
+          <ModalContainer onClose={handleCloseModal}>
+            <InvitationModal dashBoardId={boardId} onClose={handleCloseModal} />
+          </ModalContainer>,
+          document.getElementById('modal-root') as HTMLElement,
+        )}
 
       <div className={styles['editor-section']}>
         <div className={styles['button-section']}>

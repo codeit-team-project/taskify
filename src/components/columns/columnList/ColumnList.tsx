@@ -22,7 +22,7 @@ export default function ColumnList({ boardId }: ColumnListProps) {
         {data?.data.map((item) => {
           return <ColumnItem key={item.id} item={item} />
         })}
-        <AddColumnButton />
+        <AddColumnButton dashBoardId={boardId} />
       </ul>
     </>
   )
