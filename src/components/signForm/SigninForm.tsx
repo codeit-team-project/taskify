@@ -19,10 +19,6 @@ import { emailValidationRules, passwordValidationRules } from '@/utils/formInput
 import styles from './SignForm.module.scss'
 import { setCookie } from '@/utils/cookie'
 
-interface ErrorMessageType {
-  message: string
-}
-
 export default function SigninForm() {
   const {
     register,
@@ -46,12 +42,9 @@ export default function SigninForm() {
       }
       router.push('/mydashboard')
     },
-    onError: (error: AxiosError) => {
-      if (error?.response?.status === 400) {
-        const { message } = error.response.data as ErrorMessageType
-        alert(message)
-      } else if (error?.response?.status === 404) {
-        alert('존재하지 않는 유저입니다!')
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.message)
       } else return
     },
     onSettled: () => {

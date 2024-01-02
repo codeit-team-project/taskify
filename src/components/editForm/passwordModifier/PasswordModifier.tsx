@@ -19,10 +19,6 @@ import styles from './PasswordModifier.module.scss'
 import { PasswordCheckVauleType } from '@/types/auth'
 import { AxiosError } from 'axios'
 
-interface ErrorMessageType {
-  message: string
-}
-
 export default function PasswordModifier() {
   const {
     register,
@@ -46,12 +42,9 @@ export default function PasswordModifier() {
       setIsEditing(false)
       alert('비밀번호가 변경되었습니다!')
     },
-    onError: (error: AxiosError) => {
-      if (error?.response?.status === 400) {
-        const { message } = error.response.data as ErrorMessageType
-        alert(message)
-      } else if (error?.response?.status === 404) {
-        alert('존재하지 않는 유저입니다')
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.message)
       }
     },
     onSettled: async () => {
