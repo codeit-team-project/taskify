@@ -24,6 +24,10 @@ import {
 
 import styles from './SignForm.module.scss'
 
+interface ErrorMessageType {
+  message: string
+}
+
 export default function SignupForm() {
   const {
     register,
@@ -48,7 +52,8 @@ export default function SignupForm() {
     },
     onError: (error: AxiosError) => {
       if (error?.response?.status === 400) {
-        alert(`${error?.response?.data?.message}`)
+        const { message } = error.response.data as ErrorMessageType
+        alert(message)
       } else if (error?.response?.status === 409) {
         alert('이미 사용 중인 이메일입니다!')
       } else return
