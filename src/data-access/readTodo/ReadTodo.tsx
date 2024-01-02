@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from '@/data-access/readTodo/ReadTodo.module.scss'
 import Image from 'next/image'
 import close from '../../../public/assets/images/close.svg'
-import { useMutation, useQuery } from '@tanstack/react-query'
+import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
 import { getCardDetail } from '../../api/cards/getCardDetail'
 import { getColumns } from '@/api/columns/getColumns'
 import kebab from '../../../public/assets/images/kebab.svg'
@@ -12,18 +12,18 @@ import { deleteCard } from '@/api/cards/deleteCard'
 import ModalComment from '@/components/modalComment/ModalComment'
 import ModalProfile from '@/components/modalProfile/ModalProfile'
 import ModalHeader from '@/components/modalHeader/ModalHeader'
-import { queryClient } from '@/pages/_app'
 interface ReadTodoProps {
-  // queryData: any
   cardId: number
   columnId: number
   dashboardId: number
   onClose: () => void
-  refetchFunc: (columnId: number) => void
+  refetchColumnList: (columnId: number) => void
 }
 
+const queryClient = new QueryClient()
+
 export default function ReadTodo({
-  refetchFunc,
+  refetchColumnList,
   dashboardId,
   columnId,
   cardId,
@@ -54,12 +54,6 @@ export default function ReadTodo({
   const cardDeleteMutation = useMutation({
     mutationFn: (commnetId: number) => deleteCard(commnetId),
   })
-
-  useEffect(() => {
-    return () => {
-      queryClient.invalidateQueries({ queryKey: ['detailCard', cardId] })
-    }
-  }, [])
 
   if (isSuccess && columQuery.isSuccess) {
     const columnList = columQuery.data.data!
@@ -94,7 +88,7 @@ export default function ReadTodo({
             targetColumn={columnName}
             columnList={columnList}
             onClose={onClose}
-            refetchFunc={refetchFunc}
+            refetchColumnList={refetchColumnList}
           />
         ) : (
           <div className={styles.container}>
