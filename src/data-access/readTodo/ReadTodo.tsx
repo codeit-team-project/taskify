@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from '@/data-access/readTodo/ReadTodo.module.scss'
 import Image from 'next/image'
 import close from '../../../public/assets/images/close.svg'
-import { QueryClient, useMutation, useQuery } from '@tanstack/react-query'
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getCardDetail } from '../../api/cards/getCardDetail'
 import { getColumns } from '@/api/columns/getColumns'
 import kebab from '../../../public/assets/images/kebab.svg'
@@ -12,6 +12,7 @@ import { deleteCard } from '@/api/cards/deleteCard'
 import ModalComment from '@/components/modalComment/ModalComment'
 import ModalProfile from '@/components/modalProfile/ModalProfile'
 import ModalHeader from '@/components/modalHeader/ModalHeader'
+
 interface ReadTodoProps {
   cardId: number
   columnId: number
@@ -19,8 +20,6 @@ interface ReadTodoProps {
   onClose: () => void
   refetchColumnList: (columnId: number) => void
 }
-
-const queryClient = new QueryClient()
 
 export default function ReadTodo({
   refetchColumnList,
@@ -33,6 +32,7 @@ export default function ReadTodo({
   const [openDropdown, setOpenDropDown] = useState(false)
   const { ref, isComponentVisible, setIsComponentVisible } = useComponentVisible(true)
 
+  const queryClient = useQueryClient()
   const handleOpenDropdown = () => {
     setOpenDropDown(true)
     setIsComponentVisible(true)
@@ -54,6 +54,12 @@ export default function ReadTodo({
   const cardDeleteMutation = useMutation({
     mutationFn: (commnetId: number) => deleteCard(commnetId),
   })
+
+  useEffect(() => {
+    return () => {
+      queryClient.invalidateQueries({ queryKey: ['detailCard', cardId] })
+    }
+  }, [])
 
   if (isSuccess && columQuery.isSuccess) {
     const columnList = columQuery.data.data!
