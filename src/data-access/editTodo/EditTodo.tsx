@@ -57,7 +57,7 @@ export default function EditTodo({
     mutationFn: ({ cardId, data }: { cardId: number; data: editCardType }) =>
       editCard(cardId, data),
     onSuccess() {
-      refetchColumnList(columnId)
+      refetchColumnList(obj.columnId)
       resetFormStatus(obj)
       onClose()
     },
