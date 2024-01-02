@@ -11,6 +11,11 @@ export interface InvitationType {
     id: number
     email: string
   }
+  inviter: {
+    nickname: string
+    id: number
+    email: string
+  }
   inviteAccepted: boolean
   createdAt: string
   updatedAt: string
