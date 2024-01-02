@@ -5,7 +5,7 @@ import styles from './FloatingButton.module.scss'
 
 interface FloatingProps {
   boardId: number
-  onOpen: any
+  onOpen: () => void
 }
 
 function FloatingMenu({ boardId, onOpen }: FloatingProps) {
@@ -13,7 +13,7 @@ function FloatingMenu({ boardId, onOpen }: FloatingProps) {
     <div className={styles['button-container']}>
       <button className={styles['button']}>
         <Link href={`/dashboard/${String(boardId)}/edit`}>
-          <Image src="/assets/images/settingIcon.svg" alt="setting icon" width={18} height={18} />{' '}
+          <Image src="/assets/images/settingIcon.svg" alt="setting icon" width={18} height={18} />
           관리
         </Link>
       </button>
