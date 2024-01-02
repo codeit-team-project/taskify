@@ -1,8 +1,4 @@
-/* signin 페이지에 사용할 Form 컴포넌트 
-
-TODO - onSubmit에서 error 받을 때 alert 창 띄우는 코드를 모달창 띄우는 코드로 바꿀 것. (아님 토스트 메세지를 쓰던가 커스텀 alert를 써도 이쁠듯?)
-TODO - isPending을 통해 로딩스피너 활용하는 코드 추가할 것. 
-*/
+/* signin 페이지에 사용할 Form 컴포넌트 */
 
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
@@ -18,6 +14,7 @@ import { emailValidationRules, passwordValidationRules } from '@/utils/formInput
 
 import styles from './SignForm.module.scss'
 import { setCookie } from '@/utils/cookie'
+import { toastUsingButton } from '../customToast/CustomToast'
 
 export default function SigninForm() {
   const {
@@ -44,9 +41,9 @@ export default function SigninForm() {
     },
     onError: (error: AxiosError) => {
       if (error?.response?.status === 400) {
-        alert(`${error?.response?.data?.message}`)
+        toastUsingButton(error?.response?.data?.message)
       } else if (error?.response?.status === 404) {
-        alert('존재하지 않는 유저입니다!')
+        toastUsingButton('존재하지 않는 유저입니다!')
       } else return
     },
     onSettled: () => {

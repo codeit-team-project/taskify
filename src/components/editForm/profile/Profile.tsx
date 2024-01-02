@@ -22,6 +22,7 @@ import { noRequiredNicknameValidationRules } from '@/utils/formInputValidationRu
 
 import ImageUploader from './imageUploader/ImageUploader'
 import styles from './Profile.module.scss'
+import { toastUsingButton } from '@/components/customToast/CustomToast'
 
 export default function Profile() {
   const {
@@ -75,7 +76,7 @@ export default function Profile() {
     },
     onSettled: async () => {
       // 변경된 데이터 refetch
-      alert('저장되었습니다.')
+      toastUsingButton('변경되었습니다!')
       setIsEditing(false)
       await queryClient.invalidateQueries({ queryKey: ['profile-key'] })
     },

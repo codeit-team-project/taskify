@@ -17,6 +17,7 @@ import { PasswordModifierInputsType } from '@/types/formTypes'
 
 import styles from './PasswordModifier.module.scss'
 import { PasswordCheckVauleType } from '@/types/auth'
+import { toastUsingButton } from '@/components/customToast/CustomToast'
 
 export default function PasswordModifier() {
   const {
@@ -39,13 +40,13 @@ export default function PasswordModifier() {
     },
     onSuccess: () => {
       setIsEditing(false)
-      alert('비밀번호가 변경되었습니다!')
+      toastUsingButton('비밀번호가 변경되었습니다!')
     },
     onError: (error) => {
       if (error.response.status === 400) {
-        alert(error.response.data.message)
+        toastUsingButton(error.response.data.message)
       } else if (error.response.status === 404) {
-        alert('존재하지 않는 유저입니다')
+        toastUsingButton('존재하지 않는 유저입니다')
       }
     },
     onSettled: async () => {

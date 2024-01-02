@@ -4,15 +4,18 @@
 */
 
 import Link from 'next/link'
-import styles from './Dropdown.module.scss'
-import { removeCookie } from '@/utils/cookie'
 import { useRouter } from 'next/router'
+
+import { removeCookie } from '@/utils/cookie'
+
+import styles from './Dropdown.module.scss'
+import { toastUsingButton } from '@/components/customToast/CustomToast'
 
 export default function Dropdown() {
   const router = useRouter()
   const handleLogout = () => {
     removeCookie('accessToken')
-    alert('로그아웃 되었습니다!')
+    toastUsingButton('로그아웃되었습니다!')
     router.push('/')
   }
 
