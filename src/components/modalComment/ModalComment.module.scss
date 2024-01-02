@@ -3,7 +3,7 @@
 
 .commentList__item {
   display: flex;
-  column-gap: 1rem;
+  column-gap: 0.2rem;
   margin-top: 1.5rem;
 }
 
@@ -33,7 +33,6 @@
 
 @mixin textarea {
   resize: none;
-
   width: 43rem;
   height: 12rem;
   border-radius: 0.5rem;
