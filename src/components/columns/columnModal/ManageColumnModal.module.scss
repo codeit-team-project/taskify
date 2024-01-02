@@ -1,0 +1,184 @@
+@import '@/styles/mixin.scss';
+
+.modal-container {
+  width: 54rem;
+  padding: 2.8rem;
+  border-radius: 0.8rem;
+  background: var(--color-white);
+  @include mobile {
+    width: calc(100% - 2.4rem);
+  }
+}
+
+.manage-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2.8rem;
+}
+
+.title {
+  padding: 0.4rem 0;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-black_33);
+}
+
+.contents {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sub-title {
+  font-size: 1.8rem;
+  font-weight: 500;
+  color: var(--color-black_33);
+}
+
+.input {
+  padding: 1.5rem 1.6rem 1.4rem 1.6rem;
+  font-size: 1.6rem;
+  color: var(--color-black_33);
+  font-weight: 400;
+  border-radius: 0.6rem;
+  border: 1px solid var(--color-gray30);
+  background: var(--color-white);
+  outline: none;
+
+  &:focus {
+    border: 1px solid var(--color-primary);
+  }
+}
+
+.input-error {
+  border: 1px solid var(--color-red);
+}
+
+.errorMessage {
+  font-size: 1.4rem;
+  font-weight: 400;
+  color: var(--color-red);
+}
+
+.button-container {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  gap: 1.2rem;
+
+  @include tablet {
+    grid-template-columns: none;
+    gap: 1.6rem 1.1rem;
+  }
+}
+
+@mixin button {
+  padding: 1.4rem 4.6rem;
+  font-size: 1.6rem;
+  font-weight: 500;
+  border-radius: 0.8rem;
+  background: var(--color-white);
+  outline: none;
+
+  @include mobile {
+    padding: 1.2rem 0;
+    font-size: 1.4rem;
+    white-space: pre;
+  }
+}
+
+.button-delete-confirm {
+  width: fit-content;
+  color: var(--color-gray40);
+  word-break: keep-all;
+  font-size: 1.4rem;
+  font-weight: 400;
+  line-height: normal;
+  text-decoration-line: underline;
+}
+
+.button-cancel {
+  @include button;
+  color: var(--color-gray50);
+  border: 1px solid var(--color-gray30);
+  @include tablet {
+    grid-area: 2/1;
+  }
+}
+
+.button-change {
+  @include button;
+  color: var(--color-white);
+  background: var(--color-primary);
+  @include tablet {
+    grid-area: 2/2;
+  }
+}
+
+.inActive {
+  opacity: 0.7;
+  cursor: default;
+}
+
+.delete-confirm-container {
+  .delete-confirm-text {
+    grid-area: text;
+    padding: 10.8rem 0 4.5rem 0;
+    color: var(--color-black__33);
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 500;
+    line-height: normal;
+    @include mobile {
+      font-size: 1.6rem;
+      padding: 8.1rem 0 5rem 0;
+    }
+  }
+  .button-container {
+    display: flex;
+    justify-content: flex-end;
+    @include mobile {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
+    .button-delete-cancel {
+      @include button;
+      color: var(--color-gray50);
+      border: 1px solid var(--color-gray30);
+    }
+    .button-delete {
+      @include button;
+      color: var(--color-white);
+      background: var(--color-primary);
+    }
+  }
+}
+
+div.no-show {
+  display: none;
+}
+
+@include mobile {
+  .container {
+    padding: 2rem;
+    width: 32.7rem;
+    gap: 2.4rem;
+  }
+
+  .title {
+    padding-top: 0.8rem;
+    font-size: 2rem;
+  }
+
+  .sub-title {
+    font-size: 1.6rem;
+  }
+
+  .input {
+    padding: 1.3rem 1.6rem 1.2rem 1.6rem;
+    font-size: 1.4rem;
+  }
+
+  .buttons {
+    justify-content: center;
+  }
+}
