@@ -73,9 +73,8 @@ function Invitations({ invitationList }: InvitationsProps) {
     mutationKey: ['respondInvitation'],
     mutationFn: putInvitation,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['getInvitations'],
-      })
+      queryClient.invalidateQueries({ queryKey: ['getInvitations'] })
+      queryClient.invalidateQueries({ queryKey: ['dashBoards'] })
     },
   })
 
