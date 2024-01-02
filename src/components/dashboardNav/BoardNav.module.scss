@@ -47,12 +47,12 @@
 
 @include mobile {
   .nav-container {
-    justify-content: flex-end;
     height: 6rem;
-    padding: 1.3rem 1.3rem 1.3rem 1.3rem;
+    padding: 1.3rem 1.3rem 1.3rem 8rem;
     min-width: 37.5rem;
   }
   .title-section {
-    display: none;
+    font-size: 1.5rem;
+    // display: none;
   }
 }
