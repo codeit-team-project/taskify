@@ -1,9 +1,8 @@
 import axiosInstance from '@/commons/lib/axiosInstance'
-import { CardImageUploadValueType } from '@/types/columnsType'
 
-interface CreateColumnImageUploadType {
+export interface CreateColumnImageUploadType {
   columnId: number
-  data: CardImageUploadValueType
+  data: FormData
 }
 
 export const createColumnImageUpload = async ({ columnId, data }: CreateColumnImageUploadType) => {
