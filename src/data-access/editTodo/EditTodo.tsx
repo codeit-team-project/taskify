@@ -30,10 +30,10 @@ interface EditTodoProps {
   targetColumn: string
   columnList: ColumnType[]
   onClose: () => void
-  refetchFunc: (columnId: number) => void
+  refetchColumnList: (columnId: number) => void
 }
 export default function EditTodo({
-  refetchFunc,
+  refetchColumnList,
   onClose,
   dashboardId,
   cardId,
@@ -57,9 +57,12 @@ export default function EditTodo({
     mutationFn: ({ cardId, data }: { cardId: number; data: editCardType }) =>
       editCard(cardId, data),
     onSuccess() {
-      refetchFunc(columnId)
+      refetchColumnList(columnId)
       resetFormStatus(obj)
       onClose()
+    },
+    onError(error) {
+      console.log(error)
     },
   })
 
@@ -99,11 +102,8 @@ export default function EditTodo({
         imageUrl: newImageUrl as string,
       },
     }
-    try {
-      editCardMutation.mutate(editObect)
-    } catch (error) {
-      console.log('createCardMutationError', error)
-    }
+
+    editCardMutation.mutate(editObect)
   }
 
   const { assignee, title, description, dueDate, tags, imageUrl } = cardDetailQuery.data!
