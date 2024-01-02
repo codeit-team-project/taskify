@@ -2,6 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 import { useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useQuery } from '@tanstack/react-query'
 import classNames from 'classnames'
 
@@ -11,6 +12,7 @@ import SidebarItem from './SidebarItem'
 
 import { DashBoardListType } from '@/types/dashBoardType'
 import NewDashboardModal from '@/components/dashboard/NewDashboardModal'
+import ModalContainer from '@/components/dashboardModal/ModalContainer'
 
 export default function Sidebar() {
   const router = useRouter()
@@ -25,6 +27,10 @@ export default function Sidebar() {
 
   const handleOpenModal = () => {
     setIsModalOpen(true)
+  }
+
+  const onclose = () => {
+    setIsModalOpen(false)
   }
 
   return (
@@ -63,7 +69,13 @@ export default function Sidebar() {
           ))}
         </div>
       </section>
-      {isModalOpen && <NewDashboardModal onClose={() => setIsModalOpen(false)} />}
+      {isModalOpen &&
+        createPortal(
+          <ModalContainer onClose={onclose}>
+            <NewDashboardModal onClose={onclose} />
+          </ModalContainer>,
+          document.getElementById('modal-root') as HTMLElement,
+        )}
     </>
   )
 }
