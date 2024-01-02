@@ -1,0 +1,47 @@
+.background {
+  position: absolute;
+  background-color: var(--color-violet_8);
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 50rem;
+  & button {
+    color: white;
+    background: linear-gradient(
+      90deg,
+      rgba(209, 74, 92, 1) 0%,
+      rgba(175, 68, 126, 1) 16%,
+      rgba(140, 62, 162, 1) 38%,
+      rgba(85, 52, 218, 1) 100%
+    );
+    border-radius: 8px;
+    padding: 1rem 5rem;
+    position: absolute;
+    bottom: 27rem;
+    right: 10rem;
+    font-family: 'Pretendard';
+    font-weight: 800;
+  }
+}
+
+.container {
+  width: 80rem;
+  display: flex;
+  position: absolute;
+  top: 7rem;
+  & img {
+    width: 100%;
+  }
+}
+.line {
+  height: 5px;
+  width: 100%;
+  background: linear-gradient(
+    90deg,
+    rgba(252, 82, 48, 1) 0%,
+    rgba(252, 82, 48, 1) 0%,
+    rgba(252, 82, 48, 1) 32%,
+    rgba(85, 52, 218, 1) 100%
+  );
+}
