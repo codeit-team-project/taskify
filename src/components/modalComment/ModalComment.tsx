@@ -5,13 +5,13 @@ import { getComments } from '@/api/comments/getComments'
 import { CreateCommentType, createComments } from '@/api/comments/createComments'
 import { EditCommentType, editComments } from '@/api/comments/editComments'
 import { CommentType } from '@/types/commentType'
-import { useInfiniteQuery, useMutation } from '@tanstack/react-query'
+import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { mappingTime } from '@/utils/mappingTime'
 import styles from './ModalComment.module.scss'
 import Image from 'next/image'
-import { queryClient } from '@/pages/_app'
-import useScroll from '@/hooks/userScroll'
+// import { queryClient } from '@/pages/_app'
+import useScroll from '@/hooks/useScroll'
 
 interface ModalCommentProps {
   dashboardId: number
@@ -25,6 +25,7 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
   const [isEdit, setIsEdit] = useState(false)
   const [editCommentId, setEditCommentItemId] = useState(0)
   const [editComment, setEditComment] = useState('')
+  const queryClient = useQueryClient()
   const handleComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value)
   }
