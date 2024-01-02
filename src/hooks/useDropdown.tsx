@@ -7,7 +7,7 @@
 */
 
 // import { FocusEventHandler, MouseEventHandler, useState } from 'react'
-import { MouseEventHandler, useState } from 'react'
+import { useState } from 'react'
 
 export default function useDropdown() {
   // isVisible이 true면 드롭다운이 보임
@@ -21,7 +21,7 @@ export default function useDropdown() {
     }, 200)
   }
 
-  const data: [boolean, MouseEventHandler, () => void] = [
+  const data: [boolean, () => void, () => void] = [
     isVisible,
     handleOpenDropdown,
     handleCloseDropdown,
