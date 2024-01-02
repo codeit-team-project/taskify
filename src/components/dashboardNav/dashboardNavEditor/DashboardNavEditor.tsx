@@ -18,6 +18,7 @@ import { DashBoardMembers } from '@/types/members'
 import styles from './DashboardNavEditor.module.scss'
 import RandomProfile from '@/components/randomProfile/RandomProfile'
 import ModalContainer from '@/components/dashboardModal/ModalContainer'
+import FloatingButton from '../floatingButton/FloatingButton'
 
 interface DashboardNavEditorProps {
   isOwner?: boolean
@@ -73,6 +74,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
             초대하기
           </button>
         </div>
+        <FloatingButton boardId={boardId} onOpen={handleOpenModal} />
         {memberData && (
           <div className={styles['members-section']}>
             {windowSize > 744 ? (

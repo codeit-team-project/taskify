@@ -70,6 +70,7 @@ export default function ReadTodo({
     const handleDeleteCard = (cardId: number) => {
       if (window.confirm('정말삭제하시겠습니까?')) {
         cardDeleteMutation.mutate(cardId)
+        refetchColumnList(columnId)
         onClose()
       } else {
         setSelectedItem('')
@@ -82,7 +83,6 @@ export default function ReadTodo({
       }
       setOpenDropDown(false)
     }
-
     return (
       <>
         {selectItem === '수정하기' ? (
