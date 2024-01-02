@@ -19,7 +19,12 @@ export default function DesCription({ EditDesScription = '' }) {
         <span className={styles.text}>설명</span>
         <span className={styles.emphasis}>*</span>
       </div>
-      <textarea className={styles.textarea} value={description} onChange={handleDescription} />
+      <textarea
+        className={styles.textarea}
+        value={description}
+        onChange={handleDescription}
+        placeholder="설명을 입력해주세요"
+      />
     </div>
   )
 }
