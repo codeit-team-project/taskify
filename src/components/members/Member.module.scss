@@ -85,15 +85,14 @@
 @include tablet {
   .container {
     min-width: 54.4rem;
+    width: 100%;
   }
 }
 
 @include mobile {
   .container {
     min-width: 28.4rem;
-    width: 100%;
-    max-height: 33.7rem;
-    height: 100%;
+    min-height: auto;
   }
 
   .card-info {

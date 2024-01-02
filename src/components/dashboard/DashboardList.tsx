@@ -35,7 +35,7 @@ export default function DashboardList() {
     setIsOpenModal(true)
   }
 
-  const onclose = () => {
+  const onClose = () => {
     setIsOpenModal(false)
   }
 
@@ -82,8 +82,8 @@ export default function DashboardList() {
       </section>
       {isOpenModal &&
         createPortal(
-          <ModalContainer onClose={onclose}>
-            <NewDashboardModal onClose={onclose} />
+          <ModalContainer onClose={onClose}>
+            <NewDashboardModal onClose={onClose} />
           </ModalContainer>,
           document.getElementById('modal-root') as HTMLElement,
         )}
