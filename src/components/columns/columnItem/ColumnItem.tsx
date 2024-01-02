@@ -9,9 +9,10 @@ import ManageColumnButton from '../manageColumnButton/ManageColumnButton'
 interface ColumnItemProps {
   item: ColumnType
   dashBoardId: number
+  columnId: number
 }
 
-export default function ColumnItem({ item, dashBoardId }: ColumnItemProps) {
+export default function ColumnItem({ item, dashBoardId, columnId }: ColumnItemProps) {
   const { id, title } = item
 
   const { data } = useQuery<CardsType>({
@@ -27,9 +28,13 @@ export default function ColumnItem({ item, dashBoardId }: ColumnItemProps) {
             <div className={styles['dot']}></div>
             <p className={styles['title']}>{title}</p>
             <p className={styles['number']}>{data.cards.length}</p>
-            <ManageColumnButton originalTitle={title} dashBoardId={dashBoardId} columnId={id} />
+            <ManageColumnButton
+              originalTitle={title}
+              dashBoardId={dashBoardId}
+              columnId={columnId}
+            />
           </div>
-          <TaskCardList list={data.cards} />
+          <TaskCardList list={data.cards} dashBoardId={dashBoardId} columnId={columnId} />
         </>
       )}
     </li>
