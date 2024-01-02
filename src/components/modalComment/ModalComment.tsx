@@ -10,8 +10,8 @@ import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-q
 import { mappingTime } from '@/utils/mappingTime'
 import styles from './ModalComment.module.scss'
 import Image from 'next/image'
-// import { queryClient } from '@/pages/_app'
 import useScroll from '@/hooks/useScroll'
+import RandomProfile from '../randomProfile/RandomProfile'
 
 interface ModalCommentProps {
   dashboardId: number
@@ -166,8 +166,12 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
             return (
               <li key={comment.id} className={styles.commentList__item}>
                 <div className={styles.profileImage}>
-                  {author.profileImageUrl && (
+                  {author.profileImageUrl ? (
                     <Image src={author.profileImageUrl} alt="commentuser" width="30" height="30" />
+                  ) : (
+                    <>
+                      <RandomProfile size={20} email={author.nickname}></RandomProfile>
+                    </>
                   )}
                 </div>
                 <div>

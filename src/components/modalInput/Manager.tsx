@@ -4,6 +4,7 @@ import arrowDown from '../../../public/assets/images/arrowDown.svg'
 import Image from 'next/image'
 import { Members } from '@/types/members'
 import { FormContext } from '@/context/formContext'
+import RandomProfile from '../randomProfile/RandomProfile'
 
 export type managerListType = Members[]
 
@@ -28,6 +29,7 @@ export default function Manager({
     setAssigneeUserId,
   } = useContext(FormContext)
 
+  const [email, setEmail] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const handleOpenClick = () => {
     setIsOpen(!isOpen)
@@ -39,6 +41,7 @@ export default function Manager({
     }
     if (editName.length > 0) {
       setAssigneeUserName(editName)
+      setEmail(editName)
     }
     if (profileImageUrl && profileImageUrl.length > 0) {
       setProfileImage(profileImageUrl)
@@ -53,7 +56,9 @@ export default function Manager({
             <div className={styles.assigneeUser__image}>
               <Image src={profileImage} alt="profile-image" width={30} height={30} />
             </div>
-          ) : null}
+          ) : (
+            <>{email && <RandomProfile size={20} email={email}></RandomProfile>}</>
+          )}
           <span>{assigneeUserName}</span>
         </div>
         <Image src={arrowDown} alt="arrowdown" width={20} height={20} />
@@ -71,7 +76,7 @@ export default function Manager({
                   }}
                 >
                   <div className={styles.dropdown__assigneeUser__wrapper}>
-                    {person.profileImageUrl && (
+                    {person.profileImageUrl ? (
                       <Image
                         src={person.profileImageUrl}
                         alt="profileImage"
@@ -79,6 +84,8 @@ export default function Manager({
                         width={20}
                         height={20}
                       />
+                    ) : (
+                      <RandomProfile size={20} email={person.email}></RandomProfile>
                     )}
                     {person.nickname}
                   </div>

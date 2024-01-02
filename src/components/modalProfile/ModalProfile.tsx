@@ -3,6 +3,7 @@ import styles from './ModalProfile.module.scss'
 import { mappingTime } from '@/utils/mappingTime'
 import Image from 'next/image'
 import { CardType } from '@/types/cardsType'
+import RandomProfile from '../randomProfile/RandomProfile'
 
 interface ModalProfileProps {
   cardDetailData: CardType
@@ -16,10 +17,12 @@ export default function ModalProfile({ cardDetailData }: ModalProfileProps) {
       <div className={styles.assingee__profile__wrapper}>
         <span className={styles.assignee}>담당자</span>
         <div className={styles.profile}>
-          {manager.profileImageUrl && (
+          {manager.profileImageUrl ? (
             <div className={styles.profileImage}>
               <Image src={manager.profileImageUrl} width="30" height="30" alt="image" />
             </div>
+          ) : (
+            <RandomProfile size={20} email={manager.nickname}></RandomProfile>
           )}
           <span>{manager.nickname}</span>
         </div>
