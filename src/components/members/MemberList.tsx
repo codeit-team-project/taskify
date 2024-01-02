@@ -1,7 +1,3 @@
-/**
- * @TODO 구성원 컴포넌트
- * 1. 버튼 UI 공통컴포넌트화 (세컨더리 버튼) (리팩토링)
- */
 import { useEffect, useState } from 'react'
 import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
 import styles from './Member.module.scss'

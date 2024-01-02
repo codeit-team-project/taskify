@@ -1,9 +1,3 @@
-/**
- * 초대내역 컴포넌트
- * @TODO
- * 페이지에 들어갔을때 사이즈 재확인
- * 반응형 스타일 재점검
- */
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'

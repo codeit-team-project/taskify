@@ -1,7 +1,3 @@
-/**
- * @TODO 컬럼 생성 모달
- * 모달 컨테이너로 감싸기
- */
 import { ChangeEvent, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { AxiosError } from 'axios'
