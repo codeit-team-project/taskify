@@ -1,20 +1,17 @@
 @import '@/styles/mixin.scss';
 
 .article-content {
-  margin: 7rem 0 0 30rem;
-  padding: 2rem;
-  height: calc(100vh - 7rem);
+  height: 100vh;
   background: var(--color-gray10);
   overflow: auto;
+  padding: 7rem 0 0 30rem;
 
   @include tablet {
-    margin: 7rem 0 0 16rem;
+    padding: 7rem 0 0 16rem;
   }
 
   @include mobile {
-    margin: 6rem 0 0 6.7rem;
-    padding: 1.2rem;
-    height: calc(100vh - 6rem);
+    padding: 6rem 0 0 6.7rem;
   }
 }
 
