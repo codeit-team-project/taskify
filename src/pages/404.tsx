@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router'
-import styles from './index.module.scss'
+import styles from '@/styles/NotFound.module.scss'
 import { getCookie } from '@/utils/cookie'
 
 export default function NotFound() {
