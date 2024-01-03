@@ -6,8 +6,7 @@ import { CreateCommentType, createComments } from '@/api/comments/createComments
 import { EditCommentType, editComments } from '@/api/comments/editComments'
 import { CommentType } from '@/types/commentType'
 import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query'
-
-import { mappingTime } from '@/utils/mappingTime'
+import { fnsTimeFormat } from '@/utils/mappingTime'
 import styles from './ModalComment.module.scss'
 import Image from 'next/image'
 import useScroll from '@/hooks/useScroll'
@@ -161,7 +160,7 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
             const author = comment.author
             const content = comment.content
             const createdAt = comment.createdAt
-            const { year, month, day, hour, minutes } = mappingTime(createdAt)
+            const formatedTime = fnsTimeFormat(createdAt)
             return (
               <li key={comment.id} className={styles.commentList__item}>
                 <div className={styles.profileImage}>
@@ -177,9 +176,7 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
                   <div className={styles.commentperson__wrapper}>
                     <div className={styles.commnet__person}>
                       <span className={styles.nickname}>{author.nickname}</span>
-                      <span className={styles.time}>
-                        {year}.{month}.{day}.{hour}:{minutes}
-                      </span>
+                      <span className={styles.time}>{formatedTime}</span>
                     </div>
                     {editCommentId === comment.id && isEdit ? (
                       <>
