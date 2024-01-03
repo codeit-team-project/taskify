@@ -1,10 +1,12 @@
 import axiosInstance from '@/commons/lib/axiosInstance'
 import { ReceivedInvitationsType } from '@/types/invitations'
 
-export const getInvitations = async (title?: string) => {
+export const getInvitations = async (title?: string, pageParam?: number | null) => {
   try {
-    const query = title ? `size=10&title=${title}` : 'size=10'
-    const response = await axiosInstance.get<ReceivedInvitationsType>(`/invitations?${query}`)
+    let query = ''
+    if (pageParam) query += `&cursorId=${pageParam}`
+    if (title) query += `&title=${title}`
+    const response = await axiosInstance.get<ReceivedInvitationsType>(`/invitations?size=6${query}`)
 
     return response.data
   } catch (error) {

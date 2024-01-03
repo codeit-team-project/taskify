@@ -5,7 +5,7 @@ export interface InvitationsValue {
 }
 
 export interface ReceivedInvitationsType {
-  cursorId: number
+  cursorId: any
   invitations: InvitationType[] | []
 }
 
