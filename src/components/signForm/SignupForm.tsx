@@ -1,8 +1,4 @@
-/* signun 페이지에 사용할 Form 컴포넌트
-
-TODO - onSubmit 함수에서 error response 받을 때 alert 창 띄우는 코드를 나중에 모달창 띄우는 코드로 바꿀 것. (아님 토스트 메세지를 쓰던가 커스텀 alert를 써도 이쁠듯?)
-TODO - isPending을 통해 로딩스피너 활용하는 코드 추가할 것. 
-*/
+/* signun 페이지에 사용할 Form 컴포넌트*/
 
 import { AxiosError } from 'axios'
 import { useForm } from 'react-hook-form'
@@ -11,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useMutation } from '@tanstack/react-query'
 
 import { createUser } from '@/api/users/createUser'
+import { toastUsingButton } from '@/components/customToast/CustomToast'
 import ServiceChekInput from '@/components/serviceCheckInput/ServiceCheckInput'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import TextInput from '@/components/signInput/TextInput'
@@ -43,13 +40,12 @@ export default function SignupForm() {
       setIsPending(true)
     },
     onSuccess: () => {
-      alert('가입이 완료되었습니다!')
+      toastUsingButton('가입이 완료되었습니다!')
       router.push('/signin')
     },
     onError: (error) => {
       if (error instanceof AxiosError) {
-        alert(error.response?.data.message)
-        alert('이미 사용 중인 이메일입니다!')
+        toastUsingButton(error.response?.data.message)
       } else return
     },
     onSettled: () => {
