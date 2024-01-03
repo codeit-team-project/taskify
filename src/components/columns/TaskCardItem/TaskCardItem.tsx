@@ -90,6 +90,11 @@ export default function TaskCardItem({ item, dashBoardId, columnId }: TaskCardIt
                   queryClient.invalidateQueries({
                     queryKey: ['getCards', id],
                   })
+                  if (id !== columnId) {
+                    queryClient.invalidateQueries({
+                      queryKey: ['getCards', columnId],
+                    })
+                  }
                 }}
                 cardId={item.id}
                 dashboardId={dashBoardId}
