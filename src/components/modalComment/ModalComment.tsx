@@ -80,7 +80,6 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
     mutationFn: (data: CreateCommentType) => createComments(data),
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['getComments', cardId] })
-      commentQuery.refetch()
     },
   })
 
@@ -91,7 +90,6 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
     },
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['getComments', cardId] })
-      commentQuery.refetch()
     },
   })
 
@@ -100,7 +98,6 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
     mutationFn: ({ commentId, content }: EditCommentType) => editComments({ commentId, content }),
     onSuccess() {
       queryClient.invalidateQueries({ queryKey: ['getComments', cardId] })
-      commentQuery.refetch()
     },
   })
   const commentList = commentQuery.data?.pages.flatMap((page) => page.comments) || []
