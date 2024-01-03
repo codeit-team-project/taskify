@@ -8,9 +8,14 @@
     height: 7rem;
     border-radius: 0.8rem;
     resize: none;
-
     &:focus {
       outline: none;
+    }
+    &::placeholder {
+      padding-top: 0.5rem;
+      padding-left: 0.5rem;
+      font-size: 1.48rem;
+      color: var(--gray-gray_9FA6B2, #9fa6b2);
     }
   }
 }

@@ -18,6 +18,7 @@ import { PasswordModifierInputsType } from '@/types/formTypes'
 import styles from './PasswordModifier.module.scss'
 import { PasswordCheckVauleType } from '@/types/auth'
 import { toastUsingButton } from '@/components/customToast/CustomToast'
+import { AxiosError } from 'axios'
 
 export default function PasswordModifier() {
   const {
@@ -43,10 +44,8 @@ export default function PasswordModifier() {
       toastUsingButton('비밀번호가 변경되었습니다!')
     },
     onError: (error) => {
-      if (error.response.status === 400) {
-        toastUsingButton(error.response.data.message)
-      } else if (error.response.status === 404) {
-        toastUsingButton('존재하지 않는 유저입니다')
+      if (error instanceof AxiosError) {
+        toastUsingButton(error.response?.data.message)
       }
     },
     onSettled: async () => {

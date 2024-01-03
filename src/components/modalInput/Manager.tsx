@@ -59,7 +59,13 @@ export default function Manager({
           ) : (
             <>{email && <RandomProfile size={20} email={email}></RandomProfile>}</>
           )}
-          <span>{assigneeUserName}</span>
+          <span>
+            {assigneeUserName ? (
+              assigneeUserName
+            ) : (
+              <span className={styles.assigneeUserName}>이름을입력해주세요</span>
+            )}
+          </span>
         </div>
         <Image src={arrowDown} alt="arrowdown" width={20} height={20} />
         {isOpen && (

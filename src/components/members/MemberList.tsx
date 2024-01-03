@@ -1,7 +1,3 @@
-/**
- * @TODO 구성원 컴포넌트
- * 1. 버튼 UI 공통컴포넌트화 (세컨더리 버튼) (리팩토링)
- */
 import { useEffect, useState } from 'react'
 import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
 import styles from './Member.module.scss'
@@ -28,6 +24,7 @@ export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
     placeholderData: keepPreviousData,
     staleTime: 3000,
     enabled: !!dashBoardId,
+    retry: 1,
   })
 
   const hasMorePage = data && currentPage < Math.ceil(data?.totalCount / pageSize)

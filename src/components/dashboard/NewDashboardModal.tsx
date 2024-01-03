@@ -1,9 +1,3 @@
-/**
- * @TODO
- * 사이드바 "+" 클릭시 대시보드 생성 모달 나타남
- * /mydashboard 페이지에서 새로운 대시보드 "+" 클릭시 대시보드 생성 모달 나타남
- * 모달 공통 컴포넌트 적용하기
- */
 import { useRouter } from 'next/router'
 import { ChangeEvent, useState } from 'react'
 import { useMutation, useQueryClient } from '@tanstack/react-query'

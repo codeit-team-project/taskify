@@ -39,11 +39,9 @@ export default function SigninForm() {
       }
       router.push('/mydashboard')
     },
-    onError: (error: AxiosError) => {
-      if (error?.response?.status === 400) {
-        toastUsingButton(error?.response?.data?.message)
-      } else if (error?.response?.status === 404) {
-        toastUsingButton('존재하지 않는 유저입니다!')
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        toastUsingButton(error.response?.data.message)
       } else return
     },
     onSettled: () => {

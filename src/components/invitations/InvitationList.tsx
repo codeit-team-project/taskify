@@ -1,10 +1,5 @@
-/**
- * 초대내역 컴포넌트
- * @TODO
- * 페이지에 들어갔을때 사이즈 재확인
- * 반응형 스타일 재점검
- */
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
 
 import styles from './Invitation.module.scss'
@@ -15,6 +10,7 @@ import InvitationItem from './InvitationItem'
 import InvitationModal from './InvitationModal'
 import Pagination from '@/components/pagination/Pagination'
 import NodataUI from '@/components/ui/nodataUI/NodataUI'
+import ModalContainer from '@/components/dashboardModal/ModalContainer'
 
 interface InvitationListProps {
   dashBoardId: number
@@ -94,7 +90,13 @@ export default function InvitationList({ dashBoardId }: InvitationListProps) {
           )}
         </div>
       </section>
-      {isOpenModal && <InvitationModal dashBoardId={dashBoardId} onClose={handleCloseModal} />}
+      {isOpenModal &&
+        createPortal(
+          <ModalContainer onClose={handleCloseModal}>
+            <InvitationModal dashBoardId={dashBoardId} onClose={handleCloseModal} />
+          </ModalContainer>,
+          document.getElementById('modal-root') as HTMLElement,
+        )}
     </>
   )
 }

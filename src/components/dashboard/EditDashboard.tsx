@@ -1,9 +1,3 @@
-/**
- * @todo
- * 수정후에 사이드바, 네브바 대시보드 이름 변경 확인하기
- * 에러케이스 확인하기
- */
-
 import { ChangeEvent, useEffect, useState } from 'react'
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import classNames from 'classnames'
@@ -29,6 +23,7 @@ export default function EditDashboard({ dashBoardId }: EditDashboardProps) {
     queryKey: ['dashBoardsDetail', dashBoardId],
     queryFn: () => getDashBoardsDetail(dashBoardId),
     enabled: !!dashBoardId,
+    retry: 1,
   })
 
   const { mutate: updateDashBoard } = useMutation({

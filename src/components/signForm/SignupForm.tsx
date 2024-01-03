@@ -43,11 +43,9 @@ export default function SignupForm() {
       toastUsingButton('가입이 완료되었습니다!')
       router.push('/signin')
     },
-    onError: (error: AxiosError) => {
-      if (error?.response?.status === 400) {
-        toastUsingButton(error?.response?.data?.message)
-      } else if (error?.response?.status === 409) {
-        toastUsingButton('이미 사용 중인 이메일입니다!')
+    onError: (error) => {
+      if (error instanceof AxiosError) {
+        toastUsingButton(error.response?.data.message)
       } else return
     },
     onSettled: () => {
