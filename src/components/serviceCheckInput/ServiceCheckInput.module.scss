@@ -1,3 +1,5 @@
+@import '@/styles/mixin.scss';
+
 .service-term {
   color: var(--color-black_33);
   font-size: 1.4rem;
@@ -7,4 +9,68 @@
   & button {
     text-decoration: underline;
   }
+}
+
+.term {
+  position: relative;
+  background-color: var(--color-white);
+  width: 57rem;
+  height: 40rem;
+  overflow-y: scroll;
+  &::-webkit-scrollbar {
+    width: 2rem; /* 스크롤바의 너비 */
+  }
+  &::-webkit-scrollbar-thumb {
+    height: 30%; /* 스크롤바의 길이 */
+    background: var(--color-violet); /* 스크롤바의 색상 */
+    border-radius: 10px;
+    background-clip: padding-box;
+    border: 7px solid transparent;
+  }
+  &::-webkit-scrollbar-track {
+    height: 40rem;
+  }
+  @include tablet {
+    width: 45rem;
+  }
+  @include mobile {
+    width: 30rem;
+  }
+}
+
+.term-container {
+  font-size: 1.3rem;
+  line-height: 1.5;
+  margin: 3rem 1rem 4rem 2rem;
+}
+
+.logos {
+  padding: 1rem;
+  border-radius: 8px;
+  width: inherit;
+  height: 5rem;
+  position: fixed;
+  background-color: white;
+  top: 50%;
+  transform: translateY(-24rem);
+}
+
+.bottom {
+  background-color: white;
+  position: fixed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: inherit;
+  padding: 2rem;
+  top: 50%;
+  border-radius: 8px;
+  transform: translateY(18rem);
+}
+
+.button {
+  background-color: var(--color-violet);
+  padding: 0.6rem 3rem;
+  border-radius: 8px;
+  color: white;
 }
