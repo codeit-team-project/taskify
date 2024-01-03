@@ -10,6 +10,7 @@ import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
 import { useQuery } from '@tanstack/react-query'
+import { v4 as uuidv4 } from 'uuid'
 
 import { getDashBoardMembers } from '@/api/members/getMembers'
 import InvitationModal from '@/components/invitations/InvitationModal'
@@ -90,7 +91,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
           <div className={styles['members-section']}>
             {windowSize > 744 ? (
               <div
-                key={boardId}
+                key={uuidv4()}
                 className={styles['member-img-list']}
                 style={{
                   width: `${memberData.totalCount >= 5 ? 17 : memberData.totalCount * 3 + 2}rem`,
