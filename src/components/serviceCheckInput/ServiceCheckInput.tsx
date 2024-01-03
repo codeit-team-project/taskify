@@ -1,10 +1,11 @@
 /* Signup 페이지에 쓸 이용약관 체크박스 컴포넌트*/
 
 import { ChangeEvent, useState } from 'react'
-import Image from 'next/image'
-import styles from './ServiceCheckInput.module.scss'
 import { createPortal } from 'react-dom'
-import ModalContainer from '../dashboardModal/ModalContainer'
+import Image from 'next/image'
+
+import ModalContainer from '@/components/dashboardModal/ModalContainer'
+import styles from './ServiceCheckInput.module.scss'
 
 interface ServiceTermProps {
   onClose: (s: boolean) => void
