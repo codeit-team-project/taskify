@@ -12,7 +12,7 @@ interface RandomProfileProps {
 }
 
 // 알파벳에 따라 색상 string을 리턴하는 함수
-const selectColor = (letter: string) => {
+export const selectColor = (letter: string) => {
   const letterAscii = letter.charCodeAt(0)
   if (letterAscii <= 70) {
     return '#C4B1A2'
