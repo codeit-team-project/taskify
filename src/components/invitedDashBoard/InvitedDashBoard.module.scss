@@ -128,7 +128,7 @@ section.container {
           padding: 1.6rem;
         }
         td {
-          padding: 2rem 1.6rem 2rem 0;
+          padding: 0 1.6rem 2rem 0;
           @include mobile {
             padding: 10rem;
           }
