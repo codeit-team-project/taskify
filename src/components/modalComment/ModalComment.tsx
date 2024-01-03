@@ -143,7 +143,6 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
     <div className={styles.comment__wrapper}>
       <span className={styles.comment__text}>댓글</span>
       <div className={styles.commnet}>
-        s
         <div className={styles.relative}>
           <textarea className={styles.textarea} value={comment} onChange={handleComment} />
           <div className={styles.button}>
