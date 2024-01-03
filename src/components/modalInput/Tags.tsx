@@ -56,7 +56,11 @@ export default function Tags({ EditTags = [] }: TagsProps) {
               )
             })}
         </ul>
-        <input onKeyDown={handleAdd} onChange={handleTags} placeholder="입력 후 Enter" />
+        {tags.length > 0 ? (
+          <input onKeyDown={handleAdd} onChange={handleTags} />
+        ) : (
+          <input onKeyDown={handleAdd} onChange={handleTags} placeholder="입력 후 Enter" />
+        )}
       </div>
     </div>
   )
