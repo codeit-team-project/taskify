@@ -1,7 +1,6 @@
 import { getInvitations } from '@/api/invitations/getInvitations'
 import DashboardList from '@/components/dashboard/DashboardList'
 import InvitedDashBoard from '@/components/invitedDashBoard/InvitedDashBoard'
-import HeadMeta from '@/components/seo/HeadMeta'
 import MyPageLayout from '@/components/ui/layout/MypageLayout'
 import { ReceivedInvitationsType } from '@/types/invitations'
 import { InvitationType } from '@/types/invitedDashBoardListType'
@@ -9,21 +8,12 @@ import { InvitationType } from '@/types/invitedDashBoardListType'
 export default function MyDashboardPage({ ...pageProps }) {
   return (
     <MyPageLayout title="mydashboard">
-      <HeadMeta title={pageProps.title} />
       <DashboardList />
       <InvitedDashBoard
       // list={pageProps.list}
       />
     </MyPageLayout>
   )
-}
-
-export async function getServerSideProps() {
-  return {
-    props: {
-      title: '',
-    },
-  }
 }
 
 /**
