@@ -2,13 +2,12 @@
 
 .column-list {
   display: flex;
-  overflow-x: scroll;
-  height: calc(100vh - 6rem);
+  background-color: var(--color-gray10);
+  height: 100%;
   > li {
     padding-left: 2rem;
     padding-right: 2rem;
     padding-bottom: 2rem;
-    background-color: var(--color-gray10);
     &:not(:last-of-type) {
       border-right: 2px solid var(--color-gray20);
     }
