@@ -6,10 +6,10 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
+import { toastUsingButton } from '@/components/customToast/CustomToast'
 import { removeCookie } from '@/utils/cookie'
 
 import styles from './Dropdown.module.scss'
-import { toastUsingButton } from '@/components/customToast/CustomToast'
 
 export default function Dropdown() {
   const router = useRouter()

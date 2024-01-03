@@ -12,6 +12,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '@/api/users/getUser'
 import { createUserImageUpload } from '@/api/users/createUserImageUpload'
 import { editUser } from '@/api/users/editUser'
+import { toastUsingButton } from '@/components/customToast/CustomToast'
 import EditFormLayout from '@/components/editForm/EditFormLayout'
 import ReadonlyInput from '@/components/signInput/ReadonlyInput'
 import TextInput from '@/components/signInput/TextInput'
@@ -22,7 +23,6 @@ import { noRequiredNicknameValidationRules } from '@/utils/formInputValidationRu
 
 import ImageUploader from './imageUploader/ImageUploader'
 import styles from './Profile.module.scss'
-import { toastUsingButton } from '@/components/customToast/CustomToast'
 
 export default function Profile() {
   const {

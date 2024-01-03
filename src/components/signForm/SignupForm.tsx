@@ -7,6 +7,7 @@ import { useRouter } from 'next/router'
 import { useMutation } from '@tanstack/react-query'
 
 import { createUser } from '@/api/users/createUser'
+import { toastUsingButton } from '@/components/customToast/CustomToast'
 import ServiceChekInput from '@/components/serviceCheckInput/ServiceCheckInput'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import TextInput from '@/components/signInput/TextInput'
@@ -19,7 +20,6 @@ import {
 } from '@/utils/formInputValidationRules'
 
 import styles from './SignForm.module.scss'
-import { toastUsingButton } from '../customToast/CustomToast'
 
 export default function SignupForm() {
   const {
