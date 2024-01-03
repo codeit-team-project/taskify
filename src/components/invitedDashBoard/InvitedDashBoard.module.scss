@@ -5,6 +5,7 @@ section.container {
   padding-top: 3.2rem;
   border-radius: 8px;
   background: var(--color-white);
+  box-shadow: var(--box-shadow-md);
 
   @include tablet {
     width: 100%;
@@ -224,6 +225,7 @@ section.container {
   }
 
   div.no-invitation-container {
+    min-width: 102.2rem;
     display: grid;
     justify-content: center;
     justify-items: center;

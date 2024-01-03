@@ -8,6 +8,7 @@ TODO - 나중에 시간 되면 멤버 사진 누르면 멤버 리스트가 드�
 import Image from 'next/image'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { useQuery } from '@tanstack/react-query'
 
 import { getDashBoardMembers } from '@/api/members/getMembers'
@@ -16,6 +17,8 @@ import useDropdown from '@/hooks/useDropdown'
 import { DashBoardMembers } from '@/types/members'
 import styles from './DashboardNavEditor.module.scss'
 import RandomProfile from '@/components/randomProfile/RandomProfile'
+import ModalContainer from '@/components/dashboardModal/ModalContainer'
+import FloatingButton from '../floatingButton/FloatingButton'
 
 interface DashboardNavEditorProps {
   isOwner?: boolean
@@ -29,6 +32,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
   const { data: memberData } = useQuery<DashBoardMembers>({
     queryKey: ['dashBoardMembers', boardId],
     queryFn: () => getDashBoardMembers(boardId),
+    retry: 1,
     staleTime: 2000,
     enabled: !!boardId,
   })
@@ -48,27 +52,45 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
 
   return (
     <>
-      {isVisible && <InvitationModal dashBoardId={boardId} onClose={handleCloseModal} />}
+      {isVisible &&
+        createPortal(
+          <ModalContainer onClose={handleCloseModal}>
+            <InvitationModal dashBoardId={boardId} onClose={handleCloseModal} />
+          </ModalContainer>,
+          document.getElementById('modal-root') as HTMLElement,
+        )}
 
       <div className={styles['editor-section']}>
         <div className={styles['button-section']}>
           {isOwner && (
             <button className={styles['button']}>
-              <Link href={`/dashboard/${String(boardId)}/edit`}>
+              <Link
+                href={
+                  memberData
+                    ? `/dashboard/${String(boardId)}/edit`
+                    : `/dashboard/${String(boardId)}`
+                }
+              >
                 <Image src="/assets/settingIcon.svg" alt="setting icon" width={20} height={20} />
                 관리
               </Link>
             </button>
           )}
-          <button onClick={handleOpenModal} className={styles['button']}>
+          <button
+            disabled={memberData ? false : true}
+            onClick={handleOpenModal}
+            className={styles['button']}
+          >
             <Image src="/assets/addIcon.svg" alt="add icon" width={20} height={20} />
             초대하기
           </button>
         </div>
+        <FloatingButton boardId={boardId} onOpen={handleOpenModal} />
         {memberData && (
           <div className={styles['members-section']}>
             {windowSize > 744 ? (
               <div
+                key={boardId}
                 className={styles['member-img-list']}
                 style={{
                   width: `${memberData.totalCount >= 5 ? 17 : memberData.totalCount * 3 + 2}rem`,
@@ -130,7 +152,7 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
                 )}
               </div>
             )}
-            <div className={styles['spacing-bar']}></div>
+            <div key={`${windowSize}space`} className={styles['spacing-bar']}></div>
           </div>
         )}
       </div>

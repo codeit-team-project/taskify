@@ -1,11 +1,13 @@
 import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { keepPreviousData, useQuery, useQueryClient } from '@tanstack/react-query'
 import styles from './DashboardList.module.scss'
 
 import DashboardItem from './DashboardItem'
 import NewDashboardModal from './NewDashboardModal'
 import Pagination from '@/components/pagination/Pagination'
+import ModalContainer from '@/components/dashboardModal/ModalContainer'
 
 import { getDashBoardList } from '@/api/dashboards/getDashboards'
 import { DashBoardListType } from '@/types/dashBoardType'
@@ -31,6 +33,10 @@ export default function DashboardList() {
 
   const handleOpenModal = () => {
     setIsOpenModal(true)
+  }
+
+  const onClose = () => {
+    setIsOpenModal(false)
   }
 
   const hasMorePage = data && currentPage < Math.ceil(data?.totalCount / pageSize)
@@ -74,7 +80,13 @@ export default function DashboardList() {
           )}
         </div>
       </section>
-      {isOpenModal && <NewDashboardModal onClose={() => setIsOpenModal(false)} />}
+      {isOpenModal &&
+        createPortal(
+          <ModalContainer onClose={onClose}>
+            <NewDashboardModal onClose={onClose} />
+          </ModalContainer>,
+          document.getElementById('modal-root') as HTMLElement,
+        )}
     </>
   )
 }

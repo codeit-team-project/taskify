@@ -12,6 +12,7 @@ import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
 import { getUser } from '@/api/users/getUser'
 import { createUserImageUpload } from '@/api/users/createUserImageUpload'
 import { editUser } from '@/api/users/editUser'
+import { toastUsingButton } from '@/components/customToast/CustomToast'
 import EditFormLayout from '@/components/editForm/EditFormLayout'
 import ReadonlyInput from '@/components/signInput/ReadonlyInput'
 import TextInput from '@/components/signInput/TextInput'
@@ -75,7 +76,7 @@ export default function Profile() {
     },
     onSettled: async () => {
       // 변경된 데이터 refetch
-      alert('저장되었습니다.')
+      toastUsingButton('변경되었습니다!')
       setIsEditing(false)
       await queryClient.invalidateQueries({ queryKey: ['profile-key'] })
     },

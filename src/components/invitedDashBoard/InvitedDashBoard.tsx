@@ -30,9 +30,9 @@ const getInvitationsType = (
   invitationList: InvitationType[],
 ): InvitationsStatus => {
   if (!debouncedSearchTitle) {
-    return invitationList && invitationList.length > 1 ? 'totalInvitations' : 'noInvitations'
+    return invitationList && invitationList.length >= 1 ? 'totalInvitations' : 'noInvitations'
   } else {
-    return invitationList && invitationList.length > 1
+    return invitationList && invitationList.length >= 1
       ? 'searchedInvitations'
       : 'noSearchedInvitations'
   }
@@ -73,9 +73,8 @@ function Invitations({ invitationList }: InvitationsProps) {
     mutationKey: ['respondInvitation'],
     mutationFn: putInvitation,
     onSuccess: () => {
-      queryClient.invalidateQueries({
-        queryKey: ['getInvitations'],
-      })
+      queryClient.invalidateQueries({ queryKey: ['getInvitations'] })
+      queryClient.invalidateQueries({ queryKey: ['dashBoards'] })
     },
   })
 
@@ -94,7 +93,7 @@ function Invitations({ invitationList }: InvitationsProps) {
       </td>
       <td className={styles['inviter-name']}>
         <p className={styles['column-title']}>초대자</p>
-        {item.invitee.nickname}
+        {item.inviter.nickname}
       </td>
       <td className={styles['response']}>
         <div className={styles['button-container']}>

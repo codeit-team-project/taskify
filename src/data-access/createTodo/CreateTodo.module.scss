@@ -1,0 +1,49 @@
+@import '@/styles/mixin.scss';
+
+// container
+@mixin container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 2rem;
+  padding: 1.5rem;
+  width: 55rem;
+}
+
+.container {
+  @include container;
+  @include tablet {
+    width: 55rem;
+  }
+
+  @include mobile {
+    width: 30rem;
+  }
+}
+
+// title
+@mixin title {
+  font-size: 2rem;
+  font-weight: 700;
+  line-height: normal;
+  color: var(--black-black_333236, #333236);
+}
+
+.title {
+  @include title;
+}
+
+// 버튼
+@mixin button {
+  display: flex;
+  column-gap: 1rem;
+  justify-content: flex-end;
+}
+
+.button {
+  @include button;
+  @include tablet {
+  }
+
+  @include mobile {
+  }
+}

@@ -4,19 +4,21 @@
 - 닉네임 변경 기능
  */
 
+import { AxiosError } from 'axios'
 import { MouseEventHandler, useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation, useQueryClient } from '@tanstack/react-query'
 
+import { toastUsingButton } from '@/components/customToast/CustomToast'
 import { editPassword } from '@/api/auth/editPassword'
 import EditFormLayout from '@/components/editForm/EditFormLayout'
 import ReadonlyInput from '@/components/signInput/ReadonlyInput'
 import PasswordInput from '@/components/signInput/PasswordInput'
 import { passwordValidationRules } from '@/utils/formInputValidationRules'
+import { PasswordCheckVauleType } from '@/types/auth'
 import { PasswordModifierInputsType } from '@/types/formTypes'
 
 import styles from './PasswordModifier.module.scss'
-import { PasswordCheckVauleType } from '@/types/auth'
 
 export default function PasswordModifier() {
   const {
@@ -39,13 +41,11 @@ export default function PasswordModifier() {
     },
     onSuccess: () => {
       setIsEditing(false)
-      alert('비밀번호가 변경되었습니다!')
+      toastUsingButton('비밀번호가 변경되었습니다!')
     },
     onError: (error) => {
-      if (error.response.status === 400) {
-        alert(error.response.data.message)
-      } else if (error.response.status === 404) {
-        alert('존재하지 않는 유저입니다')
+      if (error instanceof AxiosError) {
+        toastUsingButton(error.response?.data.message)
       }
     },
     onSettled: async () => {
