@@ -6,7 +6,7 @@ export const getInvitations = async (title?: string, pageParam?: number | null) 
     let query = ''
     if (pageParam) query += `&cursorId=${pageParam}`
     if (title) query += `&title=${title}`
-    const response = await axiosInstance.get<ReceivedInvitationsType>(`/invitations?size=6${query}`)
+    const response = await axiosInstance.get<ReceivedInvitationsType>(`/invitations?size=5${query}`)
 
     return response.data
   } catch (error) {

@@ -1,7 +1,6 @@
 @import '@/styles/mixin.scss';
 
 section.container {
-  width: fit-content;
   max-height: 60rem;
   overflow-y: scroll;
   border-radius: 8px;
@@ -14,7 +13,7 @@ section.container {
   }
 
   @include mobile {
-    max-height: 83.6rem;
+    max-height: 50rem;
   }
 
   .column-title {
@@ -245,7 +244,6 @@ section.container {
   }
 
   div.no-invitation-container {
-    min-width: 102.2rem;
     display: grid;
     justify-content: center;
     justify-items: center;
