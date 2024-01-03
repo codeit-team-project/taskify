@@ -4,25 +4,23 @@
   display: none;
   @include mobile {
     display: flex;
+    align-items: center; /* 가로 - 중앙으로 */
+    justify-content: center;
     z-index: 55;
     background-color: var(--color-violet);
+    position: fixed;
     width: 5rem;
     height: 5rem;
-    position: fixed;
-    justify-content: center;
-    align-items: center;
-    bottom: 5rem;
-    right: 5rem;
-    border-radius: 8px;
-    color: var(--color-white);
+    bottom: 9rem;
+    right: 3rem;
     font-size: 5rem;
+    border-radius: 8px;
     transition: all 0.1s linear;
   }
 }
 
 [data-show='true'].floating {
   transform: rotate(-45deg);
-  color: var(--color-violet);
   border: 3px solid var(--color-violet);
   background-color: var(--color-violet_8);
 }
