@@ -40,7 +40,7 @@ export default function ColumnList({ boardId }: ColumnListProps) {
       ) : data && !isLoading ? (
         <ul className={styles['column-list']}>
           {data?.data.map((item) => {
-            return <ColumnItem key={item.id} item={item} />
+            return <ColumnItem key={item.id} item={item} dashBoardId={boardId} columnId={item.id} />
           })}
           <AddColumnButton dashBoardId={boardId} />
         </ul>
