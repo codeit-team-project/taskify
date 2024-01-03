@@ -2,7 +2,7 @@ import { ColumnType } from '@/types/columnsType'
 import TaskCardList from '../taskCardList/TaskCardList'
 import styles from './ColumnItem.module.scss'
 import { useQuery } from '@tanstack/react-query'
-import { getCards } from '@/api/card/getCards'
+import { getCards } from '@/api/cards/getCards'
 import { CardsType } from '@/types/cardsType'
 import ManageColumnButton from '../manageColumnButton/ManageColumnButton'
 
