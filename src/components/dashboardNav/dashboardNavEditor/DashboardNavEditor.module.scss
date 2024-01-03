@@ -23,13 +23,7 @@
       padding: 0.8rem 1.6rem;
     }
     @include mobile {
-      & .button {
-        padding: 0.7rem 1.1rem;
-        font-size: 1.2rem;
-      }
-      img {
-        display: none;
-      }
+      display: none;
     }
   }
 

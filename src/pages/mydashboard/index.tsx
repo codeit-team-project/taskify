@@ -5,13 +5,17 @@ import MyPageLayout from '@/components/ui/layout/MypageLayout'
 import { ReceivedInvitationsType } from '@/types/invitations'
 import { InvitationType } from '@/types/invitedDashBoardListType'
 
+import styles from './index.module.scss'
+
 export default function MyDashboardPage({ ...pageProps }) {
   return (
     <MyPageLayout title="mydashboard">
-      <DashboardList />
-      <InvitedDashBoard
-      // list={pageProps.list}
-      />
+      <div className={styles.container}>
+        <DashboardList />
+        <InvitedDashBoard
+        // list={pageProps.list}
+        />
+      </div>
     </MyPageLayout>
   )
 }

@@ -3,14 +3,18 @@
 .article-content {
   margin: 7rem 0 0 30rem;
   padding: 2rem;
+  height: calc(100vh - 7rem);
   background: var(--color-gray10);
+  overflow: auto;
 
   @include tablet {
     margin: 7rem 0 0 16rem;
   }
+
   @include mobile {
     margin: 6rem 0 0 6.7rem;
     padding: 1.2rem;
+    height: calc(100vh - 6rem);
   }
 }
 

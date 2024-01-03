@@ -5,13 +5,13 @@ import { getComments } from '@/api/comments/getComments'
 import { CreateCommentType, createComments } from '@/api/comments/createComments'
 import { EditCommentType, editComments } from '@/api/comments/editComments'
 import { CommentType } from '@/types/commentType'
-import { useInfiniteQuery, useMutation } from '@tanstack/react-query'
+import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 
 import { mappingTime } from '@/utils/mappingTime'
 import styles from './ModalComment.module.scss'
 import Image from 'next/image'
-import { queryClient } from '@/pages/_app'
-import useScroll from '@/hooks/userScroll'
+import useScroll from '@/hooks/useScroll'
+import RandomProfile from '../randomProfile/RandomProfile'
 
 interface ModalCommentProps {
   dashboardId: number
@@ -25,6 +25,7 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
   const [isEdit, setIsEdit] = useState(false)
   const [editCommentId, setEditCommentItemId] = useState(0)
   const [editComment, setEditComment] = useState('')
+  const queryClient = useQueryClient()
   const handleComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setComment(e.target.value)
   }
@@ -142,7 +143,6 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
     <div className={styles.comment__wrapper}>
       <span className={styles.comment__text}>댓글</span>
       <div className={styles.commnet}>
-        s
         <div className={styles.relative}>
           <textarea className={styles.textarea} value={comment} onChange={handleComment} />
           <div className={styles.button}>
@@ -165,8 +165,12 @@ export default function ModalComment({ dashboardId, columnId, cardId }: ModalCom
             return (
               <li key={comment.id} className={styles.commentList__item}>
                 <div className={styles.profileImage}>
-                  {author.profileImageUrl && (
+                  {author.profileImageUrl ? (
                     <Image src={author.profileImageUrl} alt="commentuser" width="30" height="30" />
+                  ) : (
+                    <>
+                      <RandomProfile size={20} email={author.nickname}></RandomProfile>
+                    </>
                   )}
                 </div>
                 <div>

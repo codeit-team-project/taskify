@@ -2,7 +2,7 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 import HomeLayout from '@/components/ui/layout/HomeLayout'
-import styles from './Homepage.module.scss'
+import styles from '@/styles/Homepage.module.scss'
 import StyledDescription from '@/components/styledDescription/StyledDescription'
 
 export default function Home() {
