@@ -29,7 +29,6 @@ export default function Manager({
     setAssigneeUserId,
   } = useContext(FormContext)
 
-  const [email, setEmail] = useState('')
   const [isOpen, setIsOpen] = useState(false)
   const handleOpenClick = () => {
     setIsOpen(!isOpen)
@@ -41,12 +40,12 @@ export default function Manager({
     }
     if (editName.length > 0) {
       setAssigneeUserName(editName)
-      setEmail(editName)
     }
     if (profileImageUrl && profileImageUrl.length > 0) {
       setProfileImage(profileImageUrl)
     }
   }, [])
+
   return (
     <div className={styles.container}>
       <span className={styles.text}>담당자</span>
@@ -57,7 +56,11 @@ export default function Manager({
               <Image src={profileImage} alt="profile-image" width={30} height={30} />
             </div>
           ) : (
-            <>{email && <RandomProfile size={20} email={email}></RandomProfile>}</>
+            <>
+              {assigneeUserName && (
+                <RandomProfile size={20} email={assigneeUserName}></RandomProfile>
+              )}
+            </>
           )}
           <span>
             {assigneeUserName ? (
