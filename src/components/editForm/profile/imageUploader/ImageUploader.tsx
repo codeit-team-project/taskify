@@ -29,7 +29,6 @@ const ImageUploader = forwardRef<HTMLInputElement, ProfileInputProps>(
           setPreview(savedImg)
         }
       }
-      // BUG - dependency에 preview를 넣으면 무한렌더링이 되는데 왜 그런지 모르겠습니다..
     }, [previewWatcher, name])
 
     return (
