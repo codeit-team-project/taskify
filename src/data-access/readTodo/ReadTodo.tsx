@@ -53,6 +53,10 @@ export default function ReadTodo({
   // 카드 삭제 영역
   const cardDeleteMutation = useMutation({
     mutationFn: (commnetId: number) => deleteCard(commnetId),
+    onSuccess() {
+      refetchColumnList(columnId)
+      onClose()
+    },
   })
 
   useEffect(() => {
@@ -70,8 +74,6 @@ export default function ReadTodo({
     const handleDeleteCard = (cardId: number) => {
       if (window.confirm('정말삭제하시겠습니까?')) {
         cardDeleteMutation.mutate(cardId)
-        refetchColumnList(columnId)
-        onClose()
       } else {
         setSelectedItem('')
       }
