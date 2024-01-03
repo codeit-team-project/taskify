@@ -18,7 +18,6 @@ export default function Title({ EditTitle = '' }) {
     <div className={styles.container}>
       <div>
         <span className={styles.text}>제목</span>
-        <span className={styles.emphasis}>*</span>
       </div>
       <input
         className={styles.input}

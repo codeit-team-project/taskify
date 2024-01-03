@@ -17,7 +17,6 @@ export default function DesCription({ EditDesScription = '' }) {
     <div className={styles.container}>
       <div>
         <span className={styles.text}>설명</span>
-        <span className={styles.emphasis}>*</span>
       </div>
       <textarea
         className={styles.textarea}
