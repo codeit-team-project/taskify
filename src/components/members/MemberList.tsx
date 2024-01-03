@@ -24,6 +24,7 @@ export default function MemberList({ dashBoardId = 119 }: MomberListProps) {
     placeholderData: keepPreviousData,
     staleTime: 3000,
     enabled: !!dashBoardId,
+    retry: 1,
   })
 
   const hasMorePage = data && currentPage < Math.ceil(data?.totalCount / pageSize)
