@@ -90,31 +90,24 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
           <div className={styles['members-section']}>
             {windowSize > 744 ? (
               <div
-                key={boardId}
                 className={styles['member-img-list']}
                 style={{
                   width: `${memberData.totalCount >= 5 ? 17 : memberData.totalCount * 3 + 2}rem`,
                 }}
               >
                 {memberData.members.slice(0, 4).map((member) => {
-                  if (member) {
-                    return (
-                      <>
-                        {member.profileImageUrl ? (
-                          <Image
-                            key={member.id}
-                            src={member.profileImageUrl}
-                            alt="profile"
-                            width={36}
-                            height={36}
-                            className={styles['member-img']}
-                          />
-                        ) : (
-                          <RandomProfile size={36} key={member.id} email={member.email} />
-                        )}
-                      </>
-                    )
-                  }
+                  return member.profileImageUrl ? (
+                    <Image
+                      key={member.id}
+                      src={member.profileImageUrl}
+                      alt="profile"
+                      width={36}
+                      height={36}
+                      className={styles['member-img']}
+                    />
+                  ) : (
+                    <RandomProfile size={36} key={member.id} email={member.email} />
+                  )
                 })}
                 {memberData.totalCount > 4 && (
                   <div className={styles['rest-member-img']}>+{memberData.totalCount - 4}</div>
@@ -128,24 +121,18 @@ export default function DashboardNavEditor({ isOwner = false, boardId }: Dashboa
                 }}
               >
                 {memberData.members.slice(0, 2).map((member) => {
-                  if (member) {
-                    return (
-                      <>
-                        {member.profileImageUrl ? (
-                          <Image
-                            key={member.id}
-                            src={member.profileImageUrl}
-                            alt="profile"
-                            width={36}
-                            height={36}
-                            className={styles['member-img']}
-                          />
-                        ) : (
-                          <RandomProfile size={36} key={member.id} email={member.email} />
-                        )}
-                      </>
-                    )
-                  }
+                  return member.profileImageUrl ? (
+                    <Image
+                      key={member.id}
+                      src={member.profileImageUrl}
+                      alt="profile"
+                      width={36}
+                      height={36}
+                      className={styles['member-img']}
+                    />
+                  ) : (
+                    <RandomProfile size={36} key={member.id} email={member.email} />
+                  )
                 })}
                 {memberData.totalCount > 2 && (
                   <div className={styles['rest-member-img']}>+{memberData.totalCount - 2}</div>

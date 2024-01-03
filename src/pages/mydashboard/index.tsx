@@ -1,20 +1,15 @@
-import { getInvitations } from '@/api/invitations/getInvitations'
 import DashboardList from '@/components/dashboard/DashboardList'
 import InvitedDashBoard from '@/components/invitedDashBoard/InvitedDashBoard'
 import MyPageLayout from '@/components/ui/layout/MypageLayout'
-import { ReceivedInvitationsType } from '@/types/invitations'
-import { InvitationType } from '@/types/invitedDashBoardListType'
 
 import styles from './index.module.scss'
 
-export default function MyDashboardPage({ ...pageProps }) {
+export default function MyDashboardPage() {
   return (
     <MyPageLayout title="mydashboard">
       <div className={styles.container}>
         <DashboardList />
-        <InvitedDashBoard
-        // list={pageProps.list}
-        />
+        <InvitedDashBoard />
       </div>
     </MyPageLayout>
   )
