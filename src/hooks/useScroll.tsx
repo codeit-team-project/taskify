@@ -6,7 +6,7 @@ const useScroll = () => {
   const myRef = useRef(null)
 
   const observer = useMemo(() => {
-    if (window !== undefined) {
+    if (typeof window !== 'undefined') {
       return new IntersectionObserver((entries) => {
         const entry = entries[0]
         setIsVisible(entry.isIntersecting)
