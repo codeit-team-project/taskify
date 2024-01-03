@@ -6,18 +6,22 @@ const useScroll = () => {
   const myRef = useRef(null)
 
   const observer = useMemo(() => {
-    return new IntersectionObserver((entries) => {
-      const entry = entries[0]
-      setIsVisible(entry.isIntersecting)
-    })
-  }, [])
+    if (typeof window !== 'undefined') {
+      return new IntersectionObserver((entries) => {
+        const entry = entries[0]
+        setIsVisible(entry.isIntersecting)
+      })
+    }
+  }, [typeof window])
 
   useEffect(() => {
-    if (myRef.current) {
+    if (myRef.current && observer !== undefined) {
       observer.observe(myRef.current)
     }
     return () => {
-      observer.disconnect()
+      if (observer !== undefined) {
+        observer.disconnect()
+      }
     }
   }, [myRef.current])
 
