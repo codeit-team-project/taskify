@@ -1,14 +1,19 @@
 @import '@/styles/mixin.scss';
 
 section.container {
-  width: fit-content;
-  padding-top: 3.2rem;
+  max-height: 60rem;
+  overflow-y: scroll;
   border-radius: 8px;
   background: var(--color-white);
   box-shadow: var(--box-shadow-md);
 
   @include tablet {
     width: 100%;
+    max-height: 59.2rem;
+  }
+
+  @include mobile {
+    max-height: 50rem;
   }
 
   .column-title {
@@ -23,19 +28,27 @@ section.container {
   }
 
   h2.title {
+    position: sticky;
+    top: 0;
+    height: 8.1rem;
+    padding-top: 3.2rem;
+    padding-bottom: 2rem;
     padding-left: 2.8rem;
+    background: var(--color-white);
     font-size: 2.4rem;
     font-weight: 700;
     color: var(--color-black_33);
     text-align: left;
     @include mobile {
+      height: 6.8rem;
+      padding-top: 2.4rem;
       padding-left: 1.6rem;
+      padding-left: 2rem;
       font-size: 2rem;
     }
   }
 
   table.invited-dashboard-table {
-    margin-top: 2rem;
     border-collapse: collapse;
     border-spacing: 0;
     @include tablet {
@@ -68,6 +81,12 @@ section.container {
       }
     }
     thead {
+      position: sticky;
+      top: 8.1rem;
+      background-color: var(--color-white);
+      @include mobile {
+        top: 6.8rem;
+      }
       .search-form-wrapper {
         padding: 0 2.8rem;
         @include mobile {
@@ -110,7 +129,7 @@ section.container {
           display: none;
         }
         th.column-title {
-          padding: 2.4rem 0;
+          padding-top: 2.4rem;
           &:first-of-type {
             padding-left: 2.8rem;
           }
@@ -118,7 +137,7 @@ section.container {
       }
     }
 
-    tbody {
+    tbody.column-body {
       .invitation-item-container {
         &:not(:last-of-type) {
           border-bottom: 1px solid var(--color-gray20);
@@ -225,13 +244,13 @@ section.container {
   }
 
   div.no-invitation-container {
-    min-width: 102.2rem;
     display: grid;
     justify-content: center;
     justify-items: center;
     gap: 2.4rem;
     padding: 6.6rem 0 12.8rem 0;
     @include tablet {
+      min-width: unset;
       width: 100%;
     }
     @include mobile {

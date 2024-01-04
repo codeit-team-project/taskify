@@ -1,11 +1,11 @@
-import { useState, ChangeEvent } from 'react'
+import { useState, ChangeEvent, useEffect } from 'react'
 import styles from './InvitedDashBoard.module.scss'
 import useDebounce from '@/hooks/useDebounce'
 import { getInvitations } from '@/api/invitations/getInvitations'
 import { putInvitation } from '@/api/invitations/putInvitation'
 import { InvitationType } from '@/types/invitedDashBoardListType'
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query'
-import { ReceivedInvitationsType } from '@/types/invitations'
+import { useInfiniteQuery, useMutation, useQueryClient } from '@tanstack/react-query'
+import useScroll from '@/hooks/useScroll'
 
 type InvitationsStatus =
   | 'noInvitations'
@@ -121,21 +121,52 @@ function Invitations({ invitationList }: InvitationsProps) {
 
 export default function InvitedDashBoard() {
   // { list }: InvitedDashboardProps
+
   const [searchTitle, setSearchTitle] = useState('')
   const debouncedSearchTitle = useDebounce(searchTitle, 1000)
-
-  const { data } = useQuery<ReceivedInvitationsType>({
-    queryKey: ['getInvitations', debouncedSearchTitle],
-    queryFn: () => getInvitations(debouncedSearchTitle),
-  })
-
-  const invitationList = data
-    ? data.invitations.filter((item: InvitationType) => !item.inviteAccepted)
-    : []
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
     setSearchTitle(event.target.value)
   }
+
+  const invitedListQuery = useInfiniteQuery({
+    queryKey: ['getInvitations', debouncedSearchTitle],
+    queryFn: async ({ pageParam = null }) => {
+      return getInvitations(debouncedSearchTitle, pageParam)
+    },
+    initialPageParam: null,
+    getNextPageParam: (lastpage) => {
+      if (lastpage.cursorId) {
+        return lastpage.cursorId
+      }
+      return undefined
+    },
+    getPreviousPageParam: (firstPage) => {
+      if (firstPage.cursorId) {
+        return firstPage.cursorId
+      }
+      return undefined
+    },
+    select: (data) => {
+      const filteredList = data.pages[0].invitations.filter(
+        (item: InvitationType) => !item.inviteAccepted,
+      )
+      return {
+        ...data,
+        invitations: filteredList,
+      }
+    },
+  })
+
+  const { Isvisible, myRef } = useScroll()
+
+  useEffect(() => {
+    if (Isvisible && invitedListQuery.hasNextPage) {
+      invitedListQuery.fetchNextPage()
+    }
+  }, [Isvisible, invitedListQuery.hasNextPage])
+
+  const invitationList = invitedListQuery.data?.pages.flatMap((page) => page.invitations) || []
 
   const uiType = getInvitationsType(debouncedSearchTitle, invitationList)
 
@@ -179,7 +210,7 @@ export default function InvitedDashBoard() {
               <th className={styles['column-title']}>수락 여부</th>
             </tr>
           </thead>
-          <tbody>
+          <tbody className={styles['column-body']}>
             {uiType === 'noSearchedInvitations' ? (
               <NoSearchedInvitations debouncedSearchTitle={debouncedSearchTitle} />
             ) : (
@@ -188,6 +219,7 @@ export default function InvitedDashBoard() {
           </tbody>
         </table>
       )}
+      <div ref={myRef}></div>
     </section>
   )
 }
