@@ -10,6 +10,7 @@
   border-right: 2px solid var(--color-gray30);
   transition: width 300ms ease;
   white-space: nowrap;
+  z-index: 100;
 }
 
 .logo {
