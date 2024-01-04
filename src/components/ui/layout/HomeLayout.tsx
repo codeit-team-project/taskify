@@ -1,7 +1,6 @@
 /* 메인 랜딩페이지에 쓸 레이아웃 컴포넌트
 
 TODO - 시간 난다면 theme 도 개발해보기
-TODO - 만약 theme 개발한다면 LayoutProps는 따로 types 폴더에 분리해두기
 - 인자로 children(필수)과 theme(옵션) 을 받습니다.
 */
 
