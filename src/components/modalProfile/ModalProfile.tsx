@@ -1,6 +1,6 @@
 import React from 'react'
 import styles from './ModalProfile.module.scss'
-import { mappingTime } from '@/utils/mappingTime'
+import { fnsTimeFormat } from '@/utils/mappingTime'
 import Image from 'next/image'
 import { CardType } from '@/types/cardsType'
 import RandomProfile from '../randomProfile/RandomProfile'
@@ -11,7 +11,7 @@ interface ModalProfileProps {
 
 export default function ModalProfile({ cardDetailData }: ModalProfileProps) {
   const manager = cardDetailData.assignee
-  const { year, month, day, hour, minutes } = mappingTime(cardDetailData.dueDate)
+  const time = fnsTimeFormat(cardDetailData.dueDate)
   return (
     <div className={styles.assingee__wrapper}>
       <div className={styles.assingee__profile__wrapper}>
@@ -29,7 +29,7 @@ export default function ModalProfile({ cardDetailData }: ModalProfileProps) {
       </div>
       <div className={styles.deadline}>
         <span className={styles.deadline__date}>마감일</span>
-        {year}.{month}.{day}.{hour}:{minutes}
+        {time}
       </div>
     </div>
   )

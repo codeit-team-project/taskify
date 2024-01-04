@@ -1,29 +1,26 @@
 @import '@/styles/mixin.scss';
 
 .floating {
-  z-index: 55;
   display: none;
-  background-color: var(--color-violet);
-  width: 5rem;
-  height: 5rem;
-  position: fixed;
-  bottom: 9rem;
-  right: 5rem;
-  border-radius: 8px;
-  color: var(--color-white);
-  font-size: 5rem;
-  padding-bottom: 1rem;
-  transition: all 0.1s linear;
   @include mobile {
     display: flex;
+    align-items: center; /* 가로 - 중앙으로 */
     justify-content: center;
-    align-items: center;
+    z-index: 55;
+    background-color: var(--color-violet);
+    position: fixed;
+    width: 5rem;
+    height: 5rem;
+    bottom: 9rem;
+    right: 3rem;
+    font-size: 5rem;
+    border-radius: 8px;
+    transition: all 0.1s linear;
   }
 }
 
 [data-show='true'].floating {
   transform: rotate(-45deg);
-  color: var(--color-violet);
   border: 3px solid var(--color-violet);
   background-color: var(--color-violet_8);
 }
