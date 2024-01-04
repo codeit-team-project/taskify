@@ -10,7 +10,10 @@ interface ModalButtonProps {
 }
 
 export default function ModalButton({ children, color, size, ...props }: ModalButtonProps) {
-  const containerClassName = `${styles.container} ${styles[color]} ${size ? styles[size] : ''}`
+  const containerClassName = `${styles.container} ${styles[color]} ${size ? styles[size] : ''} ${
+    props.disabled ? '' : styles.active
+  }`
+
   return (
     <button className={containerClassName} onClick={props.onClick} disabled={props.disabled}>
       {children}
