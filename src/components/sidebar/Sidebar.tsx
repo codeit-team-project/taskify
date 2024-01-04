@@ -29,7 +29,7 @@ export default function Sidebar() {
     setIsModalOpen(true)
   }
 
-  const onclose = () => {
+  const onClose = () => {
     setIsModalOpen(false)
   }
 
@@ -71,8 +71,8 @@ export default function Sidebar() {
       </section>
       {isModalOpen &&
         createPortal(
-          <ModalContainer onClose={onclose}>
-            <NewDashboardModal onClose={onclose} />
+          <ModalContainer onClose={onClose}>
+            <NewDashboardModal onClose={onClose} />
           </ModalContainer>,
           document.getElementById('modal-root') as HTMLElement,
         )}
