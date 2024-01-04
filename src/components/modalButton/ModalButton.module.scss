@@ -22,11 +22,21 @@
 
 // 버튼 color
 .purple {
+  opacity: 0.7;
   background: var(--violet-violet_5534DA, #5534da);
   color: var(--white-white_FFFFFF, #fff);
+  cursor: default;
+  &.active {
+    cursor: pointer;
+    opacity: 1;
+  }
 }
 
 .white {
+  opacity: 0.7;
   background: var(--white-white_FFFFFF, #fff);
-  color: var(--violet-violet_5534DA, #44367b);
+  color: var(--violet-violet_5534DA, #5534da);
+  &.active {
+    opacity: 1;
+  }
 }
