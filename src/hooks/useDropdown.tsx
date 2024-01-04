@@ -13,7 +13,9 @@ export default function useDropdown() {
   // isVisible이 true면 드롭다운이 보임
   const [isVisible, setIsVisible] = useState(false)
   const handleOpenDropdown = () => {
-    setIsVisible(true)
+    setTimeout(() => {
+      setIsVisible(!isVisible)
+    }, 200)
   }
   const handleCloseDropdown = () => {
     setTimeout(() => {
