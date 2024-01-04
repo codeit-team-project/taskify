@@ -16,6 +16,7 @@ interface TaskCardItemProps {
   columnId: number
 }
 
+
 export default function TaskCardItem({ item, dashBoardId, columnId }: TaskCardItemProps) {
   const queryClient = useQueryClient()
   const [isOpenModal, setIsOpenModal] = useState(false)
@@ -59,7 +60,7 @@ export default function TaskCardItem({ item, dashBoardId, columnId }: TaskCardIt
             height={18}
             alt="달력 아이콘"
           />
-          <p className={styles['date']}>{fnsTimeFormat(item.dueDate)}</p>
+          <p className={styles['date']}>{fnsTimeFormat(item.dueDate).substring(0, 10).replace(/-/g, ".")}</p>
           <div className={styles['icon-user-wrapper']}>
             {item?.assignee?.profileImageUrl ? (
               <img src={item.imageUrl} width={24} height={24} />
