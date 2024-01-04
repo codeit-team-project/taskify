@@ -1,6 +1,7 @@
 @import '@/styles/mixin.scss';
 
 section.container {
+  max-width: 102.2rem;
   max-height: 60rem;
   overflow-y: scroll;
   border-radius: 8px;
@@ -147,7 +148,7 @@ section.container {
           padding: 1.6rem;
         }
         td {
-          padding: 0 1.6rem 2rem 0;
+          padding: 2rem 1.6rem 2rem 0;
           @include mobile {
             padding: 10rem;
           }

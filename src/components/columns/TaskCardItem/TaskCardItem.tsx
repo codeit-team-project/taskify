@@ -63,7 +63,7 @@ export default function TaskCardItem({ item, dashBoardId, columnId }: TaskCardIt
           <p className={styles['date']}>{fnsTimeFormat(item.dueDate).substring(0, 10).replace(/-/g, ".")}</p>
           <div className={styles['icon-user-wrapper']}>
             {item?.assignee?.profileImageUrl ? (
-              <img src={item.imageUrl} width={24} height={24} />
+              <img className={styles['icon-profile']} src={item.assignee.profileImageUrl} width={24} height={24} />
             ) : (
               <div
                 className={styles['no-profile']}
