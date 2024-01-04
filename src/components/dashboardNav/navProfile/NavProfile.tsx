@@ -23,7 +23,7 @@ export default function NavProfile({
   onClose: handleCloseDropdown,
 }: NavProfileProps) {
   const { data: userInfo } = useQuery<UserType>({
-    queryKey: ['get-user-key'],
+    queryKey: ['profile-key'],
     queryFn: () => getUser(),
     staleTime: 1000,
   })
