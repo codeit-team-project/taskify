@@ -1,0 +1,144 @@
+@import '@/styles/mixin.scss';
+
+.container {
+  position: fixed;
+  top: 0;
+  width: 30rem;
+  height: 100%;
+  padding: 2rem 1.2rem;
+  background-color: var(--color-white);
+  border-right: 2px solid var(--color-gray30);
+  transition: width 300ms ease;
+  white-space: nowrap;
+}
+
+.logo {
+  width: 100%;
+  margin-bottom: 4.4rem;
+}
+
+.title-wrapper {
+  padding: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title {
+  font-size: 1.2rem;
+  color: var(--color-gray50);
+  font-weight: 700;
+}
+
+.action {
+  width: 2rem;
+  height: 2rem;
+  position: relative;
+  padding: 0;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.menus {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  transition: all 300ms ease;
+
+  &:hover {
+    background: var(--color-violet_8);
+    border-radius: 0.4rem;
+
+    button {
+      color: var(--color-black_33);
+    }
+  }
+}
+
+.current {
+  @extend .menus;
+  background: var(--color-violet_8);
+  border-radius: 0.4rem;
+
+  button {
+    color: var(--color-black_33);
+  }
+}
+
+.menu {
+  padding: 0;
+  background: none;
+  border: none;
+  color: var(--color-gray50);
+  font-size: 1.8rem;
+  font-weight: 500;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  cursor: pointer;
+}
+
+.icon-wrapper {
+  position: relative;
+}
+
+@include tablet {
+  .container {
+    width: 16rem;
+  }
+
+  .menus {
+    padding: 1.2rem 1rem;
+  }
+
+  .menu {
+    font-size: 1.6rem;
+  }
+
+  .icon {
+    width: 1.5rem;
+    height: 1.2rem;
+  }
+}
+
+@include mobile {
+  .container {
+    width: 6.7rem;
+  }
+
+  .logo {
+    margin-bottom: 3.8rem;
+    text-align: center;
+  }
+
+  .logo-text {
+    display: none;
+  }
+
+  .title-wrapper {
+    justify-content: center;
+  }
+
+  .title {
+    display: none;
+  }
+
+  .menus {
+    justify-content: center;
+  }
+
+  .menu {
+    display: none;
+  }
+
+  .icon-wrapper {
+    display: none;
+  }
+}

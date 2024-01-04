@@ -1,0 +1,53 @@
+@import '@/styles/mixin.scss';
+
+.container {
+  width: 23rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.text {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}
+
+@mixin dropdownButton {
+  width: 25rem;
+  border: 1px solid var(--color-gray30);
+  border-radius: 6px;
+  background: var(--color-white);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  font-size: 1.6rem;
+  position: relative;
+  z-index: 2;
+}
+.dropdownbutton {
+  @include dropdownButton;
+  @include tablet {
+  }
+
+  @include mobile {
+    width: 27rem;
+  }
+}
+.dropdown {
+  border: 1px solid var(--color-gray30);
+  border-radius: 6px;
+  box-shadow: 0px 4px 20px 0px rgba(0, 0, 0, 0.08);
+  background: var(--color-white);
+  position: absolute;
+  top: 100%;
+  ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  li:hover {
+    color: var(--color-violet);
+    background: var(--color-violet_8);
+  }
+}

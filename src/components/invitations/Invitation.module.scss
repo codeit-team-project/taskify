@@ -1,0 +1,158 @@
+@import '@/styles/mixin.scss';
+
+.container {
+  max-width: 62rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.8rem;
+  background: var(--color-white);
+  box-shadow:
+    rgba(50, 50, 105, 0.15) 0px 2px 5px 0px,
+    rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
+}
+
+.description {
+  padding: 2.8rem 2.8rem 0.8rem 2.8rem;
+  display: grid;
+  justify-content: space-between;
+  align-items: center;
+  grid-template-areas:
+    'title title button'
+    'email email email';
+  column-gap: 1.6rem;
+  row-gap: 2.8rem;
+  white-space: nowrap;
+}
+
+.info {
+  grid-area: title;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 18.6rem;
+}
+
+.title {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: var(--color-black_33);
+}
+
+.item {
+  grid-area: email;
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--color-gray40);
+}
+
+.table {
+  padding: 1.9rem 2.8rem;
+  border-bottom: 1px solid var(--color-gray20);
+  list-style: none;
+}
+
+.action {
+  width: 10.5rem;
+  grid-area: button;
+  padding: 0.8rem 1.6rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  border-radius: 0.4rem;
+  background: var(--color-violet);
+  font-size: 1.4rem;
+  color: var(--color-white);
+  white-space: nowrap;
+}
+
+.invitee {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.email {
+  font-size: 1.6rem;
+  font-weight: 400;
+  color: var(--color-black_33);
+}
+
+.cancle-button {
+  padding: 0.7rem 2.9rem;
+  color: var(--color-primary);
+  font-size: 1.4rem;
+  font-weight: 500;
+  border-radius: 0.4rem;
+  border: 1px solid var(--color-gray30);
+  background: var(--color-white);
+  transition: background 300ms ease-in;
+
+  &:hover {
+    background: var(--color-violet_8);
+  }
+
+  &:active {
+    box-shadow: inset -12px -8px 40px var(--color-gray20);
+  }
+}
+
+@include tablet {
+  .container {
+    min-width: 28.4rem;
+    width: 100%;
+    min-height: auto;
+  }
+
+  .info {
+    gap: 10rem;
+  }
+}
+
+@include mobile {
+  .container {
+    min-width: 28.4rem;
+  }
+
+  .description {
+    padding: 2.4rem 2rem 2.8rem 2rem;
+    grid-template-areas:
+      'title title title'
+      'email email button';
+    grid-row-gap: 1.2rem;
+  }
+
+  .info {
+    gap: 0;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .action {
+    width: 100%;
+    height: 2.8rem;
+    padding: 0.7rem 1.2rem;
+    justify-content: center;
+    font-size: 1.2rem;
+  }
+
+  .item {
+    font-size: 1.4rem;
+  }
+
+  .table {
+    padding: 1.2rem 2rem;
+  }
+
+  .email {
+    font-size: 1.4rem;
+  }
+
+  .cancle-button {
+    padding: 0.7rem 0.9rem;
+    font-size: 1.2rem;
+  }
+}

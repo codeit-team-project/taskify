@@ -1,0 +1,47 @@
+@import '@/styles/mixin.scss';
+
+.nav-container {
+  z-index: 50;
+  height: 7rem;
+  min-width: 50rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.6rem;
+  position: sticky;
+  inset: 0;
+  & .logo-container {
+    .logo-title {
+      visibility: visible;
+    }
+    @include mobile {
+      .logo-title {
+        visibility: hidden;
+      }
+    }
+  }
+
+  & .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    & button {
+      background: transparent;
+      border: none;
+      font-family: 'Pretendard';
+      font-size: 1.6rem;
+      padding: 0;
+      color: var(--color-black33);
+      & a:visited {
+        color: inherit;
+      }
+    }
+  }
+}
+
+.nav-container[data-theme='dark'] {
+  background-color: black;
+  color: white;
+}

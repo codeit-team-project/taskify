@@ -1,0 +1,48 @@
+@import '@/styles/mixin.scss';
+
+.footer {
+  white-space: nowrap;
+  color: var(--color-gray40);
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  height: 10rem;
+  width: 100%;
+  position: sticky;
+  display: flex;
+  padding: 4rem 10rem;
+  justify-content: space-between;
+  align-items: center;
+  bottom: 0;
+  background-color: black;
+
+  & .info-section {
+    display: flex;
+    gap: 1rem;
+  }
+
+  & .address-section {
+    display: flex;
+    gap: 1.3rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  @include tablet {
+    padding: 4rem 4rem;
+    min-width: 50rem;
+  }
+
+  @include mobile {
+    flex-direction: column;
+    font-size: 1.2rem;
+    & .info-section {
+      position: relative;
+      bottom: 3rem;
+    }
+    gap: 5rem;
+    height: 30rem;
+    padding-bottom: 9rem;
+  }
+}

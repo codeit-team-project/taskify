@@ -1,0 +1,19 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  position: relative;
+  width: 100%;
+}
+
+.icon {
+  position: absolute;
+  top: 4rem;
+  left: 0.4rem;
+  z-index: 1;
+}
+
+.text {
+  font-size: 1.3rem;
+  margin-bottom: 1rem;
+}

@@ -1,0 +1,17 @@
+@import '@/styles/mixin.scss';
+
+.container {
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 4.4rem;
+
+  @include tablet {
+    gap: 4rem;
+  }
+
+  @include mobile {
+    padding: 2.4rem;
+    gap: 2.4rem;
+  }
+}
