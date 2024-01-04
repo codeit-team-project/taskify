@@ -25,6 +25,7 @@ export default function NewDashboardModal({ onClose }: NewDashboardModalProps) {
     onSuccess: (data) => {
       queryClient.invalidateQueries({ queryKey: ['dashBoards'] })
       router.push(`/dashboard/${data.id}`)
+      onClose()
     },
   })
 
