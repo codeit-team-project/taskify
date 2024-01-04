@@ -2,23 +2,18 @@ import { CardType } from '@/types/cardsType'
 import styles from './TaskCardItem.module.scss'
 import tagStyles from '@/components/modalInput/Tags.module.scss'
 import { selectColor } from '@/components/randomProfile/RandomProfile'
-import { parseISO, format } from 'date-fns'
 import { useQueryClient } from '@tanstack/react-query'
 import { useState } from 'react'
 import ModalContent from '@/components/modalContent/ModalContent'
 import ReadTodo from '@/data-access/readTodo/ReadTodo'
 import FormProvider from '@/context/formContext'
 import { createPortal } from 'react-dom'
+import { fnsTimeFormat } from '@/utils/mappingTime'
 
 interface TaskCardItemProps {
   item: CardType
   dashBoardId: number
   columnId: number
-}
-
-const getParsedDate = (date: string) => {
-  const parsedDate = parseISO(date)
-  return format(parsedDate, 'yyyy.MM.dd')
 }
 
 export default function TaskCardItem({ item, dashBoardId, columnId }: TaskCardItemProps) {
@@ -64,7 +59,7 @@ export default function TaskCardItem({ item, dashBoardId, columnId }: TaskCardIt
             height={18}
             alt="달력 아이콘"
           />
-          <p className={styles['date']}>{getParsedDate(item.createdAt)}</p>
+          <p className={styles['date']}>{fnsTimeFormat(item.dueDate)}</p>
           <div className={styles['icon-user-wrapper']}>
             {item?.assignee?.profileImageUrl ? (
               <img src={item.imageUrl} width={24} height={24} />
